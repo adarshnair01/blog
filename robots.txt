@@ -1,0 +1,3 @@
+User-agent: *
+
+Sitemap: https://adarshnair01.github.io/blog/sitemap.xml
