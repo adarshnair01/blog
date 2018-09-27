@@ -7,10 +7,37 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>&amp;copy; &lt;a href=&#34;https://adarshnair01.github.io&#34;&gt;Adarsh Nair&lt;/a&gt; 2018</copyright>
-    <lastBuildDate>Wed, 02 Apr 2014 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 27 Sep 2018 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://adarshnair01.github.io/blog/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Airtel</title>
+      <link>https://adarshnair01.github.io/blog/tags/airtel/</link>
+      <pubDate>Thu, 27 Sep 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://adarshnair01.github.io/blog/tags/airtel/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Complaint</title>
+      <link>https://adarshnair01.github.io/blog/tags/complaint/</link>
+      <pubDate>Thu, 27 Sep 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://adarshnair01.github.io/blog/tags/complaint/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Customer Care</title>
+      <link>https://adarshnair01.github.io/blog/tags/customer-care/</link>
+      <pubDate>Thu, 27 Sep 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://adarshnair01.github.io/blog/tags/customer-care/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>Development</title>
@@ -40,11 +67,20 @@
     </item>
     
     <item>
-      <title>Hugo</title>
-      <link>https://adarshnair01.github.io/blog/tags/hugo/</link>
-      <pubDate>Wed, 02 Apr 2014 00:00:00 +0000</pubDate>
+      <title>Postpaid</title>
+      <link>https://adarshnair01.github.io/blog/tags/postpaid/</link>
+      <pubDate>Thu, 27 Sep 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://adarshnair01.github.io/blog/tags/hugo/</guid>
+      <guid>https://adarshnair01.github.io/blog/tags/postpaid/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Service</title>
+      <link>https://adarshnair01.github.io/blog/tags/service/</link>
+      <pubDate>Thu, 27 Sep 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://adarshnair01.github.io/blog/tags/service/</guid>
       <description></description>
     </item>
     
