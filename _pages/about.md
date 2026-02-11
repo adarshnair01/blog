@@ -1,8 +1,10 @@
 ---
 layout: about
 title: about
-permalink: /
+permalink: /about/
 subtitle: Data Scientist | Machine Learning Engineer
+nav: true
+nav_order: 1
 
 profile:
   align: right
