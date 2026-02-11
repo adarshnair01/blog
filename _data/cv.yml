@@ -1,0 +1,357 @@
+cv:
+  name: Adarsh Nair
+  label: Senior Data Science Manager
+  email: adarshnair01@gmail.com
+  location: Bangalore, India
+  phone: "+91 9426643740"
+  image: "" # Keep empty if no image URL
+  summary: Senior Data Science leader with 10 years of experience delivering ML-driven marketing analytics and personalization at scale. Proven track record of leading teams building recommender systems, customer segmentation, and forecasting solutions using Python, TensorFlow, AWS, and Kafka. Deep expertise in NLP, time series modeling, feature engineering, model validation, and deploying production-grade APIs with FastAPI.
+
+  social_networks:
+    - network: LinkedIn
+      username: adarshnair01
+      url: https://www.linkedin.com/in/adarshnair01/
+    - network: GitHub
+      username: adarshnair01
+      url: https://github.com/adarshnair01
+    - network: Portfolio
+      url: "#"
+
+  address:
+    city: Bangalore
+    countryCode: IN
+
+  sections:
+    Education:
+      - institution: Indian Institute of Information Technology, Allahabad
+        location: Allahabad, India
+        area: Robotics and Automation
+        studyType: Master of Technology
+        start_date: 2014-08
+        end_date: 2016-08
+        
+      - institution: Government Engineering College, Bhavnagar
+        location: Bhavnagar, India
+        area: Information Technology
+        studyType: Bachelor of Engineering
+        start_date: 2009-08
+        end_date: 2013-08
+
+    Experience:
+      - company: Yum! Digital & Technology
+        position: Senior Data Science Manager
+        location: Remote
+        start_date: 2021-04
+        end_date: Present
+        summary: Promoted to Senior Data Science Manager(Later renamed to Lead Data Scientist) from Data Science Manager.
+        highlights:
+          - "Led the integration of Large Language Models (LLMs) using Lang Chain to enhance the company's AI-driven customer support."
+          - Developed and deployed sophisticated NLP models for understanding & generating human-like text.
+          - Managed a team of 9 data scientists and analysts delivering predictive modeling, segmentation, and pricing solutions.
+          - Led propensity modeling to prioritize high-likelihood buyers and guide campaign targeting.
+          - Built and deployed a segmentation API powering marketing workflows and dashboards.
+          - Presented findings to executives and stakeholders, driving alignment and adoption across markets.
+          - Optimized data pipelines and model evaluation, improving reliability by 15%.
+          - Led a team of 8 data scientists and analysts to design and implement a recommendation engine for personalization.
+          - Established KPIs and model monitoring to track accuracy and business impact, enabling continuous improvement.
+          - Partnered with marketing, operations, and IT to prioritize data-driven opportunities and deliver actionable insights.
+          - Presented strategy and roadmap updates to senior leadership, informing campaign and product decisions.
+          - Recognized company-wide during town hall for successful ML platform rollout.
+          - Scaled production services with Docker and Kafka to support 50ms throughput with high reliability.
+
+      - company: Kvantum Inc
+        position: Principal Data Scientist
+        location: Remote
+        start_date: 2019-04
+        end_date: 2021-03
+        summary: Promoted to Principal Data Scientist from Senior Data Scientist.
+        highlights:
+          - Led a team of 3 to build market mix modeling and media optimization capabilities.
+          - Collaborated with marketing science and engineering to productionize ML algorithms and pipelines.
+          - Developed optimization strategies using the BFGS algorithm to maximize ROI across channels.
+          - Introduced parallel processing and API standards to enhance scalability by 200%.
+          - Improved knowledge sharing and documentation, reducing onboarding time by 3 days.
+          - Directed end-to-end development and deployment of a sales forecasting system for inventory planning.
+          - Communicated complex ML and statistical concepts to non-technical stakeholders to guide decisions.
+          - Designed dashboards to track forecast KPIs and accuracy, enabling proactive improvements.
+          - Led integration efforts during Yum! Brands acquisition, maintaining delivery timelines.
+          - Earned 'Wave of Happiness Award' for fostering a collaborative, high-engagement culture.
+          - Improved workflow efficiency via automation, saving 4hrs/week.
+
+      - company: Kvantum Inc
+        position: Data Scientist
+        location: Gurgaon
+        start_date: 2017-08
+        end_date: 2019-03
+        summary: Built and maintained APIs for Voice of Consumer analytics (NLP pipelines).
+        highlights:
+          - Analyzed social data for sentiment, topics, and trends to inform ad targeting and messaging.
+          - Applied Word2Vec and dimensionality reduction to extract themes from unstructured text.
+          - Partnered with product and client teams to translate insights into recommendations.
+          - Recognized as 'Most Reliable Employee' for consistent delivery and client satisfaction.
+          - Optimized NLP inference pipeline cutting latency from 320 ms to 120 ms 62% faster delivering quicker Voice of Consumer insights.
+          - Partnered with teams to translate insights into actions that boosted client satisfaction by 12% within three months across pilot clients.
+          - Architected data pipelines to enable auto-scaling, supporting up to 3M requests daily with 99.95% uptime during peak campaigns across key client deployments.
+          - Implemented targeted monitoring and lightweight tests, reducing production incidents by 40% and stabilizing deployment cycles for reliability across all customer projects.
+
+      - company: MAQ Software
+        position: Software Engineer 1
+        location: Hyderabad
+        start_date: 2016-08
+        end_date: 2017-07
+        summary: Developed web features leveraging AWS S3, Lambda, and Elasticsearch for fast retrieval.
+        highlights:
+          - Collaborated with architects and developers to deliver capabilities on schedule.
+          - Automated document generation workflows and built user support chatbot capabilities.
+          - Enhanced search indexing and query tuning, reducing page load by 45ms.
+          - Followed SDLC and code review practices to increase stability.
+
+    Awards:
+      - title: Recommendation Engine Rollout
+        date: 2024
+        awarder: Yum! Digital & Technology
+        summary: Recognized company-wide during town hall.
+
+      - title: Wave of Happiness Award
+        date: 2023
+        awarder: Kvantum Inc
+        summary: Earned for fostering a collaborative, high-engagement culture.
+
+      - title: Most Reliable Employee
+        date: 2020
+        awarder: Kvantum Inc
+        summary: Recognized for consistent delivery and client satisfaction.
+
+    Publications:
+      - title: Preserving Cluster Identity Across Time, an Incremental Cosine Similarity Approach
+        authors:
+          - Adarsh Nair
+          - Aishwariya K K
+        publisher: IEEE Xplore
+        releaseDate: 2026-07-01
+        url: https://ieeemy.org/tencon2025/
+        summary: This paper introduces an incremental cosine similarity approach to maintain cluster identity over time, addressing the challenge of cluster drift in dynamic data streams.
+
+      - title: Voronoi Heuristic-Driven Multi-Objective Optimization in Motion Planning
+        authors:
+          - Adarsh Nair
+          - Dr. Rahul Kala
+        publisher: IEEE Xplore
+        releaseDate: 2026-11-01
+        url: https://reacs2025.iiitm.ac.in/
+        summary: This paper introduces a Voronoi heuristic-driven multi-objective optimization approach for motion planning, addressing the challenge of finding optimal paths in complex environments.
+
+    Skills:
+      - name: Programming Languages
+        icon: fa-solid fa-code
+        keywords:
+          - Python
+          - R
+          - MATLAB
+          - Julia
+          - Bash
+          - HTML/CSS
+          - SQL
+          - NoSQL
+          - Java
+          - JavaScript
+          - C++
+          - C#
+
+      - name: Data Engineering & Big Data
+        icon: fa-solid fa-server
+        keywords:
+          - Docker
+          - Redis
+          - Elasticsearch
+          - Apache Kafka
+          - Spark
+
+      - name: Frameworks
+        icon: fa-solid fa-layer-group
+        keywords:
+          - NumPy
+          - pandas
+          - scikit-learn
+          - TensorFlow
+          - Keras
+          - Seaborn
+          - Plotly
+          - SciPy
+          - NLTK
+          - Gensim
+          - Statsmodels
+          - SQLAlchemy
+          - SpaCy
+          - Scrapy
+
+      - name: Statistics & ML
+        icon: fa-solid fa-chart-line
+        keywords:
+          - Recommender Systems
+          - Time Series Analysis
+          - Linear Regression
+          - Logistic Regression
+          - Random Forest
+          - SVM
+          - KNN
+          - Neural Network
+          - Transformers
+          - PCA
+          - Word2Vec
+          - NLP
+          - SHAP
+          - LIME
+          - BFGS
+          - XGBoost
+          - ARIMAX
+          - Cubature Kalman Filter
+
+      - name: GenAI
+        icon: fa-solid fa-robot
+        keywords:
+          - LLM
+          - Langchain
+          - Ollama
+          - RAG
+          - Vector Database
+          - Fine-Tuning
+          - Prompt Engineering
+
+      - name: Cloud Platforms
+        icon: fa-solid fa-cloud
+        keywords:
+          - AWS (Lambda, S3, EC2, SageMaker, Glue, CloudWatch)
+
+      - name: Tools
+        icon: fa-solid fa-toolbox
+        keywords:
+          - Git
+          - Tableau
+          - Microsoft Power BI
+          - DOMO
+          - Streamlit
+          - Google Data Studio
+          - YouTrack
+
+    Languages:
+      - name: Hindi
+        summary: "Native speaker"
+
+      - name: Malayalam
+        summary: "Native speaker"
+
+      - name: Gujarati
+        summary: "Fluent"
+
+      - name: English
+        summary: "Fluent"
+
+    Interests:
+      - name: Physics
+        icon: fa-solid fa-tag
+        keywords: "Quantum Mechanics, Quantum Computing, Quantum Information, Quantum Cryptography, Quantum Communication, Quantum Teleportation"
+
+    Certificates:
+      - name: Professional machine learning engineer
+        date: 2025-01-01
+        issuer: Google
+        icon: fa-solid fa-tag
+
+      - name: Generative AI with Large Language Models
+        date: 2024-07-01
+        issuer: Deeplearning.AI
+        icon: fa-solid fa-tag
+
+    Projects:
+      - name: Fine-tuning LLM for Intents
+        summary: Custom Fine-Tuned Large Language Models for specific domain intent recognition.
+        highlights:
+          - Developed sophisticated NLP models for understanding and generating human-like text.
+          - Fine-tuned models to accurately identify user intents for better query resolution.
+        start_date: 2026-01-01
+        end_date: Present
+
+      - name: WhatsApp Chatbot using LLMs
+        summary: AI-driven customer support chatbot integrated with WhatsApp using Large Language Models.
+        highlights:
+          - Integrated LLMs using LangChain to enhance customer support capabilities.
+          - Automated responses to common queries, improving response time and user satisfaction.
+        start_date: 2025-01-01
+        end_date: Present
+
+      - name: Recommendation Engine (2-Tower TFRS)
+        summary: Personalized recommendation system using TensorFlow Recommenders and Two-Tower architecture.
+        highlights:
+          - Led the design and implementation of the recommendation engine.
+          - Utilized Sequential Models and LSTM to capture user behavior patterns.
+          - Scaled production services to support 50ms throughput.
+        start_date: 2022-01-01
+        end_date: Present
+
+      - name: Propensity Score for Customers
+        summary: Propensity modeling framework to predict customer likelihood to purchase or churn.
+        highlights:
+          - Prioritized high-likelihood buyers to guide efficient campaign targeting.
+          - Significantly improved conversion rates by targeting the right audience.
+        start_date: 2021-01-01
+        end_date: Present
+
+      - name: Customer Segmentation
+        summary: Advanced customer segmentation solution to tailor marketing strategies to specific user groups.
+        highlights:
+          - Built and deployed a segmentation API powering marketing workflows.
+          - Utilized clustering techniques (KNN) to group customers based on behavior and demographics.
+        start_date: 2021-01-01
+        end_date: Present
+
+      - name: Customer Lifetime Value
+        summary: Predictive modeling to estimate the total value of customers over the entire relationship.
+        highlights:
+          - Implemented CLTV models using RFM Analysis and Pareto-NBD frameworks.
+          - Enabled identification of high-value segments for targeted functional strategies.
+        start_date: 2020-01-01
+        end_date: Present
+
+      - name: Forecasting for Pharma Client (SKUs)
+        summary: End-to-end sales forecasting system for inventory planning in the pharmaceutical sector.
+        highlights:
+          - Directed development and deployment of forecasting models for SKU-level planning.
+          - Designed dashboards to track forecast KPIs and accuracy.
+          - Utilized Time Series Modeling and ARIMAX.
+        start_date: 2020-01-01
+        end_date: 2021-03-01
+
+      - name: Voice of Consumer
+        summary: NLP based social listening tool to analyze consumer sentiment and feedback.
+        highlights:
+          - Built and maintained APIs for Voice of Consumer analytics.
+          - Analyzed social data for sentiment, topics, and trends to inform ad targeting.
+          - Optimized NLP inference pipeline, reducing latency by 62%.
+        start_date: 2019-01-01
+        end_date: 2019-12-31
+
+      - name: Media Optimization
+        summary: Developed media optimization strategies to maximize Return on Investment (ROI) across various advertising channels.
+        highlights:
+          - Implemented optimization strategies using the BFGS algorithm.
+          - Enabled data-driven budget allocation for consolidated marketing.
+        start_date: 2018-01-01
+        end_date: 2019-01-01
+
+      - name: Market Mix Modelling
+        summary: Built comprehensive market mix modeling capabilities to quantify the impact of marketing and non-marketing drivers on sales.
+        highlights:
+          - Led a team of 3 to develop MMM solutions.
+          - Collaborated with marketing science and engineering to productionize ML algorithms.
+        start_date: 2017-01-01
+        end_date: 2018-01-01
+
+    References:
+      - name: Professor John Doe
+        icon: fa-solid fa-laptop
+        reference: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam condimentum, diam quis convallis euismod, arcu mi ullamcorper lorem, a vestibulum nunc magna at sem. Sed in risus ac felis varius blandit.
+
+      - name: Professor Jane Smith
+        icon: fa-solid fa-thumbtack
+        reference: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam condimentum, diam quis convallis euismod, arcu mi ullamcorper lorem, a vestibulum nunc magna at sem. Sed in risus ac felis varius blandit.
