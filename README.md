@@ -19,6 +19,7 @@
 This repository contains my personal portfolio and blog, built using the [al-folio](https://github.com/alshedivat/al-folio) Jekyll theme. It showcases my professional experience, data science projects, and technical writings.
 
 ### Key Sections:
+
 - **[Blog](https://adarshnair.online/blog/)**: Deep dives into Machine Learning, AI, and Data Science.
 - **[Projects](https://adarshnair.online/blog/projects/)**: Detailed write-ups of internal and open-source data science projects.
 - **[CV](https://adarshnair.online/blog/cv/)**: My professional resume, including experience at Yum! Digital & Technology and Kvantum Inc.
@@ -28,13 +29,13 @@ This repository contains my personal portfolio and blog, built using the [al-fol
 
 ## 🛠 Featured Projects
 
-| Project | Description | Year |
-| :--- | :--- | :--- |
-| **Fine-tuning LLM for Intents** | Custom LLaMA 3/Mistral fine-tuning for high-accuracy intent recognition. | 2026 |
-| **WhatsApp Chatbot using LLMs** | Enterprise-grade RAG-based AI support bot integrated with WhatsApp. | 2025 |
-| **Recommendation Engine** | Two-Tower TFRS architecture for scalable product personalization. | 2022 |
-| **Forecasting for Pharma Client** | Hierarchical time series SKU forecasting reducing inventory waste. | 2020 |
-| **Voice of Consumer** | NLP-powered sentiment and trend analysis for social listening. | 2019 |
+| Project                           | Description                                                              | Year |
+| :-------------------------------- | :----------------------------------------------------------------------- | :--- |
+| **Fine-tuning LLM for Intents**   | Custom LLaMA 3/Mistral fine-tuning for high-accuracy intent recognition. | 2026 |
+| **WhatsApp Chatbot using LLMs**   | Enterprise-grade RAG-based AI support bot integrated with WhatsApp.      | 2025 |
+| **Recommendation Engine**         | Two-Tower TFRS architecture for scalable product personalization.        | 2022 |
+| **Forecasting for Pharma Client** | Hierarchical time series SKU forecasting reducing inventory waste.       | 2020 |
+| **Voice of Consumer**             | NLP-powered sentiment and trend analysis for social listening.           | 2019 |
 
 ---
 
@@ -76,7 +77,7 @@ Deployment is automated via GitHub Actions on every push to the `master` branch.
 
 ## 🎨 Acknowledgments
 
-This site is based on the excellent [al-folio](https://github.com/alshedivat/al-folio) theme. 
+This site is based on the excellent [al-folio](https://github.com/alshedivat/al-folio) theme.
 
 ## ⚖️ License
 

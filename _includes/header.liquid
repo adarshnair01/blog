@@ -2,23 +2,23 @@
   <!-- Nav Bar -->
   <nav id="navbar" class="navbar navbar-light navbar-expand-sm {% if site.navbar_fixed %}fixed-top{% else %}sticky-top{% endif %}" role="navigation">
     <div class="container">
-        <a class="navbar-brand title font-weight-lighter" href="https://adarshnair.online">
-          {% if site.title == 'blank' %}
-            {% if site.first_name %}
-              <span class="font-weight-bold">
-                {{- site.first_name -}}
-              </span>
-            {% endif %}
-            {% if site.middle_name %}
-              {{- site.middle_name -}}
-            {% endif %}
-            {% if site.last_name %}
-              {{- site.last_name -}}
-            {% endif %}
-          {% else %}
-            {{- site.title -}}
+      <a class="navbar-brand title font-weight-lighter" href="https://adarshnair.online">
+        {% if site.title == 'blank' %}
+          {% if site.first_name %}
+            <span class="font-weight-bold">
+              {{- site.first_name -}}
+            </span>
           {% endif %}
-        </a>
+          {% if site.middle_name %}
+            {{- site.middle_name -}}
+          {% endif %}
+          {% if site.last_name %}
+            {{- site.last_name -}}
+          {% endif %}
+        {% else %}
+          {{- site.title -}}
+        {% endif %}
+      </a>
       {% if site.enable_navbar_social and page.permalink == '/' %}
         <!-- Social Icons -->
         <div class="navbar-brand social">{% social_links %}</div>
@@ -59,24 +59,22 @@
           {% assign sorted_pages = site.pages | sort: 'nav_order' %}
           {% for p in sorted_pages %}
             {% if p.nav and p.autogen == null %}
-
-                {% assign parent_link = p.permalink | remove: 'index.html' %}
-                <li class="nav-item {% if page.url contains parent_link %}active{% endif %}">
-                  {%- if p.permalink contains '://' -%}
-                    {%- assign url = p.permalink -%}
-                  {%- elsif p.permalink contains '/blog/' -%}
-                    {%- assign url = '/blog/' -%}
-                  {%- else -%}
-                    {%- assign url = p.url -%}
-                  {%- endif %}
-                  <a class="nav-link" href="{{ url | relative_url }}">
-                    {{- p.title }}
-                    {% if page.url contains p.url %}
-                      <span class="sr-only">(current)</span>
-                    {% endif %}
-                  </a>
-                </li>
-
+              {% assign parent_link = p.permalink | remove: 'index.html' %}
+              <li class="nav-item {% if page.url contains parent_link %}active{% endif %}">
+                {%- if p.permalink contains '://' -%}
+                  {%- assign url = p.permalink -%}
+                {%- elsif p.permalink contains '/blog/' -%}
+                  {%- assign url = '/blog/' -%}
+                {%- else -%}
+                  {%- assign url = p.url -%}
+                {%- endif %}
+                <a class="nav-link" href="{{ url | relative_url }}">
+                  {{- p.title }}
+                  {% if page.url contains p.url %}
+                    <span class="sr-only">(current)</span>
+                  {% endif %}
+                </a>
+              </li>
             {% endif %}
           {% endfor %}
           {% if site.search_enabled %}

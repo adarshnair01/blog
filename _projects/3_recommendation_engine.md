@@ -21,12 +21,15 @@ Our legacy recommendation system relied on classical Collaborative Filtering (Ma
 ## Methodology
 
 ### 1. Two-Tower Architecture
+
 The core concept involves two separate neural networks (towers):
+
 - **Query Tower (User Tower)**: Encodes user features (ID, demographics, past history) into a fixed-size embedding vector.
 - **Candidate Tower (Item Tower)**: Encodes item features (ID, category, description embeddings) into a fixed-size embedding vector of the same dimension.
 - **Dot Product**: The similarity score (prediction) is calculated as the dot product of the Question and Candidate vectors. This allows for extremely fast retrieval using Approximate Nearest Neighbor (ANN) search.
 
 ### 2. Feature Engineering
+
 - **User Features**:
   - `user_id` (Embedding)
   - `history_last_10_items` (Sequence embedding, averaged or processed via LSTM)
@@ -38,6 +41,7 @@ The core concept involves two separate neural networks (towers):
   - `price_normalized` (Continuous)
 
 ### 3. Model Training
+
 - **Framework**: TensorFlow Recommenders (TFRS)
 - **Objective**: Retrieval task (Top-K) using a Softmax/Logits loss.
 - **Negative Sampling**: Implemented "in-batch" negative sampling for efficient training on large datasets without explicit negative pair generation.
@@ -48,11 +52,13 @@ The core concept involves two separate neural networks (towers):
 The deployment pipeline is critical for a high-traffic recommendation system.
 
 ### Training Pipeline
+
 - **Data**: TFRecord datasets stored in GCS.
 - **Training**: Vertex AI (Google Cloud) Custom Training Jobs.
 - **Embedding Generation**: Once trained, the Item Tower is used to pre-compute embeddings for all active products. These are exported to an ANN Index.
 
 ### Serving Infrastructure
+
 - **ANN Index**: We used **ScaNN** (Scalable Nearest Neighbors) for the index service, hosted on Kubernetes.
 - **Online Service**: A lightweight gRPC service computes the User Embedding on the fly (using the Query Tower) and queries the ScaNN index for the nearest product neighbors.
 - **Ranking**: A second-stage "Ranking Model" (DLRM) re-ranks the top 100 candidates to optimize for conversion (CVR) rather than just relevance, taking into account real-time inventory and business logic.
@@ -74,5 +80,5 @@ The deployment pipeline is critical for a high-traffic recommendation system.
 
 ## Future Work
 
-- **Real-time Session-based Recs**: Integrating Transformer4Rec to model user intent within a *single session* in real-time.
+- **Real-time Session-based Recs**: Integrating Transformer4Rec to model user intent within a _single session_ in real-time.
 - **Multi-Task Learning**: Optimizing for multiple objectives simultaneously (Clicks, Add-to-Cart, Purchase) using a shared-bottom, multi-tower wide & deep architecture.

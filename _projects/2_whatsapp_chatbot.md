@@ -21,27 +21,31 @@ Our previous rule-based chatbot was rigid and frustrating for users. It could on
 ## Methodology
 
 ### 1. Architecture: RAG Pipeline
-   - **Vector Database**: We used Weaviate to index over 5,000 pages of internal documentation, FAQs, and product manuals.
-   - **Embeddings**: Utilized OpenAI's `text-embedding-3-small` for high-quality, cost-effective semantic search.
-   - **Retrieval**: Implementation of a hybrid search strategy (Sparse BM25 + Dense Semantic Vector) to ensure keywords (like specific error codes) and semantic concepts were both captured.
+
+- **Vector Database**: We used Weaviate to index over 5,000 pages of internal documentation, FAQs, and product manuals.
+- **Embeddings**: Utilized OpenAI's `text-embedding-3-small` for high-quality, cost-effective semantic search.
+- **Retrieval**: Implementation of a hybrid search strategy (Sparse BM25 + Dense Semantic Vector) to ensure keywords (like specific error codes) and semantic concepts were both captured.
 
 ### 2. LLM Integration
-   - **Orchestration**: Built using **LangChain** to manage the conversation flow, memory, and tool usage.
-   - **Model**: GPT-4-Turbo was used for the reasoning engine due to its superior instruction following and reduced hallucination rates compared to smaller models.
-   - **Tools**: The LLM was equipped with "tools" (function calling) to:
-     - Check Order Status (API call to Shopify/OMS)
-     - Validate User Identity (OTP flow)
-     - Escalate to Human (Intercom API integration)
+
+- **Orchestration**: Built using **LangChain** to manage the conversation flow, memory, and tool usage.
+- **Model**: GPT-4-Turbo was used for the reasoning engine due to its superior instruction following and reduced hallucination rates compared to smaller models.
+- **Tools**: The LLM was equipped with "tools" (function calling) to:
+  - Check Order Status (API call to Shopify/OMS)
+  - Validate User Identity (OTP flow)
+  - Escalate to Human (Intercom API integration)
 
 ### 3. WhatsApp Integration
-   - **BSP**: Utilized Twilio as the Business Service Provider (BSP) for the WhatsApp Business API.
-   - **Webhook Handler**: Developed a robust FastAPI webhook handler to receive messages, process them asynchronously via Celery workers, and send responses.
+
+- **BSP**: Utilized Twilio as the Business Service Provider (BSP) for the WhatsApp Business API.
+- **Webhook Handler**: Developed a robust FastAPI webhook handler to receive messages, process them asynchronously via Celery workers, and send responses.
 
 ## Implementation Details
 
 The core of the system is the "Agentic" workflow. Instead of a linear script, the LLM acts as an agent that decides the next step.
 
 **Tech Stack:**
+
 - **Backend**: Python, FastAPI, Celery
 - **LLM Ops**: LangChain, LangSmith (for tracing)
 - **Database**: PostgreSQL (User Session State), Weaviate (Knowledge Base)

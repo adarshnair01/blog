@@ -21,26 +21,29 @@ In a customer support environment handling thousands of queries daily, accuratel
 ## Methodology
 
 ### 1. Data Curation and Synthesis
-   - **Historical Data**: Aggregated 500,000+ historical chat logs, manually labeled by support agents.
-   - **Synthetic Generation**: Used GPT-4 to generate synthetic variations of rare intents to balance the dataset, employing "chain-of-thought" prompting to ensure diversity in phrasing while maintaining semantic integrity.
-   - **Cleaning**: Implemented rigorous deduplication and PII redaction pipelines using scrubadub and custom regex filters.
+
+- **Historical Data**: Aggregated 500,000+ historical chat logs, manually labeled by support agents.
+- **Synthetic Generation**: Used GPT-4 to generate synthetic variations of rare intents to balance the dataset, employing "chain-of-thought" prompting to ensure diversity in phrasing while maintaining semantic integrity.
+- **Cleaning**: Implemented rigorous deduplication and PII redaction pipelines using scrubadub and custom regex filters.
 
 ### 2. Model Selection and Architecture
-   - **Base Models**: Evaluated LLaMA 3 (8B) and Mistral (7B) for their balance of performance and inference speed.
-   - **LoRA (Low-Rank Adaptation)**: Utilized LoRA to fine-tune only a small subset of parameters (approx. 1-2%), significantly reducing computational requirements while maintaining the base model's general linguistic capabilities.
-   - **Config**: 
-     - Rank (r): 64
-     - Alpha: 16
-     - Dropout: 0.1
-     - Quantization: 4-bit (QLoRA) for training on single A100 GPUs.
+
+- **Base Models**: Evaluated LLaMA 3 (8B) and Mistral (7B) for their balance of performance and inference speed.
+- **LoRA (Low-Rank Adaptation)**: Utilized LoRA to fine-tune only a small subset of parameters (approx. 1-2%), significantly reducing computational requirements while maintaining the base model's general linguistic capabilities.
+- **Config**:
+  - Rank (r): 64
+  - Alpha: 16
+  - Dropout: 0.1
+  - Quantization: 4-bit (QLoRA) for training on single A100 GPUs.
 
 ### 3. Training Process
-   - **Instruction Tuning**: Formatted data into `(System, User, Assistant)` tuples, where the system prompt defined the taxonomy and the assistant output was the JSON-structured intent.
-   - **Hyperparameters**: 
-     - Learning rate: 2e-4
-     - Batch size: 128 (with accumulation)
-     - Epochs: 3 (early stopping based on validation loss)
-   - **Framework**: Utilized the `Axolotl` library and `Unsloth` for optimized training speeds (2x faster than standard HuggingFace Trainer).
+
+- **Instruction Tuning**: Formatted data into `(System, User, Assistant)` tuples, where the system prompt defined the taxonomy and the assistant output was the JSON-structured intent.
+- **Hyperparameters**:
+  - Learning rate: 2e-4
+  - Batch size: 128 (with accumulation)
+  - Epochs: 3 (early stopping based on validation loss)
+- **Framework**: Utilized the `Axolotl` library and `Unsloth` for optimized training speeds (2x faster than standard HuggingFace Trainer).
 
 ## Implementation Details
 
@@ -68,5 +71,6 @@ outputs = llm.generate(prompts, sampling_params)
 ## Future Work
 
 Future iterations will focus on:
+
 - **Direct Preference Optimization (DPO)**: Further aligning the model's outputs with human preference data to reduce hallucinations.
 - **Continuous Learning**: Implementing a feedback loop where corrected predictions from human agents are automatically added to the training dataset for weekly model updates.
