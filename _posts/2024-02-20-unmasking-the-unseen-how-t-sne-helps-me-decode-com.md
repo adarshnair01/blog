@@ -4,11 +4,12 @@ date: "2024-02-20"
 excerpt: "Ever looked at a spreadsheet with hundreds of columns and felt overwhelmed? t-SNE is like a magic lens that helps us transform that chaos into beautiful, interpretable maps."
 author: "Adarsh Nair"
 ---
+
 Ever stared at a spreadsheet with hundreds of columns, each a "feature" of your data? Trying to make sense of a 700-dimensional space is, well, impossible for our human brains! This is where dimensionality reduction techniques become our superheroes, and t-Distributed Stochastic Neighbor Embedding (t-SNE) shines exceptionally bright in my data science toolkit.
 
 **What is t-SNE? A Friendly Guide**
 
-At its core, t-SNE is a non-linear dimensionality reduction algorithm. Its primary goal is not just to squish high-dimensional data into 2D or 3D, but to do so while preserving the *local structure* of the data as much as possible. Imagine untangling a complex knot of yarn: t-SNE tries to lay it flat, ensuring that pieces of yarn that were close together in the knot remain close on the table.
+At its core, t-SNE is a non-linear dimensionality reduction algorithm. Its primary goal is not just to squish high-dimensional data into 2D or 3D, but to do so while preserving the _local structure_ of the data as much as possible. Imagine untangling a complex knot of yarn: t-SNE tries to lay it flat, ensuring that pieces of yarn that were close together in the knot remain close on the table.
 
 **The Magic Under the Hood: A Glimpse**
 
@@ -30,9 +31,9 @@ t-SNE's brilliance lies in how it defines "closeness." It does this by convertin
 
 Unlike PCA, which prioritizes preserving global variance and might blend distinct groups, t-SNE excels at revealing intricate, non-linear structures and distinct clusters. It's incredibly powerful for:
 
-*   **Visualizing high-dimensional embeddings:** Like word embeddings or image features.
-*   **Uncovering hidden clusters:** Identifying natural groupings in customer data or genomic sequences.
-*   **Quality control:** Quickly spotting outliers or anomalies.
+- **Visualizing high-dimensional embeddings:** Like word embeddings or image features.
+- **Uncovering hidden clusters:** Identifying natural groupings in customer data or genomic sequences.
+- **Quality control:** Quickly spotting outliers or anomalies.
 
 It's truly like having X-ray vision for data. When I'm faced with a new, complex dataset, t-SNE is often one of my first steps. It helps me understand the inherent structure and guides subsequent modeling choices, making my machine learning journey much more informed.
 
@@ -40,9 +41,9 @@ It's truly like having X-ray vision for data. When I'm faced with a new, complex
 
 While amazing, t-SNE has its quirks:
 
-*   **Computational Cost:** Can be slow for very large datasets (millions of points). Consider FIt-SNE or UMAP for scale.
-*   **Stochastic Nature:** Different runs can produce slightly different layouts due to random initialization.
-*   **Not for Absolute Distances:** The distances between clusters in a t-SNE plot are qualitative, not quantitative reflections of high-dimensional distances.
+- **Computational Cost:** Can be slow for very large datasets (millions of points). Consider FIt-SNE or UMAP for scale.
+- **Stochastic Nature:** Different runs can produce slightly different layouts due to random initialization.
+- **Not for Absolute Distances:** The distances between clusters in a t-SNE plot are qualitative, not quantitative reflections of high-dimensional distances.
 
 **My Takeaway**
 

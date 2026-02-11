@@ -1,7 +1,7 @@
 ---
 title: "The Cartographer of High Dimensions: Unveiling Data's Hidden Stories with t-SNE"
 date: "2025-11-20"
-excerpt: "Ever wondered how to truly \"see\" the intricate patterns in data too complex for your eyes? t-SNE is a powerful visualization technique that helps us navigate and understand the hidden structures within high-dimensional datasets by elegantly mapping them into a lower, more interpretable space."
+excerpt: 'Ever wondered how to truly "see" the intricate patterns in data too complex for your eyes? t-SNE is a powerful visualization technique that helps us navigate and understand the hidden structures within high-dimensional datasets by elegantly mapping them into a lower, more interpretable space.'
 tags: ["Dimensionality Reduction", "Visualization", "t-SNE", "Machine Learning", "Data Science"]
 author: "Adarsh Nair"
 ---
@@ -14,7 +14,7 @@ Welcome to another entry in my data science journal. Today, I want to talk about
 
 In the world of data science, we're constantly bombarded with information. Imagine you have a dataset describing images, where each image is represented by thousands of pixel values. Or perhaps you're working with text, where each document is a vector of hundreds of word frequencies. These are what we call **high-dimensional data**.
 
-Our human brains, brilliant as they are, struggle to visualize anything beyond three dimensions. Try to picture a 100-dimensional cube... can't do it, right? This is a huge problem because often, the most interesting patterns, the hidden clusters, or the subtle relationships in our data lie buried within these high dimensions. We need a way to bring them down to a level we can actually *see* and *understand*.
+Our human brains, brilliant as they are, struggle to visualize anything beyond three dimensions. Try to picture a 100-dimensional cube... can't do it, right? This is a huge problem because often, the most interesting patterns, the hidden clusters, or the subtle relationships in our data lie buried within these high dimensions. We need a way to bring them down to a level we can actually _see_ and _understand_.
 
 Traditional methods like Principal Component Analysis (PCA) are fantastic for reducing dimensions, especially when relationships are linear. PCA tries to find the "straightest" lines (principal components) that capture the most variance in your data. But what if your data's true structure is curvy, twisted, or folded? What if the "story" of your data isn't a straight line, but a complex, non-linear narrative?
 
@@ -22,7 +22,7 @@ That's where t-SNE steps in, like a master storyteller who can simplify an epic 
 
 ### Enter t-SNE: The Art of Preserving Neighborhoods
 
-The core idea behind t-SNE is beautifully simple: **if two data points are close together in the high-dimensional space, they should also be close together in the low-dimensional map.** And conversely, if they're far apart, they should remain far apart. t-SNE focuses intensely on preserving these *local* neighborhoods, making it excellent at revealing clusters and intrinsic structures in your data.
+The core idea behind t-SNE is beautifully simple: **if two data points are close together in the high-dimensional space, they should also be close together in the low-dimensional map.** And conversely, if they're far apart, they should remain far apart. t-SNE focuses intensely on preserving these _local_ neighborhoods, making it excellent at revealing clusters and intrinsic structures in your data.
 
 Let's break down how it works, step-by-step, using an analogy.
 
@@ -46,7 +46,7 @@ This $P_{ij}$ represents the "true" similarity between $x_i$ and $x_j$ in the hi
 
 #### Step 2: Mapping to Lower Dimensions and Mimicking Friendships
 
-Now, we need to place these data points into our low-dimensional map (usually 2D or 3D) – let's call these mapped points $y_i$ and $y_j$. The goal is to arrange $y_i$ and $y_j$ in this low-dimensional space such that their relationships *mirror* those of their high-dimensional counterparts.
+Now, we need to place these data points into our low-dimensional map (usually 2D or 3D) – let's call these mapped points $y_i$ and $y_j$. The goal is to arrange $y_i$ and $y_j$ in this low-dimensional space such that their relationships _mirror_ those of their high-dimensional counterparts.
 
 We calculate a similar probability $q_{ij}$ for the points in the low-dimensional map. However, instead of a Gaussian distribution, t-SNE uses a **Student's t-distribution with 1 degree of freedom** (also known as a Cauchy distribution). Why a t-distribution? It has "heavier tails" than a Gaussian, meaning it's better at modeling distant points in the low-dimensional space. This helps prevent distant high-dimensional points from being crushed together in the low-dimensional map (the "crowding problem").
 
@@ -70,23 +70,23 @@ To minimize this cost function, t-SNE uses an optimization technique called **gr
 
 ### The Magic Parameter: Perplexity
 
-Before we dive into interpreting plots, we *must* talk about **perplexity**. This is arguably the most important hyperparameter in t-SNE.
+Before we dive into interpreting plots, we _must_ talk about **perplexity**. This is arguably the most important hyperparameter in t-SNE.
 
 Remember $\sigma_i$ in our Gaussian distribution for $P_{ij}$? Perplexity is an indirect way of setting these $\sigma_i$ values. It can be thought of as a knob that controls the **effective number of neighbors** each point considers.
 
-*   **Low perplexity:** A small number of neighbors. The algorithm focuses very locally. It's like having tunnel vision, only seeing your immediate friends. This can lead to fragmented clusters or many small, tightly packed groups.
-*   **High perplexity:** A larger number of neighbors. The algorithm takes a broader view, considering more points as relevant neighbors. This can cause distant points to be pulled closer together, potentially merging clusters.
+- **Low perplexity:** A small number of neighbors. The algorithm focuses very locally. It's like having tunnel vision, only seeing your immediate friends. This can lead to fragmented clusters or many small, tightly packed groups.
+- **High perplexity:** A larger number of neighbors. The algorithm takes a broader view, considering more points as relevant neighbors. This can cause distant points to be pulled closer together, potentially merging clusters.
 
 A common range for perplexity is **5 to 50**. It's crucial to try several different perplexity values and observe how the clusters change. A robust cluster will typically appear across a range of perplexity values. If a cluster only appears for a very specific perplexity, it might be an artifact.
 
 ### Interpreting Your t-SNE Plot: What Does it All Mean?
 
-Congratulations! You've run t-SNE, and now you have a beautiful 2D scatter plot. But what can you *really* conclude from it?
+Congratulations! You've run t-SNE, and now you have a beautiful 2D scatter plot. But what can you _really_ conclude from it?
 
 1.  **Clusters Mean Similarity:** If points form a distinct cluster, it means they are very similar in the high-dimensional space. This is t-SNE's superpower.
 2.  **Distances Within Clusters Are More Reliable Than Between Clusters:** This is the most critical rule of t-SNE interpretation.
-    *   **Within a cluster:** The relative distances are usually meaningful. If two points are close within a cluster, they are truly similar.
-    *   **Between clusters:** The distances between different clusters, or the size of a cluster, are often *not* meaningful. A large, spread-out cluster doesn't necessarily mean its points are less similar than a small, dense cluster. A cluster on the left doesn't necessarily mean it's "less related" to a cluster on the right than one in the middle. Focus on the fact that they *are* separate clusters, not how far apart they are on the plot.
+    - **Within a cluster:** The relative distances are usually meaningful. If two points are close within a cluster, they are truly similar.
+    - **Between clusters:** The distances between different clusters, or the size of a cluster, are often _not_ meaningful. A large, spread-out cluster doesn't necessarily mean its points are less similar than a small, dense cluster. A cluster on the left doesn't necessarily mean it's "less related" to a cluster on the right than one in the middle. Focus on the fact that they _are_ separate clusters, not how far apart they are on the plot.
 3.  **Cluster Density and Size Can Be Misleading:** A dense cluster might just mean its points had a very similar local neighborhood in high dimensions, not necessarily that they're "more" similar overall. Similarly, a large, spread-out cluster doesn't necessarily mean it's more diverse.
 4.  **Run it Multiple Times:** Due to the stochastic nature of the optimization process, t-SNE results can vary slightly each time you run it. Robust patterns will consistently appear.
 5.  **Look for Outliers:** Isolated points or very small clusters might indicate outliers in your data.
@@ -96,25 +96,27 @@ Congratulations! You've run t-SNE, and now you have a beautiful 2D scatter plot.
 Like any powerful tool, t-SNE has its sweet spots and its cautionary tales.
 
 **Strengths:**
-*   **Excellent for visualizing non-linear structures:** It shines where PCA falls short, revealing intricate patterns.
-*   **Great for identifying clusters:** Its focus on local neighborhoods makes it superb at separating distinct groups.
-*   **Intuitive visualization:** Once you understand its principles, the resulting plots are often highly insightful.
+
+- **Excellent for visualizing non-linear structures:** It shines where PCA falls short, revealing intricate patterns.
+- **Great for identifying clusters:** Its focus on local neighborhoods makes it superb at separating distinct groups.
+- **Intuitive visualization:** Once you understand its principles, the resulting plots are often highly insightful.
 
 **Limitations:**
-*   **Computationally expensive:** For very large datasets (tens of thousands or hundreds of thousands of points), t-SNE can be slow. More advanced implementations or alternatives like UMAP might be preferred.
-*   **Stochastic:** The initial random placement of points means results can vary. It's not a deterministic algorithm.
-*   **Does not preserve global structure:** As mentioned, distances *between* clusters are largely meaningless. This is its biggest caveat.
-*   **Requires parameter tuning:** Perplexity is critical and needs careful consideration.
-*   **Can be misinterpreted:** Easy to draw incorrect conclusions about inter-cluster distances or sizes.
+
+- **Computationally expensive:** For very large datasets (tens of thousands or hundreds of thousands of points), t-SNE can be slow. More advanced implementations or alternatives like UMAP might be preferred.
+- **Stochastic:** The initial random placement of points means results can vary. It's not a deterministic algorithm.
+- **Does not preserve global structure:** As mentioned, distances _between_ clusters are largely meaningless. This is its biggest caveat.
+- **Requires parameter tuning:** Perplexity is critical and needs careful consideration.
+- **Can be misinterpreted:** Easy to draw incorrect conclusions about inter-cluster distances or sizes.
 
 ### Where Does t-SNE Shine? Real-World Applications
 
 t-SNE is a go-to technique in many data science domains:
 
-*   **Image Recognition:** Visualizing features extracted from images (e.g., from deep learning models) to see how different classes cluster. Imagine mapping hundreds of dimensions from a convolutional neural network (CNN) into a 2D plot to see if all images of cats form a tight group, separate from dogs.
-*   **Natural Language Processing (NLP):** Visualizing word embeddings or document embeddings to understand semantic relationships. Are words with similar meanings clustered together? Are different topics forming distinct groups?
-*   **Genomics & Biology:** Uncovering cell types or disease patterns from high-dimensional gene expression data.
-*   **Fraud Detection:** Visualizing transaction data to spot unusual clusters that might indicate fraudulent activity.
+- **Image Recognition:** Visualizing features extracted from images (e.g., from deep learning models) to see how different classes cluster. Imagine mapping hundreds of dimensions from a convolutional neural network (CNN) into a 2D plot to see if all images of cats form a tight group, separate from dogs.
+- **Natural Language Processing (NLP):** Visualizing word embeddings or document embeddings to understand semantic relationships. Are words with similar meanings clustered together? Are different topics forming distinct groups?
+- **Genomics & Biology:** Uncovering cell types or disease patterns from high-dimensional gene expression data.
+- **Fraud Detection:** Visualizing transaction data to spot unusual clusters that might indicate fraudulent activity.
 
 ### My Personal Take
 

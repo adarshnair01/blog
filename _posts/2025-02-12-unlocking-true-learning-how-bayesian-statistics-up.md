@@ -8,7 +8,7 @@ author: "Adarsh Nair"
 
 As a budding data scientist, I've spent a lot of time diving into different ways we make sense of data. We learn about averages, standard deviations, hypothesis testing, and the dreaded p-value. These tools are incredibly powerful, and they form the bedrock of much of what we do. But sometimes, when I'm looking at a p-value or constructing a confidence interval, I can't help but feel like something's missing. It's like I'm asking a specific question, and the statistics are giving me an answer to a slightly different, more indirect one.
 
-"What's the probability that *my hypothesis is true*, given the data I've observed?" – this is the question that often swirls in my mind. Yet, traditional (frequentist) hypothesis testing, with its focus on p-values, essentially asks: "What's the probability of observing this data (or more extreme data), *if my null hypothesis were true*?" It's a subtle but profoundly important distinction. It leaves me wanting to incorporate my prior understanding, my intuition, or any existing knowledge I have *before* seeing the data. And that's exactly where Bayesian statistics steps in, offering a profoundly intuitive and powerful alternative framework for understanding and learning from the world.
+"What's the probability that _my hypothesis is true_, given the data I've observed?" – this is the question that often swirls in my mind. Yet, traditional (frequentist) hypothesis testing, with its focus on p-values, essentially asks: "What's the probability of observing this data (or more extreme data), _if my null hypothesis were true_?" It's a subtle but profoundly important distinction. It leaves me wanting to incorporate my prior understanding, my intuition, or any existing knowledge I have _before_ seeing the data. And that's exactly where Bayesian statistics steps in, offering a profoundly intuitive and powerful alternative framework for understanding and learning from the world.
 
 ### The Problem with "Fixed Truth"
 
@@ -26,10 +26,10 @@ $$ P(H|E) = \frac{P(E|H) \cdot P(H)}{P(E)} $$
 
 Let's break down this seemingly simple equation because each piece tells a crucial part of our story:
 
-*   **$P(H|E)$ (The Posterior Probability)**: This is what we *really* want to know! It's the probability of our **Hypothesis (H)** being true, *given the Evidence (E)* we've just observed. This is our updated belief.
-*   **$P(E|H)$ (The Likelihood)**: This tells us how likely we were to observe the **Evidence (E)** if our **Hypothesis (H)** were actually true. It's the engine that links the data to our hypothesis.
-*   **$P(H)$ (The Prior Probability)**: This is our initial belief or knowledge about the **Hypothesis (H)** *before* we've seen any new evidence. This is where we inject our existing understanding, intuition, or historical data. It's our starting point.
-*   **$P(E)$ (The Evidence or Marginal Likelihood)**: This is the overall probability of observing the **Evidence (E)**, regardless of whether our hypothesis is true or not. In many practical applications, we don't need to calculate this term directly because it acts as a normalizing constant to ensure our posterior probabilities sum to 1. For now, think of it as "the probability of seeing the data."
+- **$P(H|E)$ (The Posterior Probability)**: This is what we _really_ want to know! It's the probability of our **Hypothesis (H)** being true, _given the Evidence (E)_ we've just observed. This is our updated belief.
+- **$P(E|H)$ (The Likelihood)**: This tells us how likely we were to observe the **Evidence (E)** if our **Hypothesis (H)** were actually true. It's the engine that links the data to our hypothesis.
+- **$P(H)$ (The Prior Probability)**: This is our initial belief or knowledge about the **Hypothesis (H)** _before_ we've seen any new evidence. This is where we inject our existing understanding, intuition, or historical data. It's our starting point.
+- **$P(E)$ (The Evidence or Marginal Likelihood)**: This is the overall probability of observing the **Evidence (E)**, regardless of whether our hypothesis is true or not. In many practical applications, we don't need to calculate this term directly because it acts as a normalizing constant to ensure our posterior probabilities sum to 1. For now, think of it as "the probability of seeing the data."
 
 In essence, Bayes' Theorem says: **Our updated belief about a hypothesis (Posterior) is proportional to our initial belief (Prior) multiplied by how well the evidence supports that hypothesis (Likelihood).**
 
@@ -40,15 +40,16 @@ Let's make this concrete with a simple, relatable example.
 Imagine you find a coin on the street. You pick it up, and you want to know if it's a fair coin or if it's somehow biased towards heads.
 
 We can define two competing hypotheses:
-*   $H_F$: The coin is **Fair**. ($P(\text{Heads}|H_F) = 0.5$)
-*   $H_B$: The coin is **Biased**. (Let's say it lands heads 90% of the time: $P(\text{Heads}|H_B) = 0.9$)
+
+- $H_F$: The coin is **Fair**. ($P(\text{Heads}|H_F) = 0.5$)
+- $H_B$: The coin is **Biased**. (Let's say it lands heads 90% of the time: $P(\text{Heads}|H_B) = 0.9$)
 
 **Step 1: Define Your Priors ($P(H)$)**
 
-Before you even flip the coin, what do you believe? Most coins are fair, so you might lean towards $H_F$. But for simplicity, let's say you're equally open to either possibility. This is your *prior belief*:
+Before you even flip the coin, what do you believe? Most coins are fair, so you might lean towards $H_F$. But for simplicity, let's say you're equally open to either possibility. This is your _prior belief_:
 
-*   $P(H_F) = 0.5$ (50% chance it's fair)
-*   $P(H_B) = 0.5$ (50% chance it's biased)
+- $P(H_F) = 0.5$ (50% chance it's fair)
+- $P(H_B) = 0.5$ (50% chance it's biased)
 
 **Step 2: Gather Evidence (E)**
 
@@ -56,10 +57,10 @@ You flip the coin once. It lands on **Heads**. This is your evidence, $E = \text
 
 **Step 3: Calculate the Likelihoods ($P(E|H)$)**
 
-Now, how likely is it to get a Head *under each hypothesis*?
+Now, how likely is it to get a Head _under each hypothesis_?
 
-*   If the coin is fair ($H_F$): $P(\text{Heads}|H_F) = 0.5$
-*   If the coin is biased ($H_B$): $P(\text{Heads}|H_B) = 0.9$
+- If the coin is fair ($H_F$): $P(\text{Heads}|H_F) = 0.5$
+- If the coin is biased ($H_B$): $P(\text{Heads}|H_B) = 0.9$
 
 **Step 4: Calculate the Evidence Probability ($P(E)$)**
 
@@ -81,9 +82,9 @@ $P(H_B|\text{Heads}) = \frac{P(\text{Heads}|H_B) \cdot P(H_B)}{P(\text{Heads})} 
 
 **What happened?**
 
-Our initial belief was a 50/50 chance for either coin. After seeing just one Head, our belief in the coin being fair dropped to about 35.7%, while our belief in it being biased jumped to about 64.3%. We've *updated our beliefs*!
+Our initial belief was a 50/50 chance for either coin. After seeing just one Head, our belief in the coin being fair dropped to about 35.7%, while our belief in it being biased jumped to about 64.3%. We've _updated our beliefs_!
 
-If you were to flip the coin again and get another Head, you would use these new posterior probabilities (0.357 and 0.643) as your *new priors* and repeat the process. This is the beauty of sequential learning in Bayesian statistics – your knowledge accumulates.
+If you were to flip the coin again and get another Head, you would use these new posterior probabilities (0.357 and 0.643) as your _new priors_ and repeat the process. This is the beauty of sequential learning in Bayesian statistics – your knowledge accumulates.
 
 ### The Power of Priors: Not Just a Guess
 
@@ -103,11 +104,11 @@ The prior isn't a weakness; it's a strength! It makes our assumptions explicit a
 4.  **Incorporating Domain Knowledge**: Priors allow experts to contribute their knowledge directly into the statistical model, leading to more robust and accurate inferences, especially in fields where data might be sparse or expensive to collect (e.g., medical research, climate modeling).
 5.  **Robustness with Small Data**: When you don't have mountains of data, strong priors can help prevent overfitting and provide more stable estimates than frequentist methods might.
 6.  **Bayesian Methods in Machine Learning**:
-    *   **A/B Testing**: Deciding which website variant is better can be done more efficiently and ethically.
-    *   **Recommender Systems**: Bayesian methods can model user preferences and item characteristics to provide personalized recommendations.
-    *   **Bayesian Optimization**: Efficiently finding the best hyperparameters for complex ML models.
-    *   **Uncertainty in Deep Learning**: Bayesian Neural Networks provide not just predictions but also a measure of their confidence in those predictions, which is crucial for high-stakes applications like autonomous driving or medical diagnosis.
-    *   **Gaussian Processes**: Powerful non-parametric models used for regression, classification, and optimization, inherently Bayesian.
+    - **A/B Testing**: Deciding which website variant is better can be done more efficiently and ethically.
+    - **Recommender Systems**: Bayesian methods can model user preferences and item characteristics to provide personalized recommendations.
+    - **Bayesian Optimization**: Efficiently finding the best hyperparameters for complex ML models.
+    - **Uncertainty in Deep Learning**: Bayesian Neural Networks provide not just predictions but also a measure of their confidence in those predictions, which is crucial for high-stakes applications like autonomous driving or medical diagnosis.
+    - **Gaussian Processes**: Powerful non-parametric models used for regression, classification, and optimization, inherently Bayesian.
 
 ### The Road Ahead: Challenges & Computations
 
@@ -121,4 +122,4 @@ Choosing appropriate priors can also be a challenge, requiring thought and often
 
 Bayesian statistics isn't just a set of equations; it's a philosophy, a way of thinking about how we learn. It mirrors our natural human process of starting with a belief, encountering new information, and updating our understanding. For data scientists and machine learning engineers, it provides a powerful, flexible, and intuitive framework for building models that truly learn, quantify uncertainty, and leverage all available information – both from data and from domain knowledge.
 
-It offers a compelling answer to the question: "What's the probability that *this is true*?" By embracing Bayesian methods, we move beyond just rejecting null hypotheses and step into a world of continuously evolving, nuanced beliefs about the true state of the world. So, next time you're grappling with data, consider letting Bayes guide your learning journey. You might find it provides not just answers, but a deeper understanding.
+It offers a compelling answer to the question: "What's the probability that _this is true_?" By embracing Bayesian methods, we move beyond just rejecting null hypotheses and step into a world of continuously evolving, nuanced beliefs about the true state of the world. So, next time you're grappling with data, consider letting Bayes guide your learning journey. You might find it provides not just answers, but a deeper understanding.

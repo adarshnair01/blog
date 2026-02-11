@@ -5,6 +5,7 @@ excerpt: "Ever wondered how an AI can master a game, navigate a robot, or even d
 tags: ["Reinforcement Learning", "AI", "Machine Learning", "Decision Making", "Robotics"]
 author: "Adarsh Nair"
 ---
+
 Hey everyone!
 
 As someone deeply fascinated by how intelligence works, both biological and artificial, I've spent a lot of time pondering one of the most fundamental aspects of learning: **experience**. Think about it – from a baby learning to walk to a seasoned chess player mastering new strategies, we all learn by trying things out, seeing what happens, and adjusting our behavior based on the outcomes. We get "rewards" (like successfully taking a step or winning a game) and "punishments" (falling over, losing). This intuitive process of "learning by doing" isn't just for humans; it's also at the heart of one of the most exciting branches of Artificial Intelligence: **Reinforcement Learning (RL)**.
@@ -27,13 +28,13 @@ This interaction happens in a loop:
 
 **Agent observes state ($S_t$) $\rightarrow$ Agent chooses action ($A_t$) $\rightarrow$ Environment transitions to new state ($S_{t+1}$) and gives reward ($R_{t+1}$) $\rightarrow$ Loop repeats.**
 
-The ultimate goal of the agent is to learn a **policy** ($\pi$). A policy is essentially a strategy: it tells the agent what action to take in any given state. Our agent wants to find the *optimal policy* ($\pi^*$) – the policy that maximizes its total expected reward over the long run.
+The ultimate goal of the agent is to learn a **policy** ($\pi$). A policy is essentially a strategy: it tells the agent what action to take in any given state. Our agent wants to find the _optimal policy_ ($\pi^*$) – the policy that maximizes its total expected reward over the long run.
 
 ### The Challenge: Delayed Gratification and The Value of Future Rewards
 
 One of the trickiest parts of RL is that rewards aren't always immediate. Imagine teaching a robot to make a cup of coffee. It might perform many steps correctly (picking up the cup, pouring water) before it finally gets the "reward" of a complete, delicious cup of coffee. How does it know which of its earlier actions contributed to that final success? This is the problem of **credit assignment**.
 
-To solve this, RL introduces the concept of **value functions**. Instead of just looking at immediate rewards, value functions estimate the *total future reward* an agent can expect to receive starting from a particular state or taking a particular action.
+To solve this, RL introduces the concept of **value functions**. Instead of just looking at immediate rewards, value functions estimate the _total future reward_ an agent can expect to receive starting from a particular state or taking a particular action.
 
 There are two main types:
 
@@ -48,16 +49,17 @@ There are two main types:
 
 Notice that weird symbol $\gamma$ in the equation for $G_t$? That's the **discount factor**, a number between 0 and 1. It determines how much the agent cares about immediate rewards versus future rewards.
 
-*   If $\gamma$ is close to 0, the agent is "myopic" and only cares about immediate rewards.
-*   If $\gamma$ is close to 1, the agent is "farsighted" and values future rewards almost as much as immediate ones.
+- If $\gamma$ is close to 0, the agent is "myopic" and only cares about immediate rewards.
+- If $\gamma$ is close to 1, the agent is "farsighted" and values future rewards almost as much as immediate ones.
 
 Why do we need it?
+
 1.  **Mathematical Convergence**: It ensures that the sum of infinite future rewards doesn't explode.
-2.  **Realistic Preference**: Often, immediate rewards *are* more certain or desirable than far-off rewards.
+2.  **Realistic Preference**: Often, immediate rewards _are_ more certain or desirable than far-off rewards.
 
 Now, for the really clever part: the **Bellman Equation**. It's the backbone of many RL algorithms and allows us to break down the complex problem of estimating long-term rewards into smaller, manageable pieces.
 
-The intuition behind the Bellman Equation is simple: **the value of a state (or state-action pair) can be expressed in terms of the immediate reward plus the discounted value of the *next* state (or state-action pair).**
+The intuition behind the Bellman Equation is simple: **the value of a state (or state-action pair) can be expressed in terms of the immediate reward plus the discounted value of the _next_ state (or state-action pair).**
 
 For the optimal state-value function $V^*(s)$, it looks like this:
 $V^*(s) = \max_a E[R_{t+1} + \gamma V^*(S_{t+1}) | S_t = s, A_t = a]$
@@ -65,15 +67,16 @@ $V^*(s) = \max_a E[R_{t+1} + \gamma V^*(S_{t+1}) | S_t = s, A_t = a]$
 And for the optimal action-value function $Q^*(s,a)$:
 $Q^*(s,a) = E[R_{t+1} + \gamma \max_{a'} Q^*(S_{t+1}, a') | S_t = s, A_t = a]$
 
-Don't let the math scare you! What this means is: *the best possible value you can get from being in a state $s$ (or taking action $a$ in state $s$) is the reward you get immediately, plus the best possible value you can get from wherever you end up next.* This recursive definition allows algorithms to iteratively calculate these values.
+Don't let the math scare you! What this means is: _the best possible value you can get from being in a state $s$ (or taking action $a$ in state $s$) is the reward you get immediately, plus the best possible value you can get from wherever you end up next._ This recursive definition allows algorithms to iteratively calculate these values.
 
 ### Exploration vs. Exploitation: The Age-Old Dilemma
 
-Imagine our robot in a maze. It needs to *explore* different paths to discover where the exit is and where the walls are. But once it finds a path that leads to a reward, it should *exploit* that knowledge to reach the reward efficiently.
+Imagine our robot in a maze. It needs to _explore_ different paths to discover where the exit is and where the walls are. But once it finds a path that leads to a reward, it should _exploit_ that knowledge to reach the reward efficiently.
 
 This **exploration-exploitation trade-off** is critical in RL.
-*   **Exploration**: Trying new, potentially suboptimal actions to discover more about the environment and potentially find better rewards.
-*   **Exploitation**: Choosing actions that are known to yield high rewards based on current knowledge.
+
+- **Exploration**: Trying new, potentially suboptimal actions to discover more about the environment and potentially find better rewards.
+- **Exploitation**: Choosing actions that are known to yield high rewards based on current knowledge.
 
 If an agent only explores, it might never settle on an optimal path. If it only exploits, it might get stuck in a suboptimal local maximum, never discovering the truly best path.
 
@@ -84,7 +87,7 @@ Often, $\epsilon$ starts high and slowly decays over time, allowing for more exp
 
 ### Famous Algorithms: Q-Learning and Deep Reinforcement Learning
 
-With the core concepts in place, let's look at how agents actually *learn*.
+With the core concepts in place, let's look at how agents actually _learn_.
 
 #### Q-Learning
 
@@ -94,11 +97,12 @@ The update rule for Q-learning is:
 $Q(s,a) \leftarrow Q(s,a) + \alpha [R_{t+1} + \gamma \max_{a'} Q(S_{t+1}, a') - Q(s,a)]$
 
 Let's break it down:
-*   $Q(s,a)$: The current estimated value of taking action $a$ in state $s$.
-*   $\alpha$ (alpha): The **learning rate** (between 0 and 1). It dictates how much new information overrides old information. A high $\alpha$ means the agent quickly adapts, while a low $\alpha$ means it's more cautious.
-*   $R_{t+1}$: The immediate reward received.
-*   $\gamma \max_{a'} Q(S_{t+1}, a')$: This is the estimated optimal future value from the *next* state $S_{t+1}$. The `max` indicates that the agent assumes it will take the best possible action in the next state.
-*   $R_{t+1} + \gamma \max_{a'} Q(S_{t+1}, a') - Q(s,a)$: This entire term is the **temporal difference (TD) error**. It's the difference between the new, improved estimate of the Q-value and the old estimate. If this difference is positive, it means our current action was better than expected; if negative, worse.
+
+- $Q(s,a)$: The current estimated value of taking action $a$ in state $s$.
+- $\alpha$ (alpha): The **learning rate** (between 0 and 1). It dictates how much new information overrides old information. A high $\alpha$ means the agent quickly adapts, while a low $\alpha$ means it's more cautious.
+- $R_{t+1}$: The immediate reward received.
+- $\gamma \max_{a'} Q(S_{t+1}, a')$: This is the estimated optimal future value from the _next_ state $S_{t+1}$. The `max` indicates that the agent assumes it will take the best possible action in the next state.
+- $R_{t+1} + \gamma \max_{a'} Q(S_{t+1}, a') - Q(s,a)$: This entire term is the **temporal difference (TD) error**. It's the difference between the new, improved estimate of the Q-value and the old estimate. If this difference is positive, it means our current action was better than expected; if negative, worse.
 
 Q-Learning essentially allows the agent to iteratively refine its understanding of which actions are best in which states, eventually converging on the optimal $Q^*(s,a)$ function.
 
@@ -106,7 +110,7 @@ Q-Learning essentially allows the agent to iteratively refine its understanding 
 
 What happens when the number of states and actions becomes astronomically large? Imagine an Atari game – the state is literally every pixel on the screen. It's impossible to store a Q-value for every possible pixel configuration in a table.
 
-This is where **Deep Reinforcement Learning** comes in. It combines the principles of RL with the power of **deep neural networks**. Instead of a table, a neural network is used to *approximate* the Q-function (or the policy itself).
+This is where **Deep Reinforcement Learning** comes in. It combines the principles of RL with the power of **deep neural networks**. Instead of a table, a neural network is used to _approximate_ the Q-function (or the policy itself).
 
 For example, in **Deep Q-Networks (DQNs)**, a neural network takes the state (e.g., raw pixels from a game screen) as input and outputs the Q-values for all possible actions. The network learns by trying to minimize the TD error we saw earlier. This allows agents to generalize across similar states and handle extremely complex environments, leading to groundbreaking successes like AlphaGo and AI mastering Atari games.
 
@@ -114,18 +118,19 @@ For example, in **Deep Q-Networks (DQNs)**, a neural network takes the state (e.
 
 Reinforcement Learning isn't just for games and theoretical mazes. Its applications are rapidly expanding:
 
-*   **Robotics**: Teaching robots to grasp objects, navigate complex terrains, or perform intricate tasks.
-*   **Autonomous Driving**: Training self-driving cars to make safe and efficient decisions on the road.
-*   **Healthcare**: Optimizing treatment plans, drug discovery, and medical diagnoses.
-*   **Financial Trading**: Developing agents that can make investment decisions.
-*   **Personalized Recommendations**: Improving recommender systems by learning user preferences over time.
-*   **Resource Management**: Optimizing energy consumption in data centers or managing traffic flow.
+- **Robotics**: Teaching robots to grasp objects, navigate complex terrains, or perform intricate tasks.
+- **Autonomous Driving**: Training self-driving cars to make safe and efficient decisions on the road.
+- **Healthcare**: Optimizing treatment plans, drug discovery, and medical diagnoses.
+- **Financial Trading**: Developing agents that can make investment decisions.
+- **Personalized Recommendations**: Improving recommender systems by learning user preferences over time.
+- **Resource Management**: Optimizing energy consumption in data centers or managing traffic flow.
 
 The challenges in RL are still significant:
-*   **Sample Efficiency**: RL agents often require enormous amounts of data (experience) to learn.
-*   **Safety**: Ensuring that agents don't learn unsafe behaviors, especially in real-world scenarios.
-*   **Reward Design**: Crafting an effective reward function that truly reflects the desired behavior can be difficult.
-*   **High-Dimensionality**: Dealing with extremely complex state and action spaces remains an active research area.
+
+- **Sample Efficiency**: RL agents often require enormous amounts of data (experience) to learn.
+- **Safety**: Ensuring that agents don't learn unsafe behaviors, especially in real-world scenarios.
+- **Reward Design**: Crafting an effective reward function that truly reflects the desired behavior can be difficult.
+- **High-Dimensionality**: Dealing with extremely complex state and action spaces remains an active research area.
 
 ### Conclusion: The Future is Learning!
 

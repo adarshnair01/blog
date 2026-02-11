@@ -1,7 +1,7 @@
 ---
-title: "Unveiling the \"Eyes\" of AI: A Journey into Convolutional Neural Networks"
+title: 'Unveiling the "Eyes" of AI: A Journey into Convolutional Neural Networks'
 date: "2025-07-24"
-excerpt: "Ever wondered how computers manage to \"see\" and understand the world around them? Join me on a deep dive into Convolutional Neural Networks (CNNs), the incredible deep learning architecture that has revolutionized computer vision."
+excerpt: 'Ever wondered how computers manage to "see" and understand the world around them? Join me on a deep dive into Convolutional Neural Networks (CNNs), the incredible deep learning architecture that has revolutionized computer vision.'
 tags: ["Deep Learning", "CNN", "Computer Vision", "Neural Networks", "Machine Learning"]
 author: "Adarsh Nair"
 ---
@@ -36,6 +36,7 @@ Imagine our input image as a large grid of numbers. A **filter** (or kernel) is 
 Let's illustrate with a simple $3 \times 3$ filter on a $5 \times 5$ image:
 
 Suppose our image patch is:
+
 $$
 \begin{pmatrix}
 1 & 1 & 1 \\
@@ -45,6 +46,7 @@ $$
 $$
 
 And our filter is:
+
 $$
 \begin{pmatrix}
 -1 & 0 & 1 \\
@@ -63,8 +65,8 @@ What's truly amazing is that the numbers within these filters are **learnable pa
 
 #### Important Convolutional Layer Concepts:
 
-*   **Padding:** When we apply a filter, the output feature map is usually smaller than the input image. To preserve the spatial dimensions, we can add extra "dummy" pixels (usually zeros) around the border of the input image. This is called **padding**. "Same" padding attempts to make the output size the same as the input size, while "valid" padding means no padding is used, leading to a smaller output.
-*   **Stride:** This refers to the number of pixels the filter shifts over the input image. A stride of 1 means it moves one pixel at a time. A stride of 2 means it skips a pixel, effectively downsampling the image and reducing the size of the feature map.
+- **Padding:** When we apply a filter, the output feature map is usually smaller than the input image. To preserve the spatial dimensions, we can add extra "dummy" pixels (usually zeros) around the border of the input image. This is called **padding**. "Same" padding attempts to make the output size the same as the input size, while "valid" padding means no padding is used, leading to a smaller output.
+- **Stride:** This refers to the number of pixels the filter shifts over the input image. A stride of 1 means it moves one pixel at a time. A stride of 2 means it skips a pixel, effectively downsampling the image and reducing the size of the feature map.
 
 ### The "Neural Network" Part: Non-Linearity and Pooling
 
@@ -81,13 +83,14 @@ ReLU simply outputs the input if it's positive, and zero otherwise. It's computa
 Following the activation function, it's common to add a **pooling layer**. The primary purpose of pooling is to reduce the spatial dimensions (width and height) of the feature maps, which helps in two ways:
 
 1.  **Reduces computational load:** Fewer parameters mean faster training and less memory.
-2.  **Increases translational invariance:** It makes the features more robust to slight shifts or distortions in the input image. It's like asking, "Is this feature present *somewhere* in this general region?" rather than "Is this feature present at this *exact* pixel?"
+2.  **Increases translational invariance:** It makes the features more robust to slight shifts or distortions in the input image. It's like asking, "Is this feature present _somewhere_ in this general region?" rather than "Is this feature present at this _exact_ pixel?"
 
 The most popular type of pooling is **Max Pooling**. With max pooling, we define a small window (e.g., $2 \times 2$) and a stride. We slide this window across the feature map, and for each window, we simply take the maximum value.
 
 Example of $2 \times 2$ Max Pooling with a stride of 2:
 
 Input Feature Map:
+
 $$
 \begin{pmatrix}
 1 & 1 & 2 & 4 \\
@@ -98,6 +101,7 @@ $$
 $$
 
 Output (Max Pooled) Feature Map:
+
 $$
 \begin{pmatrix}
 \max(1,1,5,6) & \max(2,4,7,8) \\
@@ -123,9 +127,9 @@ A typical CNN architecture is built by stacking these layers in a specific seque
 
 This sequence (Conv -> ReLU -> Pool) is often repeated multiple times. As we go deeper into the network, the filters in subsequent convolutional layers learn to combine the simpler features from previous layers into more complex, abstract representations. For example:
 
-*   **Early layers:** Detect basic edges and colors.
-*   **Middle layers:** Detect textures, simple shapes, parts of objects (e.g., an eye, a wheel, a patch of fur).
-*   **Deepest layers:** Detect entire objects (e.g., a face, a car, an animal).
+- **Early layers:** Detect basic edges and colors.
+- **Middle layers:** Detect textures, simple shapes, parts of objects (e.g., an eye, a wheel, a patch of fur).
+- **Deepest layers:** Detect entire objects (e.g., a face, a car, an animal).
 
 5.  **Flattening:** After several Conv/Pool blocks, the 3D feature maps are "flattened" into a single, long 1D vector. This vector contains the high-level, abstract representation of the input image.
 6.  **Fully Connected (Dense) Layers:** These are standard neural network layers that take the flattened feature vector as input. They learn to classify the object based on these high-level features.
@@ -135,10 +139,10 @@ This sequence (Conv -> ReLU -> Pool) is often repeated multiple times. As we go 
 
 Training a CNN involves the same core principles as any other neural network: **backpropagation** and **gradient descent**. We feed the network a vast dataset of labeled images (e.g., millions of pictures of cats, dogs, cars, etc., each tagged with its correct class).
 
-*   The network makes a prediction.
-*   We calculate the "loss" or "error" (how far off the prediction was from the true label).
-*   Using backpropagation, this error is propagated backward through the network, layer by layer.
-*   Gradient descent then adjusts the weights of the filters and the fully connected layers in tiny increments, aiming to minimize this error.
+- The network makes a prediction.
+- We calculate the "loss" or "error" (how far off the prediction was from the true label).
+- Using backpropagation, this error is propagated backward through the network, layer by layer.
+- Gradient descent then adjusts the weights of the filters and the fully connected layers in tiny increments, aiming to minimize this error.
 
 Over millions of iterations and thousands of images, the filters learn to recognize salient features, and the fully connected layers learn to map these features to the correct classifications.
 
@@ -146,12 +150,12 @@ Over millions of iterations and thousands of images, the filters learn to recogn
 
 CNNs have truly revolutionized computer vision and beyond. Their ability to automatically learn hierarchical features from raw pixel data has led to groundbreaking advancements in:
 
-*   **Image Classification:** Identifying what's in an image (e.g., ImageNet Challenge winners).
-*   **Object Detection:** Locating and classifying multiple objects within an image (e.g., self-driving cars recognizing pedestrians and traffic signs).
-*   **Image Segmentation:** Assigning a label to *every pixel* in an image (e.g., medical image analysis to identify tumors).
-*   **Facial Recognition:** Unlocking your phone, security systems.
-*   **Medical Imaging:** Assisting doctors in diagnosing diseases from X-rays, MRIs, and CT scans.
-*   **Generative Models:** Creating realistic fake images and art (e.g., GANs often use CNNs as building blocks).
+- **Image Classification:** Identifying what's in an image (e.g., ImageNet Challenge winners).
+- **Object Detection:** Locating and classifying multiple objects within an image (e.g., self-driving cars recognizing pedestrians and traffic signs).
+- **Image Segmentation:** Assigning a label to _every pixel_ in an image (e.g., medical image analysis to identify tumors).
+- **Facial Recognition:** Unlocking your phone, security systems.
+- **Medical Imaging:** Assisting doctors in diagnosing diseases from X-rays, MRIs, and CT scans.
+- **Generative Models:** Creating realistic fake images and art (e.g., GANs often use CNNs as building blocks).
 
 The impact is so profound that it's hard to imagine modern AI without them. They've moved computer vision from a niche academic field to a pervasive technology in our everyday lives.
 

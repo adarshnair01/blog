@@ -20,7 +20,7 @@ In more formal terms, if we have a sequence of random variables $X_0, X_1, X_2, 
 
 $P(X_{n+1} = j | X_n = i, X_{n-1} = x_{n-1}, ..., X_0 = x_0) = P(X_{n+1} = j | X_n = i)$
 
-This equation simply means: the probability of transitioning to state $j$ at the next step ($X_{n+1}$) depends *only* on the current state $i$ ($X_n$), and not on any of the previous states ($X_{n-1}, ..., X_0$). This "memorylessness" is what makes Markov Chains so computationally tractable and fascinating.
+This equation simply means: the probability of transitioning to state $j$ at the next step ($X_{n+1}$) depends _only_ on the current state $i$ ($X_n$), and not on any of the previous states ($X_{n-1}, ..., X_0$). This "memorylessness" is what makes Markov Chains so computationally tractable and fascinating.
 
 ### States and Transitions: Mapping the World
 
@@ -42,8 +42,9 @@ A transition matrix, often denoted by $P$, is a square matrix where each entry $
 Let's stick with our simplified weather example with just two states: "Sunny" (S) and "Rainy" (R).
 
 Suppose we've observed historical data and determined the following probabilities:
-*   If it's Sunny today, there's an 80% chance it's Sunny tomorrow, and a 20% chance it's Rainy.
-*   If it's Rainy today, there's a 40% chance it's Sunny tomorrow, and a 60% chance it's Rainy.
+
+- If it's Sunny today, there's an 80% chance it's Sunny tomorrow, and a 20% chance it's Rainy.
+- If it's Rainy today, there's a 40% chance it's Sunny tomorrow, and a 60% chance it's Rainy.
 
 Our transition matrix $P$ would look like this:
 
@@ -56,8 +57,9 @@ $P = \begin{pmatrix}
 \end{pmatrix}$
 
 A few important properties of a transition matrix:
-*   Each entry $P_{ij}$ must be between 0 and 1 (as it's a probability).
-*   The sum of probabilities in each row must equal 1, because from any given state, you *must* transition to one of the possible states. For our example: $0.8 + 0.2 = 1$ and $0.4 + 0.6 = 1$.
+
+- Each entry $P_{ij}$ must be between 0 and 1 (as it's a probability).
+- The sum of probabilities in each row must equal 1, because from any given state, you _must_ transition to one of the possible states. For our example: $0.8 + 0.2 = 1$ and $0.4 + 0.6 = 1$.
 
 ### Predicting the Future: $k$ Steps Ahead
 
@@ -96,11 +98,11 @@ Let's find the stationary distribution for our weather example. Let $\pi = [\pi_
 $[\pi_S, \pi_R] \begin{pmatrix} 0.8 & 0.2 \\ 0.4 & 0.6 \end{pmatrix} = [\pi_S, \pi_R]$
 
 This gives us two equations:
+
 1.  $0.8\pi_S + 0.4\pi_R = \pi_S$
 2.  $0.2\pi_S + 0.6\pi_R = \pi_R$
 
-And our normalization condition:
-3.  $\pi_S + \pi_R = 1$
+And our normalization condition: 3. $\pi_S + \pi_R = 1$
 
 From equation 1: $0.4\pi_R = 0.2\pi_S \Rightarrow \pi_S = 2\pi_R$.
 Substitute this into equation 3: $2\pi_R + \pi_R = 1 \Rightarrow 3\pi_R = 1 \Rightarrow \pi_R = 1/3$.
@@ -113,30 +115,31 @@ So, the stationary distribution is $\pi = [2/3, 1/3]$. This means that in the lo
 The elegant simplicity and predictive power of Markov Chains have led to their widespread adoption across diverse fields:
 
 1.  **Text Generation and Natural Language Processing (NLP):**
-    *   This is perhaps one of the most intuitive applications. We can model a sequence of words as a Markov Chain. Each word is a state, and the transition probability $P_{ij}$ is the likelihood of word $j$ following word $i$.
-    *   By training on a large corpus of text, we can build a transition matrix that captures common word sequences. Then, starting with a seed word, we can generate new text by randomly picking the next word based on its transition probabilities.
-    *   While simple Markov Chains struggle with long-range coherence (they tend to produce grammatically correct but semantically nonsensical sentences after a few words), they are the foundation for more advanced NLP techniques and are directly used in things like predictive text and basic chatbots.
+    - This is perhaps one of the most intuitive applications. We can model a sequence of words as a Markov Chain. Each word is a state, and the transition probability $P_{ij}$ is the likelihood of word $j$ following word $i$.
+    - By training on a large corpus of text, we can build a transition matrix that captures common word sequences. Then, starting with a seed word, we can generate new text by randomly picking the next word based on its transition probabilities.
+    - While simple Markov Chains struggle with long-range coherence (they tend to produce grammatically correct but semantically nonsensical sentences after a few words), they are the foundation for more advanced NLP techniques and are directly used in things like predictive text and basic chatbots.
 
 2.  **Google PageRank Algorithm:**
-    *   This is a classic and highly impactful application. Imagine a "random surfer" clicking on web links. Each web page is a state, and each hyperlink from one page to another represents a possible transition.
-    *   The transition probabilities are determined by the number of outbound links from a page. The stationary distribution of this Markov Chain represents the long-term probability of the random surfer being on any given page. Pages with higher stationary probabilities are considered more "important" or "authoritative" and thus rank higher in search results.
+    - This is a classic and highly impactful application. Imagine a "random surfer" clicking on web links. Each web page is a state, and each hyperlink from one page to another represents a possible transition.
+    - The transition probabilities are determined by the number of outbound links from a page. The stationary distribution of this Markov Chain represents the long-term probability of the random surfer being on any given page. Pages with higher stationary probabilities are considered more "important" or "authoritative" and thus rank higher in search results.
 
 3.  **Financial Modeling:**
-    *   Markov Chains can be used to model the state of financial markets (e.g., bull market, bear market, stagnant market) or the credit rating of companies. Understanding the transition probabilities between these states helps in risk assessment and portfolio management.
+    - Markov Chains can be used to model the state of financial markets (e.g., bull market, bear market, stagnant market) or the credit rating of companies. Understanding the transition probabilities between these states helps in risk assessment and portfolio management.
 
 4.  **Biology and Genetics:**
-    *   They are used to model DNA sequences (bases A, C, G, T as states), protein folding, and population dynamics. For example, predicting the next base in a DNA sequence based on the current one.
+    - They are used to model DNA sequences (bases A, C, G, T as states), protein folding, and population dynamics. For example, predicting the next base in a DNA sequence based on the current one.
 
 5.  **Queueing Theory:**
-    *   Analyzing waiting lines (e.g., customers in a supermarket, calls to a customer service center). States could represent the number of people in the queue, and transitions relate to arrivals and departures.
+    - Analyzing waiting lines (e.g., customers in a supermarket, calls to a customer service center). States could represent the number of people in the queue, and transitions relate to arrivals and departures.
 
 ### Limitations and Beyond
 
 While incredibly powerful, the memoryless Markov Property can also be a limitation. Many real-world phenomena do indeed depend on more than just the immediate past. For instance, in language, the meaning of a sentence can depend on words much earlier in the sequence, not just the preceding word.
 
 This is where more advanced concepts come into play:
-*   **Hidden Markov Models (HMMs):** When the underlying states aren't directly observable, but emit observable outputs (e.g., recognizing speech where the actual phonemes are "hidden" but we hear the sounds).
-*   **Markov Decision Processes (MDPs):** When an agent can make decisions that influence the transitions between states, forming the backbone of Reinforcement Learning.
+
+- **Hidden Markov Models (HMMs):** When the underlying states aren't directly observable, but emit observable outputs (e.g., recognizing speech where the actual phonemes are "hidden" but we hear the sounds).
+- **Markov Decision Processes (MDPs):** When an agent can make decisions that influence the transitions between states, forming the backbone of Reinforcement Learning.
 
 ### Conclusion: Your Journey Has Just Begun
 

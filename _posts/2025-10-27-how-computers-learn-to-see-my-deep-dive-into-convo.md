@@ -16,7 +16,7 @@ Then came the explosion of Deep Learning, and with it, a particular architecture
 
 Before we jump into CNNs, let's briefly consider why traditional neural networks struggle with images. Imagine a simple grayscale image, say, 28x28 pixels. That's 784 individual numbers (pixel intensities). If you feed this into a regular neural network, each pixel would be an input feature. For a larger image, say 200x200, you're looking at 40,000 input features!
 
-Now, consider what happens if you want to detect a cat. A cat's ear might appear in the top-left corner in one image, and the bottom-right in another. A traditional neural network would have to learn an entirely new set of weights for each possible position of that ear, even though it's the *same* ear. This leads to:
+Now, consider what happens if you want to detect a cat. A cat's ear might appear in the top-left corner in one image, and the bottom-right in another. A traditional neural network would have to learn an entirely new set of weights for each possible position of that ear, even though it's the _same_ ear. This leads to:
 
 1.  **Too many parameters:** A massive number of weights and biases to learn, making training incredibly slow and prone to overfitting.
 2.  **Loss of spatial information:** The network treats each pixel as an independent feature, losing the crucial information about which pixels are adjacent to each other.
@@ -26,7 +26,7 @@ This is where CNNs step in, taking inspiration from our own biological visual co
 
 ### The Inspiration: Our Own Eyes and Brain
 
-Think about how *we* see. When you look at an image, your brain isn't processing every single pixel individually across your entire field of vision. Instead, your visual system has specialized cells that respond to very specific things: edges at certain orientations, corners, textures, or even more complex shapes. These detectors are localized; they only "look" at a small part of your visual field. As information moves deeper into your brain, these simple features are combined to form more complex ones, eventually leading to the recognition of entire objects.
+Think about how _we_ see. When you look at an image, your brain isn't processing every single pixel individually across your entire field of vision. Instead, your visual system has specialized cells that respond to very specific things: edges at certain orientations, corners, textures, or even more complex shapes. These detectors are localized; they only "look" at a small part of your visual field. As information moves deeper into your brain, these simple features are combined to form more complex ones, eventually leading to the recognition of entire objects.
 
 This hierarchical, localized, and feature-driven approach is precisely what CNNs mimic.
 
@@ -66,11 +66,11 @@ This calculated value, 60, becomes one pixel in our new feature map. The filter 
 
 **Why is this powerful?**
 
-*   **Feature Detection:** Different filters learn to detect different features. One might light up for horizontal edges, another for vertical edges, another for specific textures, and so on.
-*   **Parameter Sharing:** The *same* filter (set of weights) is applied across the entire image. This drastically reduces the number of parameters the network needs to learn, and it means the network can detect a feature no matter where it appears in the image (translation invariance).
-*   **Local Connectivity:** Each neuron in a convolutional layer is only connected to a small region of the input, mimicking the local processing in our visual cortex.
+- **Feature Detection:** Different filters learn to detect different features. One might light up for horizontal edges, another for vertical edges, another for specific textures, and so on.
+- **Parameter Sharing:** The _same_ filter (set of weights) is applied across the entire image. This drastically reduces the number of parameters the network needs to learn, and it means the network can detect a feature no matter where it appears in the image (translation invariance).
+- **Local Connectivity:** Each neuron in a convolutional layer is only connected to a small region of the input, mimicking the local processing in our visual cortex.
 
-In reality, a convolutional layer typically has *many* filters (e.g., 32, 64, 128 filters). Each filter creates its own feature map, and these feature maps are then stacked together, forming a multi-channel output for the next layer.
+In reality, a convolutional layer typically has _many_ filters (e.g., 32, 64, 128 filters). Each filter creates its own feature map, and these feature maps are then stacked together, forming a multi-channel output for the next layer.
 
 #### 2. Activation Functions: Adding the "Spice"
 
@@ -90,6 +90,7 @@ After convolutional and ReLU layers, we often add a **Pooling Layer**. The main 
 The most common type is **Max Pooling**. Imagine a 2x2 window sliding across your feature map, usually with a stride of 2. For each window, Max Pooling simply takes the maximum value within that window and uses it as the single output for that region.
 
 Original Feature Map (e.g., 4x4):
+
 ```
 [1, 1, 2, 4]
 [5, 6, 7, 8]
@@ -98,12 +99,14 @@ Original Feature Map (e.g., 4x4):
 ```
 
 Applying 2x2 Max Pooling with stride 2:
-*   First 2x2 window: `[1, 1, 5, 6]` -> Max is `6`
-*   Second 2x2 window: `[2, 4, 7, 8]` -> Max is `8`
-*   Third 2x2 window: `[3, 2, 1, 2]` -> Max is `3`
-*   Fourth 2x2 window: `[1, 0, 3, 4]` -> Max is `4`
+
+- First 2x2 window: `[1, 1, 5, 6]` -> Max is `6`
+- Second 2x2 window: `[2, 4, 7, 8]` -> Max is `8`
+- Third 2x2 window: `[3, 2, 1, 2]` -> Max is `3`
+- Fourth 2x2 window: `[1, 0, 3, 4]` -> Max is `4`
 
 Resulting Pooled Feature Map (2x2):
+
 ```
 [6, 8]
 [3, 4]
@@ -119,9 +122,9 @@ A typical CNN architecture is built by stacking these layers together:
 
 As the image data passes through these layers:
 
-*   **Early layers** learn to detect very simple, low-level features like edges, corners, and basic textures.
-*   **Middle layers** combine these simple features to form more complex patterns, like circles, squares, or parts of objects (e.g., eyes, wheels).
-*   **Deeper layers** integrate these more complex patterns to recognize entire objects or object parts (e.g., a full face, a car body).
+- **Early layers** learn to detect very simple, low-level features like edges, corners, and basic textures.
+- **Middle layers** combine these simple features to form more complex patterns, like circles, squares, or parts of objects (e.g., eyes, wheels).
+- **Deeper layers** integrate these more complex patterns to recognize entire objects or object parts (e.g., a full face, a car body).
 
 This hierarchical learning process is incredibly powerful because it allows the network to automatically discover and represent complex visual patterns without explicit human programming.
 
@@ -151,12 +154,12 @@ This entire process is repeated millions of times with thousands of images. Slow
 
 CNNs have truly revolutionized computer vision and beyond. Their applications are widespread and impactful:
 
-*   **Image Classification:** Identifying objects in photos (e.g., ImageNet Challenge, Google Photos).
-*   **Object Detection:** Locating and identifying multiple objects within an image, often with bounding boxes (e.g., self-driving cars recognizing pedestrians and other vehicles, security systems).
-*   **Medical Imaging:** Diagnosing diseases by analyzing X-rays, MRIs, and CT scans with superhuman accuracy.
-*   **Facial Recognition:** Unlocking phones, verifying identities.
-*   **Image Segmentation:** Assigning a class to *each pixel* in an image (e.g., separating foreground from background).
-*   **Style Transfer & Generative Models:** Creating art or generating new images (e.g., deepfakes, DALL-E, Midjourney).
+- **Image Classification:** Identifying objects in photos (e.g., ImageNet Challenge, Google Photos).
+- **Object Detection:** Locating and identifying multiple objects within an image, often with bounding boxes (e.g., self-driving cars recognizing pedestrians and other vehicles, security systems).
+- **Medical Imaging:** Diagnosing diseases by analyzing X-rays, MRIs, and CT scans with superhuman accuracy.
+- **Facial Recognition:** Unlocking phones, verifying identities.
+- **Image Segmentation:** Assigning a class to _each pixel_ in an image (e.g., separating foreground from background).
+- **Style Transfer & Generative Models:** Creating art or generating new images (e.g., deepfakes, DALL-E, Midjourney).
 
 It's astonishing to think that these complex capabilities stem from the simple, elegant operations we discussed: convolution, activation, and pooling.
 

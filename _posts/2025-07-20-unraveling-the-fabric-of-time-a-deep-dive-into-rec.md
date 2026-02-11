@@ -6,7 +6,7 @@ tags: ["Machine Learning", "Deep Learning", "RNNs", "NLP", "Time Series"]
 author: "Adarsh Nair"
 ---
 
-As a data science enthusiast, I’ve often found myself captivated by the human brain’s incredible ability to process information sequentially. We don't just see words in isolation; we understand them in context, building meaning from a stream of sounds or text. "The quick brown fox..." immediately conjures an expectation of what comes next. But how do we teach a machine to do that? How do we bestow upon it the gift of *memory*?
+As a data science enthusiast, I’ve often found myself captivated by the human brain’s incredible ability to process information sequentially. We don't just see words in isolation; we understand them in context, building meaning from a stream of sounds or text. "The quick brown fox..." immediately conjures an expectation of what comes next. But how do we teach a machine to do that? How do we bestow upon it the gift of _memory_?
 
 This question bugged me for a long time, especially when I started grappling with traditional neural networks. While powerful, those feedforward networks felt... static. Each input was treated independently, like a fresh slate every time. They were brilliant for classifying images (a cat is a cat, no matter what cat came before it), but utterly lost when it came to sequences. How could they predict the next word in a sentence if they forgot the first half?
 
@@ -38,13 +38,14 @@ And the output (if any) could be:
 $y_t = W_{hy} h_t + b_y$
 
 Let's break these down:
-*   $x_t$: The input at the current time step (e.g., a word embedding).
-*   $h_{t-1}$: The hidden state (memory) from the previous time step.
-*   $h_t$: The new hidden state, updated with current input and previous memory.
-*   $y_t$: The output at the current time step (e.g., the next predicted word).
-*   $W_{hh}$, $W_{xh}$, $W_{hy}$: These are weight matrices. Notice something crucial: *the same weight matrices are used across all time steps*. This is why RNNs are so powerful – they learn how to process sequences by applying the same learned transformation repeatedly. It's like having one student who learns how to take notes and apply that same note-taking skill throughout the entire lecture, rather than a new student for every minute!
-*   $b_h$, $b_y$: Bias vectors.
-*   $\sigma$: An activation function (like tanh or ReLU) that introduces non-linearity, allowing the network to learn complex patterns.
+
+- $x_t$: The input at the current time step (e.g., a word embedding).
+- $h_{t-1}$: The hidden state (memory) from the previous time step.
+- $h_t$: The new hidden state, updated with current input and previous memory.
+- $y_t$: The output at the current time step (e.g., the next predicted word).
+- $W_{hh}$, $W_{xh}$, $W_{hy}$: These are weight matrices. Notice something crucial: _the same weight matrices are used across all time steps_. This is why RNNs are so powerful – they learn how to process sequences by applying the same learned transformation repeatedly. It's like having one student who learns how to take notes and apply that same note-taking skill throughout the entire lecture, rather than a new student for every minute!
+- $b_h$, $b_y$: Bias vectors.
+- $\sigma$: An activation function (like tanh or ReLU) that introduces non-linearity, allowing the network to learn complex patterns.
 
 This elegant structure allows RNNs to model relationships and dependencies across different time steps, making them the go-to architecture for many sequential data tasks.
 
@@ -52,21 +53,21 @@ This elegant structure allows RNNs to model relationships and dependencies acros
 
 My eyes truly opened to the potential of RNNs when I saw their applications:
 
-*   **Natural Language Processing (NLP):**
-    *   **Text Generation:** Training an RNN on a vast corpus of text allows it to generate coherent and contextually relevant sentences, even entire stories! It learns the grammar, syntax, and style.
-    *   **Machine Translation:** Think Google Translate. RNNs can encode a sentence in one language into a fixed-size vector and then decode that vector into a sentence in another language.
-    *   **Sentiment Analysis:** Understanding if a review is positive or negative often requires processing the entire sequence of words to grasp the full sentiment, not just isolated terms.
-*   **Speech Recognition:** Converting spoken words into text. The sequence of sound waves needs to be mapped to a sequence of words.
-*   **Time Series Prediction:** Forecasting stock prices, weather patterns, or energy consumption, where past observations are crucial for predicting future values.
+- **Natural Language Processing (NLP):**
+  - **Text Generation:** Training an RNN on a vast corpus of text allows it to generate coherent and contextually relevant sentences, even entire stories! It learns the grammar, syntax, and style.
+  - **Machine Translation:** Think Google Translate. RNNs can encode a sentence in one language into a fixed-size vector and then decode that vector into a sentence in another language.
+  - **Sentiment Analysis:** Understanding if a review is positive or negative often requires processing the entire sequence of words to grasp the full sentiment, not just isolated terms.
+- **Speech Recognition:** Converting spoken words into text. The sequence of sound waves needs to be mapped to a sequence of words.
+- **Time Series Prediction:** Forecasting stock prices, weather patterns, or energy consumption, where past observations are crucial for predicting future values.
 
 ### The Achilles' Heel: Vanishing and Exploding Gradients
 
 Just when I thought RNNs were the perfect solution, I hit a snag – or rather, a pair of snags: the **vanishing gradient problem** and the **exploding gradient problem**. These issues arise during the backpropagation through time (BPTT) process, which is how RNNs learn.
 
-*   **Vanishing Gradients:** Imagine trying to teach a student about something that happened at the very beginning of the school year. If the information has been repeatedly summarized and passed along, critical details might get lost or become so diluted that their impact on current learning is negligible.
-    In RNNs, this happens because the gradients (which are used to update weights) shrink exponentially as they propagate backward through many time steps. When gradients become extremely small, the network effectively "forgets" distant past information, making it unable to learn long-term dependencies. For example, in a long sentence, an RNN might struggle to relate a pronoun to a noun that appeared 20 words earlier.
+- **Vanishing Gradients:** Imagine trying to teach a student about something that happened at the very beginning of the school year. If the information has been repeatedly summarized and passed along, critical details might get lost or become so diluted that their impact on current learning is negligible.
+  In RNNs, this happens because the gradients (which are used to update weights) shrink exponentially as they propagate backward through many time steps. When gradients become extremely small, the network effectively "forgets" distant past information, making it unable to learn long-term dependencies. For example, in a long sentence, an RNN might struggle to relate a pronoun to a noun that appeared 20 words earlier.
 
-*   **Exploding Gradients:** On the flip side, sometimes gradients can grow uncontrollably large. This leads to unstable learning, where weights change drastically with each update, causing the network to diverge and fail to learn anything meaningful. While less common, it’s like a student suddenly overreacting to a tiny piece of old information, throwing off all their current understanding. Exploding gradients can often be mitigated with a technique called **gradient clipping**, where gradients are capped at a certain threshold.
+- **Exploding Gradients:** On the flip side, sometimes gradients can grow uncontrollably large. This leads to unstable learning, where weights change drastically with each update, causing the network to diverge and fail to learn anything meaningful. While less common, it’s like a student suddenly overreacting to a tiny piece of old information, throwing off all their current understanding. Exploding gradients can often be mitigated with a technique called **gradient clipping**, where gradients are capped at a certain threshold.
 
 These problems were a major hurdle, preventing vanilla RNNs from effectively capturing very long-range dependencies. It became clear that we needed a more sophisticated memory mechanism.
 
@@ -80,14 +81,14 @@ When I first delved into LSTMs, they seemed intimidating with their complex diag
 
 Think of an LSTM cell as a sophisticated data manager with three crucial gates:
 
-1.  **Forget Gate ($f_t$):** This gate decides what information from the previous cell state ($C_{t-1}$) should be *discarded*. It outputs a number between 0 and 1 for each element in the cell state, where 0 means "forget completely" and 1 means "keep completely."
+1.  **Forget Gate ($f_t$):** This gate decides what information from the previous cell state ($C_{t-1}$) should be _discarded_. It outputs a number between 0 and 1 for each element in the cell state, where 0 means "forget completely" and 1 means "keep completely."
     $f_t = \sigma(W_f \cdot [h_{t-1}, x_t] + b_f)$
 
-2.  **Input Gate ($i_t$) and Candidate Cell State ($\tilde{C}_t$):** This gate decides what *new* information from the current input ($x_t$) should be *stored* in the cell state.
-    *   The input gate ($i_t$) decides which values to update.
-    *   The candidate cell state ($\tilde{C}_t$) creates a vector of new candidate values that *could* be added to the cell state.
-    $i_t = \sigma(W_i \cdot [h_{t-1}, x_t] + b_i)$
-    $\tilde{C}_t = \tanh(W_C \cdot [h_{t-1}, x_t] + b_C)$
+2.  **Input Gate ($i_t$) and Candidate Cell State ($\tilde{C}_t$):** This gate decides what _new_ information from the current input ($x_t$) should be _stored_ in the cell state.
+    - The input gate ($i_t$) decides which values to update.
+    - The candidate cell state ($\tilde{C}_t$) creates a vector of new candidate values that _could_ be added to the cell state.
+      $i_t = \sigma(W_i \cdot [h_{t-1}, x_t] + b_i)$
+      $\tilde{C}_t = \tanh(W_C \cdot [h_{t-1}, x_t] + b_C)$
 
 3.  **Update the Cell State ($C_t$):** This is where the magic happens. The old cell state ($C_{t-1}$) is updated based on the forget gate's decision and the new candidate values.
     $C_t = f_t \odot C_{t-1} + i_t \odot \tilde{C}_t$
@@ -103,17 +104,17 @@ The key distinction is the **cell state ($C_t$)**, which acts like a "conveyor b
 
 GRUs, introduced more recently, are a simplified version of LSTMs. They combine the forget and input gates into a single **update gate** and also merge the cell state and hidden state. This makes GRUs computationally less expensive and faster to train, while often achieving comparable performance to LSTMs.
 
-*   **Update Gate ($z_t$):** Decides how much of the past information (from $h_{t-1}$) should be carried forward and how much of the new information should be added.
-    $z_t = \sigma(W_z \cdot [h_{t-1}, x_t] + b_z)$
+- **Update Gate ($z_t$):** Decides how much of the past information (from $h_{t-1}$) should be carried forward and how much of the new information should be added.
+  $z_t = \sigma(W_z \cdot [h_{t-1}, x_t] + b_z)$
 
-*   **Reset Gate ($r_t$):** Decides how much of the previous hidden state to *forget* before combining it with the new input.
-    $r_t = \sigma(W_r \cdot [h_{t-1}, x_t] + b_r)$
+- **Reset Gate ($r_t$):** Decides how much of the previous hidden state to _forget_ before combining it with the new input.
+  $r_t = \sigma(W_r \cdot [h_{t-1}, x_t] + b_r)$
 
-*   **Candidate Hidden State ($\tilde{h}_t$):** Similar to the candidate cell state in LSTM, this is a potential new hidden state.
-    $\tilde{h}_t = \tanh(W_h \cdot [r_t \odot h_{t-1}, x_t] + b_h)$
+- **Candidate Hidden State ($\tilde{h}_t$):** Similar to the candidate cell state in LSTM, this is a potential new hidden state.
+  $\tilde{h}_t = \tanh(W_h \cdot [r_t \odot h_{t-1}, x_t] + b_h)$
 
-*   **New Hidden State ($h_t$):** The final hidden state is a linear combination of the previous hidden state and the candidate hidden state, controlled by the update gate.
-    $h_t = (1 - z_t) \odot h_{t-1} + z_t \odot \tilde{h}_t$
+- **New Hidden State ($h_t$):** The final hidden state is a linear combination of the previous hidden state and the candidate hidden state, controlled by the update gate.
+  $h_t = (1 - z_t) \odot h_{t-1} + z_t \odot \tilde{h}_t$
 
 GRUs offer a good balance between complexity and performance, making them a popular choice in many applications.
 
@@ -121,8 +122,8 @@ GRUs offer a good balance between complexity and performance, making them a popu
 
 My journey didn't stop there. Once I grasped LSTMs and GRUs, I learned about even more powerful extensions:
 
-*   **Bidirectional RNNs (Bi-RNNs):** These process sequences in both forward and backward directions, allowing them to capture context from both the past and the future. Imagine reading a sentence both left-to-right and right-to-left to fully grasp its meaning.
-*   **Sequence-to-Sequence (Seq2Seq) Models with Attention:** This architecture, often built with LSTMs or GRUs, is particularly potent for tasks like machine translation. An "encoder" RNN reads the input sequence and compresses it into a context vector. A "decoder" RNN then generates the output sequence from this context vector. The "attention mechanism" allows the decoder to "look back" at specific, relevant parts of the input sequence when generating each output element, rather than relying solely on a single fixed-size context vector. This was a game-changer!
+- **Bidirectional RNNs (Bi-RNNs):** These process sequences in both forward and backward directions, allowing them to capture context from both the past and the future. Imagine reading a sentence both left-to-right and right-to-left to fully grasp its meaning.
+- **Sequence-to-Sequence (Seq2Seq) Models with Attention:** This architecture, often built with LSTMs or GRUs, is particularly potent for tasks like machine translation. An "encoder" RNN reads the input sequence and compresses it into a context vector. A "decoder" RNN then generates the output sequence from this context vector. The "attention mechanism" allows the decoder to "look back" at specific, relevant parts of the input sequence when generating each output element, rather than relying solely on a single fixed-size context vector. This was a game-changer!
 
 ### The Enduring Legacy of RNNs
 

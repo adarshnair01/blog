@@ -41,8 +41,8 @@ print("-" * 30)
 
 When I first started, selecting data felt like playing a guessing game with square brackets. Should I use `df[...]`, `df[[...]]`, `df.column_name`? It was messy. Then I discovered `.loc` and `.iloc`, and it was like unlocking a sniper rifle for data selection.
 
-*   `.loc` is for **label-based indexing**. You use the *names* of rows and columns.
-*   `.iloc` is for **integer-location based indexing**. You use the *numerical positions* (0-based) of rows and columns.
+- `.loc` is for **label-based indexing**. You use the _names_ of rows and columns.
+- `.iloc` is for **integer-location based indexing**. You use the _numerical positions_ (0-based) of rows and columns.
 
 **Why it matters:** Using `.loc` and `.iloc` makes your code explicit, readable, and prevents subtle bugs that can arise from mixed indexing.
 
@@ -63,14 +63,15 @@ print("3. Students with a final score above 90 (using .loc with boolean):")
 print(df.loc[df['Score_Final'] > 90, ['Name', 'Major', 'Score_Final']])
 print("-" * 30)
 ```
-Notice how `.loc` helps us precisely pick rows based on a condition (like `Score_Final > 90`) and then specify *exactly* which columns we want. `.iloc` is fantastic when you just want to grab the first few or last few rows/columns, regardless of their names.
+
+Notice how `.loc` helps us precisely pick rows based on a condition (like `Score_Final > 90`) and then specify _exactly_ which columns we want. `.iloc` is fantastic when you just want to grab the first few or last few rows/columns, regardless of their names.
 
 ### 2. Unleashing Custom Power with `.apply()` and `lambda` Functions
 
 Sometimes, the built-in Pandas functions aren't enough, and you need to perform a custom operation on your data. This is where `df.apply()` combined with `lambda` functions becomes incredibly powerful.
 
-*   `df.apply()` lets you apply a function along an axis of the DataFrame (rows or columns).
-*   `lambda` functions are small, anonymous functions that you can define right on the spot.
+- `df.apply()` lets you apply a function along an axis of the DataFrame (rows or columns).
+- `lambda` functions are small, anonymous functions that you can define right on the spot.
 
 **Why it matters:** This combination allows you to write concise, custom logic for data transformation without writing lengthy function definitions.
 
@@ -90,6 +91,7 @@ df['Attendance_Category'] = df['Attendance_Rate'].apply(
 print(df[['Name', 'Attendance_Rate', 'Attendance_Category']].head())
 print("-" * 30)
 ```
+
 The `axis=1` in the first example tells Pandas to apply the `lambda` function row by row. This means `row` inside the lambda function refers to each row of the DataFrame. In the second example, we apply the `lambda` function to a single `Series` (`df['Attendance_Rate']`), so `x` refers to each individual value in that Series.
 
 ### 3. The Memory Saver: `pd.Categorical` Dtype
@@ -117,14 +119,15 @@ print("8. Categories in the 'Major' column:")
 print(df['Major'].cat.categories)
 print("-" * 30)
 ```
+
 You'll likely see a significant drop in memory usage for the 'Major' column. This is because Pandas stores categorical data internally as integers and maintains a mapping from these integers to the actual string labels, which is much more efficient than storing repeated strings.
 
 ### 4. Mastering Time with `pd.to_datetime()` & the `.dt` Accessor
 
 Dates and times are notoriously tricky in data. Luckily, Pandas makes them manageable with `pd.to_datetime()` and the `.dt` accessor.
 
-*   `pd.to_datetime()` converts strings or numbers into proper datetime objects.
-*   The `.dt` accessor, available on a Series of datetime objects, allows you to extract various components like year, month, day, hour, etc.
+- `pd.to_datetime()` converts strings or numbers into proper datetime objects.
+- The `.dt` accessor, available on a Series of datetime objects, allows you to extract various components like year, month, day, hour, etc.
 
 **Why it matters:** Accurate date and time handling is essential for time-series analysis, calculating durations, or filtering data based on specific periods.
 
@@ -150,6 +153,7 @@ print("11. Days since earliest enrollment:")
 print(df[['Name', 'Enrollment_Date', 'Days_Since_Earliest_Enrollment']].head())
 print("-" * 30)
 ```
+
 The `.dt` accessor opens up a world of possibilities for time-based features, like `dt.day_name()`, `dt.week`, `dt.is_month_start`, and more!
 
 ### 5. Unpacking List-like Data with `df.explode()`
@@ -175,6 +179,7 @@ print("14. Count of each hobby:")
 print(df_exploded['Hobbies'].value_counts())
 print("-" * 30)
 ```
+
 Notice how Alice, who had ['Reading', 'Coding'], now appears twice, once for 'Reading' and once for 'Coding'. This is incredibly useful for turning complex nested data into a flat, analyzable structure.
 
 ### 6. Speaking English to Your Data with `df.query()`
@@ -195,11 +200,12 @@ print(f"16. Students with Score_Final > {min_score} (using df.query() with varia
 print(df.query("Score_Final > @min_score")[['Name', 'Score_Final']])
 print("-" * 30)
 ```
+
 The `@` prefix tells `df.query()` that `min_score` is a Python variable defined in your environment, not a column name. This feature is super handy!
 
 ### 7. Group-wise Operations Without Losing Shape: `groupby().transform()`
 
-You know `df.groupby()` for aggregation, right? It's great for getting summary statistics for groups. But what if you want to calculate a group statistic (like the average score for each Major) and then add that *back* to the original DataFrame, maintaining its original size and structure? Enter `groupby().transform()`.
+You know `df.groupby()` for aggregation, right? It's great for getting summary statistics for groups. But what if you want to calculate a group statistic (like the average score for each Major) and then add that _back_ to the original DataFrame, maintaining its original size and structure? Enter `groupby().transform()`.
 
 **Why it matters:** `transform()` applies a function to each group and then broadcasts the result back to the original DataFrame's index, making it perfect for feature engineering where you want group-level information as new columns.
 
@@ -224,7 +230,8 @@ print("19. Score difference from major's average (using transform with lambda):"
 print(df[['Name', 'Major', 'Score_Final', 'Major_Avg_Final_Score', 'Score_Above_Major_Avg']])
 print("-" * 30)
 ```
-Notice how `transform('mean')` calculated the mean final score for each major ('CS', 'Physics', 'Math', 'Biology') and then filled that value into the `Major_Avg_Final_Score` column for *every student belonging to that major*. This is different from `groupby().mean()`, which would return a new DataFrame with just one row per major.
+
+Notice how `transform('mean')` calculated the mean final score for each major ('CS', 'Physics', 'Math', 'Biology') and then filled that value into the `Major_Avg_Final_Score` column for _every student belonging to that major_. This is different from `groupby().mean()`, which would return a new DataFrame with just one row per major.
 
 ### Wrapping Up
 

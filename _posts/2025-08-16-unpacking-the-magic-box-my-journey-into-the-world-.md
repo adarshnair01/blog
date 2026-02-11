@@ -28,13 +28,13 @@ Let's quickly recap the challenge. When you read a sentence like "The dog, which
 12. "the"
 13. "house"
 
-By the time it gets to "ran," the information about "dog" might have faded. This is the "long-range dependency" problem. Plus, because each word *had* to be processed after the previous one, you couldn't parallelize the computation – it was always a bottleneck.
+By the time it gets to "ran," the information about "dog" might have faded. This is the "long-range dependency" problem. Plus, because each word _had_ to be processed after the previous one, you couldn't parallelize the computation – it was always a bottleneck.
 
 ### The "Attention" Revolution: Looking Everywhere at Once
 
-The core innovation of Transformers is the *attention mechanism*. Think about it this way: when you're reading a complex paragraph, your brain doesn't just linearly process it. You might skim, re-read a crucial phrase, or connect a pronoun to its noun several sentences back. You *pay attention* to different parts of the text with varying degrees of focus, depending on what you're trying to understand.
+The core innovation of Transformers is the _attention mechanism_. Think about it this way: when you're reading a complex paragraph, your brain doesn't just linearly process it. You might skim, re-read a crucial phrase, or connect a pronoun to its noun several sentences back. You _pay attention_ to different parts of the text with varying degrees of focus, depending on what you're trying to understand.
 
-That's precisely what self-attention does for a Transformer. For each word in a sentence, it looks at *all other words* in that same sentence and assigns an "importance score" to them. This score determines how much each word should influence the representation of the current word.
+That's precisely what self-attention does for a Transformer. For each word in a sentence, it looks at _all other words_ in that same sentence and assigns an "importance score" to them. This score determines how much each word should influence the representation of the current word.
 
 To make this work, each word in a sequence is transformed into three different vectors:
 
@@ -42,9 +42,9 @@ To make this work, each word in a sequence is transformed into three different v
 2.  **Key (K):** What do I have? (Like an index or label for available information)
 3.  **Value (V):** What information do I contain? (The actual data associated with the key)
 
-Let's say we're processing the word "ran" in our example sentence. The "Query" vector for "ran" will interact with the "Key" vectors of *all other words* ("The", "dog", "which", etc.). The dot product between "ran's" Query and each other word's Key gives us a similarity score. A higher score means more relevance.
+Let's say we're processing the word "ran" in our example sentence. The "Query" vector for "ran" will interact with the "Key" vectors of _all other words_ ("The", "dog", "which", etc.). The dot product between "ran's" Query and each other word's Key gives us a similarity score. A higher score means more relevance.
 
-These scores are then normalized using a `softmax` function, turning them into weights that sum up to 1. Finally, we multiply these weights by the "Value" vectors of *all other words* and sum them up. The result is a new, context-rich representation for "ran" that implicitly knows it's strongly related to "dog."
+These scores are then normalized using a `softmax` function, turning them into weights that sum up to 1. Finally, we multiply these weights by the "Value" vectors of _all other words_ and sum them up. The result is a new, context-rich representation for "ran" that implicitly knows it's strongly related to "dog."
 
 Mathematically, for a given Query matrix $Q$, Key matrix $K$, and Value matrix $V$:
 
@@ -71,7 +71,7 @@ The Encoder's job is to take an input sequence (e.g., a sentence) and transform 
 
 Crucially, after each sub-layer, there's a **Residual Connection** (adding the sub-layer's input to its output) and **Layer Normalization**. These techniques help stabilize training, especially for very deep networks.
 
-But there's a catch: the self-attention mechanism, by itself, doesn't inherently understand the *order* of words. If you shuffle the words in a sentence, the attention scores might change, but the model doesn't explicitly know "this word came before that word." This is where **Positional Encoding** steps in.
+But there's a catch: the self-attention mechanism, by itself, doesn't inherently understand the _order_ of words. If you shuffle the words in a sentence, the attention scores might change, but the model doesn't explicitly know "this word came before that word." This is where **Positional Encoding** steps in.
 
 **Positional Encoding:**
 To inject information about the relative or absolute position of words in the sequence, the Transformer adds "positional encodings" to the input embeddings (the numerical representations of words). These are not learned during training but are fixed, using sine and cosine functions of different frequencies. Think of it like adding a unique "fingerprint" to each position that the model can learn to interpret.
@@ -86,7 +86,7 @@ Where `pos` is the position, `i` is the dimension, and $d_{model}$ is the dimens
 The Decoder's role is to generate an output sequence (e.g., a translation or a response) based on the Encoder's output. It also has a stack of identical layers, but each layer has three main sub-layers:
 
 1.  **Masked Multi-Head Self-Attention:** Similar to the encoder's self-attention, but with a crucial difference: it prevents the decoder from "looking ahead" at future words in the output sequence during training. This ensures the prediction for a given word only depends on the previously generated words.
-2.  **Encoder-Decoder Multi-Head Attention:** This layer allows the decoder to attend to the output of the *encoder stack*. This is how the decoder focuses on relevant parts of the input sentence when generating its output.
+2.  **Encoder-Decoder Multi-Head Attention:** This layer allows the decoder to attend to the output of the _encoder stack_. This is how the decoder focuses on relevant parts of the input sentence when generating its output.
 3.  **Position-wise Feed-Forward Network:** Same as in the encoder.
 
 Again, residual connections and layer normalization are applied after each sub-layer. The output of the final decoder layer then goes through a linear layer and a `softmax` function to produce probabilities for the next word in the sequence.
@@ -104,10 +104,10 @@ The impact of Transformers has been profound, and here's why:
 
 While born from the need to understand language, the Transformer architecture has proven to be incredibly versatile. It's now being successfully applied to:
 
-*   **Computer Vision:** Vision Transformers (ViT) process images by treating patches of pixels like words in a sentence, achieving state-of-the-art results.
-*   **Speech Recognition:** Transforming audio signals into sequences for processing.
-*   **Time Series Analysis:** Predicting future values in sequential data beyond just text.
-*   **Drug Discovery and Protein Folding:** Understanding complex molecular structures.
+- **Computer Vision:** Vision Transformers (ViT) process images by treating patches of pixels like words in a sentence, achieving state-of-the-art results.
+- **Speech Recognition:** Transforming audio signals into sequences for processing.
+- **Time Series Analysis:** Predicting future values in sequential data beyond just text.
+- **Drug Discovery and Protein Folding:** Understanding complex molecular structures.
 
 ### The Journey Continues
 

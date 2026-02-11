@@ -14,18 +14,18 @@ As a curious mind exploring the vast landscape of Data Science and Machine Learn
 
 So, grab a warm drink, and let's embark on this journey together.
 
-### What Exactly *Is* a Time Series? The Basics
+### What Exactly _Is_ a Time Series? The Basics
 
-At its core, a **time series** is simply a sequence of data points indexed (or listed) in time order. Think of it as a historical record, but where the *order* of events matters immensely. Each data point is associated with a specific timestamp.
+At its core, a **time series** is simply a sequence of data points indexed (or listed) in time order. Think of it as a historical record, but where the _order_ of events matters immensely. Each data point is associated with a specific timestamp.
 
 Common examples are everywhere:
 
-*   **Stock Prices**: Daily closing price of a company's stock.
-*   **Temperature Readings**: Hourly temperature in a city.
-*   **Sales Data**: Monthly sales figures for a product.
-*   **Website Traffic**: Number of visitors to a website per minute.
+- **Stock Prices**: Daily closing price of a company's stock.
+- **Temperature Readings**: Hourly temperature in a city.
+- **Sales Data**: Monthly sales figures for a product.
+- **Website Traffic**: Number of visitors to a website per minute.
 
-What makes time series unique is that observations are *dependent*. What happened yesterday often influences what happens today. This dependency is what we try to model.
+What makes time series unique is that observations are _dependent_. What happened yesterday often influences what happens today. This dependency is what we try to model.
 
 #### Decomposing the Puzzle: Understanding the Components
 
@@ -41,8 +41,8 @@ When I first started looking at time series plots, they often looked like a chao
 
 We can combine these components in two main ways:
 
-*   **Additive Model**: $Y_t = T_t + S_t + C_t + R_t$ (Used when fluctuations around the trend remain roughly constant over time).
-*   **Multiplicative Model**: $Y_t = T_t \times S_t \times C_t \times R_t$ (Used when the amplitude of the seasonal or cyclical variation increases with the level of the series).
+- **Additive Model**: $Y_t = T_t + S_t + C_t + R_t$ (Used when fluctuations around the trend remain roughly constant over time).
+- **Multiplicative Model**: $Y_t = T_t \times S_t \times C_t \times R_t$ (Used when the amplitude of the seasonal or cyclical variation increases with the level of the series).
 
 Understanding these components is the first step to making sense of our data. It's like dissecting a frog to understand its biology – a bit messy, but incredibly insightful!
 
@@ -74,8 +74,8 @@ Before we jump into complex models, the first step is always to visualize and ex
 3.  **Autocorrelation Function (ACF)**: This plot shows how much an observation at time $t$ is correlated with observations at previous time steps ($t-1, t-2, \dots, t-k$).
     Imagine dropping a pebble in a pond: the ripples are strongest near the center and get weaker as they spread out. ACF tells us how strong the "ripple effect" of past values is. A slow decay in ACF often indicates a trend.
 
-4.  **Partial Autocorrelation Function (PACF)**: This is a bit trickier but super useful. PACF measures the correlation between an observation at time $t$ and an observation at time $t-k$, *after removing the effects of the intermediate observations* ($t-1, t-2, \dots, t-(k-1)$).
-    Going back to the ripple analogy: if ACF tells us the total impact of a pebble on a point in the pond, PACF tries to isolate the *direct* impact, removing the influence of ripples that have already passed through the intermediate points.
+4.  **Partial Autocorrelation Function (PACF)**: This is a bit trickier but super useful. PACF measures the correlation between an observation at time $t$ and an observation at time $t-k$, _after removing the effects of the intermediate observations_ ($t-1, t-2, \dots, t-(k-1)$).
+    Going back to the ripple analogy: if ACF tells us the total impact of a pebble on a point in the pond, PACF tries to isolate the _direct_ impact, removing the influence of ripples that have already passed through the intermediate points.
 
 ACF and PACF plots are crucial for identifying the "order" of traditional time series models like ARIMA.
 
@@ -104,7 +104,7 @@ This is where things get really interesting. **ARIMA** stands for **AutoRegressi
 
 2.  **I (Integrated) - $d$**: This refers to the number of times differencing is needed to make the series stationary. If your series needs to be differenced once, then $d=1$. If twice, $d=2$. We discussed this concept earlier!
 
-3.  **MA (Moving Average) - $q$**: This component uses the linear combination of past *error terms* (the difference between the observed value and the predicted value) to predict the current observation. It's like saying, "My prediction for today's sales is adjusted based on how much I *missed* my predictions for the last $q$ days."
+3.  **MA (Moving Average) - $q$**: This component uses the linear combination of past _error terms_ (the difference between the observed value and the predicted value) to predict the current observation. It's like saying, "My prediction for today's sales is adjusted based on how much I _missed_ my predictions for the last $q$ days."
     The equation looks something like this:
     $Y_t = c + \theta_1 \epsilon_{t-1} + \dots + \theta_q \epsilon_{t-q} + \epsilon_t$
     where $\epsilon_{t-i}$ are past error terms, and $\theta_i$ are coefficients. The parameter $q$ is the order of the MA component, often identified using the ACF plot.
@@ -117,8 +117,8 @@ For time series with strong seasonal patterns, we often use **SARIMA** (Seasonal
 
 While ARIMA is a classical powerhouse, the field keeps evolving:
 
-*   **Facebook Prophet**: A fantastic tool for business forecasting. It's designed to handle trends, seasonality (multiple periods), holidays, and missing data very robustly, with minimal parameter tuning. It's an additive model under the hood.
-*   **Deep Learning Models (e.g., LSTMs)**: For extremely complex, high-dimensional time series data, Recurrent Neural Networks (RNNs) like Long Short-Term Memory (LSTM) networks can learn intricate patterns and dependencies across long sequences. These are often used when you have multiple related time series or external predictors.
+- **Facebook Prophet**: A fantastic tool for business forecasting. It's designed to handle trends, seasonality (multiple periods), holidays, and missing data very robustly, with minimal parameter tuning. It's an additive model under the hood.
+- **Deep Learning Models (e.g., LSTMs)**: For extremely complex, high-dimensional time series data, Recurrent Neural Networks (RNNs) like Long Short-Term Memory (LSTM) networks can learn intricate patterns and dependencies across long sequences. These are often used when you have multiple related time series or external predictors.
 
 ### The Road Ahead: Practical Considerations
 
@@ -127,17 +127,17 @@ Building a model isn't just about picking an algorithm; it's about careful prepa
 1.  **Data Preprocessing**: Like any data science task, cleaning is key. Handling missing values (interpolation, forward/backward fill), dealing with outliers, and transforming data (e.g., log transform for multiplicative series) are crucial steps.
 
 2.  **Feature Engineering**: For more advanced models, we can create new features from our time series:
-    *   **Lag Features**: Values from previous time steps (e.g., yesterday's sales).
-    *   **Rolling Statistics**: Moving averages, standard deviations over a window.
-    *   **Time-based Features**: Day of week, month, year, quarter, holiday flags.
+    - **Lag Features**: Values from previous time steps (e.g., yesterday's sales).
+    - **Rolling Statistics**: Moving averages, standard deviations over a window.
+    - **Time-based Features**: Day of week, month, year, quarter, holiday flags.
 
-3.  **Train/Test Split (Crucial!)**: This is *different* for time series! You *cannot* randomly shuffle your data and split. You must split chronologically. You train on an earlier period and test on a later, unseen period. We can't use future information to predict the past!
+3.  **Train/Test Split (Crucial!)**: This is _different_ for time series! You _cannot_ randomly shuffle your data and split. You must split chronologically. You train on an earlier period and test on a later, unseen period. We can't use future information to predict the past!
     A common technique is **walk-forward validation**, where you iteratively re-train your model as new data becomes available.
 
 4.  **Evaluation Metrics**: How do we know if our forecast is good? Common metrics include:
-    *   **Mean Absolute Error (MAE)**: The average absolute difference between predicted and actual values. Easy to interpret.
-    *   **Root Mean Squared Error (RMSE)**: Penalizes larger errors more heavily. Useful when large errors are particularly undesirable.
-    *   **Mean Absolute Percentage Error (MAPE)**: Expresses error as a percentage, which is often good for business stakeholders.
+    - **Mean Absolute Error (MAE)**: The average absolute difference between predicted and actual values. Easy to interpret.
+    - **Root Mean Squared Error (RMSE)**: Penalizes larger errors more heavily. Useful when large errors are particularly undesirable.
+    - **Mean Absolute Percentage Error (MAPE)**: Expresses error as a percentage, which is often good for business stakeholders.
 
 ### My Personal Takeaway & Conclusion
 

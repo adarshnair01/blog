@@ -5,6 +5,7 @@ excerpt: "Imagine a world where your beliefs about the unknown can grow stronger
 tags: ["Bayesian Statistics", "Probability", "Data Science", "Statistical Inference", "Machine Learning"]
 author: "Adarsh Nair"
 ---
+
 Hello fellow data explorers and curious minds!
 
 Today, I want to share a perspective on statistics that, for me, transformed how I approach uncertainty and learning from data. It's a journey into the heart of "Bayesian Statistics," and trust me, it's less about intimidating formulas and more about developing an intuitive, powerful way of thinking.
@@ -17,9 +18,9 @@ Most of us would do the latter. We integrate new information into our existing m
 
 Before we dive into the fun stuff, let's quickly acknowledge the elephant in the room: there are generally two main schools of thought in statistics.
 
-1.  **Frequentist Statistics:** This is what most of us encounter first. It views probability as the long-run frequency of an event. If you flip a fair coin an infinite number of times, the proportion of heads will tend towards 0.5. Parameters (like the true probability of heads) are considered fixed but unknown constants. Frequentist methods often focus on p-values and confidence intervals to make statements about the data *given* an assumed true parameter value.
+1.  **Frequentist Statistics:** This is what most of us encounter first. It views probability as the long-run frequency of an event. If you flip a fair coin an infinite number of times, the proportion of heads will tend towards 0.5. Parameters (like the true probability of heads) are considered fixed but unknown constants. Frequentist methods often focus on p-values and confidence intervals to make statements about the data _given_ an assumed true parameter value.
 
-2.  **Bayesian Statistics:** This is our star today. It views probability as a *degree of belief*. Parameters are not fixed constants; they are quantities we are uncertain about, and we represent that uncertainty with probability distributions. As we gather new data, we *update* these beliefs. Instead of asking "What is the probability of observing this data given my hypothesis?", Bayesians ask "What is the probability of my hypothesis being true given this data?". It's a subtle but crucial shift.
+2.  **Bayesian Statistics:** This is our star today. It views probability as a _degree of belief_. Parameters are not fixed constants; they are quantities we are uncertain about, and we represent that uncertainty with probability distributions. As we gather new data, we _update_ these beliefs. Instead of asking "What is the probability of observing this data given my hypothesis?", Bayesians ask "What is the probability of my hypothesis being true given this data?". It's a subtle but crucial shift.
 
 It's like the difference between saying "If the coin were fair, how likely would it be to get 7 heads out of 10 flips?" (Frequentist) versus "Given that I got 7 heads out of 10 flips, how likely is it that the coin is fair?" (Bayesian). See the difference? Bayesian statistics often feels more aligned with how we intuitively reason.
 
@@ -33,17 +34,17 @@ $P(A|B) = \frac{P(B|A) P(A)}{P(B)}$
 
 Don't let the symbols scare you! Let's break down each component, giving them more intuitive names in our Bayesian context:
 
-*   **$P(A|B)$ - The Posterior Probability (What we want to know!)**
-    *   This is our *updated belief* about hypothesis $A$ *after* observing data $B$. It's the probability of our hypothesis being true, given the evidence. This is the gold we're digging for!
+- **$P(A|B)$ - The Posterior Probability (What we want to know!)**
+  - This is our _updated belief_ about hypothesis $A$ _after_ observing data $B$. It's the probability of our hypothesis being true, given the evidence. This is the gold we're digging for!
 
-*   **$P(B|A)$ - The Likelihood**
-    *   This tells us how probable our observed data $B$ would be if our hypothesis $A$ were true. It's the "evidence strength" – how well the data supports hypothesis $A$. If $P(B|A)$ is high, it means our data $B$ is quite consistent with $A$.
+- **$P(B|A)$ - The Likelihood**
+  - This tells us how probable our observed data $B$ would be if our hypothesis $A$ were true. It's the "evidence strength" – how well the data supports hypothesis $A$. If $P(B|A)$ is high, it means our data $B$ is quite consistent with $A$.
 
-*   **$P(A)$ - The Prior Probability**
-    *   This is our *initial belief* about hypothesis $A$ *before* observing any new data $B$. It represents our state of knowledge or ignorance. It could be based on previous experiments, expert opinion, or simply a broad range of possibilities if we have no strong initial feelings.
+- **$P(A)$ - The Prior Probability**
+  - This is our _initial belief_ about hypothesis $A$ _before_ observing any new data $B$. It represents our state of knowledge or ignorance. It could be based on previous experiments, expert opinion, or simply a broad range of possibilities if we have no strong initial feelings.
 
-*   **$P(B)$ - The Marginal Likelihood (or Evidence)**
-    *   This is the total probability of observing the data $B$ across all possible hypotheses. It acts as a normalizing constant, ensuring that our posterior probabilities sum to 1. In many practical scenarios, especially when comparing hypotheses, we often don't need to calculate $P(B)$ directly, as it's just a scaling factor. We care about the *relative* probabilities.
+- **$P(B)$ - The Marginal Likelihood (or Evidence)**
+  - This is the total probability of observing the data $B$ across all possible hypotheses. It acts as a normalizing constant, ensuring that our posterior probabilities sum to 1. In many practical scenarios, especially when comparing hypotheses, we often don't need to calculate $P(B)$ directly, as it's just a scaling factor. We care about the _relative_ probabilities.
 
 So, in plain English, Bayes' Theorem says:
 
@@ -92,7 +93,7 @@ So, our posterior distribution is $Beta(2+7, 2+3) = Beta(9, 5)$.
 Our prior belief was $Beta(2,2)$, centered at 0.5.
 After observing 7 heads in 10 flips, our belief has shifted significantly to $Beta(9,5)$. This new distribution is centered at $\frac{9}{9+5} = \frac{9}{14} \approx 0.64$.
 
-Our belief about $\theta$ has moved from "probably fair (0.5)" towards "a bit biased towards heads (0.64)". The distribution has also become narrower, reflecting that we are now *more confident* in this updated estimate of $\theta$. We've learned from the data!
+Our belief about $\theta$ has moved from "probably fair (0.5)" towards "a bit biased towards heads (0.64)". The distribution has also become narrower, reflecting that we are now _more confident_ in this updated estimate of $\theta$. We've learned from the data!
 
 ### Why is This So Powerful?
 
@@ -102,24 +103,24 @@ Our belief about $\theta$ has moved from "probably fair (0.5)" towards "a bit bi
 
 3.  **Direct Answers to Our Questions:** We often want to know the probability of a hypothesis being true, or the range of probable values for a parameter. Bayesian methods directly provide these probabilities (e.g., "There's a 95% probability that $\theta$ is between 0.5 and 0.75"), which are often more intuitive than frequentist p-values or confidence intervals.
 
-4.  **Full Uncertainty Quantification:** Instead of just a single "best estimate," Bayesian analysis gives you a *distribution* over possible parameter values. This rich information allows you to understand the full range of uncertainty in your estimates.
+4.  **Full Uncertainty Quantification:** Instead of just a single "best estimate," Bayesian analysis gives you a _distribution_ over possible parameter values. This rich information allows you to understand the full range of uncertainty in your estimates.
 
 5.  **Small Data Advantage:** When you have very little data, frequentist methods can struggle. Bayesian methods, by leveraging prior information, can often provide more robust and sensible inferences.
 
 ### Where You'll See Bayesian Statistics (Beyond Coins!)
 
-*   **Machine Learning:** Naive Bayes classifiers for spam detection and text classification. Gaussian Processes for flexible regression. Bayesian Neural Networks that quantify uncertainty in their predictions.
-*   **A/B Testing:** Deciding which website variant is better by continuously updating your belief in their performance.
-*   **Medical Diagnosis:** Updating the probability of a disease given test results (this is a classic example of Bayes' Theorem in action!).
-*   **Drug Discovery:** Estimating the effectiveness of new treatments with limited trial data.
-*   **Forecasting:** Predicting future events (e.g., stock prices, weather) by incorporating new information.
-*   **Astronomy:** Estimating parameters of exoplanets or gravitational waves.
+- **Machine Learning:** Naive Bayes classifiers for spam detection and text classification. Gaussian Processes for flexible regression. Bayesian Neural Networks that quantify uncertainty in their predictions.
+- **A/B Testing:** Deciding which website variant is better by continuously updating your belief in their performance.
+- **Medical Diagnosis:** Updating the probability of a disease given test results (this is a classic example of Bayes' Theorem in action!).
+- **Drug Discovery:** Estimating the effectiveness of new treatments with limited trial data.
+- **Forecasting:** Predicting future events (e.g., stock prices, weather) by incorporating new information.
+- **Astronomy:** Estimating parameters of exoplanets or gravitational waves.
 
 ### A Note on Complexity and Computation
 
 While the simple coin example worked out nicely with known distributions (called "conjugate priors"), many real-world problems don't have such neat solutions. Calculating the posterior can involve complex integrals, especially for models with many parameters.
 
-This is where computational methods like **Markov Chain Monte Carlo (MCMC)** come into play. MCMC algorithms allow us to *sample* from complex posterior distributions, effectively bypassing the need for direct analytical calculation. Tools like PyMC3, Stan, and R's `brms` package make these advanced computations accessible to data scientists.
+This is where computational methods like **Markov Chain Monte Carlo (MCMC)** come into play. MCMC algorithms allow us to _sample_ from complex posterior distributions, effectively bypassing the need for direct analytical calculation. Tools like PyMC3, Stan, and R's `brms` package make these advanced computations accessible to data scientists.
 
 ### Embracing the Bayesian Mindset
 
@@ -128,8 +129,9 @@ Bayesian statistics isn't just a set of formulas; it's a paradigm shift. It enco
 It's about embracing uncertainty not as a weakness, but as a fundamental aspect of knowledge, and having a systematic way to reduce it.
 
 So, next time you encounter a problem involving uncertainty, ask yourself:
-*   What do I believe *before* seeing any new data? (Prior)
-*   How well does the new data align with different possibilities? (Likelihood)
-*   How should I update my beliefs given this new evidence? (Posterior)
+
+- What do I believe _before_ seeing any new data? (Prior)
+- How well does the new data align with different possibilities? (Likelihood)
+- How should I update my beliefs given this new evidence? (Posterior)
 
 By doing so, you'll not only be practicing Bayesian statistics, but you'll also be thinking like a great detective, constantly refining your theories to get closer to the truth. Start exploring, and let the data guide your beliefs!

@@ -20,14 +20,14 @@ Before Transformers, models like Recurrent Neural Networks (RNNs) and Long Short
 
 In 2017, a groundbreaking paper titled "Attention Is All You Need" by Vaswani et al. introduced the Transformer. This paper completely changed the game, primarily by doing away with sequential processing and embracing a mechanism called **attention**.
 
-The core idea? Instead of processing words sequentially, process them *all at once*, but allow each word to "pay attention" to other relevant words in the input sequence, no matter how far apart they are. This unlocked massive parallelization (meaning faster training) and allowed models to capture long-range dependencies far more effectively than their predecessors.
+The core idea? Instead of processing words sequentially, process them _all at once_, but allow each word to "pay attention" to other relevant words in the input sequence, no matter how far apart they are. This unlocked massive parallelization (meaning faster training) and allowed models to capture long-range dependencies far more effectively than their predecessors.
 
 ### Building Blocks of Understanding: The Transformer Encoder-Decoder
 
 The original Transformer architecture had two main parts: an **Encoder** and a **Decoder**.
 
-*   **Encoder:** Its job is to understand the input sequence (e.g., a sentence in English). It takes a sequence of words and outputs a rich, contextual representation of each word.
-*   **Decoder:** Its job is to generate an output sequence (e.g., the English sentence translated into French), using the encoder's understanding and its own generated output so far.
+- **Encoder:** Its job is to understand the input sequence (e.g., a sentence in English). It takes a sequence of words and outputs a rich, contextual representation of each word.
+- **Decoder:** Its job is to generate an output sequence (e.g., the English sentence translated into French), using the encoder's understanding and its own generated output so far.
 
 While the full Transformer has both, GPT models are actually **decoder-only** architectures. This is a crucial distinction we'll return to. But first, let's explore the common components found within both encoder and decoder blocks.
 
@@ -39,8 +39,8 @@ At the heart of the Transformer are several ingenious mechanisms. Let's break th
 
 Our computers don't understand words like "cat" or "house." We need to convert them into numbers.
 
-*   **Input Embeddings:** Each word in our vocabulary is mapped to a vector of numbers (e.g., a list of 768 floating-point values for GPT-2). Words with similar meanings will have similar vectors. This is the "meaning" part.
-*   **Positional Encoding:** Since the Transformer processes all words simultaneously, it loses the inherent order of the words. "Mary saw John" has a different meaning than "John saw Mary." To fix this, we add a special vector called **positional encoding** to each word's embedding. This vector encodes the word's position in the sequence.
+- **Input Embeddings:** Each word in our vocabulary is mapped to a vector of numbers (e.g., a list of 768 floating-point values for GPT-2). Words with similar meanings will have similar vectors. This is the "meaning" part.
+- **Positional Encoding:** Since the Transformer processes all words simultaneously, it loses the inherent order of the words. "Mary saw John" has a different meaning than "John saw Mary." To fix this, we add a special vector called **positional encoding** to each word's embedding. This vector encodes the word's position in the sequence.
 
 The original Transformer used a clever sine and cosine function for positional encoding:
 
@@ -48,9 +48,10 @@ $PE_{(pos, 2i)} = \sin(pos / 10000^{2i/d_{model}})$
 $PE_{(pos, 2i+1)} = \cos(pos / 10000^{2i/d_{model}})$
 
 Where:
-*   $pos$ is the position of the word in the sequence.
-*   $i$ is the dimension index within the embedding vector.
-*   $d_{model}$ is the dimension of the embedding vector.
+
+- $pos$ is the position of the word in the sequence.
+- $i$ is the dimension index within the embedding vector.
+- $d_{model}$ is the dimension of the embedding vector.
 
 This formula creates a unique, easily learnable "address" for each position, ensuring that even distant positions have a consistent relationship. It's like giving each word a unique bookmark with its page number written on it.
 
@@ -59,9 +60,10 @@ This formula creates a unique, easily learnable "address" for each position, ens
 This is where the magic truly happens. The attention mechanism allows a word to weigh the importance of all other words in the input sequence when processing itself.
 
 Imagine you're searching for a specific book in a library.
-*   Your **Query (Q)** is what you're looking for (e.g., "science fiction novels about space travel").
-*   The **Keys (K)** are the labels or descriptions of all the books in the library (e.g., "fantasy adventure," "historical drama," "sci-fi space opera").
-*   The **Values (V)** are the actual content of the books themselves.
+
+- Your **Query (Q)** is what you're looking for (e.g., "science fiction novels about space travel").
+- The **Keys (K)** are the labels or descriptions of all the books in the library (e.g., "fantasy adventure," "historical drama," "sci-fi space opera").
+- The **Values (V)** are the actual content of the books themselves.
 
 You compare your Query to all the Keys. The closer a Key matches your Query, the more "attention" you pay to that book's Value.
 
@@ -72,10 +74,11 @@ The core attention calculation is the **Scaled Dot-Product Attention**:
 $Attention(Q, K, V) = \text{softmax}(\frac{QK^T}{\sqrt{d_k}})V$
 
 Let's break this down:
-*   **$QK^T$**: This is the dot product between the Query matrix and the transpose of the Key matrix. It measures the similarity or "relevance" of each word's Query to every other word's Key. A high dot product means high relevance.
-*   **$\sqrt{d_k}$**: This is a scaling factor (square root of the dimension of the key vectors). It's used to prevent the dot products from becoming too large, which could push the softmax into regions with very small gradients, hindering learning.
-*   **$\text{softmax}(\cdot)$**: This function converts the relevance scores into a probability distribution, ensuring that all attention weights sum to 1. It tells us how much "attention" each word should pay to every other word.
-*   **$V$**: Finally, these attention weights are multiplied by the Value matrix. This effectively creates a weighted sum of the Value vectors, where words with higher attention weights contribute more to the output for the current word.
+
+- **$QK^T$**: This is the dot product between the Query matrix and the transpose of the Key matrix. It measures the similarity or "relevance" of each word's Query to every other word's Key. A high dot product means high relevance.
+- **$\sqrt{d_k}$**: This is a scaling factor (square root of the dimension of the key vectors). It's used to prevent the dot products from becoming too large, which could push the softmax into regions with very small gradients, hindering learning.
+- **$\text{softmax}(\cdot)$**: This function converts the relevance scores into a probability distribution, ensuring that all attention weights sum to 1. It tells us how much "attention" each word should pay to every other word.
+- **$V$**: Finally, these attention weights are multiplied by the Value matrix. This effectively creates a weighted sum of the Value vectors, where words with higher attention weights contribute more to the output for the current word.
 
 #### Multi-Head Attention: Seeing from Multiple Angles
 
@@ -93,21 +96,21 @@ After the attention layer, the output for each position passes through a simple,
 
 Two final touches make the Transformer architecture robust:
 
-*   **Residual Connections:** Often called "skip connections," these add the input of a sub-layer to its output. For example, if $x$ is the input to the attention layer, the output would be $x + \text{Attention}(x)$. This helps prevent the vanishing gradient problem in deep networks, making it easier to train very deep models.
-*   **Layer Normalization:** Similar to batch normalization, but instead of normalizing across the batch dimension, it normalizes across the feature dimension for each individual sample. This helps stabilize training and speed up convergence.
+- **Residual Connections:** Often called "skip connections," these add the input of a sub-layer to its output. For example, if $x$ is the input to the attention layer, the output would be $x + \text{Attention}(x)$. This helps prevent the vanishing gradient problem in deep networks, making it easier to train very deep models.
+- **Layer Normalization:** Similar to batch normalization, but instead of normalizing across the batch dimension, it normalizes across the feature dimension for each individual sample. This helps stabilize training and speed up convergence.
 
 Each sub-layer in a Transformer block (attention and feed-forward) is typically followed by a residual connection and then layer normalization.
 
 ### The GPT Twist: Decoder-Only and Causal Masking
 
-Now, let's bring it all back to GPT. As mentioned, GPT (which stands for Generative Pre-trained Transformer) is a **decoder-only** architecture. It doesn't have an encoder to process a separate input. Instead, it generates text by predicting the next word in a sequence, based *only* on the words it has generated so far.
+Now, let's bring it all back to GPT. As mentioned, GPT (which stands for Generative Pre-trained Transformer) is a **decoder-only** architecture. It doesn't have an encoder to process a separate input. Instead, it generates text by predicting the next word in a sequence, based _only_ on the words it has generated so far.
 
 This generative capability requires a crucial modification to the self-attention mechanism: **Causal (or Masked) Self-Attention**.
 
-*   When generating a word, a language model should only be able to "look at" or "pay attention to" the words that came *before* it in the sequence. It shouldn't peek at future words, as that would be cheating!
-*   Causal masking enforces this by **masking out** (setting to negative infinity, which becomes zero after softmax) any connections to future words in the attention matrix *before* the softmax step.
+- When generating a word, a language model should only be able to "look at" or "pay attention to" the words that came _before_ it in the sequence. It shouldn't peek at future words, as that would be cheating!
+- Causal masking enforces this by **masking out** (setting to negative infinity, which becomes zero after softmax) any connections to future words in the attention matrix _before_ the softmax step.
 
-Imagine you're writing a story. You can reread everything you've written so far to decide on your next sentence, but you can't magically know what you're *going* to write five sentences from now. Causal masking simulates this constraint, making GPT excellent at predicting the next logical word.
+Imagine you're writing a story. You can reread everything you've written so far to decide on your next sentence, but you can't magically know what you're _going_ to write five sentences from now. Causal masking simulates this constraint, making GPT excellent at predicting the next logical word.
 
 ### The GPT Block: Stacked for Power
 
@@ -123,11 +126,11 @@ The sheer scale of these models – billions of parameters – allows them to ca
 
 Phew! We've covered a lot of ground today. From the foundational "Attention Is All You Need" paper to the specific architectural choices that make GPT so powerful. We've seen:
 
-*   How **embeddings and positional encoding** turn words into meaningful, ordered numerical representations.
-*   The elegance of **attention**, allowing the model to dynamically weigh the importance of different parts of the input.
-*   The power of **Multi-Head Attention** to capture diverse relationships.
-*   The necessity of **causal masking** for autoregressive text generation in GPT.
-*   The stacking of these blocks and massive pre-training that lead to intelligence.
+- How **embeddings and positional encoding** turn words into meaningful, ordered numerical representations.
+- The elegance of **attention**, allowing the model to dynamically weigh the importance of different parts of the input.
+- The power of **Multi-Head Attention** to capture diverse relationships.
+- The necessity of **causal masking** for autoregressive text generation in GPT.
+- The stacking of these blocks and massive pre-training that lead to intelligence.
 
 The GPT architecture is a testament to ingenious engineering and the power of scaling. It's not magic, but a beautifully designed system that leverages parallel processing and context-aware attention to understand and generate human language with unprecedented fluency.
 

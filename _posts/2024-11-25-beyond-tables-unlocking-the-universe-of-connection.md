@@ -8,22 +8,24 @@ author: "Adarsh Nair"
 
 Hey everyone! Welcome back to the blog. Today, I want to share my excitement about a fascinating area of artificial intelligence that’s rapidly changing how we think about data: Graph Neural Networks, or GNNs.
 
-My journey into machine learning started like many of yours – with tabular data, image classification using Convolutional Neural Networks (CNNs), and sequence analysis with Recurrent Neural Networks (RNNs). I felt pretty confident, like I had a good grasp on handling different data types. But then, I stumbled upon a problem that none of these standard tools could elegantly solve: understanding *relationships*.
+My journey into machine learning started like many of yours – with tabular data, image classification using Convolutional Neural Networks (CNNs), and sequence analysis with Recurrent Neural Networks (RNNs). I felt pretty confident, like I had a good grasp on handling different data types. But then, I stumbled upon a problem that none of these standard tools could elegantly solve: understanding _relationships_.
 
 Think about it:
-*   How do you represent a social network where people are connected by friendships?
-*   What about molecules, where atoms are linked by chemical bonds?
-*   Or even a city's road network, where intersections are nodes and roads are edges?
 
-These aren't neatly structured grids (like images) or linear sequences (like text). They are *graphs* – complex, dynamic webs of interconnected entities. And that's where GNNs come in, revolutionizing how AI perceives and processes these intricate relationships.
+- How do you represent a social network where people are connected by friendships?
+- What about molecules, where atoms are linked by chemical bonds?
+- Or even a city's road network, where intersections are nodes and roads are edges?
+
+These aren't neatly structured grids (like images) or linear sequences (like text). They are _graphs_ – complex, dynamic webs of interconnected entities. And that's where GNNs come in, revolutionizing how AI perceives and processes these intricate relationships.
 
 ### The World Isn't Always Flat: Why Graphs Matter
 
 Before we dive into GNNs, let's quickly remind ourselves what a graph is in this context.
 
 A graph $G$ is formally defined as a pair $(V, E)$, where:
-*   $V$ is a set of **nodes** (or vertices) – these are the individual entities in your network (e.g., people, atoms, cities).
-*   $E$ is a set of **edges** – these represent the connections or relationships between nodes (e.g., friendships, chemical bonds, roads).
+
+- $V$ is a set of **nodes** (or vertices) – these are the individual entities in your network (e.g., people, atoms, cities).
+- $E$ is a set of **edges** – these represent the connections or relationships between nodes (e.g., friendships, chemical bonds, roads).
 
 Each node can also have **node features** ($X_v$), which are attributes describing that node. For a person in a social network, features might include their age, interests, or location. For an atom, it might be its atomic number or electronegativity. Edges can also have features (e.g., the strength of a friendship, the length of a road).
 
@@ -35,8 +37,8 @@ Now, you might be thinking, "Can't we just flatten a graph or treat it like an i
 
 1.  **Arbitrary Size and Complex Topology**: Graphs can have any number of nodes and edges, and their structure can be incredibly varied. Unlike images (fixed grid size) or sequences (fixed direction), there's no inherent order or shape to a graph.
 2.  **No Fixed Spatial Locality**: In an image, a pixel's neighbors are always in the same relative positions (e.g., top, bottom, left, right). In a graph, a node's neighbors can be anywhere in the graph, and their order is arbitrary.
-3.  **Permutation Invariance**: If you re-label the nodes of a graph, it's still the *same* graph. A GNN needs to be robust to this and produce the same output regardless of how we order the nodes. Traditional neural networks aren't inherently permutation invariant.
-4.  **Relational Information is Key**: The *connections* themselves often hold crucial information that's lost if you just treat nodes as independent data points.
+3.  **Permutation Invariance**: If you re-label the nodes of a graph, it's still the _same_ graph. A GNN needs to be robust to this and produce the same output regardless of how we order the nodes. Traditional neural networks aren't inherently permutation invariant.
+4.  **Relational Information is Key**: The _connections_ themselves often hold crucial information that's lost if you just treat nodes as independent data points.
 
 CNNs excel at finding patterns in local, grid-like structures. RNNs are masters of sequential dependencies. But for the fluid, interconnected world of graphs, we need something different – something that can understand and leverage the relationships between entities.
 
@@ -71,14 +73,15 @@ $$ H^{(k+1)} = \sigma(\tilde{D}^{-\frac{1}{2}}\tilde{A}\tilde{D}^{-\frac{1}{2}}H
 
 Let's break this down, because it looks scarier than it is!
 
-*   $H^{(k)}$: This is a matrix where each row represents the feature vector of a node at layer $k$. So, $H^{(0)}$ would be your initial node features $X$.
-*   $W^{(k)}$: This is a learnable weight matrix, similar to the weights in a standard neural network layer. It transforms the features.
-*   $\sigma$: This is an activation function, like ReLU, which introduces non-linearity.
-*   $\tilde{A} = A + I$: This is the adjacency matrix $A$ with self-loops added. Adding the identity matrix $I$ ensures that each node also aggregates its *own* features when updating its representation, which is crucial.
-*   $\tilde{D}$: This is the degree matrix of $\tilde{A}$. The degree matrix is a diagonal matrix where $\tilde{D}_{ii}$ is the sum of entries in row $i$ of $\tilde{A}$ (i.e., the number of neighbors plus one for the self-loop).
-*   $\tilde{D}^{-\frac{1}{2}}\tilde{A}\tilde{D}^{-\frac{1}{2}}$: This term is the normalized adjacency matrix. It's a clever trick that helps to *average* the features of a node's neighbors (including itself). Without this normalization, nodes with many neighbors might dominate the feature aggregation, leading to unstable learning. This specific normalization is often called the "symmetrically normalized adjacency matrix."
+- $H^{(k)}$: This is a matrix where each row represents the feature vector of a node at layer $k$. So, $H^{(0)}$ would be your initial node features $X$.
+- $W^{(k)}$: This is a learnable weight matrix, similar to the weights in a standard neural network layer. It transforms the features.
+- $\sigma$: This is an activation function, like ReLU, which introduces non-linearity.
+- $\tilde{A} = A + I$: This is the adjacency matrix $A$ with self-loops added. Adding the identity matrix $I$ ensures that each node also aggregates its _own_ features when updating its representation, which is crucial.
+- $\tilde{D}$: This is the degree matrix of $\tilde{A}$. The degree matrix is a diagonal matrix where $\tilde{D}_{ii}$ is the sum of entries in row $i$ of $\tilde{A}$ (i.e., the number of neighbors plus one for the self-loop).
+- $\tilde{D}^{-\frac{1}{2}}\tilde{A}\tilde{D}^{-\frac{1}{2}}$: This term is the normalized adjacency matrix. It's a clever trick that helps to _average_ the features of a node's neighbors (including itself). Without this normalization, nodes with many neighbors might dominate the feature aggregation, leading to unstable learning. This specific normalization is often called the "symmetrically normalized adjacency matrix."
 
 In essence, for each layer, a GCN:
+
 1.  Transforms the node features using $W^{(k)}$.
 2.  Aggregates these transformed features by averaging them with the transformed features of their neighbors (and itself), thanks to the normalized $\tilde{A}$ term.
 3.  Applies a non-linear activation function.
@@ -89,15 +92,15 @@ This process allows node features to be smoothed and enriched by their local gra
 
 The power of GNNs lies in their versatility. By understanding relationships, they're driving breakthroughs in countless domains:
 
-*   **Node Classification**: Predicting the type or category of a node.
-    *   *Example:* Identifying fraudulent users in a social network, classifying proteins by their function, recommending content to users.
-*   **Link Prediction**: Predicting whether a connection exists or should exist between two nodes.
-    *   *Example:* Recommending friends on social media, predicting drug-target interactions, completing knowledge graphs.
-*   **Graph Classification**: Classifying entire graphs based on their structure and node features.
-    *   *Example:* Predicting the properties of a molecule (e.g., toxicity, solubility) in drug discovery, classifying materials based on their atomic structure.
-*   **Recommendation Systems**: GNNs can model user-item interaction graphs, leading to highly personalized recommendations.
-*   **Traffic Prediction**: Modeling road networks to predict traffic flow and congestion.
-*   **Drug Discovery & Material Science**: Simulating molecular interactions, predicting crystal structures, and discovering new materials with desired properties.
+- **Node Classification**: Predicting the type or category of a node.
+  - _Example:_ Identifying fraudulent users in a social network, classifying proteins by their function, recommending content to users.
+- **Link Prediction**: Predicting whether a connection exists or should exist between two nodes.
+  - _Example:_ Recommending friends on social media, predicting drug-target interactions, completing knowledge graphs.
+- **Graph Classification**: Classifying entire graphs based on their structure and node features.
+  - _Example:_ Predicting the properties of a molecule (e.g., toxicity, solubility) in drug discovery, classifying materials based on their atomic structure.
+- **Recommendation Systems**: GNNs can model user-item interaction graphs, leading to highly personalized recommendations.
+- **Traffic Prediction**: Modeling road networks to predict traffic flow and congestion.
+- **Drug Discovery & Material Science**: Simulating molecular interactions, predicting crystal structures, and discovering new materials with desired properties.
 
 The list goes on and on – wherever relationships are key, GNNs are emerging as the go-to solution.
 
@@ -105,10 +108,10 @@ The list goes on and on – wherever relationships are key, GNNs are emerging as
 
 While GNNs are incredibly powerful, they're still a relatively young field with ongoing research addressing several challenges:
 
-*   **Scalability**: Training GNNs on massive graphs (billions of nodes and edges) can be computationally intensive. Researchers are working on sampling techniques and more efficient aggregation methods.
-*   **Over-smoothing**: After many layers, the features of nodes in a GNN can become too similar, making it hard to distinguish them. It's like everyone in the rumour network eventually hears the same version and loses their unique perspective.
-*   **Heterogeneous Graphs**: Many real-world graphs have different types of nodes and edges (e.g., a knowledge graph with people, places, and events connected by various relationship types). Designing GNNs that can effectively handle this heterogeneity is an active area.
-*   **Dynamic Graphs**: Graphs that change over time (e.g., new friendships being formed, traffic conditions fluctuating). Building GNNs that can learn from and predict changes in dynamic graph structures is another frontier.
+- **Scalability**: Training GNNs on massive graphs (billions of nodes and edges) can be computationally intensive. Researchers are working on sampling techniques and more efficient aggregation methods.
+- **Over-smoothing**: After many layers, the features of nodes in a GNN can become too similar, making it hard to distinguish them. It's like everyone in the rumour network eventually hears the same version and loses their unique perspective.
+- **Heterogeneous Graphs**: Many real-world graphs have different types of nodes and edges (e.g., a knowledge graph with people, places, and events connected by various relationship types). Designing GNNs that can effectively handle this heterogeneity is an active area.
+- **Dynamic Graphs**: Graphs that change over time (e.g., new friendships being formed, traffic conditions fluctuating). Building GNNs that can learn from and predict changes in dynamic graph structures is another frontier.
 
 More advanced GNN architectures like Graph Attention Networks (GATs), which allow nodes to selectively pay more attention to important neighbors, and Inductive Learning GNNs like PinSAGE (developed by Pinterest for recommendations), are pushing the boundaries further.
 

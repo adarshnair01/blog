@@ -41,14 +41,15 @@ First, we need to decide how many clusters, $k$, we want to find. This is one of
 Once $k$ is chosen, the algorithm needs $k$ starting points – these are called **centroids**. Each centroid will represent the heart of one cluster.
 
 How do we pick them?
-*   **Randomly:** The simplest approach is to randomly select $k$ data points from your dataset and declare them as the initial centroids. While easy, this can sometimes lead to poor clustering results depending on the initial random picks.
-*   **K-Means++:** A smarter, more common initialization strategy is K-Means++. It tries to select initial centroids that are far away from each other, which helps in converging to better solutions.
+
+- **Randomly:** The simplest approach is to randomly select $k$ data points from your dataset and declare them as the initial centroids. While easy, this can sometimes lead to poor clustering results depending on the initial random picks.
+- **K-Means++:** A smarter, more common initialization strategy is K-Means++. It tries to select initial centroids that are far away from each other, which helps in converging to better solutions.
 
 ### Step 2: Assignment (The "Expectation" or E-step)
 
 Now that we have our $k$ centroids, every single data point in our dataset needs to decide which centroid it's closest to.
 
-For each data point $x$, we calculate its distance to *every* centroid. The data point is then assigned to the cluster whose centroid is the **shortest distance** away.
+For each data point $x$, we calculate its distance to _every_ centroid. The data point is then assigned to the cluster whose centroid is the **shortest distance** away.
 
 The most common distance metric used is the **Euclidean distance**, which in a 2D space for points $(x_1, y_1)$ and $(x_2, y_2)$ is given by:
 $d = \sqrt{(x_2 - x_1)^2 + (y_2 - y_1)^2}$
@@ -72,10 +73,12 @@ This step ensures that the centroid truly represents the "center" of its current
 ### Step 4: Repeat Until Convergence
 
 Steps 2 and 3 are repeated iteratively.
-*   Data points are reassigned to the nearest *new* centroid.
-*   Centroids are recalculated based on their *new* member points.
+
+- Data points are reassigned to the nearest _new_ centroid.
+- Centroids are recalculated based on their _new_ member points.
 
 This process continues until one of the following conditions is met:
+
 1.  The centroids no longer move significantly (or at all) between iterations. This indicates that the clusters have stabilized.
 2.  A maximum number of iterations has been reached (a safeguard to prevent infinite loops).
 
@@ -85,18 +88,19 @@ This iterative refinement is what allows K-Means to settle into meaningful clust
 
 While the steps above describe the algorithm, what exactly is K-Means trying to achieve mathematically? It's trying to minimize something called the **Within-Cluster Sum of Squares (WCSS)**, also known as **Inertia**.
 
-Think of it this way: for a good cluster, we want the data points *within* that cluster to be as close to each other (and thus to their centroid) as possible. WCSS measures exactly that. It calculates the sum of the squared distances between each data point and its assigned centroid.
+Think of it this way: for a good cluster, we want the data points _within_ that cluster to be as close to each other (and thus to their centroid) as possible. WCSS measures exactly that. It calculates the sum of the squared distances between each data point and its assigned centroid.
 
 The objective function (what K-Means aims to minimize) is:
 
 $J = \sum_{i=1}^{k} \sum_{x \in S_i} ||x - \mu_i||^2$
 
 Let's break that down:
-*   $k$: The total number of clusters.
-*   $S_i$: Represents the set of all data points belonging to cluster $i$.
-*   $x$: A specific data point within cluster $S_i$.
-*   $\mu_i$: The centroid (mean) of cluster $S_i$.
-*   $||x - \mu_i||^2$: The squared Euclidean distance between data point $x$ and its cluster centroid $\mu_i$. Squaring the distance prevents negative values and penalizes larger distances more heavily.
+
+- $k$: The total number of clusters.
+- $S_i$: Represents the set of all data points belonging to cluster $i$.
+- $x$: A specific data point within cluster $S_i$.
+- $\mu_i$: The centroid (mean) of cluster $S_i$.
+- $||x - \mu_i||^2$: The squared Euclidean distance between data point $x$ and its cluster centroid $\mu_i$. Squaring the distance prevents negative values and penalizes larger distances more heavily.
 
 So, K-Means is constantly trying to rearrange clusters and move centroids to make this total sum of squared distances as small as possible. The smaller the WCSS, the more compact and cohesive our clusters are.
 
@@ -108,16 +112,17 @@ K-Means is powerful, but it's not a magic bullet. There are several things to ke
 
 This is perhaps the biggest challenge. K-Means requires you to specify $k$ upfront. How do you know how many natural groups exist in your data?
 
-*   **The Elbow Method:** This is a popular heuristic. You run K-Means for a range of $k$ values (e.g., from 1 to 10 or 15) and calculate the WCSS for each $k$. Then, you plot WCSS against $k$. You'll typically see the WCSS decrease rapidly at first, and then the rate of decrease will slow down, forming an "elbow" shape. The point where the elbow appears is often considered a good candidate for $k$, as adding more clusters beyond this point doesn't significantly reduce the within-cluster variance.
-*   **Silhouette Score:** This metric measures how similar a data point is to its own cluster compared to other clusters. A high silhouette score indicates that a point is well-matched to its own cluster and poorly matched to neighboring clusters. You can calculate the average silhouette score for different $k$ values and pick the $k$ that yields the highest score.
+- **The Elbow Method:** This is a popular heuristic. You run K-Means for a range of $k$ values (e.g., from 1 to 10 or 15) and calculate the WCSS for each $k$. Then, you plot WCSS against $k$. You'll typically see the WCSS decrease rapidly at first, and then the rate of decrease will slow down, forming an "elbow" shape. The point where the elbow appears is often considered a good candidate for $k$, as adding more clusters beyond this point doesn't significantly reduce the within-cluster variance.
+- **Silhouette Score:** This metric measures how similar a data point is to its own cluster compared to other clusters. A high silhouette score indicates that a point is well-matched to its own cluster and poorly matched to neighboring clusters. You can calculate the average silhouette score for different $k$ values and pick the $k$ that yields the highest score.
 
 ### 2. Sensitivity to Initialization
 
-As mentioned, if you initialize centroids randomly, different runs of K-Means can lead to different clustering results. This is because K-Means converges to a *local optimum*, not necessarily the *global optimum* of the WCSS function.
+As mentioned, if you initialize centroids randomly, different runs of K-Means can lead to different clustering results. This is because K-Means converges to a _local optimum_, not necessarily the _global optimum_ of the WCSS function.
 
 To mitigate this, it's common practice to:
-*   **Use K-Means++ initialization:** This helps space out initial centroids.
-*   **Run the algorithm multiple times with different random initializations:** Pick the clustering solution that has the lowest WCSS. Many K-Means implementations (like scikit-learn's) do this by default with the `n_init` parameter.
+
+- **Use K-Means++ initialization:** This helps space out initial centroids.
+- **Run the algorithm multiple times with different random initializations:** Pick the clustering solution that has the lowest WCSS. Many K-Means implementations (like scikit-learn's) do this by default with the `n_init` parameter.
 
 ### 3. Handling Outliers
 
@@ -125,24 +130,26 @@ K-Means is sensitive to outliers. Because it calculates means for centroids, a s
 
 ### 4. Assumptions and Limitations
 
-*   **Spherical Clusters:** K-Means assumes that clusters are roughly spherical and similar in size and density. It struggles with clusters that have complex shapes (e.g., crescent moons, intertwined spirals) or vastly different densities.
-*   **Equal Variance:** It implicitly assumes that all clusters have roughly equal variance (spread).
-*   **Requires Numeric Data:** K-Means works with numerical data and struggles directly with categorical features unless they are properly encoded.
+- **Spherical Clusters:** K-Means assumes that clusters are roughly spherical and similar in size and density. It struggles with clusters that have complex shapes (e.g., crescent moons, intertwined spirals) or vastly different densities.
+- **Equal Variance:** It implicitly assumes that all clusters have roughly equal variance (spread).
+- **Requires Numeric Data:** K-Means works with numerical data and struggles directly with categorical features unless they are properly encoded.
 
 ## When K-Means Shines (and When to Look Elsewhere)
 
 Despite its limitations, K-Means is a workhorse in data science due to its simplicity, speed, and interpretability.
 
 **It's a great choice for:**
-*   **Customer Segmentation:** Grouping customers with similar purchasing habits or demographics.
-*   **Document Clustering:** Organizing large collections of texts into thematic groups.
-*   **Image Compression:** Reducing the number of distinct colors in an image by grouping similar colors.
-*   **Anomaly Detection:** Data points far from any cluster centroid might be anomalies.
+
+- **Customer Segmentation:** Grouping customers with similar purchasing habits or demographics.
+- **Document Clustering:** Organizing large collections of texts into thematic groups.
+- **Image Compression:** Reducing the number of distinct colors in an image by grouping similar colors.
+- **Anomaly Detection:** Data points far from any cluster centroid might be anomalies.
 
 **You might want to consider other algorithms if:**
-*   Your clusters are not spherical or have complex, non-convex shapes (e.g., use DBSCAN for density-based clustering).
-*   You have varying cluster densities.
-*   You don't have a good way to estimate $k$ beforehand (e.g., hierarchical clustering, DBSCAN).
+
+- Your clusters are not spherical or have complex, non-convex shapes (e.g., use DBSCAN for density-based clustering).
+- You have varying cluster densities.
+- You don't have a good way to estimate $k$ beforehand (e.g., hierarchical clustering, DBSCAN).
 
 ## My Takeaway
 

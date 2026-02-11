@@ -14,11 +14,11 @@ So, how do these models work their magic? What's the secret sauce that allows th
 
 ### The Intuition: From a Masterpiece to Noise, and Back Again
 
-Imagine you have a beautiful, intricate painting – say, Van Gogh's *Starry Night*. Now, imagine someone gradually adding tiny speckles of paint, bit by bit, all over the canvas. At first, you might not notice much change. But as they continue, adding more and more random blobs, the painting slowly loses its detail, its colors blur, and eventually, it becomes an unrecognizable mess of colorful noise.
+Imagine you have a beautiful, intricate painting – say, Van Gogh's _Starry Night_. Now, imagine someone gradually adding tiny speckles of paint, bit by bit, all over the canvas. At first, you might not notice much change. But as they continue, adding more and more random blobs, the painting slowly loses its detail, its colors blur, and eventually, it becomes an unrecognizable mess of colorful noise.
 
 This gradual process, from a clear image to pure noise, is the core idea of the **forward diffusion process** in Diffusion Models. It's like slowly destroying information by adding random chaos.
 
-Now, for the really clever part: What if you could learn to *reverse* that process? What if you could train an artist to look at that noisy mess and, step by step, precisely remove the random paint speckles, restoring the original *Starry Night*? Not just restoring it, but understanding the underlying structure so well that they could even create a *new* Starry Night that never existed before, but feels perfectly authentic?
+Now, for the really clever part: What if you could learn to _reverse_ that process? What if you could train an artist to look at that noisy mess and, step by step, precisely remove the random paint speckles, restoring the original _Starry Night_? Not just restoring it, but understanding the underlying structure so well that they could even create a _new_ Starry Night that never existed before, but feels perfectly authentic?
 
 That's the **reverse diffusion process**, and that's exactly what Diffusion Models learn to do. They learn to denoise, one tiny step at a time, transforming pure randomness into coherent, detailed, and often breathtaking images.
 
@@ -31,10 +31,11 @@ At each timestep $t$ (from $t=1$ to $T$), we generate a slightly noisier version
 $q(x_t | x_{t-1}) = \mathcal{N}(x_t; \sqrt{1 - \beta_t} x_{t-1}, \beta_t \mathbf{I})$
 
 Let's break that down:
-*   $q(x_t | x_{t-1})$: This is a conditional probability distribution. It tells us the probability of getting $x_t$ given $x_{t-1}$.
-*   $\mathcal{N}(\cdot; \mu, \Sigma)$: This denotes a Gaussian (Normal) distribution with mean $\mu$ and covariance matrix $\Sigma$.
-*   $\sqrt{1 - \beta_t} x_{t-1}$: This is the mean of our Gaussian distribution. It means that $x_t$ will be *mostly* $x_{t-1}$, but slightly scaled down.
-*   $\beta_t \mathbf{I}$: This is the variance of our Gaussian distribution. $\mathbf{I}$ is the identity matrix, meaning we add independent noise to each pixel. The $\beta_t$ values are small, predefined numbers (e.g., from 0.0001 to 0.02) that determine how much noise is added at each step. As $t$ increases, $\beta_t$ usually increases, meaning we add *more* noise as we get closer to the final noisy image.
+
+- $q(x_t | x_{t-1})$: This is a conditional probability distribution. It tells us the probability of getting $x_t$ given $x_{t-1}$.
+- $\mathcal{N}(\cdot; \mu, \Sigma)$: This denotes a Gaussian (Normal) distribution with mean $\mu$ and covariance matrix $\Sigma$.
+- $\sqrt{1 - \beta_t} x_{t-1}$: This is the mean of our Gaussian distribution. It means that $x_t$ will be _mostly_ $x_{t-1}$, but slightly scaled down.
+- $\beta_t \mathbf{I}$: This is the variance of our Gaussian distribution. $\mathbf{I}$ is the identity matrix, meaning we add independent noise to each pixel. The $\beta_t$ values are small, predefined numbers (e.g., from 0.0001 to 0.02) that determine how much noise is added at each step. As $t$ increases, $\beta_t$ usually increases, meaning we add _more_ noise as we get closer to the final noisy image.
 
 The key insight here is that this forward process is **fixed and deterministic**. We don't train any model to do this. We simply apply this formula iteratively. After enough steps ($T$), regardless of what $x_0$ was, $x_T$ will be almost pure Gaussian noise, completely devoid of the original image's information.
 
@@ -51,13 +52,13 @@ This is where the true machine learning challenge lies. Our goal is to learn the
 
 Why is this hard? Because $q(x_{t-1} | x_t)$ (the true reverse probability) depends on the original data distribution of $x_0$, which is complex and unknown. If we knew it, we wouldn't need a generative model!
 
-However, thanks to Bayes' theorem, we know that if we had access to $x_0$, we *could* compute the reverse conditional probability $q(x_{t-1} | x_t, x_0)$. It turns out this distribution is also Gaussian!
+However, thanks to Bayes' theorem, we know that if we had access to $x_0$, we _could_ compute the reverse conditional probability $q(x_{t-1} | x_t, x_0)$. It turns out this distribution is also Gaussian!
 
 $q(x_{t-1} | x_t, x_0) = \mathcal{N}(x_{t-1}; \tilde{\mu}(x_t, x_0), \tilde{\beta}_t \mathbf{I})$
 
 The mean $\tilde{\mu}(x_t, x_0)$ and variance $\tilde{\beta}_t$ are known formulas derived from the forward process.
 
-The key insight for learning is to realize that our neural network doesn't need to learn the full distribution from scratch. Instead, it can learn to predict the *noise* $\epsilon$ that was added at step $t$.
+The key insight for learning is to realize that our neural network doesn't need to learn the full distribution from scratch. Instead, it can learn to predict the _noise_ $\epsilon$ that was added at step $t$.
 
 Recall the formula for $x_t$: $x_t = \sqrt{\bar{\alpha}_t} x_0 + \sqrt{1 - \bar{\alpha}_t} \epsilon$.
 From this, we can express $x_0$ in terms of $x_t$ and $\epsilon$:
@@ -91,9 +92,9 @@ Once our Diffusion Model is trained, generating a new image is a beautiful, iter
 
 1.  **Start with pure noise:** Begin with a random sample $x_T$ from a pure Gaussian distribution (just like static on a TV screen).
 2.  **Iterative Denoising:** For $t$ from $T$ down to $1$:
-    *   Feed $x_t$ and $t$ into your trained model $\epsilon_\theta(x_t, t)$ to predict the noise $\epsilon$.
-    *   Use this predicted noise to estimate the mean $\mu_\theta(x_t, t)$ and variance for the next, less noisy image $x_{t-1}$.
-    *   Sample $x_{t-1}$ from this estimated Gaussian distribution.
+    - Feed $x_t$ and $t$ into your trained model $\epsilon_\theta(x_t, t)$ to predict the noise $\epsilon$.
+    - Use this predicted noise to estimate the mean $\mu_\theta(x_t, t)$ and variance for the next, less noisy image $x_{t-1}$.
+    - Sample $x_{t-1}$ from this estimated Gaussian distribution.
 3.  **The Masterpiece:** After $T$ steps, you will have $x_0$, a brand new, high-quality image generated by the model.
 
 Each step removes a tiny bit of noise, refining the image, gradually bringing structure and detail out of chaos. It's like watching a sculpture emerge from a block of marble, piece by piece.
@@ -109,18 +110,18 @@ Each step removes a tiny bit of noise, refining the image, gradually bringing st
 
 Despite their prowess, Diffusion Models aren't without their drawbacks:
 
-*   **Computational Cost:** Both training and, especially, sampling can be computationally expensive due to the large number of sequential steps ($T$). Generating a single image can take many forward passes through the U-Net.
-*   **Speed:** This sequential nature makes real-time generation challenging for some applications. Researchers are actively working on solutions like Denoising Diffusion Implicit Models (DDIMs) and Latent Diffusion Models (LDMs) which significantly speed up sampling by reducing the number of necessary steps or working in a compressed latent space.
+- **Computational Cost:** Both training and, especially, sampling can be computationally expensive due to the large number of sequential steps ($T$). Generating a single image can take many forward passes through the U-Net.
+- **Speed:** This sequential nature makes real-time generation challenging for some applications. Researchers are actively working on solutions like Denoising Diffusion Implicit Models (DDIMs) and Latent Diffusion Models (LDMs) which significantly speed up sampling by reducing the number of necessary steps or working in a compressed latent space.
 
 ### Applications: Reshaping Industries
 
 The impact of Diffusion Models is already vast and growing:
 
-*   **Art and Design:** From professional artists to hobbyists, these models are changing how we create visual content.
-*   **Content Creation:** Generating unique images for marketing, presentations, and social media.
-*   **Scientific Discovery:** Designing new molecules, simulating complex systems, and even enhancing medical imaging.
-*   **Virtual Reality & Gaming:** Creating realistic environments, textures, and characters.
-*   **Image Editing:** Inpainting (filling missing parts), outpainting (extending images), super-resolution, and style transfer.
+- **Art and Design:** From professional artists to hobbyists, these models are changing how we create visual content.
+- **Content Creation:** Generating unique images for marketing, presentations, and social media.
+- **Scientific Discovery:** Designing new molecules, simulating complex systems, and even enhancing medical imaging.
+- **Virtual Reality & Gaming:** Creating realistic environments, textures, and characters.
+- **Image Editing:** Inpainting (filling missing parts), outpainting (extending images), super-resolution, and style transfer.
 
 ### Conclusion: The Future is Diffused
 

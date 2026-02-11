@@ -33,15 +33,15 @@ Let's make this concrete with a classic example: **estimating the value of Pi ($
 
 Imagine a square target with side length 2, perfectly centered at the origin (so its corners are at $(-1, -1), (1, -1), (1, 1), (-1, 1)$). Inside this square, we draw a circle with radius $r=1$, also centered at the origin.
 
-*   The area of the square is $A_s = \text{side} \times \text{side} = 2 \times 2 = 4$.
-*   The area of the inscribed circle is $A_c = \pi r^2 = \pi (1)^2 = \pi$.
+- The area of the square is $A_s = \text{side} \times \text{side} = 2 \times 2 = 4$.
+- The area of the inscribed circle is $A_c = \pi r^2 = \pi (1)^2 = \pi$.
 
 Now, here's the trick: what's the ratio of the circle's area to the square's area?
 $$ \frac{A_c}{A_s} = \frac{\pi}{4} $$
 
 So, if we could somehow find this ratio, we could multiply it by 4 to estimate $\pi$. But how do we find the ratio without knowing $\pi$ already? This is where Monte Carlo comes in!
 
-Imagine you're throwing darts randomly at this square target. Each dart has an equal chance of landing anywhere within the square. If you throw *many* darts, you'd expect the ratio of darts that land *inside the circle* to the *total number of darts thrown* to be approximately equal to the ratio of the areas.
+Imagine you're throwing darts randomly at this square target. Each dart has an equal chance of landing anywhere within the square. If you throw _many_ darts, you'd expect the ratio of darts that land _inside the circle_ to the _total number of darts thrown_ to be approximately equal to the ratio of the areas.
 
 Let's break it down into steps for a computer simulation:
 
@@ -49,7 +49,7 @@ Let's break it down into steps for a computer simulation:
 2.  **Check if the point is inside the circle:** For each point $(x, y)$, we check if it falls within the unit circle. A point is inside the circle if its distance from the origin is less than or equal to the radius (1). Using the distance formula, this means $x^2 + y^2 \le 1^2$, or simply $x^2 + y^2 \le 1$.
 3.  **Count:** We keep track of how many points fall inside the circle (`points_in_circle`) and the total number of points generated (`total_points`).
 4.  **Estimate Pi:** Our estimate for $\pi$ will then be:
-    $$ \pi \approx 4 \times \frac{\text{points\_in\_circle}}{\text{total\_points}} $$
+    $$ \pi \approx 4 \times \frac{\text{points_in_circle}}{\text{total_points}} $$
 
 The more points we generate (the more darts we throw), the closer our estimate will get to the actual value of $\pi$. This phenomenon is a beautiful demonstration of the **Law of Large Numbers**.
 
@@ -63,9 +63,9 @@ Imagine you're an investor trying to assess the risk of a new portfolio of stock
 
 Instead of trying to predict one exact future for your portfolio, a Monte Carlo simulation can:
 
-*   **Simulate thousands of possible market scenarios:** For each stock, we can define its probable price movements based on historical data and statistical distributions (e.g., normal or log-normal distributions).
-*   **Calculate portfolio value for each scenario:** For each simulated market path, we calculate the portfolio's value at a future date.
-*   **Analyze the distribution of outcomes:** After thousands of simulations, you'll have a distribution of possible portfolio values. From this, you can calculate the average expected return, the probability of losing money, or even the "Value at Risk" (VaR) – how much you could lose with a certain probability.
+- **Simulate thousands of possible market scenarios:** For each stock, we can define its probable price movements based on historical data and statistical distributions (e.g., normal or log-normal distributions).
+- **Calculate portfolio value for each scenario:** For each simulated market path, we calculate the portfolio's value at a future date.
+- **Analyze the distribution of outcomes:** After thousands of simulations, you'll have a distribution of possible portfolio values. From this, you can calculate the average expected return, the probability of losing money, or even the "Value at Risk" (VaR) – how much you could lose with a certain probability.
 
 This helps make informed decisions, understand potential downsides, and plan for different eventualities, rather than relying on a single, optimistic forecast.
 
@@ -77,9 +77,9 @@ In nuclear engineering, Monte Carlo is used to simulate the transport of neutron
 
 Monte Carlo methods are becoming increasingly vital in AI:
 
-*   **Reinforcement Learning (RL):** Algorithms like Monte Carlo Tree Search (MCTS) are used in game AI (e.g., AlphaGo, which famously beat human Go champions). MCTS explores possible future moves by simulating outcomes many times to decide the best current action.
-*   **Bayesian Inference:** For complex statistical models, especially those with many parameters, directly calculating posterior distributions can be impossible. Methods like Markov Chain Monte Carlo (MCMC) allow us to *sample* from these complex distributions, giving us insights into parameter uncertainty.
-*   **Uncertainty Quantification:** When a machine learning model makes a prediction, how confident is it? Monte Carlo methods can help estimate the uncertainty bounds around those predictions.
+- **Reinforcement Learning (RL):** Algorithms like Monte Carlo Tree Search (MCTS) are used in game AI (e.g., AlphaGo, which famously beat human Go champions). MCTS explores possible future moves by simulating outcomes many times to decide the best current action.
+- **Bayesian Inference:** For complex statistical models, especially those with many parameters, directly calculating posterior distributions can be impossible. Methods like Markov Chain Monte Carlo (MCMC) allow us to _sample_ from these complex distributions, giving us insights into parameter uncertainty.
+- **Uncertainty Quantification:** When a machine learning model makes a prediction, how confident is it? Monte Carlo methods can help estimate the uncertainty bounds around those predictions.
 
 ### The "How To": A Glimpse into the Algorithm
 
@@ -98,23 +98,23 @@ def run_monte_carlo(num_simulations):
         # Example: Simulating the sum of two dice rolls
         die1 = random.randint(1, 6)
         die2 = random.randint(1, 6)
-        
+
         # Example: Simulating a stock price change based on a normal distribution
         # daily_return = random.gauss(mean_daily_return, std_dev_daily_return)
-        
+
         # Step 3: Perform your deterministic computation with these random inputs
         # For dice example:
         current_outcome = die1 + die2
-        
+
         # For stock price example:
         # new_price = previous_price * (1 + daily_return)
-        
+
         outcomes.append(current_outcome) # Store the result of this run
 
     # Step 4: Aggregate and analyze the results
     average_outcome = statistics.mean(outcomes)
     std_dev_outcome = statistics.stdev(outcomes)
-    
+
     # You could also calculate probabilities, e.g.,
     # probability_of_sum_7 = outcomes.count(7) / num_simulations
 
@@ -136,18 +136,18 @@ Like any powerful tool, Monte Carlo simulations have their pros and cons.
 
 **Strengths:**
 
-*   **Handles Complexity:** Excellent for problems with many variables, non-linear relationships, or stochastic (random) processes.
-*   **Intuitive:** The concept of "trying it many times" is easy to grasp, even for non-experts.
-*   **Flexibility:** Can be applied to a vast range of problems across science, engineering, finance, and more.
-*   **Parallelizable:** Each simulation run is independent, making them easy to distribute across multiple processors or machines, speeding up computation significantly.
-*   **Uncertainty Quantification:** Provides not just a single answer, but a distribution of possible answers, allowing for better risk assessment.
+- **Handles Complexity:** Excellent for problems with many variables, non-linear relationships, or stochastic (random) processes.
+- **Intuitive:** The concept of "trying it many times" is easy to grasp, even for non-experts.
+- **Flexibility:** Can be applied to a vast range of problems across science, engineering, finance, and more.
+- **Parallelizable:** Each simulation run is independent, making them easy to distribute across multiple processors or machines, speeding up computation significantly.
+- **Uncertainty Quantification:** Provides not just a single answer, but a distribution of possible answers, allowing for better risk assessment.
 
 **Limitations:**
 
-*   **Computational Cost:** Requires a large number of simulations to achieve high accuracy, which can be computationally intensive and time-consuming. The convergence rate is often proportional to $1/\sqrt{N}$ (where $N$ is the number of samples), meaning to double the accuracy, you need four times as many samples.
-*   **"Curse of Dimensionality":** For problems with extremely high dimensions (many input variables), Monte Carlo can still struggle to explore the entire sample space efficiently, though it often outperforms deterministic integration methods in these scenarios.
-*   **Requires Good Random Numbers:** The quality of the results depends heavily on the quality of the pseudo-random numbers generated.
-*   **Model Dependence:** The accuracy of the simulation is limited by how well the underlying probabilistic model reflects reality. "Garbage in, garbage out" applies here.
+- **Computational Cost:** Requires a large number of simulations to achieve high accuracy, which can be computationally intensive and time-consuming. The convergence rate is often proportional to $1/\sqrt{N}$ (where $N$ is the number of samples), meaning to double the accuracy, you need four times as many samples.
+- **"Curse of Dimensionality":** For problems with extremely high dimensions (many input variables), Monte Carlo can still struggle to explore the entire sample space efficiently, though it often outperforms deterministic integration methods in these scenarios.
+- **Requires Good Random Numbers:** The quality of the results depends heavily on the quality of the pseudo-random numbers generated.
+- **Model Dependence:** The accuracy of the simulation is limited by how well the underlying probabilistic model reflects reality. "Garbage in, garbage out" applies here.
 
 ### Conclusion: Embracing the Chaos
 

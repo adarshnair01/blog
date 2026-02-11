@@ -1,7 +1,7 @@
 ---
 title: "Demystifying the Magic: My Journey into Understanding Convolutional Neural Networks"
 date: "2025-11-07"
-excerpt: "Ever wondered how computers \"see\" and understand images, differentiating a cat from a dog or spotting a tumor in an X-ray? Join me as we unravel the elegant architecture behind Convolutional Neural Networks, the bedrock of modern computer vision."
+excerpt: 'Ever wondered how computers "see" and understand images, differentiating a cat from a dog or spotting a tumor in an X-ray? Join me as we unravel the elegant architecture behind Convolutional Neural Networks, the bedrock of modern computer vision.'
 tags: ["Machine Learning", "Deep Learning", "Computer Vision", "CNNs", "Artificial Intelligence"]
 author: "Adarsh Nair"
 ---
@@ -16,9 +16,9 @@ Let's embark on this journey together, making what seems complex, surprisingly a
 
 Before CNNs became mainstream, traditional neural networks, often called **Multi-Layer Perceptrons (MLPs)** or "fully connected" networks, were the go-to. Imagine you have a simple grayscale image, say 28x28 pixels (like a digit from the MNIST dataset). That's $28 \times 28 = 784$ pixels. Each pixel is a number representing its intensity.
 
-If you feed this into a traditional neural network, you'd "flatten" the image into a single long vector of 784 numbers. If your first hidden layer had, say, 100 neurons, then each of those 100 neurons would need to be connected to *all* 784 input pixels. That's $784 \times 100 = 78,400$ weights just for the first layer! Add more layers, and these numbers explode.
+If you feed this into a traditional neural network, you'd "flatten" the image into a single long vector of 784 numbers. If your first hidden layer had, say, 100 neurons, then each of those 100 neurons would need to be connected to _all_ 784 input pixels. That's $784 \times 100 = 78,400$ weights just for the first layer! Add more layers, and these numbers explode.
 
-Beyond the computational nightmare, there's a more fundamental issue: **spatial information**. When you flatten an image, you lose the crucial information about *where* pixels are located relative to each other. A pixel at the top-left corner is treated the same as one at the bottom-right, just different positions in a list. But in an image, patterns (like an edge or a corner) are defined by the *local arrangement* of pixels. A traditional MLP doesn't inherently understand this "locality." It's like trying to understand a picture by looking at a giant, jumbled list of its pixel values – good luck spotting a cat!
+Beyond the computational nightmare, there's a more fundamental issue: **spatial information**. When you flatten an image, you lose the crucial information about _where_ pixels are located relative to each other. A pixel at the top-left corner is treated the same as one at the bottom-right, just different positions in a list. But in an image, patterns (like an edge or a corner) are defined by the _local arrangement_ of pixels. A traditional MLP doesn't inherently understand this "locality." It's like trying to understand a picture by looking at a giant, jumbled list of its pixel values – good luck spotting a cat!
 
 This is where CNNs swoop in to save the day!
 
@@ -32,9 +32,9 @@ Here's how it works:
 
 1.  **Filters (or Kernels):** At the heart of a convolutional layer is a small matrix of numbers called a **filter** (or kernel). These are typically $3 \times 3$, $5 \times 5$, or $7 \times 7$ in size. These filters are essentially feature detectors.
 2.  **The Convolution Operation:** The filter "slides" (convolves) across the input image, one small step at a time. At each step:
-    *   It multiplies its values element-wise with the corresponding pixels in the image patch it's currently covering.
-    *   It then sums up all these products to get a single number.
-    *   This single number represents how strongly that particular feature (defined by the filter) is present at that location in the image.
+    - It multiplies its values element-wise with the corresponding pixels in the image patch it's currently covering.
+    - It then sums up all these products to get a single number.
+    - This single number represents how strongly that particular feature (defined by the filter) is present at that location in the image.
 
 This process creates a new, smaller matrix called a **feature map** (or activation map), where each value indicates the presence and strength of the feature that the filter is looking for at different locations in the input image.
 
@@ -60,10 +60,10 @@ where $(i, j)$ are the coordinates in the output feature map, and $(m, n)$ are t
 
 ### Key Advantages of Convolutional Layers:
 
-*   **Local Receptive Fields:** Each neuron in a convolutional layer only "sees" a small, local region of the input image. This respects the spatial locality of features.
-*   **Weight Sharing:** The *same filter* is applied across the entire input image. This is a brilliant optimization! If an edge detector is useful in one part of the image, it's probably useful in another. This drastically reduces the number of parameters the network needs to learn compared to fully connected layers.
-*   **Translation Invariance:** Because the same filter is applied everywhere, if a feature (like an eye) shifts its position slightly in the input image, the CNN can still detect it, just at a different location in the feature map. This makes CNNs robust to variations in object placement.
-*   **Multiple Filters:** A single convolutional layer typically uses many different filters. Each filter learns to detect a different feature (e.g., one for vertical edges, one for horizontal, one for specific textures, one for corners, etc.). Stacking these feature maps gives a rich representation of the image.
+- **Local Receptive Fields:** Each neuron in a convolutional layer only "sees" a small, local region of the input image. This respects the spatial locality of features.
+- **Weight Sharing:** The _same filter_ is applied across the entire input image. This is a brilliant optimization! If an edge detector is useful in one part of the image, it's probably useful in another. This drastically reduces the number of parameters the network needs to learn compared to fully connected layers.
+- **Translation Invariance:** Because the same filter is applied everywhere, if a feature (like an eye) shifts its position slightly in the input image, the CNN can still detect it, just at a different location in the feature map. This makes CNNs robust to variations in object placement.
+- **Multiple Filters:** A single convolutional layer typically uses many different filters. Each filter learns to detect a different feature (e.g., one for vertical edges, one for horizontal, one for specific textures, one for corners, etc.). Stacking these feature maps gives a rich representation of the image.
 
 ### Activation Functions: Adding Non-Linearity
 
@@ -79,9 +79,9 @@ This function simply outputs the input if it's positive, and zero otherwise. Why
 
 After a convolutional layer and activation, it's common to add a **pooling layer**. The primary purpose of pooling layers is to progressively reduce the spatial dimensions (width and height) of the feature maps, which serves several benefits:
 
-*   **Reduces parameters and computation:** Smaller feature maps mean less data to process in subsequent layers.
-*   **Controls overfitting:** By making the network less sensitive to exact feature locations.
-*   **Enhances robustness to small translations:** A slight shift in the input image might still result in the same output from the pooling layer.
+- **Reduces parameters and computation:** Smaller feature maps mean less data to process in subsequent layers.
+- **Controls overfitting:** By making the network less sensitive to exact feature locations.
+- **Enhances robustness to small translations:** A slight shift in the input image might still result in the same output from the pooling layer.
 
 The most common type of pooling is **Max Pooling**. With max pooling, we define a small spatial window (e.g., $2 \times 2$) and a stride (e.g., 2). The window slides across the feature map, and at each step, it takes the maximum value within that window, discarding the rest. This essentially keeps the most "activated" feature within that region, making the representation more compact and robust.
 
@@ -107,8 +107,8 @@ A typical CNN architecture often looks like a series of stacked layers:
 
 `Input Image -> [CONV -> ReLU -> POOL] -> [CONV -> ReLU -> POOL] -> ... -> [CONV -> ReLU] -> Fully Connected Layers -> Output`
 
-*   **Early Layers:** The initial convolutional layers (closer to the input image) tend to learn very basic, low-level features like edges, corners, and color blobs.
-*   **Deeper Layers:** As we go deeper into the network, the convolutional layers learn to combine these basic features into more complex, abstract representations. For example, edges might combine to form shapes, shapes might combine to form parts of objects (like an eye or a wheel), and eventually, these parts form recognizable objects (a face, a car). This hierarchical feature learning is one of the most powerful aspects of deep CNNs.
+- **Early Layers:** The initial convolutional layers (closer to the input image) tend to learn very basic, low-level features like edges, corners, and color blobs.
+- **Deeper Layers:** As we go deeper into the network, the convolutional layers learn to combine these basic features into more complex, abstract representations. For example, edges might combine to form shapes, shapes might combine to form parts of objects (like an eye or a wheel), and eventually, these parts form recognizable objects (a face, a car). This hierarchical feature learning is one of the most powerful aspects of deep CNNs.
 
 ### The Classifier: Fully Connected Layers and Softmax
 
@@ -131,25 +131,25 @@ The "magic" of how these filters and weights get their specific values comes fro
 1.  **Forward Pass:** An image is fed through the network, and a prediction is made.
 2.  **Loss Calculation:** This prediction is compared to the actual label (the "ground truth"), and a **loss function** (e.g., cross-entropy for classification) calculates how "wrong" the prediction was.
 3.  **Backpropagation:** The loss is then propagated backward through the network. This process calculates the gradient (the direction and magnitude of change) of the loss with respect to every single weight and bias in the network (including the values within our filters!).
-4.  **Gradient Descent:** An optimization algorithm (like Adam or SGD) uses these gradients to slightly adjust the weights and biases in a way that *reduces* the loss for the next iteration.
+4.  **Gradient Descent:** An optimization algorithm (like Adam or SGD) uses these gradients to slightly adjust the weights and biases in a way that _reduces_ the loss for the next iteration.
 
 This cycle repeats millions of times, with thousands or millions of images, gradually refining the filters to become excellent feature detectors and the fully connected layers to become accurate classifiers.
 
 ### Why CNNs are So Powerful and Where They Shine
 
-*   **Hierarchical Feature Learning:** The ability to automatically learn features at different levels of abstraction (from simple edges to complex object parts) is a game-changer.
-*   **Parameter Efficiency:** Weight sharing in convolutional layers significantly reduces the number of parameters compared to fully connected networks for image data, making them more feasible to train and less prone to overfitting.
-*   **Translation Invariance:** Their inherent design makes them robust to shifts in object position, which is crucial for real-world image understanding.
-*   **Scalability:** They can be scaled to incredibly deep architectures, allowing them to learn from vast amounts of data and achieve superhuman performance in many vision tasks.
+- **Hierarchical Feature Learning:** The ability to automatically learn features at different levels of abstraction (from simple edges to complex object parts) is a game-changer.
+- **Parameter Efficiency:** Weight sharing in convolutional layers significantly reduces the number of parameters compared to fully connected networks for image data, making them more feasible to train and less prone to overfitting.
+- **Translation Invariance:** Their inherent design makes them robust to shifts in object position, which is crucial for real-world image understanding.
+- **Scalability:** They can be scaled to incredibly deep architectures, allowing them to learn from vast amounts of data and achieve superhuman performance in many vision tasks.
 
 Today, CNNs are the workhorses behind:
 
-*   **Image Classification:** Identifying objects in images (e.g., cat vs. dog).
-*   **Object Detection:** Locating and classifying multiple objects within an image (e.g., bounding boxes around cars, pedestrians, traffic signs).
-*   **Image Segmentation:** Assigning a class label to *every pixel* in an image.
-*   **Facial Recognition:** Identifying individuals from images or video.
-*   **Medical Imaging:** Detecting diseases from X-rays, MRIs, and CT scans.
-*   **Autonomous Driving:** Helping vehicles "see" and understand their environment.
+- **Image Classification:** Identifying objects in images (e.g., cat vs. dog).
+- **Object Detection:** Locating and classifying multiple objects within an image (e.g., bounding boxes around cars, pedestrians, traffic signs).
+- **Image Segmentation:** Assigning a class label to _every pixel_ in an image.
+- **Facial Recognition:** Identifying individuals from images or video.
+- **Medical Imaging:** Detecting diseases from X-rays, MRIs, and CT scans.
+- **Autonomous Driving:** Helping vehicles "see" and understand their environment.
 
 ### Beyond the Basics
 

@@ -16,10 +16,10 @@ That's precisely what a **Decision Tree** algorithm does: it maps out a series o
 
 At its heart, a decision tree is a flowchart-like structure where:
 
-*   **Nodes:** Represent a test on an attribute (e.g., "Is it raining?").
-*   **Branches:** Represent the outcome of the test (e.g., "Yes" or "No").
-*   **Leaf Nodes:** Represent a class label (for classification) or a numerical value (for regression), which is the final decision or prediction.
-*   **Root Node:** The topmost node, representing the initial split point, containing the entire dataset.
+- **Nodes:** Represent a test on an attribute (e.g., "Is it raining?").
+- **Branches:** Represent the outcome of the test (e.g., "Yes" or "No").
+- **Leaf Nodes:** Represent a class label (for classification) or a numerical value (for regression), which is the final decision or prediction.
+- **Root Node:** The topmost node, representing the initial split point, containing the entire dataset.
 
 Think of it like a "Choose Your Own Adventure" book. Each choice (node) leads you down a different path (branch) until you reach an ending (leaf node).
 
@@ -43,8 +43,8 @@ $Gini(t) = 1 - \sum_{i=1}^{c} p_i^2$
 
 where $c$ is the number of classes.
 
-*   A Gini Impurity of 0 means the node is perfectly pure (all instances belong to the same class).
-*   A higher Gini Impurity (up to 0.5 for a binary classification) means the node is very mixed.
+- A Gini Impurity of 0 means the node is perfectly pure (all instances belong to the same class).
+- A higher Gini Impurity (up to 0.5 for a binary classification) means the node is very mixed.
 
 **Example:**
 Let's say we have a node with 10 data points: 6 "Yes" and 4 "No".
@@ -74,8 +74,8 @@ $Entropy(t) = - \sum_{i=1}^{c} p_i \log_2(p_i)$
 
 (Note: If $p_i = 0$, then $p_i \log_2(p_i)$ is taken as 0.)
 
-*   If a node is perfectly pure (all instances belong to one class), its entropy is 0.
-*   If a node is equally split among classes, its entropy is at its maximum (e.g., 1 for binary classification).
+- If a node is perfectly pure (all instances belong to one class), its entropy is 0.
+- If a node is equally split among classes, its entropy is at its maximum (e.g., 1 for binary classification).
 
 The goal is to reduce entropy. This reduction is called **Information Gain (IG)**. For a split on an attribute $A$ (with values $v_1, v_2, ..., v_k$) from a dataset $S$:
 
@@ -87,11 +87,11 @@ Here, $S_v$ is the subset of $S$ for which attribute $A$ has value $v$, and $|S|
 
 A tree doesn't just grow forever. It needs rules to stop, otherwise it would grow infinitely complex and likely overfit (more on that later). Common stopping criteria include:
 
-*   **Maximum depth:** The tree won't grow beyond a certain number of levels.
-*   **Minimum samples per leaf:** A leaf node must contain at least a specified number of data points.
-*   **Minimum samples per split:** An internal node must contain at least a specified number of data points to be considered for splitting.
-*   **Minimum impurity decrease:** A split will only be made if it reduces impurity by at least a certain threshold.
-*   **Purity reached:** If a node becomes perfectly pure (Gini=0, Entropy=0), there's no need to split further.
+- **Maximum depth:** The tree won't grow beyond a certain number of levels.
+- **Minimum samples per leaf:** A leaf node must contain at least a specified number of data points.
+- **Minimum samples per split:** An internal node must contain at least a specified number of data points to be considered for splitting.
+- **Minimum impurity decrease:** A split will only be made if it reduces impurity by at least a certain threshold.
+- **Purity reached:** If a node becomes perfectly pure (Gini=0, Entropy=0), there's no need to split further.
 
 ### Decision Trees for Regression: Predicting Numbers
 
@@ -107,7 +107,7 @@ The algorithm seeks splits that result in child nodes with the lowest possible M
 
 ### The Superpowers of Decision Trees: Why We Love Them
 
-1.  **Interpretability (White Box Model):** This is perhaps their biggest strength. You can literally visualize the tree and follow the decision path. This makes it easy to explain *why* a particular prediction was made, which is crucial in fields like medicine or finance.
+1.  **Interpretability (White Box Model):** This is perhaps their biggest strength. You can literally visualize the tree and follow the decision path. This makes it easy to explain _why_ a particular prediction was made, which is crucial in fields like medicine or finance.
 2.  **Handles Both Numerical & Categorical Data:** Decision trees can inherently deal with different data types without much preprocessing.
 3.  **No Feature Scaling Required:** Unlike algorithms sensitive to feature magnitudes (like SVMs or neural networks), decision trees are invariant to the scaling of features.
 4.  **Captures Non-linear Relationships:** They don't assume a linear relationship between features and the target variable, making them flexible for complex datasets.
@@ -124,8 +124,8 @@ The algorithm seeks splits that result in child nodes with the lowest possible M
 
 To combat overfitting, we often employ a technique called **pruning**. Think of it as trimming the branches of a tree to make it healthier and more robust.
 
-*   **Pre-pruning (Early Stopping):** This involves setting those stopping criteria we discussed earlier (max depth, min samples per leaf, etc.) *before* the tree is fully grown. It stops the tree from growing unnecessarily complex.
-*   **Post-pruning:** Here, we let the tree grow to its maximum possible depth (or until all leaves are pure) and *then* we prune back branches. We might remove branches that only contribute marginally to prediction accuracy on a validation set, or that increase complexity too much without significant gain.
+- **Pre-pruning (Early Stopping):** This involves setting those stopping criteria we discussed earlier (max depth, min samples per leaf, etc.) _before_ the tree is fully grown. It stops the tree from growing unnecessarily complex.
+- **Post-pruning:** Here, we let the tree grow to its maximum possible depth (or until all leaves are pure) and _then_ we prune back branches. We might remove branches that only contribute marginally to prediction accuracy on a validation set, or that increase complexity too much without significant gain.
 
 ### Beyond Single Trees: Ensemble Methods
 

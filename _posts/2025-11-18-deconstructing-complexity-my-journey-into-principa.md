@@ -12,7 +12,7 @@ Welcome back to my journal where I explore the fascinating world of data science
 
 ### The Overwhelm: A Data Scientist's First Battle
 
-Imagine you're trying to understand what makes a good video game. You collect data on everything: graphics quality, story depth, sound design, replayability, online features, number of levels, character customization, budget, marketing spend, review scores from 20 different critics, player counts, genre, platform, and so on. Before you know it, you have *hundreds* of attributes, or "features," for each game.
+Imagine you're trying to understand what makes a good video game. You collect data on everything: graphics quality, story depth, sound design, replayability, online features, number of levels, character customization, budget, marketing spend, review scores from 20 different critics, player counts, genre, platform, and so on. Before you know it, you have _hundreds_ of attributes, or "features," for each game.
 
 This is a common scenario in data science. We collect vast amounts of data, hoping to capture every nuance. But more data isn't always better. In fact, too many features can be a real headache. It makes models slower, harder to interpret, and sometimes even less accurate (this is part of what we call the "curse of dimensionality"). It's like trying to understand a story by reading every single draft, every single note, instead of just the final, polished manuscript.
 
@@ -24,9 +24,9 @@ Let's start with an analogy. Imagine you have a bunch of scattered data points o
 
 Intuitively, you'd want to pick a line that aligns with the longest "stretch" of your data, where the points show the most variation. If all your points are clustered around a certain height but vary wildly in weight, you'd pick a line that primarily captures the weight variation. If they're all over the place, forming an ellipse, you'd pick the line that runs through the longest axis of that ellipse.
 
-Why? Because projecting onto this line preserves the *most variance*. Variance, in data science, often equates to information. If all points project to nearly the same spot on a line, that line captures very little of what makes the points different from each other – it holds little information. If the projected points are spread out, that line is doing a great job of distinguishing between the original points.
+Why? Because projecting onto this line preserves the _most variance_. Variance, in data science, often equates to information. If all points project to nearly the same spot on a line, that line captures very little of what makes the points different from each other – it holds little information. If the projected points are spread out, that line is doing a great job of distinguishing between the original points.
 
-PCA does exactly this, but in *any* number of dimensions. It finds these "principal components" – new axes that are orthogonal (at right angles) to each other and capture the maximum possible variance from your original data. The first principal component captures the most variance, the second captures the most remaining variance orthogonal to the first, and so on.
+PCA does exactly this, but in _any_ number of dimensions. It finds these "principal components" – new axes that are orthogonal (at right angles) to each other and capture the maximum possible variance from your original data. The first principal component captures the most variance, the second captures the most remaining variance orthogonal to the first, and so on.
 
 ### The Deeper Dive: How PCA Works (The Math Bit!)
 
@@ -46,11 +46,11 @@ where $x$ is the original value, $\mu$ is the mean of the feature, and $\sigma$ 
 
 Now that our data is scaled, we need to understand how the features relate to each other. This is where the covariance matrix comes in.
 
-*   **Variance** measures how much a single variable varies from its mean.
-*   **Covariance** measures how two variables vary together.
-    *   Positive covariance: As one variable increases, the other tends to increase.
-    *   Negative covariance: As one variable increases, the other tends to decrease.
-    *   Zero covariance: The variables don't show a clear linear relationship.
+- **Variance** measures how much a single variable varies from its mean.
+- **Covariance** measures how two variables vary together.
+  - Positive covariance: As one variable increases, the other tends to increase.
+  - Negative covariance: As one variable increases, the other tends to decrease.
+  - Zero covariance: The variables don't show a clear linear relationship.
 
 For a dataset with $p$ features, the covariance matrix $\Sigma$ will be a $p \times p$ square matrix. The diagonal elements $\Sigma_{ii}$ are the variances of each feature, and the off-diagonal elements $\Sigma_{ij}$ are the covariances between feature $i$ and feature $j$.
 
@@ -73,8 +73,9 @@ Mathematically, for a square matrix $A$, a vector $v$, and a scalar $\lambda$:
 $Av = \lambda v$
 
 Here's why they matter for PCA:
-*   The **eigenvectors** of the covariance matrix are our **principal components**. They are the new orthogonal axes along which the data varies the most.
-*   The **eigenvalues** corresponding to these eigenvectors tell us the **amount of variance** captured along each principal component. A larger eigenvalue means that its corresponding eigenvector (principal component) captures more of the total variance in the data.
+
+- The **eigenvectors** of the covariance matrix are our **principal components**. They are the new orthogonal axes along which the data varies the most.
+- The **eigenvalues** corresponding to these eigenvectors tell us the **amount of variance** captured along each principal component. A larger eigenvalue means that its corresponding eigenvector (principal component) captures more of the total variance in the data.
 
 #### Step 4: Sort Eigenvalues and Select Principal Components
 
@@ -94,7 +95,7 @@ Each row of $Z$ now represents an observation in the new, lower-dimensional spac
 
 ### What are Principal Components, Really?
 
-It's important to understand that principal components are not just a subset of your original features. They are *linear combinations* of your original features. For example, the first principal component might be something like:
+It's important to understand that principal components are not just a subset of your original features. They are _linear combinations_ of your original features. For example, the first principal component might be something like:
 
 $PC1 = 0.6 \times (\text{Graphics Quality}) + 0.4 \times (\text{Story Depth}) - 0.2 \times (\text{Budget})$
 
@@ -104,29 +105,29 @@ This means PC1 captures a blend of these original attributes, weighted according
 
 Deciding on the optimal number of principal components ($k$) is more art than science, but we have tools to guide us:
 
-1.  **Explained Variance Ratio:** Each eigenvalue tells us the variance captured by its corresponding principal component. We can calculate the *proportion* of total variance explained by each component.
-    *   `explained_variance_ratio = eigenvalue / sum(all_eigenvalues)`
+1.  **Explained Variance Ratio:** Each eigenvalue tells us the variance captured by its corresponding principal component. We can calculate the _proportion_ of total variance explained by each component.
+    - `explained_variance_ratio = eigenvalue / sum(all_eigenvalues)`
 2.  **Cumulative Explained Variance:** We look at the cumulative sum of these ratios. We often aim to retain enough components to explain a significant portion of the total variance, say 80% or 95%.
 3.  **Scree Plot:** This is a plot of the eigenvalues (or explained variance) in descending order. We look for an "elbow" in the plot, where the explained variance starts to level off significantly. The components before the elbow are usually the ones we keep.
 
 ### Why PCA is a Superpower: Use Cases
 
-*   **Dimensionality Reduction:** This is its primary use. Fewer features mean:
-    *   **Faster Training:** Machine learning models train much quicker.
-    *   **Less Memory:** Storing and processing data becomes more efficient.
-    *   **Mitigating the Curse of Dimensionality:** Reduces the risk of overfitting by providing a more generalized representation of the data.
-*   **Visualization:** When you have 100 features, you can't plot them. Reducing to 2 or 3 principal components allows you to visualize high-dimensional data, revealing clusters, outliers, or patterns that were previously hidden.
-*   **Noise Reduction:** Components with very small eigenvalues capture very little variance, often corresponding to noise or minor fluctuations. By discarding these components, we can effectively denoise our data.
-*   **Feature Engineering:** Principal components are new, uncorrelated features that can sometimes be more informative for certain models than the original correlated features.
+- **Dimensionality Reduction:** This is its primary use. Fewer features mean:
+  - **Faster Training:** Machine learning models train much quicker.
+  - **Less Memory:** Storing and processing data becomes more efficient.
+  - **Mitigating the Curse of Dimensionality:** Reduces the risk of overfitting by providing a more generalized representation of the data.
+- **Visualization:** When you have 100 features, you can't plot them. Reducing to 2 or 3 principal components allows you to visualize high-dimensional data, revealing clusters, outliers, or patterns that were previously hidden.
+- **Noise Reduction:** Components with very small eigenvalues capture very little variance, often corresponding to noise or minor fluctuations. By discarding these components, we can effectively denoise our data.
+- **Feature Engineering:** Principal components are new, uncorrelated features that can sometimes be more informative for certain models than the original correlated features.
 
 ### When to Think Twice: Limitations
 
 While powerful, PCA isn't a silver bullet:
 
-*   **Linearity Assumption:** PCA only finds linear relationships between features. If your data has complex, non-linear structures, PCA might miss them. For such cases, techniques like Kernel PCA or t-SNE might be more appropriate.
-*   **Interpretability:** As mentioned, principal components are linear combinations. This can make them harder to interpret in real-world terms compared to original features.
-*   **Variance as Information:** PCA assumes that directions with higher variance contain more "information." This is usually a good assumption, but it's not always true. Sometimes, less variant features can be very important.
-*   **Sensitivity to Scaling:** As we saw with standardization, the results of PCA are heavily influenced by the scaling of your features.
+- **Linearity Assumption:** PCA only finds linear relationships between features. If your data has complex, non-linear structures, PCA might miss them. For such cases, techniques like Kernel PCA or t-SNE might be more appropriate.
+- **Interpretability:** As mentioned, principal components are linear combinations. This can make them harder to interpret in real-world terms compared to original features.
+- **Variance as Information:** PCA assumes that directions with higher variance contain more "information." This is usually a good assumption, but it's not always true. Sometimes, less variant features can be very important.
+- **Sensitivity to Scaling:** As we saw with standardization, the results of PCA are heavily influenced by the scaling of your features.
 
 ### My Personal Takeaway
 

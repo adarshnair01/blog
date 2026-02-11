@@ -8,11 +8,11 @@ author: "Adarsh Nair"
 
 Hey everyone!
 
-If you're anything like me, you've probably been equal parts amazed and bewildered by the rapid advancements in Artificial Intelligence, especially the rise of those incredibly articulate "chatbots" we now interact with daily. From writing essays to debugging code, these Large Language Models (LLMs) seem to do it all. But what *are* they, really? Are they truly intelligent? Or just incredibly sophisticated parrots?
+If you're anything like me, you've probably been equal parts amazed and bewildered by the rapid advancements in Artificial Intelligence, especially the rise of those incredibly articulate "chatbots" we now interact with daily. From writing essays to debugging code, these Large Language Models (LLMs) seem to do it all. But what _are_ they, really? Are they truly intelligent? Or just incredibly sophisticated parrots?
 
 As someone diving deep into Data Science and Machine Learning Engineering, I've found myself increasingly drawn to the magic behind these models. This post is a journey through my understanding of LLMs, designed to be accessible enough for curious high school students, yet deep enough for my fellow technical enthusiasts. Think of it as peeking under the hood of a futuristic car – we'll understand the engine without needing to design every nut and bolt ourselves.
 
-### So, What Exactly *Is* a Large Language Model?
+### So, What Exactly _Is_ a Large Language Model?
 
 Forget the sci-fi movie robots for a moment. At their core, LLMs are incredibly complex statistical models designed to understand and generate human-like text. The "Large" in LLM refers to a few things:
 
@@ -27,7 +27,7 @@ Essentially, an LLM learns the patterns, grammar, facts, and even some nuances o
 Imagine your phone's autocomplete feature, but on steroids, with an IQ in the thousands, and access to all human knowledge. That's essentially what an LLM does. Given a sequence of words, its fundamental task is to calculate the probability distribution of what the next word should be.
 
 Let's say we have the sentence: "The cat sat on the..."
-An LLM doesn't *understand* in the human sense, but it has learned from its training data that words like "mat," "rug," "floor," or "sofa" are highly probable to follow. It assigns probabilities to countless possibilities:
+An LLM doesn't _understand_ in the human sense, but it has learned from its training data that words like "mat," "rug," "floor," or "sofa" are highly probable to follow. It assigns probabilities to countless possibilities:
 
 $P(next\_word | \text{"The cat sat on the"}) = \{ \text{mat}: 0.4, \text{rug}: 0.2, \text{floor}: 0.1, \text{moon}: 0.0001, ... \}$
 
@@ -47,12 +47,12 @@ Let's break down the key ideas:
 
 3.  **Positional Encoding:** Unlike RNNs, Transformers don't inherently process words sequentially. To give the model information about the order of words in a sentence, we add "positional encodings" to the embeddings. This helps the model understand that "dog bites man" is different from "man bites dog."
 
-4.  **The Self-Attention Mechanism:** This is the real star of the show. Imagine you're reading a sentence: "The animal didn't cross the street because *it* was too tired." When you read "it," you instinctively know "it" refers to "the animal." Self-attention allows the model to do something similar.
+4.  **The Self-Attention Mechanism:** This is the real star of the show. Imagine you're reading a sentence: "The animal didn't cross the street because _it_ was too tired." When you read "it," you instinctively know "it" refers to "the animal." Self-attention allows the model to do something similar.
 
     For each word in the input sequence, self-attention calculates how much "attention" it should pay to every other word in the sequence. It does this by creating three vectors for each word:
-    *   **Query (Q):** What am I looking for? (e.g., "what's the subject of this sentence?")
-    *   **Key (K):** What do I have to offer? (e.g., "I'm 'animal', a noun.")
-    *   **Value (V):** What information do I carry? (e.g., "I'm tired.")
+    - **Query (Q):** What am I looking for? (e.g., "what's the subject of this sentence?")
+    - **Key (K):** What do I have to offer? (e.g., "I'm 'animal', a noun.")
+    - **Value (V):** What information do I carry? (e.g., "I'm tired.")
 
     The attention score between two words is computed by taking the dot product of their Query and Key vectors. A higher dot product means more relevance. These scores are then normalized (using a softmax function) and multiplied by the Value vectors to create a weighted sum.
 
@@ -66,7 +66,7 @@ Let's break down the key ideas:
 
 6.  **Feed-Forward Networks & Residual Connections:** After the attention layers, each token's representation passes through a simple feed-forward neural network. Crucially, "residual connections" (or skip connections) and layer normalization are used throughout the architecture. These help stabilize training and prevent information loss by allowing gradients to flow more easily through the deep network.
 
-Modern LLMs like GPT-3/4 or Llama are typically *decoder-only* Transformers. This means they are primarily designed for generating text, taking an input sequence and iteratively predicting the next token until a stop condition is met.
+Modern LLMs like GPT-3/4 or Llama are typically _decoder-only_ Transformers. This means they are primarily designed for generating text, taking an input sequence and iteratively predicting the next token until a stop condition is met.
 
 ### The Training Regimen: Pre-training and Fine-tuning
 
@@ -75,18 +75,18 @@ The journey of an LLM involves two main phases:
 1.  **Pre-training:** This is the massive, unsupervised learning phase. The model is fed vast amounts of raw text and trained on a simple, yet powerful, objective: predict the next token. By doing this repeatedly across trillions of tokens, the model develops a deep statistical understanding of language, grammar, facts, and even reasoning patterns. It's like a student who has read every book in the world and can now finish any sentence you start.
 
 2.  **Fine-tuning (Optional but Crucial):** While pre-training gives the model general language abilities, it might not be great at following specific instructions or behaving safely. This is where fine-tuning comes in.
-    *   **Instruction Tuning:** The model is further trained on datasets of prompt-response pairs, where humans have demonstrated how to follow instructions (e.g., "Summarize this article," "Write a poem about X").
-    *   **Reinforcement Learning from Human Feedback (RLHF):** This is a powerful technique where human evaluators rank the quality of different model responses. These rankings are then used to train a "reward model," which in turn guides the LLM to generate responses that are preferred by humans. This makes models more helpful, harmless, and honest.
+    - **Instruction Tuning:** The model is further trained on datasets of prompt-response pairs, where humans have demonstrated how to follow instructions (e.g., "Summarize this article," "Write a poem about X").
+    - **Reinforcement Learning from Human Feedback (RLHF):** This is a powerful technique where human evaluators rank the quality of different model responses. These rankings are then used to train a "reward model," which in turn guides the LLM to generate responses that are preferred by humans. This makes models more helpful, harmless, and honest.
 
 ### Why "Large" Matters: Scaling Laws and Emergent Abilities
 
-The surprising thing about LLMs is not just that they work, but that they get *dramatically* better as they scale up in size (parameters) and training data. This phenomenon is described by **scaling laws**, which suggest a predictable relationship between model size, data, computation, and performance.
+The surprising thing about LLMs is not just that they work, but that they get _dramatically_ better as they scale up in size (parameters) and training data. This phenomenon is described by **scaling laws**, which suggest a predictable relationship between model size, data, computation, and performance.
 
 What's truly fascinating are **emergent abilities**. These are capabilities that aren't present in smaller models but suddenly "emerge" in larger ones, often without explicit training. Examples include:
 
-*   **In-context learning:** The ability to learn a new task from just a few examples given in the prompt, without updating its weights.
-*   **Chain-of-thought prompting:** Breaking down complex problems into intermediate steps to improve reasoning.
-*   **Complex code generation or mathematical problem-solving.**
+- **In-context learning:** The ability to learn a new task from just a few examples given in the prompt, without updating its weights.
+- **Chain-of-thought prompting:** Breaking down complex problems into intermediate steps to improve reasoning.
+- **Complex code generation or mathematical problem-solving.**
 
 These emergent abilities are what make LLMs feel so incredibly intelligent and versatile.
 
@@ -94,11 +94,11 @@ These emergent abilities are what make LLMs feel so incredibly intelligent and v
 
 Despite their incredible power, LLMs are not perfect and come with significant challenges:
 
-*   **Hallucinations:** They can confidently generate factually incorrect information. Remember, they are predicting probabilities, not accessing a knowledge base.
-*   **Bias:** They can perpetuate and even amplify biases present in their training data.
-*   **Computational Cost:** Training and running these models is extremely expensive, both financially and environmentally.
-*   **Lack of True Understanding:** While they mimic understanding, they don't possess consciousness, common sense, or real-world experience. They are statistical models, not sentient beings.
-*   **Safety and Ethics:** Ensuring these models are used responsibly, preventing misuse, and addressing job displacement are ongoing ethical considerations.
+- **Hallucinations:** They can confidently generate factually incorrect information. Remember, they are predicting probabilities, not accessing a knowledge base.
+- **Bias:** They can perpetuate and even amplify biases present in their training data.
+- **Computational Cost:** Training and running these models is extremely expensive, both financially and environmentally.
+- **Lack of True Understanding:** While they mimic understanding, they don't possess consciousness, common sense, or real-world experience. They are statistical models, not sentient beings.
+- **Safety and Ethics:** Ensuring these models are used responsibly, preventing misuse, and addressing job displacement are ongoing ethical considerations.
 
 ### My Takeaway and the Future
 

@@ -17,7 +17,7 @@ Before we get to GPT, we need to talk about its ancestors. For a long time, mode
 1.  **Slow Processing:** Being sequential, they couldn't process words in parallel, making training very slow for long sentences.
 2.  **Long-Range Dependencies:** It was hard for them to remember information from very early in a long sequence, often leading to a "forgetting" problem.
 
-Enter the **Transformer**. Introduced in 2017 by Google Brain in the paper "Attention Is All You Need," it revolutionized NLP by ditching recurrence entirely. The key innovation? **Self-attention**. Instead of processing words sequentially, self-attention allows each word in a sentence to instantaneously "look at" and weigh the importance of *every other word* in that same sentence. This means words can capture long-range dependencies efficiently and, crucially, computations can be parallelized, leading to much faster training.
+Enter the **Transformer**. Introduced in 2017 by Google Brain in the paper "Attention Is All You Need," it revolutionized NLP by ditching recurrence entirely. The key innovation? **Self-attention**. Instead of processing words sequentially, self-attention allows each word in a sentence to instantaneously "look at" and weigh the importance of _every other word_ in that same sentence. This means words can capture long-range dependencies efficiently and, crucially, computations can be parallelized, leading to much faster training.
 
 ### GPT's Special Sauce: The Decoder-Only Approach
 
@@ -25,7 +25,7 @@ The original Transformer architecture had two main components: an **encoder** an
 
 GPT, however, is designed for a specific task: **generative language modeling**. It's not translating; it's creating text from scratch, predicting the next word in a sequence. For this, it needs to be able to generate content step-by-step. So, what's GPT's secret? It uses a **decoder-only** Transformer architecture.
 
-Think of it like this: an encoder-decoder model is like having both a reader and a writer. GPT is *just* a writer. It takes some initial text, and then it writes the next word, then the next, and so on, building up the story. This "writing" process is guided by a special trick called **masked self-attention**.
+Think of it like this: an encoder-decoder model is like having both a reader and a writer. GPT is _just_ a writer. It takes some initial text, and then it writes the next word, then the next, and so on, building up the story. This "writing" process is guided by a special trick called **masked self-attention**.
 
 ### Inside a GPT Decoder Block: The Engine Room
 
@@ -35,8 +35,8 @@ Let's peel back the layers of a single GPT decoder block. GPT models are essenti
 
 Before any processing begins, raw text needs to be converted into a language the model understands: numbers.
 
-*   **Tokenization:** First, your input text (e.g., "Hello world!") is broken down into smaller units called "tokens" (often words or sub-word units).
-*   **Embedding:** Each token is then converted into a numerical vector (a list of numbers) called an **embedding**. This vector captures the semantic meaning of the token. Words with similar meanings will have similar embeddings.
+- **Tokenization:** First, your input text (e.g., "Hello world!") is broken down into smaller units called "tokens" (often words or sub-word units).
+- **Embedding:** Each token is then converted into a numerical vector (a list of numbers) called an **embedding**. This vector captures the semantic meaning of the token. Words with similar meanings will have similar embeddings.
 
 But there's a problem: Self-attention processes all words in parallel, losing their inherent order. "Dog bites man" and "Man bites dog" would look the same to a vanilla self-attention mechanism! To fix this, we add **Positional Encodings** to the token embeddings. These are special vectors that inject information about each token's position in the sequence, allowing the model to understand word order.
 
@@ -44,16 +44,17 @@ So, for each token, the input to the first decoder block is its word embedding p
 
 #### 2. Masked Multi-Head Self-Attention: The "Thinking" Mechanism
 
-This is where the magic truly happens. Self-attention allows the model to weigh the importance of other words when processing a specific word. But for generation, there's a crucial constraint: a word should *only* be able to "see" and attend to words that came *before* it in the sequence, not future words. This is where **masking** comes in.
+This is where the magic truly happens. Self-attention allows the model to weigh the importance of other words when processing a specific word. But for generation, there's a crucial constraint: a word should _only_ be able to "see" and attend to words that came _before_ it in the sequence, not future words. This is where **masking** comes in.
 
-Imagine you're writing a story. You know what you've written so far, but you can't magically peek into the future to see what you *will* write. Masked self-attention ensures our model behaves the same way.
+Imagine you're writing a story. You know what you've written so far, but you can't magically peek into the future to see what you _will_ write. Masked self-attention ensures our model behaves the same way.
 
 Let's break down the self-attention formula:
 
 Each input vector (from our combined word + positional embedding) is transformed into three different vectors:
-*   **Query ($Q$):** What am I looking for? (A representation of the current word)
-*   **Key ($K$):** What do I have? (A representation of all words in the sequence)
-*   **Value ($V$):** What information do I carry? (Another representation of all words)
+
+- **Query ($Q$):** What am I looking for? (A representation of the current word)
+- **Key ($K$):** What do I have? (A representation of all words in the sequence)
+- **Value ($V$):** What information do I carry? (Another representation of all words)
 
 The core calculation for attention is:
 
@@ -63,11 +64,11 @@ $$
 
 Let's unpack this:
 
-*   **$QK^T$**: This is a dot product between the query vector of the current word and the key vectors of *all* words in the sequence (including itself). It measures how "related" or "relevant" each other word is to the current word. A higher dot product means more attention.
-*   **$\sqrt{d_k}$**: This is a scaling factor, where $d_k$ is the dimension of the key vectors. It's used to prevent the dot products from becoming too large, which could push the softmax function into regions with tiny gradients, making learning difficult.
-*   **$M$ (The Mask):** This is the crucial part for GPT. $M$ is a matrix where entries corresponding to future words are set to a very large negative number (like $-\infty$). When you add this to $QK^T$ *before* the softmax, those future word scores effectively become zero after the softmax, meaning the current word pays zero attention to any words that haven't been generated yet. This enforces the auto-regressive (sequential generation) property.
-*   **$\text{softmax}(\dots)$**: This function converts the attention scores into probability-like weights, ensuring they sum to 1.
-*   **$V$**: Finally, these weights are multiplied by the Value vectors. The result is a weighted sum of the Value vectors, effectively capturing the contextual information from other words that are relevant to the current word, based on the learned attention weights.
+- **$QK^T$**: This is a dot product between the query vector of the current word and the key vectors of _all_ words in the sequence (including itself). It measures how "related" or "relevant" each other word is to the current word. A higher dot product means more attention.
+- **$\sqrt{d_k}$**: This is a scaling factor, where $d_k$ is the dimension of the key vectors. It's used to prevent the dot products from becoming too large, which could push the softmax function into regions with tiny gradients, making learning difficult.
+- **$M$ (The Mask):** This is the crucial part for GPT. $M$ is a matrix where entries corresponding to future words are set to a very large negative number (like $-\infty$). When you add this to $QK^T$ _before_ the softmax, those future word scores effectively become zero after the softmax, meaning the current word pays zero attention to any words that haven't been generated yet. This enforces the auto-regressive (sequential generation) property.
+- **$\text{softmax}(\dots)$**: This function converts the attention scores into probability-like weights, ensuring they sum to 1.
+- **$V$**: Finally, these weights are multiplied by the Value vectors. The result is a weighted sum of the Value vectors, effectively capturing the contextual information from other words that are relevant to the current word, based on the learned attention weights.
 
 **Multi-Head Attention:** Instead of just one set of $Q, K, V$ transformations, Multi-Head Attention performs this process multiple times in parallel with different linear projections. Each "head" learns to focus on different aspects of the relationships between words. The outputs from all heads are then concatenated and linearly transformed to produce the final output for the attention layer. This enriches the model's ability to capture diverse dependencies.
 
@@ -79,8 +80,8 @@ After the attention output, the data passes through a simple, position-wise **Fe
 
 Throughout the decoder block, two architectural patterns are vital for stable and effective training of deep networks:
 
-*   **Residual Connections:** After both the attention layer and the FFN, the original input to that sub-layer is added back to its output. Formally, this looks like $x + \text{Sublayer}(x)$. This helps mitigate the vanishing gradient problem in deep networks, allowing gradients to flow more easily through many layers.
-*   **Layer Normalization:** Immediately following each residual connection, Layer Normalization is applied. This normalizes the summed input across its features for *each sample independently* (unlike Batch Normalization, which normalizes features across the batch). This helps stabilize training and allows for higher learning rates.
+- **Residual Connections:** After both the attention layer and the FFN, the original input to that sub-layer is added back to its output. Formally, this looks like $x + \text{Sublayer}(x)$. This helps mitigate the vanishing gradient problem in deep networks, allowing gradients to flow more easily through many layers.
+- **Layer Normalization:** Immediately following each residual connection, Layer Normalization is applied. This normalizes the summed input across its features for _each sample independently_ (unlike Batch Normalization, which normalizes features across the batch). This helps stabilize training and allows for higher learning rates.
 
 ### Stacking it Up: The Full GPT Architecture
 
@@ -88,14 +89,14 @@ A GPT model consists of many of these identical decoder blocks stacked one on to
 
 ### The Output Layer: Predicting the Next Word
 
-After passing through the final decoder block, the output vector for the *last token* in the sequence (or the token being generated) is fed into a final linear layer, followed by a softmax activation function. This layer projects the model's internal representation onto the entire vocabulary, producing a probability distribution over all possible next words. The word with the highest probability is typically chosen as the next generated token, or more sophisticated sampling methods are used.
+After passing through the final decoder block, the output vector for the _last token_ in the sequence (or the token being generated) is fed into a final linear layer, followed by a softmax activation function. This layer projects the model's internal representation onto the entire vocabulary, producing a probability distribution over all possible next words. The word with the highest probability is typically chosen as the next generated token, or more sophisticated sampling methods are used.
 
 ### The "GPT" in Generative Pre-trained Transformer
 
 Now that we've seen the "Transformer" part, let's quickly clarify the "G" and "P":
 
-*   **Generative:** This means the model is designed to *produce* new content, rather than just classifying or understanding existing content. It generates text one token at a time in an auto-regressive fashion.
-*   **Pre-trained:** This is a massive part of GPT's success. These models are first trained on truly enormous datasets of text (billions and billions of words from books, articles, websites, etc.) in an unsupervised manner. During this pre-training, the model learns the intricate patterns, grammar, facts, and nuances of human language simply by trying to predict the next word in vast amounts of text. This pre-training phase is incredibly computationally intensive but results in a highly capable "base" model.
+- **Generative:** This means the model is designed to _produce_ new content, rather than just classifying or understanding existing content. It generates text one token at a time in an auto-regressive fashion.
+- **Pre-trained:** This is a massive part of GPT's success. These models are first trained on truly enormous datasets of text (billions and billions of words from books, articles, websites, etc.) in an unsupervised manner. During this pre-training, the model learns the intricate patterns, grammar, facts, and nuances of human language simply by trying to predict the next word in vast amounts of text. This pre-training phase is incredibly computationally intensive but results in a highly capable "base" model.
 
 After pre-training, these models can then be "fine-tuned" on smaller, task-specific datasets to adapt them to particular applications (like summarization or question answering), though recent models like GPT-3 and beyond demonstrate impressive "zero-shot" and "few-shot" capabilities directly from pre-training.
 
@@ -104,10 +105,11 @@ After pre-training, these models can then be "fine-tuned" on smaller, task-speci
 **Training:** The primary training objective for GPT is to predict the next token in a sequence. Given a sequence of tokens $x_1, x_2, \dots, x_t$, the model learns to predict $x_{t+1}$. It's trained by minimizing the negative log-likelihood (a form of cross-entropy loss) of the actual next token given the preceding ones across vast amounts of text.
 
 **Inference (Generation):** When you prompt GPT, you provide an initial sequence (e.g., "Write a poem about the ocean:").
+
 1.  The model processes this prompt.
 2.  It predicts the most probable next token (e.g., "The").
 3.  "The" is then appended to the prompt.
-4.  The *entire new sequence* ("Write a poem about the ocean: The") is fed back into the model to predict the *next* token (e.g., "waves").
+4.  The _entire new sequence_ ("Write a poem about the ocean: The") is fed back into the model to predict the _next_ token (e.g., "waves").
 5.  This auto-regressive process continues, token by token, until a stopping condition is met (e.g., a specific number of tokens, or an "end of sequence" token is predicted).
 
 Various **decoding strategies** like greedy sampling, beam search, or more advanced sampling methods (temperature, top-k, top-p) are used to make the generation process more diverse or focused.

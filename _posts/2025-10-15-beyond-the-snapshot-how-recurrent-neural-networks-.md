@@ -6,24 +6,24 @@ tags: ["Machine Learning", "Deep Learning", "Recurrent Neural Networks", "NLP", 
 author: "Adarsh Nair"
 ---
 
-Remember that moment in a conversation when someone brings up something you said five minutes ago, and it completely changes the meaning of what they're saying *now*? Our human brains are incredible at this. We don't just process information in isolated snapshots; we build context, link ideas, and crucially, remember the past to understand the present.
+Remember that moment in a conversation when someone brings up something you said five minutes ago, and it completely changes the meaning of what they're saying _now_? Our human brains are incredible at this. We don't just process information in isolated snapshots; we build context, link ideas, and crucially, remember the past to understand the present.
 
 But what about machines? For the longest time, the workhorse of deep learning – the Feedforward Neural Network – was a bit like a goldfish. It was brilliant at tasks like classifying images, where each input (an image) is independent of the last. Show it a cat, it says "cat." Show it a dog, it says "dog." It doesn't remember the cat it saw a moment ago, nor does it care.
 
 This "goldfish memory" became a problem when we wanted AI to tackle sequential data: things like spoken language, text, music, or time series. In these domains, the order of information matters immensely. "I did not buy it" means something entirely different from "I did buy it." The single word "not" flips the entire meaning, relying on context from the preceding words. A traditional feedforward network would struggle here, as it processes each word in isolation.
 
-This is where the magic of **Recurrent Neural Networks (RNNs)** comes in. They are deep learning architectures specifically designed to process sequential data by incorporating a form of "memory." Imagine a neural network that doesn't just look at the current input, but also whispers to itself about what it saw *just before*. That's the essence of an RNN.
+This is where the magic of **Recurrent Neural Networks (RNNs)** comes in. They are deep learning architectures specifically designed to process sequential data by incorporating a form of "memory." Imagine a neural network that doesn't just look at the current input, but also whispers to itself about what it saw _just before_. That's the essence of an RNN.
 
 ### The Core Idea: A Loop in Time
 
-At its heart, an RNN is very similar to a feedforward network, but with a twist: it has a loop. This loop allows information to persist from one step of the network to the next. Think of it like this: when an RNN processes an input at a particular time step, it doesn't just produce an output; it also updates an internal "hidden state." This hidden state then acts as memory, influencing the processing of the *next* input in the sequence.
+At its heart, an RNN is very similar to a feedforward network, but with a twist: it has a loop. This loop allows information to persist from one step of the network to the next. Think of it like this: when an RNN processes an input at a particular time step, it doesn't just produce an output; it also updates an internal "hidden state." This hidden state then acts as memory, influencing the processing of the _next_ input in the sequence.
 
 Let's try to visualize this. Imagine you're reading a book. You read a word. To understand that word, you also remember the context from the previous words in the sentence. An RNN works similarly:
 
 1.  **Input ($x_t$):** At time $t$, the network receives a new piece of data from the sequence (e.g., a word in a sentence).
 2.  **Hidden State ($h_t$):** It combines this new input with its "memory" from the previous time step ($h_{t-1}$). This combination results in a new hidden state, which encapsulates the current understanding of the sequence up to time $t$.
 3.  **Output ($y_t$):** Based on this new hidden state, the network can produce an output (e.g., predicting the next word, or classifying the sentiment of the sentence so far).
-4.  **Recurrence:** The crucial part is that $h_t$ is then passed along as $h_{t-1}$ for the *next* time step, $t+1$. This creates the loop, enabling the network to learn patterns and dependencies across time.
+4.  **Recurrence:** The crucial part is that $h_t$ is then passed along as $h_{t-1}$ for the _next_ time step, $t+1$. This creates the loop, enabling the network to learn patterns and dependencies across time.
 
 To make this clearer, we often "unroll" the RNN over time. Instead of a single neuron with a loop, we picture multiple copies of the same network, each passing its hidden state to the next.
 
@@ -34,7 +34,8 @@ x_0 --> RNN_cell_0 --> h_0 --> RNN_cell_1 --> h_1 --> RNN_cell_2 --> h_2 ...
         y_0     |             y_1     |             y_2     |
         (from previous h)     (from previous h)     (from previous h)
 ```
-*A simplified unrolled RNN, where $x_t$ is the input at time $t$, $h_t$ is the hidden state (memory) at time $t$, and $y_t$ is the output at time $t$. Notice how $h_t$ feeds into the next cell.*
+
+_A simplified unrolled RNN, where $x_t$ is the input at time $t$, $h_t$ is the hidden state (memory) at time $t$, and $y_t$ is the output at time $t$. Notice how $h_t$ feeds into the next cell._
 
 Crucially, **the same set of weights and biases are used at every time step.** This is what allows RNNs to learn sequential patterns and generalize across different parts of a sequence, regardless of its length.
 
@@ -54,14 +55,14 @@ $y_t = W_{hy} h_t + b_y$
 
 Let's break down these terms:
 
-*   $x_t$: This is your input vector at time step $t$. For text, this might be a word embedding (a numerical representation of a word).
-*   $h_t$: This is the hidden state vector at time step $t$. It's the network's "memory" or understanding of the sequence up to this point.
-*   $h_{t-1}$: This is the hidden state from the previous time step. It's the memory passed from the past.
-*   $W_{hh}$: These are the weights for the recurrent connection (hidden-to-hidden). They determine how much influence the previous hidden state has on the current one.
-*   $W_{xh}$: These are the weights for the input-to-hidden connection. They determine how much influence the current input has on the current hidden state.
-*   $W_{hy}$: These are the weights for the hidden-to-output connection. They map the hidden state to the desired output.
-*   $b_h$ and $b_y$: These are bias vectors, which allow the network to shift the activation function.
-*   $\tanh$: This is the hyperbolic tangent activation function. It squashes the values between -1 and 1, helping to stabilize the hidden state values and prevent them from exploding. Other activation functions like ReLU or sigmoid can also be used, though $\tanh$ is common for $h_t$.
+- $x_t$: This is your input vector at time step $t$. For text, this might be a word embedding (a numerical representation of a word).
+- $h_t$: This is the hidden state vector at time step $t$. It's the network's "memory" or understanding of the sequence up to this point.
+- $h_{t-1}$: This is the hidden state from the previous time step. It's the memory passed from the past.
+- $W_{hh}$: These are the weights for the recurrent connection (hidden-to-hidden). They determine how much influence the previous hidden state has on the current one.
+- $W_{xh}$: These are the weights for the input-to-hidden connection. They determine how much influence the current input has on the current hidden state.
+- $W_{hy}$: These are the weights for the hidden-to-output connection. They map the hidden state to the desired output.
+- $b_h$ and $b_y$: These are bias vectors, which allow the network to shift the activation function.
+- $\tanh$: This is the hyperbolic tangent activation function. It squashes the values between -1 and 1, helping to stabilize the hidden state values and prevent them from exploding. Other activation functions like ReLU or sigmoid can also be used, though $\tanh$ is common for $h_t$.
 
 The beauty here is that $W_{hh}$, $W_{xh}$, $W_{hy}$, $b_h$, and $b_y$ are learned during training and are **shared across all time steps**. This parameter sharing is fundamental to RNNs' ability to recognize patterns no matter where they appear in a sequence.
 
@@ -77,8 +78,8 @@ Imagine you're playing a game of "telephone" down a very long line. If each pers
 
 RNNs suffer from this problem because gradients are propagated back through many time steps.
 
-*   **Vanishing Gradients:** As gradients are multiplied by weight matrices at each time step during backpropagation, if these weights are small, the gradients can shrink exponentially, becoming effectively zero. This means the network struggles to learn long-term dependencies; it "forgets" information from earlier in the sequence. It's like trying to remember the very first word of a long book while reading the last chapter – the signal has faded too much.
-*   **Exploding Gradients:** Conversely, if the weights are large, gradients can grow exponentially, leading to extremely large updates to the network weights. This causes instability, making the network unable to learn effectively (think NaN values and random guesses).
+- **Vanishing Gradients:** As gradients are multiplied by weight matrices at each time step during backpropagation, if these weights are small, the gradients can shrink exponentially, becoming effectively zero. This means the network struggles to learn long-term dependencies; it "forgets" information from earlier in the sequence. It's like trying to remember the very first word of a long book while reading the last chapter – the signal has faded too much.
+- **Exploding Gradients:** Conversely, if the weights are large, gradients can grow exponentially, leading to extremely large updates to the network weights. This causes instability, making the network unable to learn effectively (think NaN values and random guesses).
 
 These issues made training vanilla RNNs for sequences longer than a few dozen steps very difficult. And this is precisely why researchers developed more sophisticated recurrent architectures.
 
@@ -96,10 +97,10 @@ The key innovation in an LSTM is the **cell state ($C_t$)**, which acts like a c
     $f_t = \sigma(W_f \cdot [h_{t-1}, x_t] + b_f)$
 
 2.  **Input Gate ($i_t$) and Candidate Cell State ($\tilde{C}_t$):** Decides what new information to store in the cell state.
-    *   The input gate $i_t$ decides which values to update.
-    *   The candidate cell state $\tilde{C}_t$ is a new potential memory that could be added.
-    $i_t = \sigma(W_i \cdot [h_{t-1}, x_t] + b_i)$
-    $\tilde{C}_t = \tanh(W_C \cdot [h_{t-1}, x_t] + b_C)$
+    - The input gate $i_t$ decides which values to update.
+    - The candidate cell state $\tilde{C}_t$ is a new potential memory that could be added.
+      $i_t = \sigma(W_i \cdot [h_{t-1}, x_t] + b_i)$
+      $\tilde{C}_t = \tanh(W_C \cdot [h_{t-1}, x_t] + b_C)$
 
 3.  **Update Cell State:** The old cell state $C_{t-1}$ is updated to the new cell state $C_t$ by first forgetting what the forget gate decided, and then adding the new candidate memory, scaled by the input gate:
     $C_t = f_t * C_{t-1} + i_t * \tilde{C}_t$
@@ -122,7 +123,7 @@ A GRU has two main gates:
 2.  **Reset Gate ($r_t$):** This gate decides how much of the past hidden state to "forget" when calculating the new candidate hidden state. If the reset gate is close to 0, it means the network effectively ignores the past hidden state and focuses only on the current input.
     $r_t = \sigma(W_r \cdot [h_{t-1}, x_t] + b_r)$
 
-The new candidate hidden state $\tilde{h}_t$ is then calculated by combining the current input with the *reset* version of the previous hidden state:
+The new candidate hidden state $\tilde{h}_t$ is then calculated by combining the current input with the _reset_ version of the previous hidden state:
 $\tilde{h}_t = \tanh(W \cdot [r_t * h_{t-1}, x_t] + b)$
 
 Finally, the new hidden state $h_t$ is a linear combination of the previous hidden state and the new candidate hidden state, controlled by the update gate:
@@ -134,15 +135,15 @@ GRUs offer a good balance between complexity and performance, making them a popu
 
 The ability of RNNs (especially LSTMs and GRUs) to process and remember sequential information has unlocked a vast array of applications across various fields:
 
-*   **Natural Language Processing (NLP):**
-    *   **Machine Translation:** Understanding a sentence in one language and generating it in another (e.g., Google Translate).
-    *   **Text Generation:** Writing coherent sentences or paragraphs, like predictive text or creative writing AI.
-    *   **Sentiment Analysis:** Determining if a piece of text expresses positive, negative, or neutral sentiment.
-    *   **Speech Recognition:** Converting spoken language into text.
-*   **Time Series Prediction:** Forecasting future values based on past observations, such as stock prices, weather patterns, or energy consumption.
-*   **Music Generation:** Creating new melodies or harmonies.
-*   **Video Processing:** Understanding actions and events in video clips by processing frames sequentially.
-*   **Recommendation Systems:** Suggesting items based on a user's sequence of past interactions.
+- **Natural Language Processing (NLP):**
+  - **Machine Translation:** Understanding a sentence in one language and generating it in another (e.g., Google Translate).
+  - **Text Generation:** Writing coherent sentences or paragraphs, like predictive text or creative writing AI.
+  - **Sentiment Analysis:** Determining if a piece of text expresses positive, negative, or neutral sentiment.
+  - **Speech Recognition:** Converting spoken language into text.
+- **Time Series Prediction:** Forecasting future values based on past observations, such as stock prices, weather patterns, or energy consumption.
+- **Music Generation:** Creating new melodies or harmonies.
+- **Video Processing:** Understanding actions and events in video clips by processing frames sequentially.
+- **Recommendation Systems:** Suggesting items based on a user's sequence of past interactions.
 
 ### Limitations and the Rise of Transformers
 
@@ -155,9 +156,9 @@ These limitations paved the way for a new architecture that has dominated the fi
 
 However, this doesn't mean RNNs are obsolete! They still excel in specific scenarios:
 
-*   **Streaming Data:** For tasks where data arrives sequentially and real-time processing is crucial (e.g., live speech processing), RNNs can be more suitable than Transformers which typically require the entire sequence upfront.
-*   **Shorter Sequences:** For sequences that aren't excessively long, GRUs and LSTMs can be simpler, faster to train, and require fewer parameters than large Transformer models.
-*   **Specific Architectures:** They still form components in hybrid models or certain encoder-decoder architectures.
+- **Streaming Data:** For tasks where data arrives sequentially and real-time processing is crucial (e.g., live speech processing), RNNs can be more suitable than Transformers which typically require the entire sequence upfront.
+- **Shorter Sequences:** For sequences that aren't excessively long, GRUs and LSTMs can be simpler, faster to train, and require fewer parameters than large Transformer models.
+- **Specific Architectures:** They still form components in hybrid models or certain encoder-decoder architectures.
 
 ### Conclusion: The Enduring Legacy of Memory
 

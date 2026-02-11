@@ -6,7 +6,7 @@ tags: ["Machine Learning", "Anomaly Detection", "Data Science", "Artificial Inte
 author: "Adarsh Nair"
 ---
 
-As a budding data scientist, one of the most thrilling quests I've embarked upon is the hunt for the unexpected. You know, those moments when something just doesn't *fit*? Like a single purple sock in a drawer full of white ones, or an unusually quiet morning in a bustling city. In the vast oceans of data we navigate daily, these "odd ones out" aren't just curiosities; they are often critical signals, warnings, or even opportunities waiting to be discovered. This, my friends, is the realm of **Anomaly Detection**.
+As a budding data scientist, one of the most thrilling quests I've embarked upon is the hunt for the unexpected. You know, those moments when something just doesn't _fit_? Like a single purple sock in a drawer full of white ones, or an unusually quiet morning in a bustling city. In the vast oceans of data we navigate daily, these "odd ones out" aren't just curiosities; they are often critical signals, warnings, or even opportunities waiting to be discovered. This, my friends, is the realm of **Anomaly Detection**.
 
 ### What Exactly Are We Hunting? Defining the "Anomaly"
 
@@ -16,7 +16,7 @@ But it's not always so straightforward. Anomalies can take on different forms:
 
 1.  **Point Anomalies:** These are single data instances that are unusual compared to the rest of the data. Think of a $10,000 transaction on a credit card that usually sees $50 purchases. That's a point anomaly.
 2.  **Contextual Anomalies:** Here, a data point might not be unusual on its own, but it becomes anomalous in a specific context. For example, a temperature reading of 30°C in July in the Sahara Desert is normal, but the same reading in Antarctica in December would be highly anomalous.
-3.  **Collective Anomalies:** This is when a collection of related data points, as a group, deviates from the norm, even if individual points within the collection aren't anomalous. Picture a sudden, sustained drop in website traffic for a few hours. Each individual minute of low traffic might not be an anomaly, but the *pattern* over those hours definitely is.
+3.  **Collective Anomalies:** This is when a collection of related data points, as a group, deviates from the norm, even if individual points within the collection aren't anomalous. Picture a sudden, sustained drop in website traffic for a few hours. Each individual minute of low traffic might not be an anomaly, but the _pattern_ over those hours definitely is.
 
 My journey into anomaly detection often feels like being a digital Sherlock Holmes. I'm looking for clues, subtle deviations, and patterns that scream "something is different here!"
 
@@ -24,13 +24,13 @@ My journey into anomaly detection often feels like being a digital Sherlock Holm
 
 The reasons for wanting to find these anomalies are vast and impactful:
 
-*   **Fraud Detection:** Spotting unusual credit card transactions, insurance claims, or login patterns can save billions.
-*   **Cybersecurity:** Identifying abnormal network traffic or system access attempts can prevent data breaches.
-*   **Healthcare:** Detecting unusual patterns in patient vital signs, MRI scans, or lab results can lead to early diagnosis of diseases.
-*   **Manufacturing:** Pinpointing strange sensor readings on factory machines can predict equipment failure, preventing costly downtime.
-*   **Environmental Monitoring:** Uncovering unusual pollution levels or climate shifts.
+- **Fraud Detection:** Spotting unusual credit card transactions, insurance claims, or login patterns can save billions.
+- **Cybersecurity:** Identifying abnormal network traffic or system access attempts can prevent data breaches.
+- **Healthcare:** Detecting unusual patterns in patient vital signs, MRI scans, or lab results can lead to early diagnosis of diseases.
+- **Manufacturing:** Pinpointing strange sensor readings on factory machines can predict equipment failure, preventing costly downtime.
+- **Environmental Monitoring:** Uncovering unusual pollution levels or climate shifts.
 
-The list goes on. In every domain where data is collected, understanding what's *not* normal is as crucial as understanding what *is*.
+The list goes on. In every domain where data is collected, understanding what's _not_ normal is as crucial as understanding what _is_.
 
 ### The Detective's Paradox: Why Anomalies Are So Hard to Find
 
@@ -67,9 +67,9 @@ Think of yourself standing in a crowded room. If you're "normal," you'll have ma
 k-NN for anomaly detection calculates the distance from each data point to its $k$ nearest neighbors. If this average distance is significantly larger than for other points, it's flagged as an anomaly. It's intuitive, but can be computationally expensive for very large datasets.
 
 **b. Local Outlier Factor (LOF):**
-LOF takes the proximity idea a step further. Instead of just absolute distance, it considers the *density* around a point. A point might be far from its neighbors, but if its neighbors are also far from their neighbors, then it's not necessarily an anomaly in a sparsely populated region. LOF identifies points that are "less dense" than their neighbors.
+LOF takes the proximity idea a step further. Instead of just absolute distance, it considers the _density_ around a point. A point might be far from its neighbors, but if its neighbors are also far from their neighbors, then it's not necessarily an anomaly in a sparsely populated region. LOF identifies points that are "less dense" than their neighbors.
 
-If a point has a significantly lower local density than its neighbors, its LOF score will be high, indicating it's an outlier. It’s like being in a small, remote village. You're far from the city, but you're not an outlier *within your village*. An anomaly would be the one person living in a cave far away from even that remote village.
+If a point has a significantly lower local density than its neighbors, its LOF score will be high, indicating it's an outlier. It’s like being in a small, remote village. You're far from the city, but you're not an outlier _within your village_. An anomaly would be the one person living in a cave far away from even that remote village.
 
 #### 3. Ensemble Methods: The Committee of Detectives
 
@@ -101,9 +101,9 @@ A high reconstruction error flags the input as an anomaly. This method is partic
 
 Even with these powerful tools, our detective work isn't always smooth sailing:
 
-*   **Labeling Problem:** Often, we don't have labeled examples of anomalies. We know what "normal" looks like, but not always what "abnormal" is. This leads to **unsupervised anomaly detection** (where we don't use labels) or **semi-supervised** (where we only have labels for normal data).
-*   **Feature Engineering:** The quality of our features significantly impacts detection. Crafting features that highlight deviations is an art form.
-*   **Thresholding:** Deciding what "anomaly score" is high enough to trigger an alert is crucial and often application-specific. Too low, and you get too many false alarms; too high, and you miss critical events.
+- **Labeling Problem:** Often, we don't have labeled examples of anomalies. We know what "normal" looks like, but not always what "abnormal" is. This leads to **unsupervised anomaly detection** (where we don't use labels) or **semi-supervised** (where we only have labels for normal data).
+- **Feature Engineering:** The quality of our features significantly impacts detection. Crafting features that highlight deviations is an art form.
+- **Thresholding:** Deciding what "anomaly score" is high enough to trigger an alert is crucial and often application-specific. Too low, and you get too many false alarms; too high, and you miss critical events.
 
 ### Conclusion: Embracing the Unexpected
 

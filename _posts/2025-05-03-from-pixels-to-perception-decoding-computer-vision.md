@@ -10,7 +10,7 @@ As a budding data scientist and machine learning enthusiast, few fields captivat
 
 ### The Human Advantage: Effortless Sight
 
-Think for a moment about how *you* see. You glance at a room and instantly recognize a chair, a table, a window. You don't consciously process the light reflecting off objects, the colors, the shapes, the textures. Your brain does it all, effortlessly, in milliseconds. This ability, honed over millions of years of evolution, is incredibly complex. Our visual cortex is a marvel, performing sophisticated pattern recognition and contextual understanding without us even realizing it.
+Think for a moment about how _you_ see. You glance at a room and instantly recognize a chair, a table, a window. You don't consciously process the light reflecting off objects, the colors, the shapes, the textures. Your brain does it all, effortlessly, in milliseconds. This ability, honed over millions of years of evolution, is incredibly complex. Our visual cortex is a marvel, performing sophisticated pattern recognition and contextual understanding without us even realizing it.
 
 Now, imagine trying to teach a computer to do the same.
 
@@ -24,7 +24,7 @@ In the early days of AI, researchers tried to hard-code rules. "Look for two cir
 
 ### The Revolution: Deep Learning and Convolutional Neural Networks
 
-The breakthrough came with the advent of **Deep Learning**, a subfield of machine learning that uses multi-layered neural networks. Instead of us telling the computer *what* to look for, we let the computer *learn* these features directly from data.
+The breakthrough came with the advent of **Deep Learning**, a subfield of machine learning that uses multi-layered neural networks. Instead of us telling the computer _what_ to look for, we let the computer _learn_ these features directly from data.
 
 And for images, the stars of the show are **Convolutional Neural Networks (CNNs)**.
 
@@ -41,7 +41,7 @@ Imagine you’re looking for a specific type of edge in an image. You don’t ne
 
     The mathematical operation for convolution can be expressed as:
     $O(i, j) = \sum_m \sum_n I(i-m, j-n) K(m, n)$
-    
+
     Here:
     - $I$ is the input image (or feature map from a previous layer).
     - $K$ is the kernel (our filter).
@@ -60,15 +60,16 @@ Imagine you’re looking for a specific type of edge in an image. You don’t ne
     After a convolutional layer, we often use a **pooling layer**, most commonly **Max Pooling**. This layer takes a small window (e.g., 2x2) and slides it across the feature map, outputting only the maximum value within that window.
 
     Why do this?
-    -   **Dimensionality Reduction:** It significantly reduces the spatial dimensions (height and width) of the feature maps, making the network smaller, faster, and less prone to overfitting.
-    -   **Translation Invariance:** By taking the maximum value, small shifts or distortions in the input image (like an object moving a few pixels to the left) will still result in a similar high activation in the pooled output. This makes the model more robust to minor variations.
+    - **Dimensionality Reduction:** It significantly reduces the spatial dimensions (height and width) of the feature maps, making the network smaller, faster, and less prone to overfitting.
+    - **Translation Invariance:** By taking the maximum value, small shifts or distortions in the input image (like an object moving a few pixels to the left) will still result in a similar high activation in the pooled output. This makes the model more robust to minor variations.
 
 #### Stacking Layers: Learning Hierarchical Features
 
 The true power of CNNs comes from stacking multiple convolutional and pooling layers.
--   **Early layers** learn to detect very simple, low-level features like edges, corners, and basic textures.
--   **Middle layers** combine these simple features to recognize more complex patterns, like circles, squares, parts of objects (e.g., an eye, a wheel spoke).
--   **Deeper layers** then combine these complex patterns to identify entire objects, like faces, cars, or animals.
+
+- **Early layers** learn to detect very simple, low-level features like edges, corners, and basic textures.
+- **Middle layers** combine these simple features to recognize more complex patterns, like circles, squares, parts of objects (e.g., an eye, a wheel spoke).
+- **Deeper layers** then combine these complex patterns to identify entire objects, like faces, cars, or animals.
 
 This hierarchical learning is why CNNs are so effective: they automatically learn relevant features at different levels of abstraction, from pixels to complete concepts.
 
@@ -81,7 +82,7 @@ Finally, after several convolutional and pooling layers have extracted a rich se
 The principles of CNNs have revolutionized countless applications:
 
 1.  **Image Classification:** The most basic task: "What is this image primarily depicting?" From identifying types of animals to recognizing different plant species.
-2.  **Object Detection:** Not just *what* is in the image, but *where* is it? This involves drawing **bounding boxes** around objects and labeling them. Crucial for self-driving cars (identifying pedestrians, other vehicles, traffic lights) and security systems.
+2.  **Object Detection:** Not just _what_ is in the image, but _where_ is it? This involves drawing **bounding boxes** around objects and labeling them. Crucial for self-driving cars (identifying pedestrians, other vehicles, traffic lights) and security systems.
 3.  **Semantic Segmentation:** Taking understanding to the pixel level. Every single pixel in an image is assigned a class label (e.g., "road," "sky," "car," "person"). Essential for precise medical image analysis and sophisticated robotics.
 4.  **Facial Recognition:** Identifying individuals from images or video, used in everything from smartphone unlocks to airport security.
 5.  **Medical Imaging:** Assisting doctors in detecting diseases like cancer, analyzing X-rays, MRIs, and CT scans with remarkable accuracy, often spotting things human eyes might miss.
@@ -92,10 +93,10 @@ The principles of CNNs have revolutionized countless applications:
 
 While Computer Vision has made incredible strides, it's a rapidly evolving field with ongoing challenges:
 
--   **Data Dependency:** Deep learning models, especially in vision, often require massive amounts of labeled data to train effectively, which can be expensive and time-consuming to acquire.
--   **Bias:** If the training data is biased (e.g., underrepresenting certain demographics), the model's performance can be poor or even discriminatory when applied to those groups.
--   **Explainability:** CNNs are often "black boxes." It can be difficult to understand *why* a model made a particular decision, which is a concern in critical applications like medical diagnosis or autonomous driving.
--   **Adversarial Attacks:** Small, imperceptible perturbations to an image can completely fool a sophisticated model, leading to misclassifications.
+- **Data Dependency:** Deep learning models, especially in vision, often require massive amounts of labeled data to train effectively, which can be expensive and time-consuming to acquire.
+- **Bias:** If the training data is biased (e.g., underrepresenting certain demographics), the model's performance can be poor or even discriminatory when applied to those groups.
+- **Explainability:** CNNs are often "black boxes." It can be difficult to understand _why_ a model made a particular decision, which is a concern in critical applications like medical diagnosis or autonomous driving.
+- **Adversarial Attacks:** Small, imperceptible perturbations to an image can completely fool a sophisticated model, leading to misclassifications.
 
 The future is exciting, with new research exploring **self-supervised learning** (learning from unlabeled data), **Vision Transformers** (adapting the powerful transformer architecture from natural language processing to vision tasks), and **multimodal AI** (combining vision with other modalities like language and audio for a richer understanding).
 

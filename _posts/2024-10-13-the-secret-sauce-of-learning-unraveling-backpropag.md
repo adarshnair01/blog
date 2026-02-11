@@ -18,16 +18,16 @@ Imagine you're teaching a child to recognize a cat. You show them a picture and 
 
 Neural networks learn in a remarkably similar fashion. They start with a task, make a guess, evaluate how wrong their guess was, and then adjust their internal parameters (like a child updating their mental model) to make better guesses next time.
 
-But how does a computer "know" *how* to adjust? How does it figure out which internal "knobs and dials" (which we call *weights* and *biases*) contributed most to its mistake, and by how much? This is precisely the problem Backpropagation solves.
+But how does a computer "know" _how_ to adjust? How does it figure out which internal "knobs and dials" (which we call _weights_ and _biases_) contributed most to its mistake, and by how much? This is precisely the problem Backpropagation solves.
 
 ### A Quick Peek: The Forward Pass
 
-Before we go *backward*, let's briefly understand the *forward* journey. A neural network is essentially a series of interconnected nodes (neurons) organized into layers.
+Before we go _backward_, let's briefly understand the _forward_ journey. A neural network is essentially a series of interconnected nodes (neurons) organized into layers.
 
 1.  **Input Layer:** Your data (e.g., pixel values of an image, words in a sentence) enters here.
-2.  **Hidden Layers:** Each neuron in a layer takes inputs from the previous layer, multiplies them by a *weight*, adds a *bias*, and then applies an *activation function*. This creates an output that feeds into the next layer.
+2.  **Hidden Layers:** Each neuron in a layer takes inputs from the previous layer, multiplies them by a _weight_, adds a _bias_, and then applies an _activation function_. This creates an output that feeds into the next layer.
     Mathematically, for a single neuron, this process looks something like this:
-    $$ z = \sum_{i} (w_i x_i) + b $$
+    $$ z = \sum\_{i} (w_i x_i) + b $$
     $$ a = \sigma(z) $$
     Where $x_i$ are the inputs, $w_i$ are the weights, $b$ is the bias, $\sigma$ is the activation function (like ReLU or Sigmoid), $z$ is the weighted sum, and $a$ is the activated output.
 3.  **Output Layer:** The final layer produces the network's prediction (e.g., "this is a cat," "the stock price will go up").
@@ -36,24 +36,24 @@ This entire process, from input to output, is called the **forward pass**. At th
 
 ### Quantifying "How Wrong": The Loss Function
 
-Our network has made a prediction ($\hat{y}$), but we also know the *actual* correct answer ($y$). The next logical step is to measure the discrepancy between the two. This is where the **loss function** (or cost function) comes in. It's a mathematical way to quantify "how wrong" our network's prediction was.
+Our network has made a prediction ($\hat{y}$), but we also know the _actual_ correct answer ($y$). The next logical step is to measure the discrepancy between the two. This is where the **loss function** (or cost function) comes in. It's a mathematical way to quantify "how wrong" our network's prediction was.
 
 A common loss function for regression tasks is the Mean Squared Error (MSE):
-$$ L = \frac{1}{N} \sum_{i=1}^{N} (y_i - \hat{y}_i)^2 $$
+$$ L = \frac{1}{N} \sum\_{i=1}^{N} (y_i - \hat{y}\_i)^2 $$
 For classification, we often use Cross-Entropy Loss. The goal of training a neural network is to **minimize this loss**. We want to tweak our weights and biases so that the loss value gets as close to zero as possible.
 
 ### The Path to Improvement: Gradient Descent
 
-Minimizing the loss function can be visualized as finding the bottom of a valley. Imagine you're blindfolded on a mountain, and you want to reach the lowest point. How would you do it? You'd feel the slope around you and take a small step in the steepest *downhill* direction.
+Minimizing the loss function can be visualized as finding the bottom of a valley. Imagine you're blindfolded on a mountain, and you want to reach the lowest point. How would you do it? You'd feel the slope around you and take a small step in the steepest _downhill_ direction.
 
 In calculus, the "steepest downhill direction" is given by the **negative gradient**. The gradient is a vector of partial derivatives, indicating the rate of change of the loss function with respect to each weight and bias.
 
 **Gradient Descent** is the optimization algorithm that uses these gradients. It tells us:
-$$ w_{new} = w_{old} - \alpha \frac{\partial L}{\partial w} $$
-$$ b_{new} = b_{old} - \alpha \frac{\partial L}{\partial b} $$
+$$ w*{new} = w*{old} - \alpha \frac{\partial L}{\partial w} $$
+$$ b*{new} = b*{old} - \alpha \frac{\partial L}{\partial b} $$
 Here, $\alpha$ is the **learning rate**, a small positive number that controls the size of our steps. A larger $\alpha$ means bigger steps, potentially reaching the minimum faster but risking overshooting it. A smaller $\alpha$ means slower, more cautious steps.
 
-The crucial question remains: How do we calculate $\frac{\partial L}{\partial w}$ and $\frac{\partial L}{\partial b}$ for *every single weight and bias* in a complex network with potentially millions of parameters? Doing this naively for each parameter would be computationally impossible.
+The crucial question remains: How do we calculate $\frac{\partial L}{\partial w}$ and $\frac{\partial L}{\partial b}$ for _every single weight and bias_ in a complex network with potentially millions of parameters? Doing this naively for each parameter would be computationally impossible.
 
 **Enter Backpropagation.**
 
@@ -65,7 +65,7 @@ Think of the network as a long chain of interconnected mathematical operations. 
 
 The Chain Rule states that if a variable $C$ depends on $B$, and $B$ depends on $A$, then the rate of change of $C$ with respect to $A$ is:
 $$ \frac{\partial C}{\partial A} = \frac{\partial C}{\partial B} \cdot \frac{\partial B}{\partial A} $$
-Backpropagation applies this principle by calculating the gradients of the loss function with respect to the weights and biases starting from the *output layer* and moving *backward* through the network, layer by layer. It effectively "propagates" the error signal backward, determining how much each weight and bias contributed to the final error.
+Backpropagation applies this principle by calculating the gradients of the loss function with respect to the weights and biases starting from the _output layer_ and moving _backward_ through the network, layer by layer. It effectively "propagates" the error signal backward, determining how much each weight and bias contributed to the final error.
 
 **Analogy:** Imagine a factory assembly line. If a defect is found in the final product (our "loss"), how do you figure out which specific machine or worker (our "weights" and "biases") earlier in the line was responsible, and by how much? You'd trace the defect backward, stage by stage, attributing blame at each step based on its contribution to the overall error.
 
@@ -74,27 +74,27 @@ Backpropagation applies this principle by calculating the gradients of the loss 
 Let's trace the "blame" backward. We want to find $\frac{\partial L}{\partial w}$ and $\frac{\partial L}{\partial b}$ for all layers.
 
 1.  **Start at the Output Layer:**
-    First, we calculate the gradient of the loss function with respect to the output of the *last* activated neuron, $\frac{\partial L}{\partial a^{(L)}}$. This tells us how much the loss changes if the final output activation changes. This is often straightforward, as we know the loss function.
+    First, we calculate the gradient of the loss function with respect to the output of the _last_ activated neuron, $\frac{\partial L}{\partial a^{(L)}}$. This tells us how much the loss changes if the final output activation changes. This is often straightforward, as we know the loss function.
 
 2.  **Calculate Gradients for the Last Layer's Weights and Biases:**
     Now, let's consider the weights ($w^{(L)}$) and biases ($b^{(L)}$) connecting the second-to-last layer to the output layer.
-    *   To find $\frac{\partial L}{\partial w^{(L)}}$, we use the chain rule:
-        $$ \frac{\partial L}{\partial w^{(L)}} = \frac{\partial L}{\partial a^{(L)}} \cdot \frac{\partial a^{(L)}}{\partial z^{(L)}} \cdot \frac{\partial z^{(L)}}{\partial w^{(L)}} $$
-        *   We already have $\frac{\partial L}{\partial a^{(L)}}$.
-        *   $\frac{\partial a^{(L)}}{\partial z^{(L)}}$ is the derivative of the activation function at the output layer (e.g., derivative of sigmoid or softmax).
-        *   $\frac{\partial z^{(L)}}{\partial w^{(L)}}$ is simply the input activation from the *previous* layer, $a^{(L-1)}$, because $z^{(L)} = w^{(L)} a^{(L-1)} + b^{(L)}$.
-    *   Similarly for the bias:
-        $$ \frac{\partial L}{\partial b^{(L)}} = \frac{\partial L}{\partial a^{(L)}} \cdot \frac{\partial a^{(L)}}{\partial z^{(L)}} \cdot \frac{\partial z^{(L)}}{\partial b^{(L)}} $$
-        *   Since $\frac{\partial z^{(L)}}{\partial b^{(L)}} = 1$, this simplifies to $\frac{\partial L}{\partial b^{(L)}} = \frac{\partial L}{\partial a^{(L)}} \cdot \frac{\partial a^{(L)}}{\partial z^{(L)}}$.
+    - To find $\frac{\partial L}{\partial w^{(L)}}$, we use the chain rule:
+      $$ \frac{\partial L}{\partial w^{(L)}} = \frac{\partial L}{\partial a^{(L)}} \cdot \frac{\partial a^{(L)}}{\partial z^{(L)}} \cdot \frac{\partial z^{(L)}}{\partial w^{(L)}} $$
+      - We already have $\frac{\partial L}{\partial a^{(L)}}$.
+      - $\frac{\partial a^{(L)}}{\partial z^{(L)}}$ is the derivative of the activation function at the output layer (e.g., derivative of sigmoid or softmax).
+      - $\frac{\partial z^{(L)}}{\partial w^{(L)}}$ is simply the input activation from the _previous_ layer, $a^{(L-1)}$, because $z^{(L)} = w^{(L)} a^{(L-1)} + b^{(L)}$.
+    - Similarly for the bias:
+      $$ \frac{\partial L}{\partial b^{(L)}} = \frac{\partial L}{\partial a^{(L)}} \cdot \frac{\partial a^{(L)}}{\partial z^{(L)}} \cdot \frac{\partial z^{(L)}}{\partial b^{(L)}} $$
+      - Since $\frac{\partial z^{(L)}}{\partial b^{(L)}} = 1$, this simplifies to $\frac{\partial L}{\partial b^{(L)}} = \frac{\partial L}{\partial a^{(L)}} \cdot \frac{\partial a^{(L)}}{\partial z^{(L)}}$.
 
-    At this stage, we have the gradients for the weights and biases of the *last* layer.
+    At this stage, we have the gradients for the weights and biases of the _last_ layer.
 
 3.  **Propagate the Error Signal to the Previous Layer:**
-    Before we can calculate the gradients for the *second-to-last* layer's weights and biases, we need to know how much the loss is affected by the *activations* of that layer, i.e., $\frac{\partial L}{\partial a^{(L-1)}}$. This is the "error signal" that gets passed backward.
+    Before we can calculate the gradients for the _second-to-last_ layer's weights and biases, we need to know how much the loss is affected by the _activations_ of that layer, i.e., $\frac{\partial L}{\partial a^{(L-1)}}$. This is the "error signal" that gets passed backward.
     $$ \frac{\partial L}{\partial a^{(L-1)}} = \left( \frac{\partial L}{\partial a^{(L)}} \cdot \frac{\partial a^{(L)}}{\partial z^{(L)}} \right) \cdot \frac{\partial z^{(L)}}{\partial a^{(L-1)}} $$
-    *   The term in the parentheses is essentially the "error" at the output of the *current* layer before activation.
-    *   $\frac{\partial z^{(L)}}{\partial a^{(L-1)}}$ is simply the weights $w^{(L)}$ connecting the previous layer's activations to the current layer's weighted sum.
-    So, each previous layer's activation receives a weighted sum of the error signals from the layer ahead of it.
+    - The term in the parentheses is essentially the "error" at the output of the _current_ layer before activation.
+    - $\frac{\partial z^{(L)}}{\partial a^{(L-1)}}$ is simply the weights $w^{(L)}$ connecting the previous layer's activations to the current layer's weighted sum.
+      So, each previous layer's activation receives a weighted sum of the error signals from the layer ahead of it.
 
 4.  **Repeat for All Hidden Layers:**
     Now that we have $\frac{\partial L}{\partial a^{(L-1)}}$, we treat it as our new "starting error" and repeat steps 2 and 3 for layer $L-1$, then $L-2$, and so on, until we reach the first hidden layer.
@@ -113,9 +113,9 @@ Once Backpropagation has computed all the gradients ($\frac{\partial L}{\partial
 
 ### Why is Backpropagation so Important?
 
-*   **Efficiency:** It's an incredibly efficient algorithm. Instead of calculating each partial derivative independently, which would be prohibitively expensive for large networks, Backpropagation computes them all in a single backward pass. This efficiency is what made training deep neural networks feasible.
-*   **Foundation of Deep Learning:** Without backpropagation, deep learning as we know it simply wouldn't exist. It's the core algorithm that allows complex, multi-layered networks to learn intricate patterns from vast amounts of data.
-*   **Generalizability:** It's a general algorithm that works for almost any differentiable activation function and network architecture.
+- **Efficiency:** It's an incredibly efficient algorithm. Instead of calculating each partial derivative independently, which would be prohibitively expensive for large networks, Backpropagation computes them all in a single backward pass. This efficiency is what made training deep neural networks feasible.
+- **Foundation of Deep Learning:** Without backpropagation, deep learning as we know it simply wouldn't exist. It's the core algorithm that allows complex, multi-layered networks to learn intricate patterns from vast amounts of data.
+- **Generalizability:** It's a general algorithm that works for almost any differentiable activation function and network architecture.
 
 ### Conclusion: The Unsung Hero
 

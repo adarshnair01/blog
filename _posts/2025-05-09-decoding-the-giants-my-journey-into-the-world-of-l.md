@@ -14,7 +14,7 @@ As someone deeply fascinated by data science and machine learning engineering, d
 
 ## The "Language" Problem: Why It's So Hard
 
-For humans, language is second nature. We effortlessly understand sarcasm, context, and nuance. But for computers? It’s a minefield. Imagine trying to teach a machine that "bank" can mean a financial institution *and* the side of a river. Or that "cool" can be temperature *or* awesome.
+For humans, language is second nature. We effortlessly understand sarcasm, context, and nuance. But for computers? It’s a minefield. Imagine trying to teach a machine that "bank" can mean a financial institution _and_ the side of a river. Or that "cool" can be temperature _or_ awesome.
 
 Historically, teaching computers to understand and generate human language (Natural Language Processing or NLP) involved a lot of rules, manual feature engineering, and statistical models that struggled with ambiguity. The challenge was immense because language isn't just about words; it's about relationships, context, and the vast, often unstated, knowledge we share as humans.
 
@@ -30,7 +30,7 @@ This combination of scale allows LLMs to not just recognize words, but to grasp 
 
 ## The Core Idea: Predicting the Next Word
 
-At its heart, an LLM is a masterful predictor. Given a sequence of words, its primary task during pre-training is to predict the *next* word. For example, if you feed it "The cat sat on the...", it will try to guess "mat," "rug," or "couch." This might sound simple, but by doing this task billions of times across a truly gargantuan text corpus, the model implicitly learns grammar, syntax, facts about the world, and even common sense.
+At its heart, an LLM is a masterful predictor. Given a sequence of words, its primary task during pre-training is to predict the _next_ word. For example, if you feed it "The cat sat on the...", it will try to guess "mat," "rug," or "couch." This might sound simple, but by doing this task billions of times across a truly gargantuan text corpus, the model implicitly learns grammar, syntax, facts about the world, and even common sense.
 
 ## How Do They Work? Unpacking the Transformer
 
@@ -42,8 +42,8 @@ Let's break down the key ideas:
 
 First, text isn't directly fed into a neural network. It needs to be converted into a numerical format.
 
-*   **Tokenization:** The input text is broken down into smaller units called **tokens**. A token can be a word ("cat"), a sub-word ("ing"), or even a single character. This allows the model to handle rare words and new vocabulary efficiently.
-*   **Embeddings:** Each token is then converted into a numerical vector (a list of numbers) called an **embedding**. These embeddings capture the semantic meaning of the token. Words with similar meanings (like "king" and "queen") will have embeddings that are "close" to each other in this multi-dimensional space. Think of it like giving each word a unique GPS coordinate, but where proximity in the coordinate system means semantic similarity.
+- **Tokenization:** The input text is broken down into smaller units called **tokens**. A token can be a word ("cat"), a sub-word ("ing"), or even a single character. This allows the model to handle rare words and new vocabulary efficiently.
+- **Embeddings:** Each token is then converted into a numerical vector (a list of numbers) called an **embedding**. These embeddings capture the semantic meaning of the token. Words with similar meanings (like "king" and "queen") will have embeddings that are "close" to each other in this multi-dimensional space. Think of it like giving each word a unique GPS coordinate, but where proximity in the coordinate system means semantic similarity.
 
 ### 2. Positional Encoding: Understanding Order
 
@@ -57,20 +57,22 @@ Imagine the sentence: "The animal didn't cross the street because it was too tir
 When the model processes the word "it", how does it know if "it" refers to "the animal" or "the street"? Self-attention helps by allowing "it" to "look at" and draw information from all other words in the sentence, giving more weight to "animal" and "tired."
 
 Mathematically, self-attention works by computing three vectors for each token:
-*   **Query (Q):** What am I looking for? (The current token's perspective)
-*   **Key (K):** What do I have? (The information in other tokens)
-*   **Value (V):** What information do I pass on if I'm relevant?
 
-The core idea is to calculate a **score** of how relevant each *Key* is to the current *Query*. These scores are then normalized (using a softmax function) to get weights. Finally, these weights are multiplied by the *Value* vectors and summed up.
+- **Query (Q):** What am I looking for? (The current token's perspective)
+- **Key (K):** What do I have? (The information in other tokens)
+- **Value (V):** What information do I pass on if I'm relevant?
+
+The core idea is to calculate a **score** of how relevant each _Key_ is to the current _Query_. These scores are then normalized (using a softmax function) to get weights. Finally, these weights are multiplied by the _Value_ vectors and summed up.
 
 The formula for scaled dot-product attention looks like this:
 $Attention(Q, K, V) = softmax(\frac{QK^T}{\sqrt{d_k}})V$
 
 Where:
-*   $Q$ is the matrix of queries.
-*   $K$ is the matrix of keys.
-*   $V$ is the matrix of values.
-*   $d_k$ is the dimension of the key vectors (used for scaling to prevent very large dot products that push softmax into regions with tiny gradients).
+
+- $Q$ is the matrix of queries.
+- $K$ is the matrix of keys.
+- $V$ is the matrix of values.
+- $d_k$ is the dimension of the key vectors (used for scaling to prevent very large dot products that push softmax into regions with tiny gradients).
 
 This means for every word, the model creates a new representation that is a weighted sum of all other words' information, where the weights are determined by their relevance.
 
@@ -97,22 +99,22 @@ Original Transformers had an Encoder (for understanding input) and a Decoder (fo
 
 The capabilities of LLMs are staggering:
 
-*   **Text Generation:** Writing articles, stories, code, emails, and even poetry.
-*   **Summarization:** Condensing long texts into key points.
-*   **Translation:** Breaking down language barriers.
-*   **Question Answering:** Providing informed responses to queries.
-*   **Code Generation & Debugging:** Assisting developers by writing or fixing code.
-*   **Creative Tasks:** Brainstorming ideas, crafting marketing copy, generating dialogues.
+- **Text Generation:** Writing articles, stories, code, emails, and even poetry.
+- **Summarization:** Condensing long texts into key points.
+- **Translation:** Breaking down language barriers.
+- **Question Answering:** Providing informed responses to queries.
+- **Code Generation & Debugging:** Assisting developers by writing or fixing code.
+- **Creative Tasks:** Brainstorming ideas, crafting marketing copy, generating dialogues.
 
 ## Challenges and Limitations
 
 Despite their prowess, LLMs are not without flaws:
 
-*   **Hallucinations:** They can confidently generate factually incorrect information because they are trained to produce *plausible* text, not necessarily *truthful* text.
-*   **Bias:** As they learn from human-generated data, LLMs can inherit and perpetuate societal biases present in that data.
-*   **Lack of True Understanding:** They don't "think" or "understand" in the human sense. They are complex pattern-matching machines.
-*   **Computational Cost:** Training and even running large models can be extremely expensive in terms of hardware and energy.
-*   **Ethical Concerns:** Misinformation, misuse for malicious purposes, and job displacement are significant societal challenges.
+- **Hallucinations:** They can confidently generate factually incorrect information because they are trained to produce _plausible_ text, not necessarily _truthful_ text.
+- **Bias:** As they learn from human-generated data, LLMs can inherit and perpetuate societal biases present in that data.
+- **Lack of True Understanding:** They don't "think" or "understand" in the human sense. They are complex pattern-matching machines.
+- **Computational Cost:** Training and even running large models can be extremely expensive in terms of hardware and energy.
+- **Ethical Concerns:** Misinformation, misuse for malicious purposes, and job displacement are significant societal challenges.
 
 ## My Perspective: The Future is Conversational
 

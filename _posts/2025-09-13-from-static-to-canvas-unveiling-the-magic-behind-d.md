@@ -14,9 +14,9 @@ If you're anything like me, you're probably curious about the "how." How do thes
 
 Imagine you have a beautiful, pristine photograph. Now, imagine someone gradually sprinkles a tiny bit of random noise (like static on an old TV) onto it, then a bit more, and a bit more, until eventually, all you see is pure, undifferentiated static. The original image is completely gone, swallowed by randomness.
 
-This "noising" process is easy to do. We know exactly how much noise we're adding at each step. The real genius of Diffusion Models lies in *reversing* this process. What if we could learn to take that pure static and, step by tiny step, remove the noise until a clear image emerges? This, in essence, is what a Diffusion Model does: it learns to reverse the entropy, to turn chaos back into order, static back into a masterpiece.
+This "noising" process is easy to do. We know exactly how much noise we're adding at each step. The real genius of Diffusion Models lies in _reversing_ this process. What if we could learn to take that pure static and, step by tiny step, remove the noise until a clear image emerges? This, in essence, is what a Diffusion Model does: it learns to reverse the entropy, to turn chaos back into order, static back into a masterpiece.
 
-It's like a sculptor who learns by watching a perfect statue slowly crumble into dust. The sculptor doesn't just learn how to make dust; they learn the *precise steps* needed to *reverse* that crumbling, allowing them to eventually sculpt a new statue from a pile of dust.
+It's like a sculptor who learns by watching a perfect statue slowly crumble into dust. The sculptor doesn't just learn how to make dust; they learn the _precise steps_ needed to _reverse_ that crumbling, allowing them to eventually sculpt a new statue from a pile of dust.
 
 ### Part 1: The Forward Diffusion Process (The Crumbling Statue)
 
@@ -27,11 +27,12 @@ At each step $t$, we take the slightly noisy image $x_{t-1}$ and add a small amo
 $$q(x_t | x_{t-1}) = \mathcal{N}(x_t; \sqrt{1-\beta_t}x_{t-1}, \beta_t I)$$
 
 Here's what each part means:
-*   $x_0$: Our original, pristine image.
-*   $x_t$: The image at time step $t$, which is slightly noisier than $x_{t-1}$.
-*   $\mathcal{N}(x; \mu, \Sigma)$: This denotes a normal (Gaussian) distribution with mean $\mu$ and covariance $\Sigma$.
-*   $\beta_t$: A small, pre-defined variance schedule. It's usually small at the beginning and increases towards the end, meaning we add more noise as time progresses.
-*   $I$: The identity matrix, meaning the noise is added independently to each pixel.
+
+- $x_0$: Our original, pristine image.
+- $x_t$: The image at time step $t$, which is slightly noisier than $x_{t-1}$.
+- $\mathcal{N}(x; \mu, \Sigma)$: This denotes a normal (Gaussian) distribution with mean $\mu$ and covariance $\Sigma$.
+- $\beta_t$: A small, pre-defined variance schedule. It's usually small at the beginning and increases towards the end, meaning we add more noise as time progresses.
+- $I$: The identity matrix, meaning the noise is added independently to each pixel.
 
 This formula essentially says: to get $x_t$, we take a small piece of $x_{t-1}$ (scaled by $\sqrt{1-\beta_t}$) and add a bit of random Gaussian noise (with variance $\beta_t$).
 
@@ -55,9 +56,9 @@ Now for the hard part, the part that requires machine learning magic! We want to
 
 The true reverse probability $q(x_{t-1} | x_t)$ is incredibly complex and intractable to compute directly. This is where our neural network comes in. We train a model to approximate this reverse step: $p_\theta(x_{t-1} | x_t)$.
 
-Crucially, it turns out that if $\beta_t$ is small enough (which it is), $q(x_{t-1} | x_t)$ can also be approximated by a Gaussian distribution. This means our model just needs to learn the *mean* and *variance* of this Gaussian to go backwards.
+Crucially, it turns out that if $\beta_t$ is small enough (which it is), $q(x_{t-1} | x_t)$ can also be approximated by a Gaussian distribution. This means our model just needs to learn the _mean_ and _variance_ of this Gaussian to go backwards.
 
-Amazingly, it's been shown that this reverse transition $q(x_{t-1} | x_t, x_0)$ (if we knew $x_0$) has a mean that depends directly on the *noise* that was added to get $x_t$. So, instead of trying to predict $x_{t-1}$ directly, our neural network $\epsilon_\theta(x_t, t)$ is trained to predict the **noise component** $\epsilon$ from $x_t$ and the current time step $t$.
+Amazingly, it's been shown that this reverse transition $q(x_{t-1} | x_t, x_0)$ (if we knew $x_0$) has a mean that depends directly on the _noise_ that was added to get $x_t$. So, instead of trying to predict $x_{t-1}$ directly, our neural network $\epsilon_\theta(x_t, t)$ is trained to predict the **noise component** $\epsilon$ from $x_t$ and the current time step $t$.
 
 Let's elaborate on that:
 From our forward process, we know $x_t = \sqrt{\bar{\alpha}_t}x_0 + \sqrt{1-\bar{\alpha}_t}\epsilon$.
@@ -83,7 +84,7 @@ So, how do we actually train this $\epsilon_\theta$ network?
 3.  **Generate noise:** Sample some pure Gaussian noise $\epsilon \sim \mathcal{N}(0, I)$.
 4.  **Create a noisy image:** Use the direct forward process formula to get $x_t$:
     $$x_t = \sqrt{\bar{\alpha}_t}x_0 + \sqrt{1-\bar{\alpha}_t}\epsilon$$
-    Now we have $x_t$, a version of our cat photo with $t$ steps of noise added. We also know the *exact* noise $\epsilon$ that was used to create it.
+    Now we have $x_t$, a version of our cat photo with $t$ steps of noise added. We also know the _exact_ noise $\epsilon$ that was used to create it.
 5.  **Predict the noise:** Feed $x_t$ and $t$ into our neural network $\epsilon_\theta$. The network tries to predict the noise: $\epsilon_\theta(x_t, t)$.
 6.  **Calculate the loss:** Compare the network's prediction $\epsilon_\theta(x_t, t)$ with the actual noise $\epsilon$ using the simple mean squared error: $L_t = ||\epsilon - \epsilon_\theta(x_t, t)||^2$.
 7.  **Update the network:** Use gradient descent to adjust the weights of $\epsilon_\theta$ to minimize this loss.
@@ -96,21 +97,21 @@ Once our $\epsilon_\theta$ network is trained, the exciting part begins: generat
 
 1.  **Start with pure noise:** Begin with a completely random Gaussian noise image $x_T \sim \mathcal{N}(0, I)$. This is our blank canvas, our pile of dust.
 2.  **Iterative Denoising:** Now, we iterate backwards from $t=T$ down to $t=1$:
-    *   **Predict the noise:** Use our trained network to predict the noise component $\epsilon_t$ in $x_t$: $\epsilon_t = \epsilon_\theta(x_t, t)$.
-    *   **Estimate $x_0$ (temporarily):** We can use our predicted noise to make a temporary estimation of the original, clean image $x_0$ at this step:
-        $$\hat{x}_0 = \frac{1}{\sqrt{\bar{\alpha}_t}}(x_t - \sqrt{1-\bar{\alpha}_t}\epsilon_t)$$
-    *   **Calculate the next, less noisy image $x_{t-1}$:** Using $\hat{x}_0$ and some known parameters from the forward process, we can construct $x_{t-1}$. A common formulation looks something like this (simplified):
-        $$x_{t-1} = \frac{1}{\sqrt{\alpha_t}} \left(x_t - \frac{1-\alpha_t}{\sqrt{1-\bar{\alpha}_t}}\epsilon_t\right) + \sigma_t z$$
-        where $\sigma_t$ is a specific variance for the reverse step, and $z \sim \mathcal{N}(0, I)$ is a bit of random noise added back in. This randomness is crucial; without it, the model would always generate the *same* image from the *same* starting noise, losing its creative spark.
+    - **Predict the noise:** Use our trained network to predict the noise component $\epsilon_t$ in $x_t$: $\epsilon_t = \epsilon_\theta(x_t, t)$.
+    - **Estimate $x_0$ (temporarily):** We can use our predicted noise to make a temporary estimation of the original, clean image $x_0$ at this step:
+      $$\hat{x}_0 = \frac{1}{\sqrt{\bar{\alpha}_t}}(x_t - \sqrt{1-\bar{\alpha}_t}\epsilon_t)$$
+    - **Calculate the next, less noisy image $x_{t-1}$:** Using $\hat{x}_0$ and some known parameters from the forward process, we can construct $x_{t-1}$. A common formulation looks something like this (simplified):
+      $$x_{t-1} = \frac{1}{\sqrt{\alpha_t}} \left(x_t - \frac{1-\alpha_t}{\sqrt{1-\bar{\alpha}_t}}\epsilon_t\right) + \sigma_t z$$
+      where $\sigma_t$ is a specific variance for the reverse step, and $z \sim \mathcal{N}(0, I)$ is a bit of random noise added back in. This randomness is crucial; without it, the model would always generate the _same_ image from the _same_ starting noise, losing its creative spark.
 3.  **The Final Image:** After $T$ steps, we arrive at $x_0$, a brand new, generated image that was conjured from pure static!
 
 ### The U-Net: The Brain of the Operation
 
 I mentioned the U-Net architecture. Why is it so effective here?
 
-*   **Encoder-Decoder Structure:** It's a type of convolutional neural network designed to process images. It has a "contracting path" (encoder) that downsamples the image, extracting high-level features, and an "expanding path" (decoder) that upsamples, reconstructing the image while incorporating these features.
-*   **Skip Connections:** This is the "U" part. It directly connects layers from the encoder to corresponding layers in the decoder. This allows the network to combine coarse-grained semantic information (from deep in the encoder) with fine-grained spatial details (from shallow in the encoder), which is vital for precise image reconstruction.
-*   **Time Embeddings:** Since the amount of noise and the task of the network changes with time step $t$, we can't just feed $t$ as a number. Instead, $t$ is typically converted into a high-dimensional vector (a "time embedding") and added to the intermediate layers of the U-Net. This tells the network "at what point in the denoising process" it is.
+- **Encoder-Decoder Structure:** It's a type of convolutional neural network designed to process images. It has a "contracting path" (encoder) that downsamples the image, extracting high-level features, and an "expanding path" (decoder) that upsamples, reconstructing the image while incorporating these features.
+- **Skip Connections:** This is the "U" part. It directly connects layers from the encoder to corresponding layers in the decoder. This allows the network to combine coarse-grained semantic information (from deep in the encoder) with fine-grained spatial details (from shallow in the encoder), which is vital for precise image reconstruction.
+- **Time Embeddings:** Since the amount of noise and the task of the network changes with time step $t$, we can't just feed $t$ as a number. Instead, $t$ is typically converted into a high-dimensional vector (a "time embedding") and added to the intermediate layers of the U-Net. This tells the network "at what point in the denoising process" it is.
 
 The U-Net is perfect for Diffusion Models because it needs to take a noisy image and output another image (the predicted noise) of the exact same size, while understanding both the global context and local details.
 

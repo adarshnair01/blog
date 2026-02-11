@@ -25,6 +25,7 @@ This constant communication, activation, and inhibition is how we think, learn, 
 Inspired by our biological counterparts, computer scientists in the 1940s and 50s began to conceptualize the "artificial neuron," also known as a **perceptron**. At its core, an artificial neuron is a remarkably simple decision-making unit.
 
 Imagine you're trying to decide if you should study for an exam. You consider several factors:
+
 1.  **How difficult is the subject?** (High importance)
 2.  **How much time do you have?** (Medium importance)
 3.  **Are your friends studying?** (Low importance, maybe)
@@ -68,7 +69,7 @@ Imagine a chain reaction: inputs flow into the first hidden layer, which process
 
 ### The Learning Curve: How Neural Networks Get Smart
 
-This is the truly fascinating part: how do these networks *learn*? Initially, all the weights and biases in a Neural Network are set randomly. So, its first predictions will be utterly terrible, like a baby guessing answers on a complex exam. The goal is to adjust these weights and biases iteratively until the network's predictions are as accurate as possible.
+This is the truly fascinating part: how do these networks _learn_? Initially, all the weights and biases in a Neural Network are set randomly. So, its first predictions will be utterly terrible, like a baby guessing answers on a complex exam. The goal is to adjust these weights and biases iteratively until the network's predictions are as accurate as possible.
 
 This learning process involves three key steps, repeated many, many times:
 
@@ -80,9 +81,9 @@ This learning process involves three key steps, repeated many, many times:
     $L = \frac{1}{2m} \sum_{j=1}^{m} (y_j - \hat{y}_j)^2$
     Here, $m$ is the number of training examples, $y_j$ is the true value, and $\hat{y}_j$ is the network's prediction. The goal is to minimize this loss.
 
-3.  **Backpropagation: The "Aha!" Moment:** This is the clever algorithm that tells the network *how* to adjust its weights and biases to reduce the loss. It's like a teacher giving feedback to a student. If the student answers a question incorrectly, the teacher doesn't just say "wrong," but explains *why* it's wrong and *how* to improve for next time.
+3.  **Backpropagation: The "Aha!" Moment:** This is the clever algorithm that tells the network _how_ to adjust its weights and biases to reduce the loss. It's like a teacher giving feedback to a student. If the student answers a question incorrectly, the teacher doesn't just say "wrong," but explains _why_ it's wrong and _how_ to improve for next time.
 
-    Backpropagation uses a concept from calculus called the **gradient**. Think of the loss function as a landscape with hills and valleys. We want to find the lowest point (minimum loss) in this landscape. The gradient points in the direction of the steepest ascent. We want to go *down* the hill, so we move in the opposite direction of the gradient. This optimization process is called **Gradient Descent**.
+    Backpropagation uses a concept from calculus called the **gradient**. Think of the loss function as a landscape with hills and valleys. We want to find the lowest point (minimum loss) in this landscape. The gradient points in the direction of the steepest ascent. We want to go _down_ the hill, so we move in the opposite direction of the gradient. This optimization process is called **Gradient Descent**.
 
     Mathematically, we calculate the **partial derivatives** of the loss function with respect to each weight and bias in the network. A partial derivative tells us how much the loss would change if we slightly tweaked a specific weight or bias. Using the **chain rule** (another fundamental calculus concept), backpropagation efficiently computes these gradients by working backward from the output layer to the input layer.
 
@@ -96,13 +97,13 @@ This entire process – forward propagation, loss calculation, and backpropagati
 
 ### Why Are Neural Networks So Powerful?
 
-1.  **Universal Approximation Theorem:** This amazing theorem states that a Neural Network with at least one hidden layer can approximate *any* continuous function to arbitrary accuracy, given enough neurons and the right weights. This means they are incredibly versatile.
-2.  **Feature Learning:** Unlike traditional machine learning algorithms where you might need to manually extract "features" from your data (e.g., edges in an image), Deep Neural Networks can learn relevant features *on their own* from raw data. The early layers might learn simple features like edges or corners, while deeper layers combine these to learn more complex features like eyes, noses, or entire objects.
+1.  **Universal Approximation Theorem:** This amazing theorem states that a Neural Network with at least one hidden layer can approximate _any_ continuous function to arbitrary accuracy, given enough neurons and the right weights. This means they are incredibly versatile.
+2.  **Feature Learning:** Unlike traditional machine learning algorithms where you might need to manually extract "features" from your data (e.g., edges in an image), Deep Neural Networks can learn relevant features _on their own_ from raw data. The early layers might learn simple features like edges or corners, while deeper layers combine these to learn more complex features like eyes, noses, or entire objects.
 3.  **Scalability:** With more data and more computational power (thanks to GPUs!), Neural Networks can often achieve better performance than other algorithms, especially on complex tasks like image recognition and natural language processing.
 
 ### Challenges and the Road Ahead
 
-While powerful, Neural Networks aren't without their quirks. They require vast amounts of data to train effectively, and training can be computationally expensive. They are also often seen as "black boxes" – it can be challenging to interpret *why* a network made a particular decision, which is a significant area of ongoing research.
+While powerful, Neural Networks aren't without their quirks. They require vast amounts of data to train effectively, and training can be computationally expensive. They are also often seen as "black boxes" – it can be challenging to interpret _why_ a network made a particular decision, which is a significant area of ongoing research.
 
 However, the field is rapidly evolving. We're seeing specialized architectures like **Convolutional Neural Networks (CNNs)** for image processing and **Recurrent Neural Networks (RNNs)** for sequential data like text and speech. The journey of Neural Networks, from simple perceptrons to complex deep learning models, is a testament to human ingenuity and the power of iterative refinement.
 

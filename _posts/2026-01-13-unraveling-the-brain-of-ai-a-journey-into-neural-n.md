@@ -6,7 +6,7 @@ tags: ["Machine Learning", "Deep Learning", "Neural Networks", "Artificial Intel
 author: "Adarsh Nair"
 ---
 
-I remember the first time I truly wrapped my head around the concept of Artificial Intelligence. It wasn't about robots or sci-fi movies; it was about the profound idea that a machine could *learn*. But how? How could a hunk of silicon and wires mimic something as complex as human thought? My quest to understand led me down a fascinating rabbit hole, right into the heart of what makes modern AI tick: **Neural Networks**.
+I remember the first time I truly wrapped my head around the concept of Artificial Intelligence. It wasn't about robots or sci-fi movies; it was about the profound idea that a machine could _learn_. But how? How could a hunk of silicon and wires mimic something as complex as human thought? My quest to understand led me down a fascinating rabbit hole, right into the heart of what makes modern AI tick: **Neural Networks**.
 
 If you've ever felt intimidated by the jargon surrounding deep learning, you're not alone. But trust me, at its core, a neural network is an elegant, surprisingly intuitive system. Think of it as a collaborative team of tiny, interconnected decision-makers, all working together to solve incredibly complex problems. Ready to peel back the layers? Let's dive in!
 
@@ -14,16 +14,16 @@ If you've ever felt intimidated by the jargon surrounding deep learning, you're 
 
 Before we get technical, let's take a moment to appreciate the biological marvel that inspired it all: the human brain. Our brains are made of billions of cells called **neurons**. Each neuron is a tiny processor with a specific job:
 
-*   **Dendrites:** These are like antennas, receiving signals from other neurons.
-*   **Cell Body (Soma):** This is the neuron's "brain," where all incoming signals are processed.
-*   **Axon:** If the signals are strong enough, the neuron "fires" an electrical impulse down its axon to other neurons.
-*   **Synapses:** These are the tiny gaps where neurons connect and pass signals. The strength of these connections changes over time, which is how we learn!
+- **Dendrites:** These are like antennas, receiving signals from other neurons.
+- **Cell Body (Soma):** This is the neuron's "brain," where all incoming signals are processed.
+- **Axon:** If the signals are strong enough, the neuron "fires" an electrical impulse down its axon to other neurons.
+- **Synapses:** These are the tiny gaps where neurons connect and pass signals. The strength of these connections changes over time, which is how we learn!
 
 This incredible network allows us to recognize faces, understand language, learn new skills, and make decisions – often without us even consciously realizing the intricate processing happening beneath the surface.
 
 ### Building Blocks: The Artificial Neuron (or Perceptron)
 
-So, how do we translate this biological marvel into something a computer can understand? We build an *artificial neuron*, often called a **perceptron**, which is a mathematical model of its biological counterpart.
+So, how do we translate this biological marvel into something a computer can understand? We build an _artificial neuron_, often called a **perceptron**, which is a mathematical model of its biological counterpart.
 
 Imagine our artificial neuron as a tiny decision-making unit. It takes several inputs, processes them, and then spits out an output.
 
@@ -33,7 +33,7 @@ Imagine our artificial neuron as a tiny decision-making unit. It takes several i
 
 These weighted inputs and the bias are summed together to get a value, let's call it $z$:
 
-$ z = \sum_{i=1}^{n} w_i x_i + b $
+$ z = \sum\_{i=1}^{n} w_i x_i + b $
 
 Or, more explicitly for a few inputs:
 
@@ -42,8 +42,8 @@ $ z = w_1 x_1 + w_2 x_2 + \dots + w_n x_n + b $
 4.  **Activation Function ($f$):** This is the final step where the neuron decides whether to "fire" (or activate) based on the value of $z$. The activation function introduces non-linearity, which is vital for neural networks to learn complex patterns. Without it, stacking multiple layers would just be like having one single layer.
 
     Common activation functions include:
-    *   **Sigmoid:** Squashes values between 0 and 1, useful for binary classification. $f(z) = \frac{1}{1 + e^{-z}}$
-    *   **ReLU (Rectified Linear Unit):** Outputs the input directly if it's positive, otherwise it outputs zero. It's simple and very popular: $f(z) = \max(0, z)$
+    - **Sigmoid:** Squashes values between 0 and 1, useful for binary classification. $f(z) = \frac{1}{1 + e^{-z}}$
+    - **ReLU (Rectified Linear Unit):** Outputs the input directly if it's positive, otherwise it outputs zero. It's simple and very popular: $f(z) = \max(0, z)$
 
     So, the final output of our single artificial neuron is:
 
@@ -72,7 +72,7 @@ Let's say we're training a network to recognize handwritten digits. We show it a
 1.  **The Loss Function (Cost Function): Quantifying "Wrongness"**
     First, we need a way to measure how "wrong" the network's prediction is. This is where the **loss function** comes in. It calculates the difference between the network's prediction ($\hat{y}$) and the actual correct answer ($y$). A common loss function for regression problems (predicting a number) is the Mean Squared Error (MSE):
 
-    $ L = \frac{1}{2m} \sum_{j=1}^{m} (\hat{y}^{(j)} - y^{(j)})^2 $
+    $ L = \frac{1}{2m} \sum\_{j=1}^{m} (\hat{y}^{(j)} - y^{(j)})^2 $
 
     Here, $m$ is the number of examples, $\hat{y}^{(j)}$ is the network's prediction for example $j$, and $y^{(j)}$ is the true value. Our goal is to make this $L$ as small as possible.
 
@@ -80,9 +80,8 @@ Let's say we're training a network to recognize handwritten digits. We show it a
     Minimizing the loss function means finding the optimal set of weights and biases that yield the most accurate predictions. This is an optimization problem, and a powerful technique for solving it is called **Gradient Descent**.
 
     Imagine yourself blindfolded on a mountain, trying to find the lowest point (the minimum loss). You can't see the whole landscape, but you can feel the slope directly beneath your feet. To go down, you'd take a small step in the direction of the steepest descent. This is precisely what gradient descent does!
-
-    *   The "slope" in our analogy is the **gradient** of the loss function with respect to each weight and bias. It tells us how much the loss changes if we slightly adjust a particular weight or bias.
-    *   We repeatedly adjust the weights and biases by taking small steps in the opposite direction of the gradient (because we want to *decrease* the loss).
+    - The "slope" in our analogy is the **gradient** of the loss function with respect to each weight and bias. It tells us how much the loss changes if we slightly adjust a particular weight or bias.
+    - We repeatedly adjust the weights and biases by taking small steps in the opposite direction of the gradient (because we want to _decrease_ the loss).
 
     For each weight $w$ and bias $b$ in the network, we update them using this rule:
 
@@ -92,19 +91,18 @@ Let's say we're training a network to recognize handwritten digits. We show it a
     Here, $\frac{\partial L}{\partial w}$ and $\frac{\partial L}{\partial b}$ are the partial derivatives of the loss function with respect to $w$ and $b$ respectively, representing the gradient.
 
 3.  **The Magic Sauce: Backpropagation**
-    Okay, so we know we need to adjust weights and biases based on the gradient of the loss. But how do we calculate these gradients for *every single weight and bias* across potentially many layers? This is where **Backpropagation** comes in, a truly ingenious algorithm.
+    Okay, so we know we need to adjust weights and biases based on the gradient of the loss. But how do we calculate these gradients for _every single weight and bias_ across potentially many layers? This is where **Backpropagation** comes in, a truly ingenious algorithm.
 
     Think back to our assembly line analogy. If the final product is faulty, how do you know which worker (neuron) contributed how much to the error? Backpropagation provides a systematic way to distribute the blame (or credit) for the error across all the neurons and their connections in the network.
 
-    It works by calculating the error at the output layer and then "propagating" this error *backward* through the network, layer by layer. Using the chain rule from calculus, it efficiently determines how much each weight and bias contributed to the final error, allowing us to compute all the necessary gradients. These gradients are then used by gradient descent to update the parameters.
+    It works by calculating the error at the output layer and then "propagating" this error _backward_ through the network, layer by layer. Using the chain rule from calculus, it efficiently determines how much each weight and bias contributed to the final error, allowing us to compute all the necessary gradients. These gradients are then used by gradient descent to update the parameters.
 
     This forward pass (prediction) and backward pass (error correction) cycle is repeated many times over thousands or millions of training examples. With each iteration, the network's weights and biases are slightly refined, causing it to make better and better predictions.
 
 4.  **Learning Rate ($\alpha$): How Big a Step?**
     The $\alpha$ in our gradient descent update rule is the **learning rate**. It's a crucial hyperparameter that determines the size of the steps we take down the loss mountain.
-
-    *   A **large learning rate** might cause us to overshoot the minimum, bouncing around or even diverging.
-    *   A **small learning rate** will make the learning process very slow, potentially getting stuck in local minima.
+    - A **large learning rate** might cause us to overshoot the minimum, bouncing around or even diverging.
+    - A **small learning rate** will make the learning process very slow, potentially getting stuck in local minima.
 
     Finding the right learning rate is often a delicate balancing act!
 
@@ -112,28 +110,28 @@ Let's say we're training a network to recognize handwritten digits. We show it a
 
 After understanding how they learn, it becomes clearer why Neural Networks have taken the world by storm:
 
-*   **Automatic Feature Learning:** Unlike traditional machine learning algorithms where you often have to manually design "features" (e.g., edges, textures for images), neural networks learn these features *automatically* from the raw data. The hidden layers essentially learn to extract increasingly abstract and meaningful representations of the input.
-*   **Universal Approximators:** Theoretically, a neural network with at least one hidden layer can approximate any continuous function. This means they can learn incredibly complex, non-linear relationships in data that other algorithms might struggle with.
-*   **Scalability with Data:** While traditional algorithms often plateau in performance after a certain amount of data, deep neural networks tend to perform better with more data, making them ideal for the big data era.
+- **Automatic Feature Learning:** Unlike traditional machine learning algorithms where you often have to manually design "features" (e.g., edges, textures for images), neural networks learn these features _automatically_ from the raw data. The hidden layers essentially learn to extract increasingly abstract and meaningful representations of the input.
+- **Universal Approximators:** Theoretically, a neural network with at least one hidden layer can approximate any continuous function. This means they can learn incredibly complex, non-linear relationships in data that other algorithms might struggle with.
+- **Scalability with Data:** While traditional algorithms often plateau in performance after a certain amount of data, deep neural networks tend to perform better with more data, making them ideal for the big data era.
 
 ### Real-World Applications (A Glimpse)
 
 Neural networks are not just theoretical constructs; they are the engines behind much of the AI we interact with daily:
 
-*   **Image Recognition:** From identifying objects in photos to powering facial recognition in your smartphone (Convolutional Neural Networks or CNNs).
-*   **Natural Language Processing (NLP):** Understanding speech, translating languages, powering chatbots, and generating text (Recurrent Neural Networks or RNNs, and more recently, Transformers).
-*   **Recommendation Systems:** Suggesting movies on Netflix, products on Amazon, or music on Spotify.
-*   **Autonomous Driving:** Helping vehicles perceive their surroundings and make navigation decisions.
-*   **Medical Diagnosis:** Assisting doctors in detecting diseases from medical images.
+- **Image Recognition:** From identifying objects in photos to powering facial recognition in your smartphone (Convolutional Neural Networks or CNNs).
+- **Natural Language Processing (NLP):** Understanding speech, translating languages, powering chatbots, and generating text (Recurrent Neural Networks or RNNs, and more recently, Transformers).
+- **Recommendation Systems:** Suggesting movies on Netflix, products on Amazon, or music on Spotify.
+- **Autonomous Driving:** Helping vehicles perceive their surroundings and make navigation decisions.
+- **Medical Diagnosis:** Assisting doctors in detecting diseases from medical images.
 
 ### Challenges and the Road Ahead
 
 While incredibly powerful, neural networks aren't a silver bullet. They come with their own set of challenges:
 
-*   **Computational Cost:** Training large neural networks requires significant computational resources and time.
-*   **Data Hunger:** They often need vast amounts of labeled data to perform well.
-*   **Explainability (The Black Box):** It can be difficult to understand *why* a neural network makes a particular decision. Their internal workings are often opaque, making them "black boxes."
-*   **Ethical Considerations:** As AI becomes more integrated into our lives, questions of bias in data, fairness, and accountability become paramount.
+- **Computational Cost:** Training large neural networks requires significant computational resources and time.
+- **Data Hunger:** They often need vast amounts of labeled data to perform well.
+- **Explainability (The Black Box):** It can be difficult to understand _why_ a neural network makes a particular decision. Their internal workings are often opaque, making them "black boxes."
+- **Ethical Considerations:** As AI becomes more integrated into our lives, questions of bias in data, fairness, and accountability become paramount.
 
 The field of neural networks is constantly evolving. Researchers are developing new architectures (like Transformers, GANs, etc.), more efficient training techniques, and methods to address explainability and ethical concerns.
 

@@ -6,7 +6,7 @@ tags: ["Deep Learning", "Neural Networks", "Machine Learning", "Artificial Intel
 author: "Adarsh Nair"
 ---
 
-My first encounter with Deep Learning felt like peering into the future. I remember seeing a demo of an AI recognizing objects in real-time, instantly categorizing everything from a coffee cup to a cat. It wasn't just impressive; it was *mind-blowing*. I’d spent some time with traditional machine learning models, meticulously crafting features, but this? This seemed to bypass all that manual labor, learning directly from raw data. That moment ignited a curiosity that quickly turned into a passion.
+My first encounter with Deep Learning felt like peering into the future. I remember seeing a demo of an AI recognizing objects in real-time, instantly categorizing everything from a coffee cup to a cat. It wasn't just impressive; it was _mind-blowing_. I’d spent some time with traditional machine learning models, meticulously crafting features, but this? This seemed to bypass all that manual labor, learning directly from raw data. That moment ignited a curiosity that quickly turned into a passion.
 
 Deep Learning, at its core, isn't some mystical black magic. It's a powerful subfield of Machine Learning inspired by the structure and function of the human brain, designed to uncover intricate patterns and representations in vast amounts of data. And in this post, I want to take you on a journey through the fundamental ideas that make it all work, from the simplest building blocks to the complex architectures powering today's AI breakthroughs.
 
@@ -16,13 +16,14 @@ Before we dive into the "deep" part, let's briefly touch upon what came before. 
 
 Imagine you want to build a model to detect cats in images. With traditional ML, you might tell the computer: "Look for edges, calculate the aspect ratio of the head, find whiskers." You're giving it explicit instructions on what makes a "cat." This works, but it's limited by human ingenuity and the complexity of the task. For highly unstructured data like images, audio, or raw text, feature engineering can become a monumental, if not impossible, task.
 
-This is where Deep Learning truly shines. Instead of us telling the machine *what* features to look for, Deep Learning models *learn* these features directly from the data. They build up a hierarchy of concepts, starting with simple ones and combining them into more abstract, complex representations. It's like teaching a child not by listing features of a cat, but by showing them thousands of cat pictures and letting them figure it out. This shift from feature engineering to **feature learning** is arguably the most significant contribution of Deep Learning.
+This is where Deep Learning truly shines. Instead of us telling the machine _what_ features to look for, Deep Learning models _learn_ these features directly from the data. They build up a hierarchy of concepts, starting with simple ones and combining them into more abstract, complex representations. It's like teaching a child not by listing features of a cat, but by showing them thousands of cat pictures and letting them figure it out. This shift from feature engineering to **feature learning** is arguably the most significant contribution of Deep Learning.
 
 ### The Neuron: A Simple Yet Powerful Idea
 
 The fundamental unit of a Deep Learning model is the **artificial neuron**, often called a **perceptron**. Inspired by biological neurons, it's a remarkably simple concept. Imagine a tiny decision-maker.
 
 Here's how it works:
+
 1.  **Inputs ($x_i$):** A neuron receives several inputs. Think of these as signals from other neurons or raw data points.
 2.  **Weights ($w_i$):** Each input is multiplied by a "weight." These weights represent the strength or importance of each input. A larger weight means that input has a stronger influence on the neuron's output.
 3.  **Summation:** All the weighted inputs are summed together.
@@ -34,10 +35,11 @@ Mathematically, a single neuron's output ($y$) can be represented as:
 $y = f(\sum_{i=1}^{n} w_i x_i + b)$
 
 Where:
-*   $x_i$ are the inputs
-*   $w_i$ are the weights
-*   $b$ is the bias
-*   $f$ is the activation function
+
+- $x_i$ are the inputs
+- $w_i$ are the weights
+- $b$ is the bias
+- $f$ is the activation function
 
 At this point, a single neuron doesn't seem that intelligent, right? It's just a weighted sum and a simple decision. But the magic happens when you stack thousands, even millions, of these simple decision-makers together.
 
@@ -67,11 +69,12 @@ Where $y_{true}$ is the actual value and $y_{pred}$ is the network's prediction.
 
 #### 2. Assigning Blame: Backpropagation
 
-This is where Deep Learning truly earns its reputation for being "smart." Once we know how much error the network made (from the loss function), we need to figure out *which* weights and biases in *which* neurons contributed to that error, and by how much. This is akin to debugging a complex machine: if the final output is wrong, how do you know which specific gears or levers need adjustment?
+This is where Deep Learning truly earns its reputation for being "smart." Once we know how much error the network made (from the loss function), we need to figure out _which_ weights and biases in _which_ neurons contributed to that error, and by how much. This is akin to debugging a complex machine: if the final output is wrong, how do you know which specific gears or levers need adjustment?
 
 **Backpropagation** is the algorithm that solves this. It's essentially the repeated application of the **chain rule** from calculus. Starting from the output layer, it propagates the error backward through the network, layer by layer, calculating the **gradient** of the loss with respect to each weight and bias. The gradient tells us two things:
-*   The **magnitude** of how much a weight/bias contributed to the error.
-*   The **direction** in which that weight/bias should be adjusted to reduce the error.
+
+- The **magnitude** of how much a weight/bias contributed to the error.
+- The **direction** in which that weight/bias should be adjusted to reduce the error.
 
 So, for every weight $w$ in the network, backpropagation calculates $\frac{\partial L}{\partial w}$, which tells us how much the loss $L$ would change if we slightly adjusted $w$.
 
@@ -88,9 +91,10 @@ In our case, "downhill" means decreasing the loss. So, we update each weight ($w
 $w_{new} = w_{old} - \alpha \frac{\partial L}{\partial w}$
 
 Where:
-*   $w_{new}$ is the updated weight.
-*   $w_{old}$ is the current weight.
-*   $\alpha$ (alpha) is the **learning rate**. This hyperparameter determines the size of the steps we take. A small learning rate means slow but precise learning; a large one means faster but potentially unstable learning (overshooting the minimum).
+
+- $w_{new}$ is the updated weight.
+- $w_{old}$ is the current weight.
+- $\alpha$ (alpha) is the **learning rate**. This hyperparameter determines the size of the steps we take. A small learning rate means slow but precise learning; a large one means faster but potentially unstable learning (overshooting the minimum).
 
 This cycle of (1) Forward Propagation, (2) Loss Calculation, (3) Backpropagation, and (4) Weight Update is repeated thousands, even millions, of times, over many "epochs" (passes through the entire dataset). With each iteration, the network's weights and biases are fine-tuned, and its predictions become more accurate.
 
@@ -98,9 +102,9 @@ This cycle of (1) Forward Propagation, (2) Loss Calculation, (3) Backpropagation
 
 Why "deep"? It simply refers to the presence of multiple hidden layers. This depth is crucial because it allows the network to learn increasingly complex and abstract representations of the input data.
 
-*   **Early layers** might detect simple features like edges, corners, or specific sound frequencies.
-*   **Middle layers** combine these simple features into more complex patterns, like textures, eyes, or parts of words.
-*   **Later layers** combine these complex patterns into highly abstract concepts, such as a full human face, a complete sentence's meaning, or the distinct sound of a specific musical instrument.
+- **Early layers** might detect simple features like edges, corners, or specific sound frequencies.
+- **Middle layers** combine these simple features into more complex patterns, like textures, eyes, or parts of words.
+- **Later layers** combine these complex patterns into highly abstract concepts, such as a full human face, a complete sentence's meaning, or the distinct sound of a specific musical instrument.
 
 This hierarchical feature learning is what gives Deep Learning its incredible power and allows it to tackle problems that were previously intractable.
 
@@ -127,10 +131,10 @@ Deep Learning has been around for decades, but it's only in the last 10-15 years
 
 While immensely powerful, Deep Learning isn't without its challenges:
 
-*   **Data Hunger:** Training state-of-the-art models often requires massive, labeled datasets, which can be expensive and time-consuming to acquire.
-*   **Interpretability (The "Black Box"):** Understanding *why* a deep learning model makes a particular decision can be difficult. This "black box" problem is a significant concern, especially in critical applications like healthcare or autonomous driving.
-*   **Computational Cost:** Training large models demands substantial computational resources, contributing to significant energy consumption.
-*   **Bias and Fairness:** If the training data contains biases, the model will learn and perpetuate those biases, leading to unfair or discriminatory outcomes. Addressing this requires careful data curation and algorithmic fairness research.
+- **Data Hunger:** Training state-of-the-art models often requires massive, labeled datasets, which can be expensive and time-consuming to acquire.
+- **Interpretability (The "Black Box"):** Understanding _why_ a deep learning model makes a particular decision can be difficult. This "black box" problem is a significant concern, especially in critical applications like healthcare or autonomous driving.
+- **Computational Cost:** Training large models demands substantial computational resources, contributing to significant energy consumption.
+- **Bias and Fairness:** If the training data contains biases, the model will learn and perpetuate those biases, leading to unfair or discriminatory outcomes. Addressing this requires careful data curation and algorithmic fairness research.
 
 My journey into Deep Learning has been nothing short of exhilarating. It's a field that blends mathematics, computer science, and a dash of artistic intuition to create systems that constantly push the boundaries of what machines can do. From recognizing faces on our phones to powering conversational AI, Deep Learning is not just transforming technology; it's redefining our interaction with the digital world.
 

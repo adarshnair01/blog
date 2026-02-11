@@ -42,7 +42,7 @@ print(final_df)
 It works, but it creates a bunch of intermediate variables (`df_step1`, `df_step2`). This can make your code harder to read, debug, and takes up more memory if your data is huge. Enter method chaining!
 
 **`assign()` for New Columns:**
-Instead of `df['new_col'] = ...`, use `.assign()`. It returns a *new* DataFrame with the column added, allowing you to keep chaining.
+Instead of `df['new_col'] = ...`, use `.assign()`. It returns a _new_ DataFrame with the column added, allowing you to keep chaining.
 
 **`pipe()` for Custom Functions:**
 What if you have a custom function that takes a DataFrame and returns a DataFrame? `pipe()` is your friend. It allows you to insert any function into your chain.
@@ -60,7 +60,7 @@ print("\nProcessed DataFrame (chained):")
 print(processed_df)
 ```
 
-The `lambda x:` inside `assign()` means "for each row `x` in the current DataFrame, calculate the Fahrenheit temperature." The `lambda df_filtered:` inside `pipe()` allows us to pass the *entire* DataFrame at that stage of the chain to a function (in this case, just column selection). This makes your code flow like a well-oiled machine!
+The `lambda x:` inside `assign()` means "for each row `x` in the current DataFrame, calculate the Fahrenheit temperature." The `lambda df_filtered:` inside `pipe()` allows us to pass the _entire_ DataFrame at that stage of the chain to a function (in this case, just column selection). This makes your code flow like a well-oiled machine!
 
 ### 2. Vectorization: Ditching Loops for Lightning Speed
 
@@ -84,13 +84,14 @@ print("\nDataFrame with squared temperatures:")
 print(df[['temperature_c', 'temp_sq_slow', 'temp_sq_fast']])
 ```
 
-Notice how `df['temperature_c']**2` directly applies the squaring operation to *every element* in the column simultaneously. This is what vectorization looks like.
+Notice how `df['temperature_c']**2` directly applies the squaring operation to _every element_ in the column simultaneously. This is what vectorization looks like.
 
 **When to vectorize:**
-*   Arithmetic operations (`+`, `-`, `*`, `/`, `**`)
-*   Comparison operations (`>`, `<`, `==`)
-*   String operations (using the `.str` accessor, which we'll cover next!)
-*   Many NumPy functions (e.g., `np.log`, `np.sqrt`)
+
+- Arithmetic operations (`+`, `-`, `*`, `/`, `**`)
+- Comparison operations (`>`, `<`, `==`)
+- String operations (using the `.str` accessor, which we'll cover next!)
+- Many NumPy functions (e.g., `np.log`, `np.sqrt`)
 
 Whenever you find yourself writing a `for` loop over DataFrame rows, pause! There's almost always a faster, vectorized Pandas or NumPy way to do it.
 
@@ -174,7 +175,7 @@ Notice how you can chain `.str` methods too! `str.strip().str.replace().str.uppe
 
 Imagine you have a column like `country` with values 'USA', 'Canada', 'Mexico', 'USA', 'Canada', etc. If you have millions of rows, storing these strings repeatedly takes up a lot of memory. A "categorical" data type in Pandas can save you a ton of memory and even speed up operations like `groupby()`.
 
-A categorical column stores only the *unique* values (the "categories") once, and then stores integer codes referring to these categories for each row.
+A categorical column stores only the _unique_ values (the "categories") once, and then stores integer codes referring to these categories for each row.
 
 ```python
 # Data with many repeating strings
@@ -194,6 +195,7 @@ print(f"Memory usage (after categorical conversion): {memory_after / (1024**2):.
 
 # Notice the significant memory saving!
 ```
+
 The memory saving can be quite dramatic, especially when the number of unique categories is small compared to the total number of rows. For a column with $N$ rows and $C$ unique categories, storing as strings might take $N \times L_{avg}$ bytes (where $L_{avg}$ is average string length), while categorical might take $C \times L_{cat} + N \times S_{int}$ bytes (where $L_{cat}$ is category string length, $S_{int}$ is integer size for codes). When $N$ is large and $C$ is small, the saving is huge.
 
 Beyond memory, `groupby()` and other operations on categorical columns can be significantly faster because Pandas is comparing and sorting integers instead of strings.
@@ -227,6 +229,7 @@ weekly_sum_temp = time_df['temperature'].resample('W').sum() # For cumulative da
 print("\nWeekly Sum Temperature (Resampled):")
 print(weekly_sum_temp.head())
 ```
+
 The `.dt` accessor allows you to pull out specific parts of a datetime object (year, month, day, hour, minute, day of week, etc.) just like the `.str` accessor does for strings.
 
 `resample()` is like `groupby()` but specifically for time-based intervals. It's incredibly powerful for aggregating data over different time frequencies (e.g., from minute-by-minute sensor readings to hourly averages, or daily sales to monthly totals).
@@ -276,6 +279,6 @@ print(df_unstacked_city)
 
 Phew! That was a lot, wasn't it? We've journeyed through chaining methods for cleaner code, embraced vectorization for speed, harnessed the power of `groupby()` for aggregation, cleaned strings with `.str`, optimized memory with categorical data, navigated time with `.dt` and `resample()`, and even reshaped our data with `stack()` and `unstack()`.
 
-These tips aren't just theoretical; they are the tools I use *daily* to tackle real-world data problems efficiently and elegantly. Pandas is a vast library, and there's always more to learn. The best way to solidify these concepts is to **practice, practice, practice!** Grab a dataset (Kaggle is a fantastic resource!), open a Jupyter Notebook, and start applying these techniques.
+These tips aren't just theoretical; they are the tools I use _daily_ to tackle real-world data problems efficiently and elegantly. Pandas is a vast library, and there's always more to learn. The best way to solidify these concepts is to **practice, practice, practice!** Grab a dataset (Kaggle is a fantastic resource!), open a Jupyter Notebook, and start applying these techniques.
 
 Remember, data science is an iterative process. Don't be afraid to experiment, make mistakes, and then refactor your code. Each tip you master makes you a more confident and capable data scientist. Happy coding!

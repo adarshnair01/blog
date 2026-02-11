@@ -12,15 +12,15 @@ Welcome to the captivating realm of **Markov Chains**, a concept so elegant in i
 
 ### The Heart of the Matter: Memorylessness (The Markov Property)
 
-At the core of every Markov Chain lies a brilliant, almost philosophical, idea known as the **Markov Property**. It states that *the future state of a system depends only on its current state, not on the sequence of events that preceded it.*
+At the core of every Markov Chain lies a brilliant, almost philosophical, idea known as the **Markov Property**. It states that _the future state of a system depends only on its current state, not on the sequence of events that preceded it._
 
-Think of it like this: If I'm trying to decide what to wear tomorrow, a Markov Chain would suggest that my choice only depends on what I'm wearing *today*. It doesn't care what I wore last Tuesday, or even last year. My current outfit is the only piece of information relevant to my next outfit decision.
+Think of it like this: If I'm trying to decide what to wear tomorrow, a Markov Chain would suggest that my choice only depends on what I'm wearing _today_. It doesn't care what I wore last Tuesday, or even last year. My current outfit is the only piece of information relevant to my next outfit decision.
 
 Mathematically, if $X_n$ represents the state of our system at time $n$, the Markov Property can be expressed as:
 
 $P(X_{n+1} = j \mid X_n = i, X_{n-1} = k, ..., X_0 = l) = P(X_{n+1} = j \mid X_n = i)$
 
-This means the probability of transitioning to state $j$ at the next step ($n+1$), given all past states, is the same as the probability of transitioning to state $j$ given *only* the current state $i$. This "memoryless" property simplifies things immensely, turning complex sequences into manageable chunks.
+This means the probability of transitioning to state $j$ at the next step ($n+1$), given all past states, is the same as the probability of transitioning to state $j$ given _only_ the current state $i$. This "memoryless" property simplifies things immensely, turning complex sequences into manageable chunks.
 
 ### Building Blocks: States, Transitions, and Probabilities
 
@@ -30,15 +30,15 @@ To truly grasp Markov Chains, let's break down their essential components:
 
 2.  **Transitions:** These are the movements or changes from one state to another. If it's sunny today, tomorrow it might be rainy – that's a transition.
 
-3.  **Transition Probabilities:** This is where the magic happens. For every possible transition from state $i$ to state $j$, there's a probability $P_{ij}$ that this transition will occur. For a valid Markov Chain, the sum of probabilities for all possible transitions *from* a given state must equal 1. (You have to go *somewhere*!).
+3.  **Transition Probabilities:** This is where the magic happens. For every possible transition from state $i$ to state $j$, there's a probability $P_{ij}$ that this transition will occur. For a valid Markov Chain, the sum of probabilities for all possible transitions _from_ a given state must equal 1. (You have to go _somewhere_!).
 
     Let's stick with our simplified weather example. Suppose we observe the weather for many years and find these probabilities:
-    *   If it's **Sunny** today:
-        *   There's a 90% chance it will be **Sunny** tomorrow ($P_{SS} = 0.9$).
-        *   There's a 10% chance it will be **Rainy** tomorrow ($P_{SR} = 0.1$).
-    *   If it's **Rainy** today:
-        *   There's a 30% chance it will be **Sunny** tomorrow ($P_{RS} = 0.3$).
-        *   There's a 70% chance it will be **Rainy** tomorrow ($P_{RR} = 0.7$).
+    - If it's **Sunny** today:
+      - There's a 90% chance it will be **Sunny** tomorrow ($P_{SS} = 0.9$).
+      - There's a 10% chance it will be **Rainy** tomorrow ($P_{SR} = 0.1$).
+    - If it's **Rainy** today:
+      - There's a 30% chance it will be **Sunny** tomorrow ($P_{RS} = 0.3$).
+      - There's a 70% chance it will be **Rainy** tomorrow ($P_{RR} = 0.7$).
 
     We can represent these probabilities elegantly in a **Transition Matrix (P)**:
 
@@ -50,9 +50,9 @@ To truly grasp Markov Chains, let's break down their essential components:
 
 For many, visual aids make complex concepts click. Markov Chains can be beautifully represented using **state diagrams**:
 
-*   Each state is a node (a circle).
-*   Transitions are directed arrows (edges) between nodes.
-*   Each arrow is labeled with its corresponding transition probability.
+- Each state is a node (a circle).
+- Transitions are directed arrows (edges) between nodes.
+- Each arrow is labeled with its corresponding transition probability.
 
 Let's draw our weather example:
 
@@ -66,6 +66,7 @@ Let's draw our weather example:
       (0.3)
 (0.1)      (0.7)
 ```
+
 (Imagine an arrow from Sunny to Sunny with 0.9, Sunny to Rainy with 0.1, Rainy to Sunny with 0.3, and Rainy to Rainy with 0.7).
 This diagram visually encapsulates all the information in our transition matrix, making it easy to see the possible paths and their likelihoods.
 
@@ -96,7 +97,7 @@ This is incredibly powerful! With simple matrix multiplication, we can peer into
 
 ### The Long Run: Stationary Distribution
 
-Now, what if we fast-forward far into the future – say, 100 days? Or 1000 days? Will the weather probabilities still depend on whether it was sunny or rainy *today*?
+Now, what if we fast-forward far into the future – say, 100 days? Or 1000 days? Will the weather probabilities still depend on whether it was sunny or rainy _today_?
 
 For many Markov Chains (specifically, those that are **irreducible**, meaning you can eventually get from any state to any other state, and **aperiodic**, meaning they don't get stuck in predictable cycles), something amazing happens: the system eventually reaches a **stationary distribution**, also known as a steady-state distribution.
 
@@ -113,6 +114,7 @@ To find $\pi_s$ for our weather example, we'd solve a system of linear equations
 $\begin{pmatrix} s_S & s_R \end{pmatrix} \begin{pmatrix} 0.9 & 0.1 \\ 0.3 & 0.7 \end{pmatrix} = \begin{pmatrix} s_S & s_R \end{pmatrix}$
 
 This gives us two equations:
+
 1.  $0.9 s_S + 0.3 s_R = s_S$
 2.  $0.1 s_S + 0.7 s_R = s_R$
 
@@ -154,4 +156,4 @@ Of course, no model is perfect. The assumption of memorylessness is a strong one
 
 Markov Chains are a testament to the power of mathematics to model and understand complexity. With just a few simple rules – states and memoryless transitions – we can build models that predict long-term behavior, uncover hidden structures, and drive some of the most impactful technologies of our time.
 
-So, the next time you use Google, or your phone suggests the next word, or you simply ponder tomorrow's weather, remember the elegant simplicity of the Markov Chain, quietly working behind the scenes, unraveling the secrets of tomorrow. What seemingly random process will *you* model next? The journey into stochastic processes is just beginning!
+So, the next time you use Google, or your phone suggests the next word, or you simply ponder tomorrow's weather, remember the elegant simplicity of the Markov Chain, quietly working behind the scenes, unraveling the secrets of tomorrow. What seemingly random process will _you_ model next? The journey into stochastic processes is just beginning!

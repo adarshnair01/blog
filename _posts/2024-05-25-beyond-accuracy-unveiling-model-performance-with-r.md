@@ -5,6 +5,7 @@ excerpt: "Ever felt that model accuracy isn't telling the whole story? Dive into
 tags: ["Machine Learning", "Model Evaluation", "Classification", "ROC Curve", "AUC"]
 author: "Adarsh Nair"
 ---
+
 Hey everyone!
 
 Welcome back to my little corner of the data science world. Today, I want to talk about something fundamental, yet often misunderstood, in machine learning: evaluating our classification models. When I first started my journey, I thought accuracy was king. If my model was 95% accurate, surely it was amazing, right? Oh, how naive I was! It turns out, the world of binary classification is far more nuanced, and metrics like ROC (Receiver Operating Characteristic) curves and AUC (Area Under the Curve) are our guiding stars.
@@ -23,19 +24,20 @@ Before we dive deeper, let's establish our foundation: the **Confusion Matrix**.
 
 Let's define the terms:
 
-*   **True Positives (TP):** Our model correctly predicted the positive class. (e.g., "It's a cat!" and it truly was a cat.)
-*   **True Negatives (TN):** Our model correctly predicted the negative class. (e.g., "It's not a cat!" and it truly wasn't a cat.)
-*   **False Positives (FP):** Our model incorrectly predicted the positive class. (Type I error). (e.g., "It's a cat!" but it was actually a dog. Oh dear.)
-*   **False Negatives (FN):** Our model incorrectly predicted the negative class. (Type II error). (e.g., "It's not a cat!" but it actually was a cat. The model missed it!)
+- **True Positives (TP):** Our model correctly predicted the positive class. (e.g., "It's a cat!" and it truly was a cat.)
+- **True Negatives (TN):** Our model correctly predicted the negative class. (e.g., "It's not a cat!" and it truly wasn't a cat.)
+- **False Positives (FP):** Our model incorrectly predicted the positive class. (Type I error). (e.g., "It's a cat!" but it was actually a dog. Oh dear.)
+- **False Negatives (FN):** Our model incorrectly predicted the negative class. (Type II error). (e.g., "It's not a cat!" but it actually was a cat. The model missed it!)
 
-|                | **Actual Positive** | **Actual Negative** |
-| :------------- | :------------------ | :------------------ |
+|                   | **Actual Positive** | **Actual Negative** |
+| :---------------- | :------------------ | :------------------ |
 | **Pred Positive** | TP                  | FP                  |
 | **Pred Negative** | FN                  | TN                  |
 
 The costs associated with FP and FN errors can be vastly different depending on the application. In our rare disease example:
-*   **FP:** A healthy person is told they have the disease. This might cause stress and unnecessary further tests.
-*   **FN:** A sick person is told they are healthy. This is far more dangerous, potentially leading to delayed treatment and serious health consequences.
+
+- **FP:** A healthy person is told they have the disease. This might cause stress and unnecessary further tests.
+- **FN:** A sick person is told they are healthy. This is far more dangerous, potentially leading to delayed treatment and serious health consequences.
 
 Understanding these trade-offs is crucial.
 
@@ -49,7 +51,7 @@ Sensitivity measures the proportion of actual positive cases that our model corr
 
 $ Sensitivity = Recall = TPR = \frac{TP}{TP + FN} $
 
-In our disease detection example, high sensitivity means the model is good at finding *all* the people who actually have the disease, minimizing false negatives. This is often paramount in medical screening, where missing a disease (FN) is more detrimental than a false alarm (FP).
+In our disease detection example, high sensitivity means the model is good at finding _all_ the people who actually have the disease, minimizing false negatives. This is often paramount in medical screening, where missing a disease (FN) is more detrimental than a false alarm (FP).
 
 ### Specificity (True Negative Rate - TNR)
 
@@ -63,14 +65,14 @@ High specificity means the model is good at ruling out the disease for healthy i
 
 Here's the rub: improving sensitivity often comes at the cost of specificity, and vice-versa. Think about it: if you want to catch every single person with the disease (high sensitivity), you might lower your detection threshold so much that you also flag many healthy people (high false positives, low specificity). Conversely, if you want to be absolutely sure someone has the disease before flagging them (high specificity), you might miss some genuine cases (high false negatives, low sensitivity).
 
-So, how do we visualize and quantify this trade-off across *all* possible thresholds? Enter the ROC curve.
+So, how do we visualize and quantify this trade-off across _all_ possible thresholds? Enter the ROC curve.
 
 ## The Power of the ROC Curve
 
 A classification model, especially one based on probabilities (like logistic regression or a neural network), doesn't just output a "yes" or "no." Instead, it outputs a probability score – say, the likelihood that an email is spam, or that a transaction is fraudulent. To convert this probability into a binary prediction, we use a **threshold**.
 
-*   If probability $\geq$ threshold, predict Positive.
-*   If probability $<$ threshold, predict Negative.
+- If probability $\geq$ threshold, predict Positive.
+- If probability $<$ threshold, predict Negative.
 
 The magic of the ROC curve lies in showing us what happens to our model's performance as we vary this threshold across all possible values (from 0 to 1).
 
@@ -87,9 +89,9 @@ Let's imagine you calculate (FPR, TPR) for a threshold of 0.1, then 0.2, then 0.
 
 ### Interpreting the ROC Curve
 
-*   **The Diagonal Line:** A straight line from (0,0) to (1,1) represents a purely random classifier. It's like flipping a coin for each prediction. If your model's ROC curve is close to or below this line, your model is performing no better than, or even worse than, random chance.
-*   **The Ideal Curve:** The closer your curve is to the top-left corner (0,1), the better your classifier. A perfect classifier would have a curve that shoots straight up from (0,0) to (0,1) and then across to (1,1), meaning it achieves 100% TPR with 0% FPR – it correctly identifies all positives without making any false alarms.
-*   **The Trade-off Visualized:** As you move along the curve from left to right, you are effectively lowering your prediction threshold. This increases your TPR (you catch more positives), but also increases your FPR (you get more false alarms).
+- **The Diagonal Line:** A straight line from (0,0) to (1,1) represents a purely random classifier. It's like flipping a coin for each prediction. If your model's ROC curve is close to or below this line, your model is performing no better than, or even worse than, random chance.
+- **The Ideal Curve:** The closer your curve is to the top-left corner (0,1), the better your classifier. A perfect classifier would have a curve that shoots straight up from (0,0) to (0,1) and then across to (1,1), meaning it achieves 100% TPR with 0% FPR – it correctly identifies all positives without making any false alarms.
+- **The Trade-off Visualized:** As you move along the curve from left to right, you are effectively lowering your prediction threshold. This increases your TPR (you catch more positives), but also increases your FPR (you get more false alarms).
 
 The ROC curve provides a comprehensive visual summary of your model's ability to discriminate between classes across all possible decision thresholds. It helps us see the full spectrum of the sensitivity-specificity trade-off.
 
@@ -101,10 +103,10 @@ The AUC is quite literally the area under the ROC curve. It quantifies the overa
 
 ### Interpreting the AUC Score
 
-*   **AUC ranges from 0 to 1.**
-*   **AUC = 0.5:** This means your model is performing no better than random chance. It's like your diagonal line.
-*   **AUC = 1.0:** This indicates a perfect classifier, one that correctly separates all positive and negative instances.
-*   **AUC < 0.5:** This is unusual and suggests your model is performing worse than random. It might mean your model is learning the inverse relationship, or perhaps your positive and negative labels are flipped!
+- **AUC ranges from 0 to 1.**
+- **AUC = 0.5:** This means your model is performing no better than random chance. It's like your diagonal line.
+- **AUC = 1.0:** This indicates a perfect classifier, one that correctly separates all positive and negative instances.
+- **AUC < 0.5:** This is unusual and suggests your model is performing worse than random. It might mean your model is learning the inverse relationship, or perhaps your positive and negative labels are flipped!
 
 ### Why AUC is so Valuable
 

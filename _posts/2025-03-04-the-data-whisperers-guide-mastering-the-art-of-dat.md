@@ -33,10 +33,10 @@ Recognizing these patterns is the first step to becoming a data whisperer!
 
 My personal motto for data cleaning involves four key steps:
 
-*   **Explore:** Always start with Exploratory Data Analysis (EDA). Visualizations, descriptive statistics (`.describe()`, `.info()`, `.value_counts()`), and simple checks are your best friends here. You can't clean what you don't see.
-*   **Decide:** Once you identify an issue, decide on the best strategy. There's rarely a one-size-fits-all solution. Your decision often depends on the specific context, the amount of data affected, and the goal of your analysis.
-*   **Act:** Implement your chosen strategy using tools like Pandas, NumPy, or even custom Python scripts.
-*   **Iterate:** Data cleaning is not a linear process. Fixing one issue might reveal another, or your initial solution might not be optimal. Be prepared to go back and forth.
+- **Explore:** Always start with Exploratory Data Analysis (EDA). Visualizations, descriptive statistics (`.describe()`, `.info()`, `.value_counts()`), and simple checks are your best friends here. You can't clean what you don't see.
+- **Decide:** Once you identify an issue, decide on the best strategy. There's rarely a one-size-fits-all solution. Your decision often depends on the specific context, the amount of data affected, and the goal of your analysis.
+- **Act:** Implement your chosen strategy using tools like Pandas, NumPy, or even custom Python scripts.
+- **Iterate:** Data cleaning is not a linear process. Fixing one issue might reveal another, or your initial solution might not be optimal. Be prepared to go back and forth.
 
 Now, let's dive into some practical strategies!
 
@@ -53,23 +53,23 @@ My go-to moves are `df.isnull().sum()` to get a count of NaNs per column, and `d
 
 **Strategies:**
 
-*   **Deletion (Dropping):**
-    *   **Drop Rows:** If a row has too many missing values, or if the number of rows with missing values is a tiny fraction of your total dataset, you might drop the entire row using `df.dropna()`. Be careful, though! If you drop too many rows, you might lose valuable information or introduce bias.
-    *   **Drop Columns:** If a column has an overwhelmingly high percentage of missing values (e.g., 70-80% or more), it might be better to drop the entire column using `df.dropna(axis=1)`. The column might not provide enough useful information anyway.
+- **Deletion (Dropping):**
+  - **Drop Rows:** If a row has too many missing values, or if the number of rows with missing values is a tiny fraction of your total dataset, you might drop the entire row using `df.dropna()`. Be careful, though! If you drop too many rows, you might lose valuable information or introduce bias.
+  - **Drop Columns:** If a column has an overwhelmingly high percentage of missing values (e.g., 70-80% or more), it might be better to drop the entire column using `df.dropna(axis=1)`. The column might not provide enough useful information anyway.
 
-*   **Imputation (Filling):** This is where you replace missing values with estimated ones.
-    *   **Mean/Median/Mode Imputation:**
-        *   For numerical data, replacing NaNs with the **mean** or **median** of the column is a common, simple approach. The median is more robust to outliers.
-        *   For categorical data, replacing with the **mode** (most frequent value) is often appropriate.
-        *   Example (mean imputation for a numerical column 'Age'):
-            `df['Age'].fillna(df['Age'].mean(), inplace=True)`
-        *   The mathematical idea behind mean imputation for a set of observations $x_1, x_2, \ldots, x_N$ is:
-            $\text{Value}_{\text{imputed}} = \frac{1}{N} \sum_{i=1}^{N} x_i$
-            Where $N$ is the number of non-missing observations.
-    *   **Forward Fill (ffill) / Backward Fill (bfill):** Especially useful for time-series data. `ffill` propagates the last valid observation forward, while `bfill` propagates the next valid observation backward.
-        `df['SensorReading'].ffill(inplace=True)`
-    *   **Constant Value Imputation:** Sometimes, you might fill NaNs with a specific constant, like 'Unknown' for a categorical column, or 0 for a numerical one if 0 has a specific meaning (e.g., 0 sales when sales data is missing).
-    *   **More Advanced Imputation:** For more sophisticated scenarios, you could use machine learning models (like K-Nearest Neighbors Imputer or even build a regression model) to predict missing values based on other features. This is often more accurate but also more complex.
+- **Imputation (Filling):** This is where you replace missing values with estimated ones.
+  - **Mean/Median/Mode Imputation:**
+    - For numerical data, replacing NaNs with the **mean** or **median** of the column is a common, simple approach. The median is more robust to outliers.
+    - For categorical data, replacing with the **mode** (most frequent value) is often appropriate.
+    - Example (mean imputation for a numerical column 'Age'):
+      `df['Age'].fillna(df['Age'].mean(), inplace=True)`
+    - The mathematical idea behind mean imputation for a set of observations $x_1, x_2, \ldots, x_N$ is:
+      $\text{Value}_{\text{imputed}} = \frac{1}{N} \sum_{i=1}^{N} x_i$
+      Where $N$ is the number of non-missing observations.
+  - **Forward Fill (ffill) / Backward Fill (bfill):** Especially useful for time-series data. `ffill` propagates the last valid observation forward, while `bfill` propagates the next valid observation backward.
+    `df['SensorReading'].ffill(inplace=True)`
+  - **Constant Value Imputation:** Sometimes, you might fill NaNs with a specific constant, like 'Unknown' for a categorical column, or 0 for a numerical one if 0 has a specific meaning (e.g., 0 sales when sales data is missing).
+  - **More Advanced Imputation:** For more sophisticated scenarios, you could use machine learning models (like K-Nearest Neighbors Imputer or even build a regression model) to predict missing values based on other features. This is often more accurate but also more complex.
 
 My advice: Start simple. Visualize the distribution of the column before and after imputation to ensure you're not distorting it too much.
 
@@ -79,17 +79,17 @@ This is about bringing uniformity to your data, making sure "apples" are always 
 
 **Strategies:**
 
-*   **Standardization (Case, Whitespace):**
-    *   Convert text to a consistent case (e.g., all lowercase or all uppercase): `df['City'].str.lower()`.
-    *   Remove leading/trailing whitespace: `df['Product'].str.strip()`.
-    *   Replace multiple spaces with single ones: `df['Address'].str.replace('\s+', ' ', regex=True)`.
-*   **Mapping and Correction:** If you have known variations (e.g., "NY" should be "New York"), create a mapping dictionary and apply it:
-    `city_map = {'NY': 'New York', 'LA': 'Los Angeles'}`
-    `df['State'].replace(city_map, inplace=True)`
-*   **Regular Expressions (Regex):** Powerful for pattern matching and extraction. If you need to extract numbers from a string, validate email formats, or find specific patterns, regex is your friend.
-    *   Example: Extracting digits from a messy column:
-        `df['Phone'].str.extract('(\d{3}-\d{3}-\d{4})')`
-*   **Categorical Encoding (briefly):** While more of a feature engineering step, standardizing categories often precedes encoding them (e.g., One-Hot Encoding or Label Encoding) for machine learning models.
+- **Standardization (Case, Whitespace):**
+  - Convert text to a consistent case (e.g., all lowercase or all uppercase): `df['City'].str.lower()`.
+  - Remove leading/trailing whitespace: `df['Product'].str.strip()`.
+  - Replace multiple spaces with single ones: `df['Address'].str.replace('\s+', ' ', regex=True)`.
+- **Mapping and Correction:** If you have known variations (e.g., "NY" should be "New York"), create a mapping dictionary and apply it:
+  `city_map = {'NY': 'New York', 'LA': 'Los Angeles'}`
+  `df['State'].replace(city_map, inplace=True)`
+- **Regular Expressions (Regex):** Powerful for pattern matching and extraction. If you need to extract numbers from a string, validate email formats, or find specific patterns, regex is your friend.
+  - Example: Extracting digits from a messy column:
+    `df['Phone'].str.extract('(\d{3}-\d{3}-\d{4})')`
+- **Categorical Encoding (briefly):** While more of a feature engineering step, standardizing categories often precedes encoding them (e.g., One-Hot Encoding or Label Encoding) for machine learning models.
 
 Always use `.value_counts()` before and after these operations to verify the changes.
 
@@ -99,26 +99,26 @@ Outliers are data points significantly different from others. They can be genuin
 
 **Identification:**
 
-*   **Visualization:** Box plots are fantastic for spotting outliers visually. Histograms can also reveal unusual distributions.
-*   **Statistical Methods:**
-    *   **Z-score:** Measures how many standard deviations a data point is from the mean. A common threshold is $\left|Z\right| > 3$.
-        The Z-score for a data point $x$ in a dataset with mean $\mu$ and standard deviation $\sigma$ is:
-        $Z = \frac{x - \mu}{\sigma}$
-    *   **IQR (Interquartile Range) Method:** More robust to skewed data than the Z-score. It defines outliers as values falling below $Q_1 - 1.5 \times IQR$ or above $Q_3 + 1.5 \times IQR$.
-        Here, $Q_1$ is the first quartile (25th percentile), $Q_3$ is the third quartile (75th percentile), and $IQR = Q_3 - Q_1$.
+- **Visualization:** Box plots are fantastic for spotting outliers visually. Histograms can also reveal unusual distributions.
+- **Statistical Methods:**
+  - **Z-score:** Measures how many standard deviations a data point is from the mean. A common threshold is $\left|Z\right| > 3$.
+    The Z-score for a data point $x$ in a dataset with mean $\mu$ and standard deviation $\sigma$ is:
+    $Z = \frac{x - \mu}{\sigma}$
+  - **IQR (Interquartile Range) Method:** More robust to skewed data than the Z-score. It defines outliers as values falling below $Q_1 - 1.5 \times IQR$ or above $Q_3 + 1.5 \times IQR$.
+    Here, $Q_1$ is the first quartile (25th percentile), $Q_3$ is the third quartile (75th percentile), and $IQR = Q_3 - Q_1$.
 
 **Strategies:**
 
-*   **Removal:** If an outlier is clearly a data entry error (e.g., that "70 feet" height), it's best to remove it. However, if it's a genuine extreme value, think twice. Removing too many true outliers can lead to a loss of valuable information or an oversimplified view of reality.
-*   **Transformation:** Applying mathematical transformations (like `log` or square root) can reduce the impact of extreme values, especially if your data is skewed.
-    `df['Income_Log'] = np.log(df['Income'])`
-*   **Capping (Winsorization):** This involves setting a ceiling and/or a floor for outliers. Values above the upper cap are replaced by the cap value, and values below the lower cap are replaced by the floor value.
-    *   Example: Cap values above the 99th percentile and below the 1st percentile.
-        `upper_bound = df['Price'].quantile(0.99)`
-        `lower_bound = df['Price'].quantile(0.01)`
-        `df['Price'] = np.where(df['Price'] > upper_bound, upper_bound, df['Price'])`
-        `df['Price'] = np.where(df['Price'] < lower_bound, lower_bound, df['Price'])`
-*   **Treat as Missing:** If you're unsure if an outlier is an error or a true extreme, you could treat it as a missing value and then use your preferred imputation strategy.
+- **Removal:** If an outlier is clearly a data entry error (e.g., that "70 feet" height), it's best to remove it. However, if it's a genuine extreme value, think twice. Removing too many true outliers can lead to a loss of valuable information or an oversimplified view of reality.
+- **Transformation:** Applying mathematical transformations (like `log` or square root) can reduce the impact of extreme values, especially if your data is skewed.
+  `df['Income_Log'] = np.log(df['Income'])`
+- **Capping (Winsorization):** This involves setting a ceiling and/or a floor for outliers. Values above the upper cap are replaced by the cap value, and values below the lower cap are replaced by the floor value.
+  - Example: Cap values above the 99th percentile and below the 1st percentile.
+    `upper_bound = df['Price'].quantile(0.99)`
+    `lower_bound = df['Price'].quantile(0.01)`
+    `df['Price'] = np.where(df['Price'] > upper_bound, upper_bound, df['Price'])`
+    `df['Price'] = np.where(df['Price'] < lower_bound, lower_bound, df['Price'])`
+- **Treat as Missing:** If you're unsure if an outlier is an error or a true extreme, you could treat it as a missing value and then use your preferred imputation strategy.
 
 Always consider the domain context. Is a $1,000,000 salary an outlier in a dataset of students, or a legitimate observation in a dataset of CEOs?
 
@@ -141,12 +141,12 @@ Incorrect data types can prevent calculations, consume more memory, and cause er
 
 **Correction:**
 
-*   **To Numeric:**
-    `pd.to_numeric(df['Price'], errors='coerce')` – `errors='coerce'` will turn unparseable values into NaNs, which you can then handle.
-*   **To Datetime:** Essential for time-series analysis.
-    `pd.to_datetime(df['TransactionDate'], errors='coerce')`
-*   **To Category:** For columns with a limited number of unique values, converting to `category` can save memory and improve performance for some operations.
-    `df['Gender'] = df['Gender'].astype('category')`
+- **To Numeric:**
+  `pd.to_numeric(df['Price'], errors='coerce')` – `errors='coerce'` will turn unparseable values into NaNs, which you can then handle.
+- **To Datetime:** Essential for time-series analysis.
+  `pd.to_datetime(df['TransactionDate'], errors='coerce')`
+- **To Category:** For columns with a limited number of unique values, converting to `category` can save memory and improve performance for some operations.
+  `df['Gender'] = df['Gender'].astype('category')`
 
 Correcting data types is a fundamental step that often enables subsequent cleaning and analysis.
 
@@ -158,11 +158,11 @@ While not strictly "cleaning," once your data is clean, you can often derive new
 
 ### Best Practices & The Data Whisperer's Mindset
 
-*   **Version Control:** Always keep your data cleaning scripts under version control (like Git). This allows you to track changes, revert if needed, and collaborate effectively.
-*   **Document Everything:** Make comments in your code. Explain *why* you made certain cleaning decisions. This is crucial for reproducibility and for anyone else (or future you!) who looks at your work.
-*   **Automate When Possible:** If you're dealing with recurring data, build robust cleaning pipelines that can be run automatically.
-*   **Domain Knowledge is Gold:** The best data cleaners aren't just technical wizards; they also understand the subject matter of their data. Knowing what the data *should* look like helps immensely in identifying anomalies and choosing the right cleaning strategy.
-*   **Garbage In, Garbage Out (GIGO):** This old computing adage holds particularly true for data science. No matter how advanced your machine learning algorithm is, if you feed it dirty, inconsistent, or biased data, your output will be garbage.
+- **Version Control:** Always keep your data cleaning scripts under version control (like Git). This allows you to track changes, revert if needed, and collaborate effectively.
+- **Document Everything:** Make comments in your code. Explain _why_ you made certain cleaning decisions. This is crucial for reproducibility and for anyone else (or future you!) who looks at your work.
+- **Automate When Possible:** If you're dealing with recurring data, build robust cleaning pipelines that can be run automatically.
+- **Domain Knowledge is Gold:** The best data cleaners aren't just technical wizards; they also understand the subject matter of their data. Knowing what the data _should_ look like helps immensely in identifying anomalies and choosing the right cleaning strategy.
+- **Garbage In, Garbage Out (GIGO):** This old computing adage holds particularly true for data science. No matter how advanced your machine learning algorithm is, if you feed it dirty, inconsistent, or biased data, your output will be garbage.
 
 ### Conclusion: Your Journey to Becoming a Data Whisperer
 

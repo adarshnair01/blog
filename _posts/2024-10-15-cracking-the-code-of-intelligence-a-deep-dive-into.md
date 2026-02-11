@@ -8,7 +8,7 @@ author: "Adarsh Nair"
 
 My journey into the world of Artificial Intelligence began with a simple question: "How can machines learn?" It's a question that has captivated scientists and dreamers for decades, leading to incredible leaps in technology. And perhaps no field embodies this quest for artificial intelligence more profoundly than **Deep Learning**.
 
-Deep Learning isn't just a buzzword; it's a revolutionary subset of Machine Learning that has transformed everything from how we search for information to how self-driving cars navigate our streets. But what *is* it, really? And how does it work its magic?
+Deep Learning isn't just a buzzword; it's a revolutionary subset of Machine Learning that has transformed everything from how we search for information to how self-driving cars navigate our streets. But what _is_ it, really? And how does it work its magic?
 
 As a data scientist and machine learning engineer, I've spent countless hours diving into the mathematical elegance and engineering ingenuity that underpin Deep Learning. Today, I want to share that understanding with you, breaking down the core concepts into accessible ideas. Consider this our shared notebook as we explore the digital brain.
 
@@ -34,10 +34,10 @@ Let's start with a single artificial neuron, often called a "perceptron." It's s
 5.  **Activation Function:** This is the crucial non-linear step. The sum $z$ is passed through an activation function, which decides whether the neuron "fires" or not, and how strongly. Without this non-linearity, no matter how many layers we stack, the network would essentially just be learning a linear relationship, which isn't powerful enough for complex tasks.
 
     Common activation functions include:
-    *   **Sigmoid:** Squashes the output between 0 and 1. Useful for probabilities.
-        $\sigma(z) = \frac{1}{1 + e^{-z}}$
-    *   **ReLU (Rectified Linear Unit):** Outputs the input directly if it's positive, otherwise it outputs zero. This is very popular today due to its simplicity and effectiveness.
-        $\text{ReLU}(z) = \max(0, z)$
+    - **Sigmoid:** Squashes the output between 0 and 1. Useful for probabilities.
+      $\sigma(z) = \frac{1}{1 + e^{-z}}$
+    - **ReLU (Rectified Linear Unit):** Outputs the input directly if it's positive, otherwise it outputs zero. This is very popular today due to its simplicity and effectiveness.
+      $\text{ReLU}(z) = \max(0, z)$
 
     The output of the activation function, $a$, is the neuron's final output, which can then become an input to other neurons.
 
@@ -48,7 +48,7 @@ A single neuron is limited, like one person trying to solve a complex puzzle. Th
 An Artificial Neural Network typically has three types of layers:
 
 1.  **Input Layer:** These neurons simply take in the raw data (e.g., the pixels of an image, words in a sentence). They don't perform any computation other than passing the data through.
-2.  **Hidden Layers:** These are where the magic happens! In these layers, neurons receive inputs from the previous layer, perform their weighted sum and activation, and then pass their outputs to the next layer. A "deep" network simply means it has *many* hidden layers. Each layer learns to recognize different features or patterns in the data, gradually building up more complex representations.
+2.  **Hidden Layers:** These are where the magic happens! In these layers, neurons receive inputs from the previous layer, perform their weighted sum and activation, and then pass their outputs to the next layer. A "deep" network simply means it has _many_ hidden layers. Each layer learns to recognize different features or patterns in the data, gradually building up more complex representations.
 3.  **Output Layer:** This layer produces the network's final prediction. For classifying a cat, it might have two neurons: one for "cat" and one for "not-cat," with the output indicating the probability of each. For predicting a number (like a house price), it might have a single neuron.
 
 Imagine our cat image again. The first hidden layer might learn to detect simple features like edges, corners, and blobs. The second layer might combine these edges to recognize textures (fur, stripes) or simple shapes (an ear, an eye). The third layer might then combine these shapes and textures to identify larger parts of a cat (head, tail). And finally, the output layer puts it all together to say "Aha! That's a cat!" This hierarchical learning is a key advantage of deep networks.
@@ -61,8 +61,8 @@ Initially, the weights and biases in a neural network are set randomly. This mea
 2.  **Loss Function (Cost Function):** We compare the network's prediction ($\hat{y}$) with the actual correct answer ($y$). A **loss function** quantifies how "wrong" the prediction was. For example, if we're predicting a numerical value, we might use **Mean Squared Error (MSE)**:
     $L = \frac{1}{m} \sum_{j=1}^{m} (y_j - \hat{y}_j)^2$
     where $m$ is the number of examples, $y_j$ is the true value, and $\hat{y}_j$ is the predicted value. The goal is to minimize this loss.
-3.  **Gradient Descent:** This is the core optimization algorithm. Imagine the loss function as a mountainous landscape, and we want to find the lowest point (minimum loss). We start at a random point (random weights) and take small steps downhill. The "gradient" tells us the direction of the steepest ascent, so we move in the *opposite* direction.
-4.  **Backpropagation:** This is the ingenious algorithm that makes training deep neural networks feasible. After calculating the loss, backpropagation calculates *how much* each individual weight and bias in the network contributed to that error. It does this by propagating the error backwards from the output layer, through the hidden layers, all the way to the input layer. This is where calculus (specifically the chain rule) comes into play, allowing us to compute the gradient of the loss with respect to each weight and bias.
+3.  **Gradient Descent:** This is the core optimization algorithm. Imagine the loss function as a mountainous landscape, and we want to find the lowest point (minimum loss). We start at a random point (random weights) and take small steps downhill. The "gradient" tells us the direction of the steepest ascent, so we move in the _opposite_ direction.
+4.  **Backpropagation:** This is the ingenious algorithm that makes training deep neural networks feasible. After calculating the loss, backpropagation calculates _how much_ each individual weight and bias in the network contributed to that error. It does this by propagating the error backwards from the output layer, through the hidden layers, all the way to the input layer. This is where calculus (specifically the chain rule) comes into play, allowing us to compute the gradient of the loss with respect to each weight and bias.
 
     Once we know how each weight and bias affects the loss, we can adjust them slightly in the direction that reduces the loss. This adjustment is guided by a **learning rate**, which controls the size of our "steps" down the loss landscape.
 
@@ -72,8 +72,8 @@ This cycle of forward pass, calculating loss, backpropagation, and updating weig
 
 The "deep" in Deep Learning refers to the presence of multiple hidden layers. While a shallow network (one hidden layer) can theoretically learn any function, deep networks offer practical advantages:
 
-*   **Hierarchical Feature Learning:** As mentioned, each layer can learn increasingly abstract and complex representations of the data. This means the network can automatically discover and combine features from the raw input without explicit human engineering.
-*   **Efficiency:** For certain types of problems, a deep network can learn more complex functions with fewer neurons than an equivalent shallow network.
+- **Hierarchical Feature Learning:** As mentioned, each layer can learn increasingly abstract and complex representations of the data. This means the network can automatically discover and combine features from the raw input without explicit human engineering.
+- **Efficiency:** For certain types of problems, a deep network can learn more complex functions with fewer neurons than an equivalent shallow network.
 
 However, deep networks also introduce challenges like **vanishing gradients** (gradients become too small to update weights effectively in earlier layers) and **exploding gradients** (gradients become too large, leading to unstable learning). Modern Deep Learning research has developed sophisticated solutions, such as ReLU activation functions, batch normalization, and various optimization algorithms, to overcome these hurdles.
 
@@ -91,14 +91,14 @@ While the core principles of ANNs and backpropagation remain, different types of
 
 To make these incredible systems work, we need a few key ingredients:
 
-*   **Vast Amounts of Data:** Deep Learning models thrive on data. The more diverse and high-quality data they're trained on, the better they perform.
-*   **Computational Power:** Training deep networks involves billions of calculations. This requires specialized hardware like Graphics Processing Units (GPUs) or Tensor Processing Units (TPUs), which are excellent at parallel processing.
-*   **Sophisticated Algorithms and Frameworks:** Beyond the core concepts, practical Deep Learning relies on frameworks like TensorFlow and PyTorch, which provide tools to build, train, and deploy complex models efficiently.
-*   **Human Expertise:** Data scientists and machine learning engineers are crucial for preparing data, designing architectures, tuning hyperparameters, and interpreting results.
+- **Vast Amounts of Data:** Deep Learning models thrive on data. The more diverse and high-quality data they're trained on, the better they perform.
+- **Computational Power:** Training deep networks involves billions of calculations. This requires specialized hardware like Graphics Processing Units (GPUs) or Tensor Processing Units (TPUs), which are excellent at parallel processing.
+- **Sophisticated Algorithms and Frameworks:** Beyond the core concepts, practical Deep Learning relies on frameworks like TensorFlow and PyTorch, which provide tools to build, train, and deploy complex models efficiently.
+- **Human Expertise:** Data scientists and machine learning engineers are crucial for preparing data, designing architectures, tuning hyperparameters, and interpreting results.
 
 ### The Road Ahead: Challenges and Promise
 
-Deep Learning has delivered astonishing breakthroughs, but it's not without its challenges. Issues like model interpretability (understanding *why* a network makes a certain decision), bias in training data leading to unfair or discriminatory outcomes, and the ethical implications of powerful AI systems are active areas of research and societal debate.
+Deep Learning has delivered astonishing breakthroughs, but it's not without its challenges. Issues like model interpretability (understanding _why_ a network makes a certain decision), bias in training data leading to unfair or discriminatory outcomes, and the ethical implications of powerful AI systems are active areas of research and societal debate.
 
 Despite these challenges, the field continues to evolve at an astounding pace. New architectures, training techniques, and applications emerge constantly, pushing the boundaries of what machines can achieve. From medical diagnosis to climate modeling, Deep Learning promises to be a pivotal force in solving some of humanity's most pressing problems.
 

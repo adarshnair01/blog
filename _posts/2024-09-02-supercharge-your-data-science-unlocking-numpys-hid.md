@@ -6,11 +6,11 @@ tags: ["NumPy", "Optimization", "Python", "Data Science", "Performance"]
 author: "Adarsh Nair"
 ---
 
-My journey into data science, much like many of yours I imagine, began with the comforting embrace of Python. It’s so intuitive, so readable, so... *slow* sometimes. I remember the frustration of watching my scripts chug along for what felt like an eternity when processing even moderately sized datasets. It was like trying to run a marathon in flip-flops. Then, I met NumPy, and it was like someone handed me a pair of high-performance running shoes.
+My journey into data science, much like many of yours I imagine, began with the comforting embrace of Python. It’s so intuitive, so readable, so... _slow_ sometimes. I remember the frustration of watching my scripts chug along for what felt like an eternity when processing even moderately sized datasets. It was like trying to run a marathon in flip-flops. Then, I met NumPy, and it was like someone handed me a pair of high-performance running shoes.
 
-But here’s the kicker: even with those fancy shoes, you still need to know *how* to run efficiently. Simply using NumPy isn't always enough; using it *optimally* is where the real magic happens. This isn't just about shaving off milliseconds; it's about transforming hours into minutes, enabling you to iterate faster, experiment more, and tackle problems that were previously out of reach due to computational constraints.
+But here’s the kicker: even with those fancy shoes, you still need to know _how_ to run efficiently. Simply using NumPy isn't always enough; using it _optimally_ is where the real magic happens. This isn't just about shaving off milliseconds; it's about transforming hours into minutes, enabling you to iterate faster, experiment more, and tackle problems that were previously out of reach due to computational constraints.
 
-So, grab your virtual notebook! Today, we're going to dive deep into the secrets of NumPy optimization. We'll explore *why* it's fast, and more importantly, *how* you can write code that leverages its power to the fullest. Think of this as your personal guide to becoming a NumPy performance wizard.
+So, grab your virtual notebook! Today, we're going to dive deep into the secrets of NumPy optimization. We'll explore _why_ it's fast, and more importantly, _how_ you can write code that leverages its power to the fullest. Think of this as your personal guide to becoming a NumPy performance wizard.
 
 ### The NumPy Superpower: Why It's Fast (When Used Right)
 
@@ -54,7 +54,7 @@ numpy_vector_time = timeit.timeit(lambda: add_with_numpy(arr1, arr2), number=10)
 print(f"NumPy vectorized time: {numpy_vector_time:.6f} seconds")
 ```
 
-When I ran this on my machine, the Python loop took around 1.2 seconds, while the NumPy version completed in about 0.01 seconds. That's a *100x speedup*! This dramatic difference stems from NumPy's ability to execute element-wise operations as a single, highly optimized C operation.
+When I ran this on my machine, the Python loop took around 1.2 seconds, while the NumPy version completed in about 0.01 seconds. That's a _100x speedup_! This dramatic difference stems from NumPy's ability to execute element-wise operations as a single, highly optimized C operation.
 
 Mathematically, if we have two vectors $\mathbf{a} = [a_1, a_2, ..., a_n]$ and $\mathbf{b} = [b_1, b_2, ..., b_n]$, their sum is $\mathbf{c} = \mathbf{a} + \mathbf{b}$, where each element $c_i = a_i + b_i$. NumPy handles this element-wise operation incredibly efficiently.
 
@@ -62,7 +62,7 @@ Mathematically, if we have two vectors $\mathbf{a} = [a_1, a_2, ..., a_n]$ and $
 
 ### Memory Matters: Avoid Unnecessary Copying
 
-NumPy is smart about memory, but it's easy to accidentally force it to make copies of arrays, which can be expensive, especially for large datasets. Operations like slicing *can* return a "view" of the original array (meaning no new memory is allocated), but sometimes they return a copy. Knowing the difference can save you a lot of performance headaches.
+NumPy is smart about memory, but it's easy to accidentally force it to make copies of arrays, which can be expensive, especially for large datasets. Operations like slicing _can_ return a "view" of the original array (meaning no new memory is allocated), but sometimes they return a copy. Knowing the difference can save you a lot of performance headaches.
 
 A "view" is like looking through a window at the original data; any changes you make through the view will affect the original array. A "copy" is like taking a photograph; changes to the photo don't affect the original scene.
 
@@ -92,7 +92,7 @@ indexed_array = large_array[[100, 200, 300]]
 print(f"Is indexed_array a view? {np.may_share_memory(large_array, indexed_array)}") # False
 ```
 
-**Key takeaway**: Be mindful of when NumPy creates copies. Explicitly use `.copy()` when you *need* an independent version of the data. Otherwise, try to work with views when possible. The `.flags['OWNDATA']` attribute can also tell you if an array owns its data (i.e., it's not a view of another array).
+**Key takeaway**: Be mindful of when NumPy creates copies. Explicitly use `.copy()` when you _need_ an independent version of the data. Otherwise, try to work with views when possible. The `.flags['OWNDATA']` attribute can also tell you if an array owns its data (i.e., it's not a view of another array).
 
 ### The Right Tool for the Job: Data Types (`dtype`)
 
@@ -132,6 +132,7 @@ $\mathbf{a} + k = [a_1+k, a_2+k, ..., a_n+k]$
 NumPy effectively "stretches" the scalar $k$ to match the shape of $\mathbf{a}$ without actually allocating new memory for $k$.
 
 More complex broadcasting rules apply when combining arrays of different dimensions:
+
 1.  If the arrays don't have the same number of dimensions, the shape of the smaller array is padded with ones on its left side.
 2.  The arrays are compatible if, for each dimension, their sizes are equal, or one of them is 1.
 3.  Dimensions with size 1 are stretched to match the other array's size.
@@ -161,7 +162,7 @@ Broadcasting enables concise code and avoids explicit loops, making your code fa
 
 NumPy's "universal functions" (ufuncs) are vectorized wrappers around C functions that perform element-wise operations on arrays. You've already used them implicitly when you write `arr1 + arr2` (which calls `np.add`) or `np.sqrt(arr)`.
 
-Ufuncs are incredibly fast because they are highly optimized at the C level. When possible, always prefer a NumPy ufunc over writing your own Python function, even if your Python function *looks* vectorized.
+Ufuncs are incredibly fast because they are highly optimized at the C level. When possible, always prefer a NumPy ufunc over writing your own Python function, even if your Python function _looks_ vectorized.
 
 ```python
 # Calculate sine of each element
@@ -225,8 +226,8 @@ $f(x) = \begin{cases} \text{value\_if\_true} & \text{if condition} \\ \text{valu
 
 While these principles cover the vast majority of NumPy optimization, for those truly pushing the boundaries, consider:
 
-*   **Memory Layout (`order='C'` vs `order='F'`)**: NumPy arrays can be stored in C-contiguous (row-major) or Fortran-contiguous (column-major) order. Accessing elements in a way that aligns with their memory layout can lead to better cache performance, especially in multi-dimensional arrays. Most Python users default to C-order.
-*   **Numba and Cython**: For incredibly specific, hot-spot functions where even optimized NumPy falls short, tools like Numba (which compiles Python code to fast machine code at runtime) or Cython (which allows you to write C extensions for Python) can provide further speedups. But always profile first; don't reach for these unless you've exhausted pure NumPy optimizations.
+- **Memory Layout (`order='C'` vs `order='F'`)**: NumPy arrays can be stored in C-contiguous (row-major) or Fortran-contiguous (column-major) order. Accessing elements in a way that aligns with their memory layout can lead to better cache performance, especially in multi-dimensional arrays. Most Python users default to C-order.
+- **Numba and Cython**: For incredibly specific, hot-spot functions where even optimized NumPy falls short, tools like Numba (which compiles Python code to fast machine code at runtime) or Cython (which allows you to write C extensions for Python) can provide further speedups. But always profile first; don't reach for these unless you've exhausted pure NumPy optimizations.
 
 ### My Final Thoughts: Cultivating an Optimization Mindset
 

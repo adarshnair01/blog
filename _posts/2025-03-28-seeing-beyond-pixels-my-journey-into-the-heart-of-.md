@@ -1,7 +1,7 @@
 ---
 title: "Seeing Beyond Pixels: My Journey into the Heart of Computer Vision"
 date: "2025-03-28"
-excerpt: "Join me on an exploration of Computer Vision, the fascinating field that teaches machines to \"see\" and understand the world through images, transforming everything from self-driving cars to medical diagnostics."
+excerpt: 'Join me on an exploration of Computer Vision, the fascinating field that teaches machines to "see" and understand the world through images, transforming everything from self-driving cars to medical diagnostics.'
 tags: ["Computer Vision", "Deep Learning", "Image Processing", "AI", "Machine Learning"]
 author: "Adarsh Nair"
 ---
@@ -36,9 +36,9 @@ This approach worked for very specific, controlled problems. But it was brittle.
 
 ### The Machine Learning Revolution: Learning from Data
 
-The paradigm shifted with the advent of Machine Learning. Instead of programming explicit rules, we started feeding computers massive datasets of images labeled with what they contained. The idea was to let the machine *learn* the patterns and features directly from the data. Algorithms like Support Vector Machines (SVMs) or Random Forests, when fed with the aforementioned handcrafted features, showed promise.
+The paradigm shifted with the advent of Machine Learning. Instead of programming explicit rules, we started feeding computers massive datasets of images labeled with what they contained. The idea was to let the machine _learn_ the patterns and features directly from the data. Algorithms like Support Vector Machines (SVMs) or Random Forests, when fed with the aforementioned handcrafted features, showed promise.
 
-However, the bottleneck remained: human effort was still required to extract those "good" features. We needed a way for the machine to not just learn to classify, but also to learn *what features were important* for classification.
+However, the bottleneck remained: human effort was still required to extract those "good" features. We needed a way for the machine to not just learn to classify, but also to learn _what features were important_ for classification.
 
 ### Deep Learning and CNNs: The Game Changer
 
@@ -59,16 +59,16 @@ This is the heart of a CNN. Instead of processing every pixel individually, a co
 Imagine the kernel as a small magnifying glass looking for a specific pattern. When the pattern under the magnifying glass matches what the kernel is looking for (e.g., a vertical edge), it produces a strong signal in the output. If it doesn't match, the signal is weak.
 
 Mathematically, a 2D convolution operation can be expressed as:
-$$ (I * K)(i, j) = \sum_m \sum_n I(i-m, j-n)K(m, n) $$
+$$ (I \* K)(i, j) = \sum_m \sum_n I(i-m, j-n)K(m, n) $$
 Where $I$ is the input image, $K$ is the kernel, and $(i, j)$ are the coordinates of the output pixel. This operation effectively creates a **feature map**, which highlights where that specific pattern was detected in the original image.
 
-A CNN uses *many* different kernels, each designed to detect a different feature (horizontal edges, vertical edges, diagonal lines, blobs, etc.). These kernels aren't designed by humans; they are *learned* by the network during training!
+A CNN uses _many_ different kernels, each designed to detect a different feature (horizontal edges, vertical edges, diagonal lines, blobs, etc.). These kernels aren't designed by humans; they are _learned_ by the network during training!
 
 #### 2. Activation Functions (ReLU): Adding Non-linearity
 
 After convolution, the output often passes through an activation function. The most popular one in CNNs is the **Rectified Linear Unit (ReLU)**, defined as:
 $$ ReLU(x) = \max(0, x) $$
-ReLU simply sets all negative values to zero and keeps positive values as they are. Why is this important? It introduces *non-linearity* into the network. Without non-linearity, stacking multiple convolutional layers would just result in another linear transformation, limiting the network's ability to learn complex patterns. ReLU allows the network to model highly complex, non-linear relationships in the data, which are essential for understanding real-world images.
+ReLU simply sets all negative values to zero and keeps positive values as they are. Why is this important? It introduces _non-linearity_ into the network. Without non-linearity, stacking multiple convolutional layers would just result in another linear transformation, limiting the network's ability to learn complex patterns. ReLU allows the network to model highly complex, non-linear relationships in the data, which are essential for understanding real-world images.
 
 #### 3. Pooling Layers: Downsampling and Invariance
 
@@ -76,8 +76,9 @@ Next comes the pooling layer, typically **Max Pooling**. This layer reduces the 
 
 How does Max Pooling work? It slides a small window (e.g., 2x2) over the feature map and picks the maximum value within that window.
 This has several benefits:
-*   **Dimensionality Reduction:** It reduces the number of parameters and computation, preventing overfitting.
-*   **Translation Invariance:** By taking the maximum value, the exact position of a feature becomes less important. If an edge shifts slightly, the max pooling output might still be the same, making the network less sensitive to minor shifts or distortions in the input image.
+
+- **Dimensionality Reduction:** It reduces the number of parameters and computation, preventing overfitting.
+- **Translation Invariance:** By taking the maximum value, the exact position of a feature becomes less important. If an edge shifts slightly, the max pooling output might still be the same, making the network less sensitive to minor shifts or distortions in the input image.
 
 #### 4. Fully Connected Layers: Classification
 
@@ -93,13 +94,13 @@ This hierarchical learning, where early layers learn simple features and deeper 
 
 The impact of CNNs and Computer Vision is everywhere:
 
-*   **Autonomous Vehicles:** Object detection (cars, pedestrians, traffic signs), lane keeping, pedestrian tracking.
-*   **Medical Imaging:** Detecting tumors in X-rays or MRIs, diagnosing diseases from microscopic images, surgical assistance.
-*   **Facial Recognition:** Unlocking phones, security surveillance, identifying individuals.
-*   **Augmented Reality (AR):** Overlaying digital information onto the real world (e.g., Snapchat filters, IKEA Place app).
-*   **Retail:** Analyzing customer behavior, inventory management, frictionless checkout stores.
-*   **Manufacturing:** Quality control, anomaly detection in production lines.
-*   **Agriculture:** Monitoring crop health, detecting pests.
+- **Autonomous Vehicles:** Object detection (cars, pedestrians, traffic signs), lane keeping, pedestrian tracking.
+- **Medical Imaging:** Detecting tumors in X-rays or MRIs, diagnosing diseases from microscopic images, surgical assistance.
+- **Facial Recognition:** Unlocking phones, security surveillance, identifying individuals.
+- **Augmented Reality (AR):** Overlaying digital information onto the real world (e.g., Snapchat filters, IKEA Place app).
+- **Retail:** Analyzing customer behavior, inventory management, frictionless checkout stores.
+- **Manufacturing:** Quality control, anomaly detection in production lines.
+- **Agriculture:** Monitoring crop health, detecting pests.
 
 I've personally applied these techniques in projects ranging from classifying different types of plant diseases from leaf images to developing a custom object detection model for specific tools in a workshop setting. The ability to leverage pre-trained models like ResNet or YOLO and fine-tune them for specific tasks is incredibly powerful and democratizes access to this cutting-edge technology.
 
@@ -107,12 +108,12 @@ I've personally applied these techniques in projects ranging from classifying di
 
 Despite its incredible progress, Computer Vision still faces challenges:
 
-*   **Data Scarcity and Bias:** High-quality, labeled data is expensive and time-consuming to acquire. Biases in training data can lead to unfair or inaccurate predictions, especially in sensitive applications like facial recognition.
-*   **Explainability (XAI):** Deep learning models can be "black boxes." Understanding *why* a CNN made a particular prediction is crucial for trust and debugging, especially in critical domains like healthcare.
-*   **Robustness:** CNNs can be vulnerable to "adversarial attacks" – tiny, imperceptible changes to an image that can trick a model into misclassifying it.
-*   **Computational Cost:** Training large CNNs requires significant computational resources.
+- **Data Scarcity and Bias:** High-quality, labeled data is expensive and time-consuming to acquire. Biases in training data can lead to unfair or inaccurate predictions, especially in sensitive applications like facial recognition.
+- **Explainability (XAI):** Deep learning models can be "black boxes." Understanding _why_ a CNN made a particular prediction is crucial for trust and debugging, especially in critical domains like healthcare.
+- **Robustness:** CNNs can be vulnerable to "adversarial attacks" – tiny, imperceptible changes to an image that can trick a model into misclassifying it.
+- **Computational Cost:** Training large CNNs requires significant computational resources.
 
-The future of Computer Vision is bustling with innovation. Researchers are working on more efficient architectures, self-supervised learning (where models learn from unlabeled data), robust models against adversarial attacks, and techniques for greater explainability. The emergence of **Generative Adversarial Networks (GANs)** and **Diffusion Models** allows machines to not just understand images but also to *create* incredibly realistic ones, pushing the boundaries of what's possible.
+The future of Computer Vision is bustling with innovation. Researchers are working on more efficient architectures, self-supervised learning (where models learn from unlabeled data), robust models against adversarial attacks, and techniques for greater explainability. The emergence of **Generative Adversarial Networks (GANs)** and **Diffusion Models** allows machines to not just understand images but also to _create_ incredibly realistic ones, pushing the boundaries of what's possible.
 
 ### Conclusion: My Ongoing Vision Quest
 

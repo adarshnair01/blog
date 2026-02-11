@@ -18,10 +18,10 @@ So, grab a warm drink, and let's embark on this journey together!
 
 Imagine you're tracking your study hours and the corresponding test scores. You might get data points like this:
 
-*   (2 hours, 60 score)
-*   (4 hours, 75 score)
-*   (5 hours, 80 score)
-*   (7 hours, 90 score)
+- (2 hours, 60 score)
+- (4 hours, 75 score)
+- (5 hours, 80 score)
+- (7 hours, 90 score)
 
 If you plot these points on a graph, what do you notice? There's a general trend, right? More study hours usually lead to higher scores. It looks like you could probably draw a straight line that roughly goes through or very close to most of these points.
 
@@ -34,10 +34,11 @@ You probably remember the equation of a straight line from your math classes:
 $y = mx + b$
 
 Where:
-*   $y$ is the output (the test score we want to predict).
-*   $x$ is the input (the study hours).
-*   $m$ is the slope of the line (how much $y$ changes for every unit change in $x$).
-*   $b$ is the y-intercept (the value of $y$ when $x$ is 0).
+
+- $y$ is the output (the test score we want to predict).
+- $x$ is the input (the study hours).
+- $m$ is the slope of the line (how much $y$ changes for every unit change in $x$).
+- $b$ is the y-intercept (the value of $y$ when $x$ is 0).
 
 In machine learning, we often use slightly different notation, but it means the exact same thing. Our predicted output is called $h_\theta(x)$ (pronounced "h of theta of x"), and our parameters ($m$ and $b$) are represented by $\theta_1$ and $\theta_0$ respectively.
 
@@ -45,8 +46,8 @@ So, our machine learning version of the line equation is:
 
 $h_\theta(x) = \theta_0 + \theta_1x$
 
-*   $\theta_0$ (theta naught) is our y-intercept.
-*   $\theta_1$ (theta one) is our slope.
+- $\theta_0$ (theta naught) is our y-intercept.
+- $\theta_1$ (theta one) is our slope.
 
 Our goal? To find the "perfect" $\theta_0$ and $\theta_1$ that define the best-fit line for our data.
 
@@ -67,16 +68,17 @@ So, our **Cost Function**, specifically the **Mean Squared Error (MSE)**, looks 
 $J(\theta_0, \theta_1) = \frac{1}{2m} \sum_{i=1}^{m} (h_\theta(x^{(i)}) - y^{(i)})^2$
 
 Let's break this down:
-*   $J(\theta_0, \theta_1)$: This is our cost function. It takes $\theta_0$ and $\theta_1$ as inputs and outputs a single number representing how "bad" that particular line is.
-*   $\frac{1}{2m}$: This is a scaling factor. $m$ is the total number of data points. We divide by $m$ to get the *average* squared error. The '2' is there for mathematical convenience (it makes the derivative simpler later on, trust me!).
-*   $\sum_{i=1}^{m}$: This means "sum up for all data points from $i=1$ to $m$."
-*   $(h_\theta(x^{(i)}) - y^{(i)})^2$: This is the squared error for a single data point. $(h_\theta(x^{(i)})$ is our prediction, and $y^{(i)}$ is the actual value.
+
+- $J(\theta_0, \theta_1)$: This is our cost function. It takes $\theta_0$ and $\theta_1$ as inputs and outputs a single number representing how "bad" that particular line is.
+- $\frac{1}{2m}$: This is a scaling factor. $m$ is the total number of data points. We divide by $m$ to get the _average_ squared error. The '2' is there for mathematical convenience (it makes the derivative simpler later on, trust me!).
+- $\sum_{i=1}^{m}$: This means "sum up for all data points from $i=1$ to $m$."
+- $(h_\theta(x^{(i)}) - y^{(i)})^2$: This is the squared error for a single data point. $(h_\theta(x^{(i)})$ is our prediction, and $y^{(i)}$ is the actual value.
 
 Our ultimate goal in Linear Regression is to find the values of $\theta_0$ and $\theta_1$ that **minimize** this cost function $J(\theta_0, \theta_1)$. In simpler terms, we want to find the line that has the smallest average squared distance from all our data points.
 
 ### Finding the Minimum: Enter Gradient Descent
 
-Okay, so we have a cost function that tells us how good a line is. Now, how do we *find* the $\theta_0$ and $\theta_1$ that give us the absolute minimum cost?
+Okay, so we have a cost function that tells us how good a line is. Now, how do we _find_ the $\theta_0$ and $\theta_1$ that give us the absolute minimum cost?
 
 Imagine you're standing on a mountain in a dense fog, and your goal is to reach the lowest point in the valley. You can't see the whole valley, but you can feel the slope directly beneath your feet. What would you do? You'd probably take a small step in the steepest downhill direction. Then you'd feel the slope again and take another step. You'd repeat this process until you couldn't go any further downhill – meaning you've reached a local minimum.
 
@@ -87,19 +89,20 @@ Our cost function $J(\theta_0, \theta_1)$ can be visualized as a bowl-shaped sur
 Gradient Descent is an iterative optimization algorithm that works like this:
 
 1.  **Start with initial guesses** for $\theta_0$ and $\theta_1$ (often random values, or simply 0).
-2.  **Repeatedly update** $\theta_0$ and $\theta_1$ by taking a step in the direction opposite to the gradient of the cost function. The gradient tells us the direction of the steepest *ascent*, so we move in the opposite direction to go downhill.
+2.  **Repeatedly update** $\theta_0$ and $\theta_1$ by taking a step in the direction opposite to the gradient of the cost function. The gradient tells us the direction of the steepest _ascent_, so we move in the opposite direction to go downhill.
 
 The update rules for each parameter look like this:
 
 $\theta_j := \theta_j - \alpha \frac{\partial}{\partial \theta_j} J(\theta_0, \theta_1)$
 
 Let's break this update rule down:
-*   $\theta_j$: This represents one of our parameters ($\theta_0$ or $\theta_1$).
-*   $:= $: This means "update $\theta_j$ with the new value on the right."
-*   $\alpha$ (alpha): This is the **learning rate**. It's a small positive number that controls the size of each "step" we take down the mountain.
-    *   If $\alpha$ is too small, Gradient Descent will be very slow to converge (it takes tiny steps).
-    *   If $\alpha$ is too large, it might overshoot the minimum repeatedly and never converge, or even diverge.
-*   $\frac{\partial}{\partial \theta_j} J(\theta_0, \theta_1)$: This is the **partial derivative** of the cost function $J$ with respect to $\theta_j$. It tells us the slope of the cost function at our current $\theta_j$ position. It points in the direction of steepest ascent.
+
+- $\theta_j$: This represents one of our parameters ($\theta_0$ or $\theta_1$).
+- $:= $: This means "update $\theta_j$ with the new value on the right."
+- $\alpha$ (alpha): This is the **learning rate**. It's a small positive number that controls the size of each "step" we take down the mountain.
+  - If $\alpha$ is too small, Gradient Descent will be very slow to converge (it takes tiny steps).
+  - If $\alpha$ is too large, it might overshoot the minimum repeatedly and never converge, or even diverge.
+- $\frac{\partial}{\partial \theta_j} J(\theta_0, \theta_1)$: This is the **partial derivative** of the cost function $J$ with respect to $\theta_j$. It tells us the slope of the cost function at our current $\theta_j$ position. It points in the direction of steepest ascent.
 
 #### The Derivatives
 
@@ -124,7 +127,7 @@ So, our specific update rules become:
 2.  **Update $\theta_1$**:
     $\theta_1 := \theta_1 - \alpha \frac{1}{m} \sum_{i=1}^{m} (h_\theta(x^{(i)}) - y^{(i)}) x^{(i)}$
 
-**Important Note:** You must update $\theta_0$ and $\theta_1$ **simultaneously**. This means you calculate the partial derivatives for *both* $\theta_0$ and $\theta_1$ using the *current* $\theta_0$ and $\theta_1$ values, and only then update both parameters with their new values. Otherwise, you might end up with an incorrect descent path.
+**Important Note:** You must update $\theta_0$ and $\theta_1$ **simultaneously**. This means you calculate the partial derivatives for _both_ $\theta_0$ and $\theta_1$ using the _current_ $\theta_0$ and $\theta_1$ values, and only then update both parameters with their new values. Otherwise, you might end up with an incorrect descent path.
 
 We repeat these updates for many iterations (or until the change in $\theta_0$ and $\theta_1$ becomes very small), and eventually, our $\theta_0$ and $\theta_1$ will converge to the values that minimize our cost function, giving us our "best fit" line!
 
@@ -149,6 +152,7 @@ One crucial practical tip for multivariate linear regression with Gradient Desce
 ### A Few Words on Assumptions and Limitations
 
 While powerful, Linear Regression, like any model, comes with assumptions:
+
 1.  **Linearity**: The relationship between independent variables ($x$) and the dependent variable ($y$) must be linear.
 2.  **Independence**: Observations should be independent of each other.
 3.  **Homoscedasticity**: The variance of the errors should be constant across all levels of the independent variables. (No "funnel" shape in the residuals plot).
@@ -161,10 +165,10 @@ If these assumptions are severely violated, the reliability and interpretability
 
 Linear Regression is more than just a simple algorithm; it's a cornerstone of data science and machine learning for several reasons:
 
-*   **Simplicity and Interpretability**: It's easy to understand, and the coefficients ($\theta_j$) directly tell us the impact of each feature on the target variable.
-*   **Foundation**: Many more complex algorithms build upon its principles. Understanding Linear Regression is key to grasping concepts like regularization (Lasso, Ridge), logistic regression (for classification), and even neural networks.
-*   **Baseline Model**: It often serves as a great baseline to compare more complex models against. If a complicated model doesn't significantly outperform Linear Regression, you might question its necessity.
-*   **Wide Applicability**: From predicting economic trends to optimizing marketing campaigns and forecasting sales, Linear Regression is a workhorse in various industries.
+- **Simplicity and Interpretability**: It's easy to understand, and the coefficients ($\theta_j$) directly tell us the impact of each feature on the target variable.
+- **Foundation**: Many more complex algorithms build upon its principles. Understanding Linear Regression is key to grasping concepts like regularization (Lasso, Ridge), logistic regression (for classification), and even neural networks.
+- **Baseline Model**: It often serves as a great baseline to compare more complex models against. If a complicated model doesn't significantly outperform Linear Regression, you might question its necessity.
+- **Wide Applicability**: From predicting economic trends to optimizing marketing campaigns and forecasting sales, Linear Regression is a workhorse in various industries.
 
 ### Wrapping Up
 

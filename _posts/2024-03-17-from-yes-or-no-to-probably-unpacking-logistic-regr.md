@@ -5,6 +5,7 @@ excerpt: "Ever wondered how computers predict 'yes' or 'no' instead of just numb
 tags: ["Machine Learning", "Logistic Regression", "Classification", "Data Science", "Statistics"]
 author: "Adarsh Nair"
 ---
+
 Welcome, fellow data explorers! Today, we're diving into a cornerstone of machine learning: Logistic Regression. Don't let the "regression" in its name fool you; this elegant algorithm is all about **classification**, helping machines make binary decisions like "spam" or "not spam," "disease" or "no disease," "churn" or "stay."
 
 Imagine you're trying to predict if a student will pass an exam based on the hours they studied. If you used simple Linear Regression, you might get predictions like 0.2 (which doesn't make sense for a "pass/fail" outcome) or even 1.5 (definitely not a pass/fail). Clearly, we need a different approach. We need something that gives us a probability, a value comfortably nestled between 0 and 1, which we can then use to make a confident 'yes' or 'no' decision.
@@ -41,19 +42,19 @@ $\sigma(z) = \frac{1}{1 + e^{-z}}$
 
 Let's break down why this function is so perfect for our needs:
 
-*   **S-shaped Curve:** If you were to plot $\sigma(z)$, you'd see a beautiful S-shaped curve. As $z$ approaches positive infinity, $\sigma(z)$ approaches 1. As $z$ approaches negative infinity, $\sigma(z)$ approaches 0. When $z=0$, $\sigma(0) = \frac{1}{1 + e^0} = \frac{1}{1+1} = 0.5$.
-*   **Probability Interpretation:** We interpret the output of the sigmoid function, $\hat{y} = \sigma(z)$, as the probability that the output $Y$ belongs to class 1, given the input $\mathbf{x}$ and the learned weights $\mathbf{w}$ and bias $b$.
-    
-    $\hat{y} = P(Y=1 | \mathbf{x}; \mathbf{w}, b) = \frac{1}{1 + e^{-(\mathbf{w}^T \mathbf{x} + b)}}$
+- **S-shaped Curve:** If you were to plot $\sigma(z)$, you'd see a beautiful S-shaped curve. As $z$ approaches positive infinity, $\sigma(z)$ approaches 1. As $z$ approaches negative infinity, $\sigma(z)$ approaches 0. When $z=0$, $\sigma(0) = \frac{1}{1 + e^0} = \frac{1}{1+1} = 0.5$.
+- **Probability Interpretation:** We interpret the output of the sigmoid function, $\hat{y} = \sigma(z)$, as the probability that the output $Y$ belongs to class 1, given the input $\mathbf{x}$ and the learned weights $\mathbf{w}$ and bias $b$.
 
-    So, if $\hat{y}$ is 0.8, it means there's an 80% chance the input $\mathbf{x}$ belongs to class 1. If it's 0.2, then there's a 20% chance it belongs to class 1 (and an 80% chance it belongs to class 0).
+  $\hat{y} = P(Y=1 | \mathbf{x}; \mathbf{w}, b) = \frac{1}{1 + e^{-(\mathbf{w}^T \mathbf{x} + b)}}$
+
+  So, if $\hat{y}$ is 0.8, it means there's an 80% chance the input $\mathbf{x}$ belongs to class 1. If it's 0.2, then there's a 20% chance it belongs to class 1 (and an 80% chance it belongs to class 0).
 
 ### Making a Decision: The Decision Boundary
 
 Now that we have probabilities, how do we make a firm "yes" or "no" decision? We introduce a **decision boundary**. Typically, we set a threshold, often 0.5.
 
-*   If $P(Y=1 | \mathbf{x}) \ge 0.5$, we classify the instance as class 1.
-*   If $P(Y=1 | \mathbf{x}) < 0.5$, we classify the instance as class 0.
+- If $P(Y=1 | \mathbf{x}) \ge 0.5$, we classify the instance as class 1.
+- If $P(Y=1 | \mathbf{x}) < 0.5$, we classify the instance as class 0.
 
 This threshold of 0.5 has a neat connection back to our linear score, $z$. Remember that $\sigma(z)=0.5$ when $z=0$. So, our decision boundary is effectively defined by:
 
@@ -79,11 +80,11 @@ Now, if we take the natural logarithm of the odds, we get the **log-odds** (also
 
 $\log(\text{Odds}) = \log(e^z) = z$
 
-Aha! Our linear score $z = \mathbf{w}^T \mathbf{x} + b$ is precisely the log-odds of an instance belonging to class 1. This reveals the true nature of Logistic Regression: it's a linear model of the *log-odds*. This connection is crucial for understanding the statistical foundations and interpretability of the model.
+Aha! Our linear score $z = \mathbf{w}^T \mathbf{x} + b$ is precisely the log-odds of an instance belonging to class 1. This reveals the true nature of Logistic Regression: it's a linear model of the _log-odds_. This connection is crucial for understanding the statistical foundations and interpretability of the model.
 
 ### Learning the Weights: The Cost Function and Gradient Descent
 
-So far, we've seen how Logistic Regression uses a linear combination and the sigmoid function to predict probabilities. But how does the model *learn* the optimal weights $\mathbf{w}$ and bias $b$?
+So far, we've seen how Logistic Regression uses a linear combination and the sigmoid function to predict probabilities. But how does the model _learn_ the optimal weights $\mathbf{w}$ and bias $b$?
 
 Just like with Linear Regression, we need a way to quantify how "wrong" our current predictions are compared to the actual labels. This is the job of the **Cost Function** (or Loss Function).
 
@@ -97,8 +98,8 @@ $L(\hat{y}^{(i)}, y^{(i)}) = -[y^{(i)} \log(\hat{y}^{(i)}) + (1 - y^{(i)}) \log(
 
 Let's dissect this:
 
-*   If the true label $y^{(i)} = 1$: The loss becomes $-\log(\hat{y}^{(i)})$. We want $\hat{y}^{(i)}$ to be close to 1. If $\hat{y}^{(i)}$ is 1, $\log(1)=0$, so the loss is 0. If $\hat{y}^{(i)}$ is close to 0 (meaning we predicted class 0 with high confidence, but it was actually class 1), then $\log(\hat{y}^{(i)})$ approaches negative infinity, making the loss positive infinity – a huge penalty!
-*   If the true label $y^{(i)} = 0$: The loss becomes $-\log(1 - \hat{y}^{(i)})$. We want $\hat{y}^{(i)}$ to be close to 0 (meaning $1 - \hat{y}^{(i)}$ is close to 1). If $1 - \hat{y}^{(i)}$ is 1, the loss is 0. If $1 - \hat{y}^{(i)}$ is close to 0 (meaning we predicted class 1 with high confidence, but it was actually class 0), the loss becomes huge.
+- If the true label $y^{(i)} = 1$: The loss becomes $-\log(\hat{y}^{(i)})$. We want $\hat{y}^{(i)}$ to be close to 1. If $\hat{y}^{(i)}$ is 1, $\log(1)=0$, so the loss is 0. If $\hat{y}^{(i)}$ is close to 0 (meaning we predicted class 0 with high confidence, but it was actually class 1), then $\log(\hat{y}^{(i)})$ approaches negative infinity, making the loss positive infinity – a huge penalty!
+- If the true label $y^{(i)} = 0$: The loss becomes $-\log(1 - \hat{y}^{(i)})$. We want $\hat{y}^{(i)}$ to be close to 0 (meaning $1 - \hat{y}^{(i)}$ is close to 1). If $1 - \hat{y}^{(i)}$ is 1, the loss is 0. If $1 - \hat{y}^{(i)}$ is close to 0 (meaning we predicted class 1 with high confidence, but it was actually class 0), the loss becomes huge.
 
 This function effectively penalizes confident incorrect predictions much more heavily than confident correct predictions, which is exactly what we want for a classifier.
 
@@ -112,10 +113,10 @@ Once we have our cost function, we use an optimization algorithm like **Gradient
 
 Logistic Regression, despite its simplicity, is incredibly powerful and widely used. You'll find it in:
 
-*   **Spam Detection:** Classifying emails as "spam" or "not spam."
-*   **Medical Diagnosis:** Predicting the likelihood of a disease based on symptoms and test results.
-*   **Credit Scoring:** Assessing the probability of loan default.
-*   **Customer Churn Prediction:** Determining if a customer is likely to leave a service.
+- **Spam Detection:** Classifying emails as "spam" or "not spam."
+- **Medical Diagnosis:** Predicting the likelihood of a disease based on symptoms and test results.
+- **Credit Scoring:** Assessing the probability of loan default.
+- **Customer Churn Prediction:** Determining if a customer is likely to leave a service.
 
 It's often the first algorithm data scientists reach for binary classification problems because of its interpretability, efficiency, and robustness. It serves as an excellent baseline model against which more complex models can be compared.
 
@@ -123,9 +124,9 @@ It's often the first algorithm data scientists reach for binary classification p
 
 While powerful, Logistic Regression isn't a silver bullet:
 
-*   **Linear Decision Boundary:** It assumes a linear relationship between the features and the log-odds. If the true decision boundary is highly non-linear, Logistic Regression might struggle unless you engineer new features to capture that non-linearity (e.g., polynomial features).
-*   **Sensitivity to Outliers:** Like Linear Regression, it can be sensitive to extreme outliers, which can skew the decision boundary.
-*   **Multi-class Classification:** By default, Logistic Regression is a binary classifier. For problems with more than two classes, extensions like One-vs-Rest (OvR) or Multinomial Logistic Regression (often called Softmax Regression) are used.
+- **Linear Decision Boundary:** It assumes a linear relationship between the features and the log-odds. If the true decision boundary is highly non-linear, Logistic Regression might struggle unless you engineer new features to capture that non-linearity (e.g., polynomial features).
+- **Sensitivity to Outliers:** Like Linear Regression, it can be sensitive to extreme outliers, which can skew the decision boundary.
+- **Multi-class Classification:** By default, Logistic Regression is a binary classifier. For problems with more than two classes, extensions like One-vs-Rest (OvR) or Multinomial Logistic Regression (often called Softmax Regression) are used.
 
 ### Conclusion
 

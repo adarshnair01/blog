@@ -19,7 +19,7 @@ Before GPT, recurrent neural networks (RNNs) and their more sophisticated cousin
 1.  **Slow Training:** The sequential nature meant they couldn't process words in parallel.
 2.  **Long-Range Dependencies:** Remembering information from many steps ago was hard, leading to what's called the "vanishing gradient problem."
 
-Enter the **Transformer** in 2017, with its groundbreaking paper "Attention Is All You Need." It completely revolutionized how we handle sequences. The core idea? Instead of sequential processing, let the model look at *all* words in a sentence simultaneously and decide which ones are most relevant to each other – this is "attention."
+Enter the **Transformer** in 2017, with its groundbreaking paper "Attention Is All You Need." It completely revolutionized how we handle sequences. The core idea? Instead of sequential processing, let the model look at _all_ words in a sentence simultaneously and decide which ones are most relevant to each other – this is "attention."
 
 GPT, standing for **Generative Pre-trained Transformer**, takes this Transformer architecture and adapts it specifically for generation tasks. Unlike the original Transformer, which has both an encoder (for understanding input) and a decoder (for generating output), GPT models are **decoder-only** architectures. This means they are inherently designed for generating sequences, one token at a time, based on everything they've seen before.
 
@@ -31,26 +31,26 @@ At its heart, GPT is a stack of identical "decoder blocks." Each block processes
 
 Before any computation can happen, our words need to be converted into a numerical format that the model can understand.
 
-*   **Token Embeddings:** Each word (or sub-word, called a "token") in our vocabulary gets mapped to a high-dimensional vector. Words with similar meanings will have similar vectors. These embeddings aren't pre-defined; the model *learns* them during training. It's like teaching the model the nuances of language from scratch!
+- **Token Embeddings:** Each word (or sub-word, called a "token") in our vocabulary gets mapped to a high-dimensional vector. Words with similar meanings will have similar vectors. These embeddings aren't pre-defined; the model _learns_ them during training. It's like teaching the model the nuances of language from scratch!
 
-*   **Positional Encoding:** Transformers process all words at once. This means they lose the crucial information about word order. "Dog bites man" is very different from "Man bites dog." To reintroduce this order, we add a "positional encoding" vector to each token's embedding. This encoding provides information about the token's absolute or relative position in the sequence. A common method uses sine and cosine functions:
+- **Positional Encoding:** Transformers process all words at once. This means they lose the crucial information about word order. "Dog bites man" is very different from "Man bites dog." To reintroduce this order, we add a "positional encoding" vector to each token's embedding. This encoding provides information about the token's absolute or relative position in the sequence. A common method uses sine and cosine functions:
 
-    $PE_{(pos, 2i)} = \sin(pos / 10000^{2i/d_{model}})$
-    $PE_{(pos, 2i+1)} = \cos(pos / 10000^{2i/d_{model}})$
+  $PE_{(pos, 2i)} = \sin(pos / 10000^{2i/d_{model}})$
+  $PE_{(pos, 2i+1)} = \cos(pos / 10000^{2i/d_{model}})$
 
-    Here, $pos$ is the token's position, $i$ is the dimension of the embedding vector, and $d_{model}$ is the dimensionality of the embedding. This clever approach allows the model to infer relative positions between tokens.
+  Here, $pos$ is the token's position, $i$ is the dimension of the embedding vector, and $d_{model}$ is the dimensionality of the embedding. This clever approach allows the model to infer relative positions between tokens.
 
 So, the actual input to our first decoder block is the sum of the token embedding and its positional encoding.
 
 #### 2. The Star of the Show: Masked Multi-Head Self-Attention
 
-This is where the magic truly happens. Self-attention allows each word in a sequence to "look" at all other words and determine their relevance. For example, in "The animal didn't cross the street because *it* was too tired," self-attention helps the model understand that "it" refers to "the animal."
+This is where the magic truly happens. Self-attention allows each word in a sequence to "look" at all other words and determine their relevance. For example, in "The animal didn't cross the street because _it_ was too tired," self-attention helps the model understand that "it" refers to "the animal."
 
 The core idea involves three learned linear projections (fancy matrix multiplications) of our input embeddings:
 
-*   **Query (Q):** What am I looking for? (The current word's perspective)
-*   **Key (K):** What do I have? (Other words' perspectives)
-*   **Value (V):** What information do I carry? (The actual content of other words)
+- **Query (Q):** What am I looking for? (The current word's perspective)
+- **Key (K):** What do I have? (Other words' perspectives)
+- **Value (V):** What information do I carry? (The actual content of other words)
 
 The attention score is calculated by taking the dot product of the Query with all Keys, scaling it, and then applying a softmax function to get attention weights. These weights tell us how much each other word's Value should contribute to the current word's new representation.
 
@@ -58,7 +58,7 @@ $\text{Attention}(Q, K, V) = \text{softmax}(\frac{QK^T}{\sqrt{d_k}})V$
 
 The division by $\sqrt{d_k}$ (the square root of the dimension of the keys) is a scaling factor to prevent the dot products from becoming too large, which could push the softmax into regions with very small gradients.
 
-**Masked Attention (Crucial for GPT):** Since GPT is generative and predicts the *next* word, it's vital that it doesn't "cheat" by looking at future words during training. This is where **masked self-attention** comes in. We apply a "mask" (typically by setting future word scores to negative infinity before the softmax) to prevent any token from attending to subsequent tokens in the sequence. It's like putting blinders on the model, forcing it to predict purely based on past context.
+**Masked Attention (Crucial for GPT):** Since GPT is generative and predicts the _next_ word, it's vital that it doesn't "cheat" by looking at future words during training. This is where **masked self-attention** comes in. We apply a "mask" (typically by setting future word scores to negative infinity before the softmax) to prevent any token from attending to subsequent tokens in the sequence. It's like putting blinders on the model, forcing it to predict purely based on past context.
 
 **Multi-Head Attention:** Instead of just one set of Q, K, V projections, we have multiple independent "attention heads." Each head learns to focus on different aspects of the relationships between words. For instance, one head might focus on grammatical dependencies, while another might capture semantic relationships. The outputs from all heads are then concatenated and linearly transformed to produce the final output for the multi-head attention layer. This enriches the model's ability to capture diverse patterns.
 
@@ -70,13 +70,13 @@ After the attention mechanism, the output of the multi-head attention layer pass
 
 Two important techniques are applied repeatedly within each decoder block:
 
-*   **Residual Connections (Add):** The output of each sub-layer (attention, FFN) is added to its input. This is represented as $x + \text{Sublayer}(x)$. This "skip connection" helps mitigate the vanishing gradient problem in deep networks, allowing information to flow more directly through the layers and making it easier to train very deep models.
+- **Residual Connections (Add):** The output of each sub-layer (attention, FFN) is added to its input. This is represented as $x + \text{Sublayer}(x)$. This "skip connection" helps mitigate the vanishing gradient problem in deep networks, allowing information to flow more directly through the layers and making it easier to train very deep models.
 
-*   **Layer Normalization (Normalize):** After the residual connection, Layer Normalization is applied. Unlike Batch Normalization which normalizes across the batch for each feature, Layer Normalization normalizes the features *within each individual sample*. This helps stabilize training by keeping the activations within a reasonable range and speeds up convergence.
+- **Layer Normalization (Normalize):** After the residual connection, Layer Normalization is applied. Unlike Batch Normalization which normalizes across the batch for each feature, Layer Normalization normalizes the features _within each individual sample_. This helps stabilize training by keeping the activations within a reasonable range and speeds up convergence.
 
 ### Putting It All Together: The GPT Stack
 
-A GPT model is constructed by stacking many of these identical decoder blocks on top of each other. The output of one block becomes the input to the next. The initial input (embeddings + positional encodings) goes into the first block, and the final output of the last block is then fed into a final linear layer and a softmax function. This output layer's job is to predict the probability distribution over the entire vocabulary for the *next token*.
+A GPT model is constructed by stacking many of these identical decoder blocks on top of each other. The output of one block becomes the input to the next. The initial input (embeddings + positional encodings) goes into the first block, and the final output of the last block is then fed into a final linear layer and a softmax function. This output layer's job is to predict the probability distribution over the entire vocabulary for the _next token_.
 
 ### How GPT Learns: Pre-training and Prediction
 

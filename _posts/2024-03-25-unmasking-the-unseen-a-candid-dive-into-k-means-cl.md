@@ -5,6 +5,7 @@ excerpt: "Ever wondered how machines group seemingly random data points into mea
 tags: ["K-Means", "Clustering", "Unsupervised Learning", "Machine Learning", "Data Science"]
 author: "Adarsh Nair"
 ---
+
 Hey everyone!
 
 Welcome back to the lab – or rather, my little corner of the internet where we dissect fascinating bits of data science. Today, we're tackling a concept that, despite its simplicity, underpins countless real-world applications: **K-Means Clustering**.
@@ -18,8 +19,9 @@ Sound familiar? This is the core challenge of **unsupervised learning**, a branc
 At its heart, K-Means is an algorithm that partitions `n` observations into `k` clusters. The goal is simple: each observation belongs to the cluster whose mean (or "centroid") is closest to it. Think of it like a game of musical chairs, but for data points, with the centroids being the chairs.
 
 Why "K-Means"?
-*   **K** represents the number of clusters we want to find.
-*   **Means** refers to the average position (centroid) of the data points within each cluster.
+
+- **K** represents the number of clusters we want to find.
+- **Means** refers to the average position (centroid) of the data points within each cluster.
 
 It’s like saying, "Hey, I believe there are `K` natural groups here. Let's find the 'center' of each group and then assign every data point to its closest center." Elegant, right?
 
@@ -41,7 +43,7 @@ With `K` chosen, the algorithm needs a starting point. It randomly selects `K` d
 
 #### Step 3: Assign Points to Clusters (The "E" for Expectation Step)
 
-Now the real work begins! For every single data point in your dataset, the algorithm calculates its distance to *each* of the `K` centroids. Whichever centroid is closest, that's the cluster the data point is assigned to.
+Now the real work begins! For every single data point in your dataset, the algorithm calculates its distance to _each_ of the `K` centroids. Whichever centroid is closest, that's the cluster the data point is assigned to.
 
 How do we measure "closeness"? The most common method is the **Euclidean distance**, which you might remember from geometry class. For two points, $\mathbf{x} = (x_1, x_2, \dots, x_D)$ and $\mathbf{c} = (c_1, c_2, \dots, c_D)$ in D-dimensional space, the Euclidean distance is:
 
@@ -51,7 +53,7 @@ Think of it as the straight-line distance between two points. Every data point e
 
 #### Step 4: Update Centroids (The "M" for Maximization Step)
 
-Once all data points have been assigned to their nearest cluster, the centroids themselves need to move. Each centroid is recalculated by taking the *mean* (average) of all the data points currently assigned to its cluster.
+Once all data points have been assigned to their nearest cluster, the centroids themselves need to move. Each centroid is recalculated by taking the _mean_ (average) of all the data points currently assigned to its cluster.
 
 If $C_j$ represents the set of data points assigned to cluster $j$, then the new centroid $\mathbf{c}_j$ for that cluster is:
 
@@ -61,7 +63,7 @@ This step is crucial because it ensures that each centroid is truly at the "cent
 
 #### Step 5: Repeat Until Convergence
 
-Steps 3 and 4 are repeated iteratively. Data points are reassigned to their nearest *newly moved* centroids, and then the centroids are recalculated again. This process continues until one of two conditions is met:
+Steps 3 and 4 are repeated iteratively. Data points are reassigned to their nearest _newly moved_ centroids, and then the centroids are recalculated again. This process continues until one of two conditions is met:
 
 1.  **Convergence:** The centroids no longer move significantly between iterations, meaning the cluster assignments have stabilized. The clusters have found their "happy places."
 2.  **Maximum Iterations:** A predefined maximum number of iterations is reached, preventing the algorithm from running indefinitely.
@@ -77,11 +79,12 @@ WCSS is the sum of the squared distances between each data point and the centroi
 $$J = \sum_{j=1}^K \sum_{\mathbf{x} \in C_j} \| \mathbf{x} - \mathbf{c}_j \|^2$$
 
 Here:
-*   $K$ is the number of clusters.
-*   $C_j$ is the set of points in cluster $j$.
-*   $\mathbf{x}$ is a data point.
-*   $\mathbf{c}_j$ is the centroid of cluster $j$.
-*   $\| \mathbf{x} - \mathbf{c}_j \|^2$ is the squared Euclidean distance between point $\mathbf{x}$ and centroid $\mathbf{c}_j$.
+
+- $K$ is the number of clusters.
+- $C_j$ is the set of points in cluster $j$.
+- $\mathbf{x}$ is a data point.
+- $\mathbf{c}_j$ is the centroid of cluster $j$.
+- $\| \mathbf{x} - \mathbf{c}_j \|^2$ is the squared Euclidean distance between point $\mathbf{x}$ and centroid $\mathbf{c}_j$.
 
 Minimizing WCSS means we want to make the clusters as "tight" and compact as possible. We want points within a cluster to be very close to their centroid, implying a strong similarity. K-Means guarantees that it will converge to a local minimum of this objective function.
 
@@ -97,29 +100,29 @@ The "elbow" indicates a good balance between having too few clusters (high WCSS)
 
 ### Strengths of K-Means
 
-*   **Simplicity and Interpretability:** It's straightforward to understand and implement. The clusters are defined by their centroids, which are easy to interpret.
-*   **Computational Efficiency:** For datasets with a large number of observations, K-Means is generally quite fast, especially compared to more complex clustering algorithms. Its time complexity is approximately $O(n \cdot K \cdot D \cdot I)$, where $n$ is data points, $K$ is clusters, $D$ is dimensions, and $I$ is iterations.
-*   **Versatility:** It's widely used across various domains for tasks like customer segmentation, document analysis, image compression, and anomaly detection.
+- **Simplicity and Interpretability:** It's straightforward to understand and implement. The clusters are defined by their centroids, which are easy to interpret.
+- **Computational Efficiency:** For datasets with a large number of observations, K-Means is generally quite fast, especially compared to more complex clustering algorithms. Its time complexity is approximately $O(n \cdot K \cdot D \cdot I)$, where $n$ is data points, $K$ is clusters, $D$ is dimensions, and $I$ is iterations.
+- **Versatility:** It's widely used across various domains for tasks like customer segmentation, document analysis, image compression, and anomaly detection.
 
 ### Limitations and Considerations
 
 No algorithm is perfect, and K-Means has its quirks:
 
-*   **Sensitive to Initialization:** Because centroids are randomly initialized, different runs of K-Means can yield different clusterings, especially with suboptimal starting points. This is often mitigated by running the algorithm multiple times with different initializations and choosing the result with the lowest WCSS.
-*   **Requires Specifying `K`:** As discussed, deciding `K` beforehand can be challenging without prior domain knowledge.
-*   **Assumes Spherical Clusters:** K-Means implicitly assumes that clusters are roughly spherical and of similar size and density. It struggles with clusters of irregular shapes (e.g., crescent moons, intertwined spirals) or varying densities.
-*   **Sensitive to Outliers:** Outliers can drastically pull centroids towards them, distorting cluster boundaries. Preprocessing steps like outlier detection or using more robust clustering methods might be necessary.
-*   **Numerical Data Only:** K-Means works with numerical data. Categorical features often require encoding before being used with K-Means.
+- **Sensitive to Initialization:** Because centroids are randomly initialized, different runs of K-Means can yield different clusterings, especially with suboptimal starting points. This is often mitigated by running the algorithm multiple times with different initializations and choosing the result with the lowest WCSS.
+- **Requires Specifying `K`:** As discussed, deciding `K` beforehand can be challenging without prior domain knowledge.
+- **Assumes Spherical Clusters:** K-Means implicitly assumes that clusters are roughly spherical and of similar size and density. It struggles with clusters of irregular shapes (e.g., crescent moons, intertwined spirals) or varying densities.
+- **Sensitive to Outliers:** Outliers can drastically pull centroids towards them, distorting cluster boundaries. Preprocessing steps like outlier detection or using more robust clustering methods might be necessary.
+- **Numerical Data Only:** K-Means works with numerical data. Categorical features often require encoding before being used with K-Means.
 
 ### Real-World Applications
 
 Beyond the LEGO bricks, K-Means is a workhorse in the real world:
 
-*   **Customer Segmentation:** Grouping customers based on purchasing behavior or demographics to tailor marketing strategies.
-*   **Image Compression:** Reducing the number of colors in an image by clustering similar colors together, representing them with their centroid color.
-*   **Document Clustering:** Organizing large collections of text documents into topics for easier navigation and analysis.
-*   **Geospatial Analysis:** Identifying areas with similar characteristics, such as crime hotspots or regions with similar ecological features.
-*   **Anomaly Detection:** Data points that are far from any cluster centroid could be identified as anomalies or outliers.
+- **Customer Segmentation:** Grouping customers based on purchasing behavior or demographics to tailor marketing strategies.
+- **Image Compression:** Reducing the number of colors in an image by clustering similar colors together, representing them with their centroid color.
+- **Document Clustering:** Organizing large collections of text documents into topics for easier navigation and analysis.
+- **Geospatial Analysis:** Identifying areas with similar characteristics, such as crime hotspots or regions with similar ecological features.
+- **Anomaly Detection:** Data points that are far from any cluster centroid could be identified as anomalies or outliers.
 
 ### Wrapping Up
 

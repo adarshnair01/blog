@@ -1,7 +1,7 @@
 ---
 title: "Unraveling the Magic of Computer Vision: My Journey into Convolutional Neural Networks"
 date: "2025-05-27"
-excerpt: "Ever wondered how computers \"see\" and understand the world around them? This post takes you on a journey through the fascinating architecture of Convolutional Neural Networks, the true artists of machine vision."
+excerpt: 'Ever wondered how computers "see" and understand the world around them? This post takes you on a journey through the fascinating architecture of Convolutional Neural Networks, the true artists of machine vision.'
 tags: ["Machine Learning", "Deep Learning", "Computer Vision", "Neural Networks", "CNNs"]
 author: "Adarsh Nair"
 ---
@@ -10,9 +10,9 @@ Hello fellow explorers of the digital frontier!
 
 Have you ever stopped to think about how incredible our own vision system is? We instantly recognize faces, differentiate a cat from a dog, read text, and navigate complex environments, all without conscious effort. It’s truly astounding! For a long time, enabling computers to perform even a fraction of these tasks seemed like science fiction. Early attempts at "computer vision" were often clunky, rule-based systems that struggled with variations in lighting, angle, or even slight occlusions.
 
-Then came the revolution: Neural Networks. While standard neural networks showed promise, they faced a massive challenge when it came to images. Imagine trying to feed a 100x100 pixel grayscale image into a fully connected neural network. That's 10,000 input neurons! For a color image (100x100x3), it's 30,000! Now, if each of those input neurons connected to, say, 100 neurons in the first hidden layer, we're talking about 3 million connections *just for that first layer*. The number of parameters quickly becomes astronomical, leading to slow training, huge memory requirements, and a high risk of overfitting. It was like trying to drink from a firehose.
+Then came the revolution: Neural Networks. While standard neural networks showed promise, they faced a massive challenge when it came to images. Imagine trying to feed a 100x100 pixel grayscale image into a fully connected neural network. That's 10,000 input neurons! For a color image (100x100x3), it's 30,000! Now, if each of those input neurons connected to, say, 100 neurons in the first hidden layer, we're talking about 3 million connections _just for that first layer_. The number of parameters quickly becomes astronomical, leading to slow training, huge memory requirements, and a high risk of overfitting. It was like trying to drink from a firehose.
 
-This is where Convolutional Neural Networks (CNNs), or ConvNets, burst onto the scene, fundamentally changing the game for computer vision. When I first encountered CNNs, they felt like magic. How could a computer learn to *see*? My journey into understanding them has been one of gradual enlightenment, breaking down this complex architecture into its elegant, powerful components. I invite you to join me as we peel back the layers and discover the brilliance behind these networks.
+This is where Convolutional Neural Networks (CNNs), or ConvNets, burst onto the scene, fundamentally changing the game for computer vision. When I first encountered CNNs, they felt like magic. How could a computer learn to _see_? My journey into understanding them has been one of gradual enlightenment, breaking down this complex architecture into its elegant, powerful components. I invite you to join me as we peel back the layers and discover the brilliance behind these networks.
 
 ### The Heart of the Matter: Convolution!
 
@@ -60,8 +60,9 @@ $ (-10 + 0 + 30) + (-10 + 0 + 30) + (-10 + 0 + 30) = 20 + 20 + 20 = 60 $
 This "60" is the first pixel in our feature map. We then slide the filter by a certain number of pixels (called the **stride**) and repeat the process. If the stride is 1, we move one pixel at a time. If the stride is 2, we skip a pixel.
 
 **Why is this brilliant?**
+
 1.  **Locality:** Filters only look at small, local regions of the image. This mirrors how our brain processes visual information – we focus on local features before combining them.
-2.  **Parameter Sharing:** The *same* filter is applied across the *entire* image. This is incredibly powerful! If a vertical edge detector is useful in one part of the image (e.g., detecting a tree trunk), it's likely useful in another part (e.g., detecting a building edge). This dramatically reduces the number of parameters the network needs to learn, making it much more efficient and less prone to overfitting than a fully connected layer.
+2.  **Parameter Sharing:** The _same_ filter is applied across the _entire_ image. This is incredibly powerful! If a vertical edge detector is useful in one part of the image (e.g., detecting a tree trunk), it's likely useful in another part (e.g., detecting a building edge). This dramatically reduces the number of parameters the network needs to learn, making it much more efficient and less prone to overfitting than a fully connected layer.
 3.  **Multiple Filters:** A convolutional layer doesn't just have one filter; it has many! Each filter learns to detect a different feature – one might look for horizontal edges, another for corners, another for specific textures, and so on. Each filter produces its own feature map, and these feature maps are stacked together to form the output of the convolutional layer.
 
 ### Adding a Spark: Activation Functions
@@ -79,8 +80,8 @@ Following a convolutional layer and an activation function, we often find a **po
 
 The most common types of pooling are:
 
-*   **Max Pooling:** This is like a "spotlight" operator. It slides a small window (e.g., 2x2) over the feature map and selects the *maximum* value within that window.
-*   **Average Pooling:** Similar to Max Pooling, but it calculates the *average* value within the window.
+- **Max Pooling:** This is like a "spotlight" operator. It slides a small window (e.g., 2x2) over the feature map and selects the _maximum_ value within that window.
+- **Average Pooling:** Similar to Max Pooling, but it calculates the _average_ value within the window.
 
 Let's illustrate Max Pooling with a small 4x4 feature map and a 2x2 pooling window with a stride of 2:
 
@@ -94,10 +95,10 @@ Feature Map:
 
 With a 2x2 window and stride 2, we take the max from each 2x2 block:
 
-*   Top-left block `[[1,1],[5,6]]` -> max is 6
-*   Top-right block `[[2,4],[7,8]]` -> max is 8
-*   Bottom-left block `[[3,2],[1,2]]` -> max is 3
-*   Bottom-right block `[[1,0],[3,4]]` -> max is 4
+- Top-left block `[[1,1],[5,6]]` -> max is 6
+- Top-right block `[[2,4],[7,8]]` -> max is 8
+- Bottom-left block `[[3,2],[1,2]]` -> max is 3
+- Bottom-right block `[[1,0],[3,4]]` -> max is 4
 
 The resulting pooled feature map would be:
 
@@ -109,9 +110,9 @@ Pooled Feature Map:
 
 **Benefits of Pooling:**
 
-*   **Dimensionality Reduction:** Reduces the size of the representation, making computation faster.
-*   **Translation Invariance:** Makes the network more robust to small shifts or distortions in the input image. If an important feature moves a few pixels, its maximum value will likely still be captured within the pooling window.
-*   **Reduces Overfitting:** Fewer parameters to learn.
+- **Dimensionality Reduction:** Reduces the size of the representation, making computation faster.
+- **Translation Invariance:** Makes the network more robust to small shifts or distortions in the input image. If an important feature moves a few pixels, its maximum value will likely still be captured within the pooling window.
+- **Reduces Overfitting:** Fewer parameters to learn.
 
 ### The Full Picture: A CNN's Architecture
 
@@ -134,21 +135,21 @@ During training, we feed the network millions of labeled images (e.g., "this ima
 
 ### Why CNNs are So Powerful
 
-*   **Hierarchical Feature Learning:** They automatically learn a hierarchy of features, from simple (edges, textures) to complex (object parts, entire objects).
-*   **Parameter Efficiency:** Weight sharing in convolutional layers drastically reduces the number of parameters compared to fully connected networks for images.
-*   **Translational Invariance:** Because filters scan the entire image, a CNN can recognize a feature (like an eye) regardless of where it appears in the image. This is a huge advantage over traditional methods.
-*   **Spatial Relationships:** Convolution inherently respects the spatial relationships between pixels, which is crucial for understanding images.
+- **Hierarchical Feature Learning:** They automatically learn a hierarchy of features, from simple (edges, textures) to complex (object parts, entire objects).
+- **Parameter Efficiency:** Weight sharing in convolutional layers drastically reduces the number of parameters compared to fully connected networks for images.
+- **Translational Invariance:** Because filters scan the entire image, a CNN can recognize a feature (like an eye) regardless of where it appears in the image. This is a huge advantage over traditional methods.
+- **Spatial Relationships:** Convolution inherently respects the spatial relationships between pixels, which is crucial for understanding images.
 
 ### Beyond Classification: The Versatility of CNNs
 
 While image classification (e.g., identifying objects in a photo) is a cornerstone application, CNNs are incredibly versatile and power countless other computer vision tasks:
 
-*   **Object Detection:** Not just *what* is in the image, but *where* it is (e.g., drawing bounding boxes around all cars in a street scene).
-*   **Image Segmentation:** Classifying every single pixel in an image (e.g., labeling which pixels belong to a person, a car, or the road).
-*   **Facial Recognition:** Identifying individuals from images or video streams.
-*   **Medical Imaging:** Detecting diseases from X-rays, MRIs, and CT scans.
-*   **Autonomous Driving:** Helping self-driving cars perceive their surroundings.
-*   **Generative Models:** Creating realistic fake images and videos (think deepfakes or AI art).
+- **Object Detection:** Not just _what_ is in the image, but _where_ it is (e.g., drawing bounding boxes around all cars in a street scene).
+- **Image Segmentation:** Classifying every single pixel in an image (e.g., labeling which pixels belong to a person, a car, or the road).
+- **Facial Recognition:** Identifying individuals from images or video streams.
+- **Medical Imaging:** Detecting diseases from X-rays, MRIs, and CT scans.
+- **Autonomous Driving:** Helping self-driving cars perceive their surroundings.
+- **Generative Models:** Creating realistic fake images and videos (think deepfakes or AI art).
 
 ### My Takeaway: A Glimpse into AI's Future
 

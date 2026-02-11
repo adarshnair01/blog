@@ -28,10 +28,10 @@ $\hat{y} = \beta_0 + \beta_1x$
 
 Let's break down these terms:
 
-*   $\hat{y}$ (pronounced "y-hat"): This is our **predicted value**. It's what our model estimates for the output variable.
-*   $x$: This is our **input variable** (or independent variable). It's the feature we're using to make a prediction (e.g., study hours, temperature).
-*   $\beta_0$ (beta-nought): This is the **y-intercept**. It's the value of $\hat{y}$ when $x$ is 0. Think of it as the baseline value. In our study hours example, it might represent the score a student could expect even if they studied zero hours (perhaps from prior knowledge or luck!).
-*   $\beta_1$ (beta-one): This is the **slope** of the line. It tells us how much $\hat{y}$ changes for every one-unit increase in $x$. If $\beta_1$ is 5, it means for every extra hour studied, the test score is predicted to increase by 5 points.
+- $\hat{y}$ (pronounced "y-hat"): This is our **predicted value**. It's what our model estimates for the output variable.
+- $x$: This is our **input variable** (or independent variable). It's the feature we're using to make a prediction (e.g., study hours, temperature).
+- $\beta_0$ (beta-nought): This is the **y-intercept**. It's the value of $\hat{y}$ when $x$ is 0. Think of it as the baseline value. In our study hours example, it might represent the score a student could expect even if they studied zero hours (perhaps from prior knowledge or luck!).
+- $\beta_1$ (beta-one): This is the **slope** of the line. It tells us how much $\hat{y}$ changes for every one-unit increase in $x$. If $\beta_1$ is 5, it means for every extra hour studied, the test score is predicted to increase by 5 points.
 
 When we have more than one input variable (e.g., predicting house prices based on size, number of bedrooms, and location), we move to **Multiple Linear Regression**. The equation expands:
 
@@ -77,8 +77,8 @@ Gradient Descent is an iterative optimization algorithm. Imagine you're standing
 
 Once you've fitted your line, understanding the coefficients is crucial:
 
-*   **$\beta_0$ (Intercept):** This is the baseline. If all your input variables are zero, this is your predicted output. Be careful though; sometimes $x=0$ isn't a meaningful point (e.g., predicting salary based on years of experience, where 0 years might mean a different context).
-*   **$\beta_1$ (Slope):** This is the heart of your prediction. A positive $\beta_1$ means as $x$ increases, $\hat{y}$ increases. A negative $\beta_1$ means as $x$ increases, $\hat{y}$ decreases. The magnitude tells you **how much** $\hat{y}$ changes for a one-unit change in $x$.
+- **$\beta_0$ (Intercept):** This is the baseline. If all your input variables are zero, this is your predicted output. Be careful though; sometimes $x=0$ isn't a meaningful point (e.g., predicting salary based on years of experience, where 0 years might mean a different context).
+- **$\beta_1$ (Slope):** This is the heart of your prediction. A positive $\beta_1$ means as $x$ increases, $\hat{y}$ increases. A negative $\beta_1$ means as $x$ increases, $\hat{y}$ decreases. The magnitude tells you **how much** $\hat{y}$ changes for a one-unit change in $x$.
 
 #### How Good Is Our Line? Introducing $R^2$
 
@@ -88,14 +88,14 @@ $R^2 = 1 - \frac{RSS}{TSS}$
 
 Where:
 
-*   $RSS$ is the Residual Sum of Squares (our errors, as defined above).
-*   $TSS$ is the Total Sum of Squares ($TSS = \sum_{i=1}^n (y_i - \bar{y})^2$). This measures the total variation in the actual $y$ values around their mean ($\bar{y}$).
+- $RSS$ is the Residual Sum of Squares (our errors, as defined above).
+- $TSS$ is the Total Sum of Squares ($TSS = \sum_{i=1}^n (y_i - \bar{y})^2$). This measures the total variation in the actual $y$ values around their mean ($\bar{y}$).
 
 Think of $R^2$ as the proportion of the variance in the dependent variable ($y$) that is predictable from the independent variable(s) ($x$). It ranges from 0 to 1:
 
-*   An $R^2$ of 1 means your model perfectly explains all the variance in $y$ (a perfect fit).
-*   An $R^2$ of 0 means your model explains none of the variance in $y$ (it's as good as just predicting the average of $y$).
-*   An $R^2$ of 0.75 means 75% of the variation in $y$ can be explained by your $x$ variable(s).
+- An $R^2$ of 1 means your model perfectly explains all the variance in $y$ (a perfect fit).
+- An $R^2$ of 0 means your model explains none of the variance in $y$ (it's as good as just predicting the average of $y$).
+- An $R^2$ of 0.75 means 75% of the variation in $y$ can be explained by your $x$ variable(s).
 
 A higher $R^2$ generally indicates a better fit, but beware! A high $R^2$ doesn't always mean your model is 'good' or that you've found a causal relationship. It just means the line you found is a good statistical fit.
 
@@ -115,17 +115,17 @@ Always check these assumptions using diagnostic plots (like residual plots) to e
 
 **Use Linear Regression when:**
 
-*   You suspect a linear relationship between your variables.
-*   You need a simple, interpretable model.
-*   You want a baseline model to compare more complex models against.
-*   The assumptions mentioned above are reasonably met.
+- You suspect a linear relationship between your variables.
+- You need a simple, interpretable model.
+- You want a baseline model to compare more complex models against.
+- The assumptions mentioned above are reasonably met.
 
 **Avoid (or be cautious with) Linear Regression when:**
 
-*   The relationship is clearly non-linear (e.g., exponential growth, S-curves).
-*   Your data has significant outliers that can severely skew the line.
-*   You need to capture complex interactions between variables that a simple linear model can't represent.
-*   Your dependent variable is categorical (e.g., predicting 'yes' or 'no'). For this, logistic regression is often used.
+- The relationship is clearly non-linear (e.g., exponential growth, S-curves).
+- Your data has significant outliers that can severely skew the line.
+- You need to capture complex interactions between variables that a simple linear model can't represent.
+- Your dependent variable is categorical (e.g., predicting 'yes' or 'no'). For this, logistic regression is often used.
 
 ### A Quick Peek at Practical Application
 

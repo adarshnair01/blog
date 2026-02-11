@@ -4,6 +4,7 @@ date: "2024-02-26"
 excerpt: "Ever wonder how computers learn to make choices, just like we do? Today, we're peeling back the layers on Decision Trees, a foundational machine learning algorithm that mirrors our everyday decision-making process."
 author: "Adarsh Nair"
 ---
+
 Hey there, fellow data explorer!
 
 Have you ever played a game of "20 Questions"? Or perhaps navigated a "choose your own adventure" book? That's precisely the intuition behind one of the most elegant and understandable algorithms in machine learning: the **Decision Tree**. As someone passionate about making sense of data, I find Decision Trees particularly captivating because they explain their reasoning in a way that feels incredibly human.
@@ -12,10 +13,10 @@ Have you ever played a game of "20 Questions"? Or perhaps navigated a "choose yo
 
 Imagine a flowchart. That's essentially what a Decision Tree is! It's a non-parametric supervised learning algorithm used for both classification and regression tasks. At its core, it breaks down a dataset into smaller and smaller subsets while at the same time an associated decision tree is incrementally developed. The final result is a tree with **decision nodes** and **leaf nodes**.
 
--   **Root Node**: The very first decision point. It represents the entire dataset.
--   **Internal Nodes**: These are decision points where the data is split based on a specific feature (a "question" about your data).
--   **Branches**: The pathways leading from a decision node, representing the possible outcomes of the question.
--   **Leaf Nodes**: These are the final outcomes or predictions. Once you reach a leaf, you have your answer!
+- **Root Node**: The very first decision point. It represents the entire dataset.
+- **Internal Nodes**: These are decision points where the data is split based on a specific feature (a "question" about your data).
+- **Branches**: The pathways leading from a decision node, representing the possible outcomes of the question.
+- **Leaf Nodes**: These are the final outcomes or predictions. Once you reach a leaf, you have your answer!
 
 ### How Does It "Decide"? The Magic Under the Hood
 
@@ -44,5 +45,4 @@ But fear not! These challenges paved the way for more robust algorithms like **R
 
 ### Your Turn to Decide!
 
-Decision Trees offer a fantastic entry point into the world of machine learning. Their transparency allows us to peek into the "mind" of the algorithm, understanding *why* a particular decision was made. So next time you're making a choice, remember the humble Decision Tree – a simple yet powerful structure guiding us through the complex landscape of data. Go on, build one yourself and see the magic unfold!
-
+Decision Trees offer a fantastic entry point into the world of machine learning. Their transparency allows us to peek into the "mind" of the algorithm, understanding _why_ a particular decision was made. So next time you're making a choice, remember the humble Decision Tree – a simple yet powerful structure guiding us through the complex landscape of data. Go on, build one yourself and see the magic unfold!

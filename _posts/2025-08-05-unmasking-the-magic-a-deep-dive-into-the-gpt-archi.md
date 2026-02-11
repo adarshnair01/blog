@@ -16,7 +16,7 @@ Before GPT, the world of Natural Language Processing (NLP) was largely dominated
 
 Think of it like reading a book one word at a time, trying to remember everything that came before. While effective for short sentences, they had two major Achilles' heels:
 
-1.  **Sequential Bottleneck:** They *had* to process words one after another. This made them slow and couldn't fully leverage the parallel processing power of modern GPUs.
+1.  **Sequential Bottleneck:** They _had_ to process words one after another. This made them slow and couldn't fully leverage the parallel processing power of modern GPUs.
 2.  **Long-Range Dependencies:** Remembering information from paragraphs ago was incredibly difficult. By the time an RNN reached the end of a long sentence, the initial context might have faded, leading to issues with understanding complex relationships.
 
 In 2017, a groundbreaking paper titled "Attention Is All You Need" introduced the **Transformer architecture**, which completely revolutionized how we handle sequences. The core idea? Ditch sequential processing for a mechanism called **self-attention**.
@@ -31,7 +31,7 @@ Our computers don't understand words like "cat" or "algorithm." They understand 
 
 #### 2. Positional Encoding: Because Order Still Matters
 
-The brilliance of the Transformer is its ability to process all words in a sentence *simultaneously*. But herein lies a problem: if words are processed in parallel, how do we know their order? "Dog bites man" means something very different from "Man bites dog."
+The brilliance of the Transformer is its ability to process all words in a sentence _simultaneously_. But herein lies a problem: if words are processed in parallel, how do we know their order? "Dog bites man" means something very different from "Man bites dog."
 
 This is where **Positional Encoding** comes in. Instead of relying on sequential processing, we inject information about the position of each word directly into its embedding vector. Imagine adding a small, unique "tag" to each word that tells the model where it sits in the sequence.
 
@@ -41,9 +41,10 @@ $PE_{(pos, 2i)} = \sin(pos / 10000^{2i/d_{model}})$
 $PE_{(pos, 2i+1)} = \cos(pos / 10000^{2i/d_{model}})$
 
 Where:
-*   `pos` is the position of the token in the sequence.
-*   `i` is the dimension within the embedding vector.
-*   `d_model` is the dimension of the embedding vector.
+
+- `pos` is the position of the token in the sequence.
+- `i` is the dimension within the embedding vector.
+- `d_model` is the dimension of the embedding vector.
 
 By adding this positional encoding to the word embedding, each token carries information about both its meaning and its location in the sequence.
 
@@ -55,9 +56,9 @@ Think of it like a committee meeting: when someone speaks, everyone else listens
 
 For each word, three main vectors are derived from its embedded representation:
 
-*   **Query (Q):** What am I looking for? (Like a search query)
-*   **Key (K):** What do I have to offer? (Like a tag on information)
-*   **Value (V):** What information do I actually carry? (The actual information)
+- **Query (Q):** What am I looking for? (Like a search query)
+- **Key (K):** What do I have to offer? (Like a tag on information)
+- **Value (V):** What information do I actually carry? (The actual information)
 
 The self-attention mechanism works by calculating a score for each word's Query against all other words' Keys. This score tells us how much "attention" a word should pay to other words. These scores are then scaled and passed through a softmax function to get attention weights, which are then multiplied by the Value vectors to get the final output.
 
@@ -66,13 +67,14 @@ The formula for Scaled Dot-Product Attention looks like this:
 $Attention(Q, K, V) = softmax(\frac{QK^T}{\sqrt{d_k}})V$
 
 Where:
-*   $Q$, $K$, $V$ are matrices stacked with query, key, and value vectors for all words.
-*   $d_k$ is the dimension of the key vectors (used to scale the dot product, preventing large values from pushing the softmax into regions with tiny gradients).
+
+- $Q$, $K$, $V$ are matrices stacked with query, key, and value vectors for all words.
+- $d_k$ is the dimension of the key vectors (used to scale the dot product, preventing large values from pushing the softmax into regions with tiny gradients).
 
 **Multi-Head Attention:** Instead of just one committee meeting, imagine having several specialized sub-committees, each focusing on a different aspect of the problem. This is Multi-Head Attention. It allows the model to simultaneously pay attention to different parts of the input sequence (e.g., one "head" might focus on grammatical dependencies, another on semantic relationships). The outputs from these different "heads" are then concatenated and linearly transformed.
 
 **Crucially for GPT: Masked Self-Attention:**
-GPT models are *generative* and *autoregressive*, meaning they predict the *next* word based on *previous* words. To ensure this behavior during training, we employ **masked self-attention**. When the model is processing a word, it is prevented from "peeking" at future words in the sequence. This is done by setting the attention scores for future words to negative infinity before the softmax, effectively zeroing them out. This forces the model to learn to predict words one by one, just like a human speaking or writing.
+GPT models are _generative_ and _autoregressive_, meaning they predict the _next_ word based on _previous_ words. To ensure this behavior during training, we employ **masked self-attention**. When the model is processing a word, it is prevented from "peeking" at future words in the sequence. This is done by setting the attention scores for future words to negative infinity before the softmax, effectively zeroing them out. This forces the model to learn to predict words one by one, just like a human speaking or writing.
 
 #### 4. Feed-Forward Network: Processing the "Attended" Information
 
@@ -81,8 +83,9 @@ After the attention mechanism has allowed words to gather context from each othe
 #### 5. Residual Connections and Layer Normalization: Stability and Speed
 
 Throughout the Transformer block, you'll find **Residual Connections** (or skip connections) and **Layer Normalization**.
-*   **Residual Connections:** These add the input of a sub-layer to its output. This helps combat the vanishing gradient problem in deep networks, allowing information to flow more easily through many layers and speeding up training.
-*   **Layer Normalization:** This technique normalizes the activations of each layer, making training more stable and robust to different input scales.
+
+- **Residual Connections:** These add the input of a sub-layer to its output. This helps combat the vanishing gradient problem in deep networks, allowing information to flow more easily through many layers and speeding up training.
+- **Layer Normalization:** This technique normalizes the activations of each layer, making training more stable and robust to different input scales.
 
 ### From Transformer to GPT: The Generative Leap
 
@@ -90,21 +93,22 @@ Now that we understand the core components, let's see how they come together in 
 
 The original Transformer architecture has two main parts: an **Encoder** (which processes an input sequence to understand it) and a **Decoder** (which generates an output sequence).
 
-GPT models are **Decoder-only** Transformers. Why? Because their primary job is text generation, which is an autoregressive task. We give it a prompt, and it generates the *next* most probable word, then the *next*, and so on, until it completes the thought or reaches a specified length. The masked self-attention we discussed earlier is critical for this.
+GPT models are **Decoder-only** Transformers. Why? Because their primary job is text generation, which is an autoregressive task. We give it a prompt, and it generates the _next_ most probable word, then the _next_, and so on, until it completes the thought or reaches a specified length. The masked self-attention we discussed earlier is critical for this.
 
 #### 1. Pre-training: Learning the Language of the Internet
 
 The "P" in GPT stands for "Pre-trained," and this is where a massive amount of its power comes from. Instead of training from scratch for every specific task, GPT models undergo an extensive **pre-training phase**.
 
-Imagine giving a student access to almost the entire internet – billions of words from books, articles, websites, and conversations – and asking them to simply predict the *next word* in every possible sentence. This is essentially what pre-training does.
+Imagine giving a student access to almost the entire internet – billions of words from books, articles, websites, and conversations – and asking them to simply predict the _next word_ in every possible sentence. This is essentially what pre-training does.
 
 During pre-training, the model learns:
-*   **Grammar and Syntax:** How words fit together correctly.
-*   **Facts and World Knowledge:** Relationships between concepts and real-world information.
-*   **Reasoning Abilities:** Patterns that allow it to infer logical connections.
-*   **Different Writing Styles:** From formal essays to casual chat.
 
-This objective is called **Language Modeling**, specifically next-token prediction: $P(w_i | w_1, ..., w_{i-1})$. The model is fed a sequence of words $w_1, ..., w_{i-1}$ and tries to predict $w_i$. Because of the masked attention, it can only see words that have *already occurred* in the sequence.
+- **Grammar and Syntax:** How words fit together correctly.
+- **Facts and World Knowledge:** Relationships between concepts and real-world information.
+- **Reasoning Abilities:** Patterns that allow it to infer logical connections.
+- **Different Writing Styles:** From formal essays to casual chat.
+
+This objective is called **Language Modeling**, specifically next-token prediction: $P(w_i | w_1, ..., w_{i-1})$. The model is fed a sequence of words $w_1, ..., w_{i-1}$ and tries to predict $w_i$. Because of the masked attention, it can only see words that have _already occurred_ in the sequence.
 
 This unsupervised learning approach, on such a vast scale, enables the model to develop an incredibly rich and general understanding of language.
 

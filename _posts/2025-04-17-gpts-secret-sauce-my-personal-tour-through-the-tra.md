@@ -6,7 +6,7 @@ tags: ["Machine Learning", "NLP", "Transformers", "GPT", "Deep Learning"]
 author: "Adarsh Nair"
 ---
 
-I remember the first time I truly felt the "wow" factor of a large language model. It wasn't just generating coherent sentences; it was understanding context, tone, and even subtle nuances. It felt like a glimpse into the future, and my data science brain immediately started buzzing: *How does it do that?*
+I remember the first time I truly felt the "wow" factor of a large language model. It wasn't just generating coherent sentences; it was understanding context, tone, and even subtle nuances. It felt like a glimpse into the future, and my data science brain immediately started buzzing: _How does it do that?_
 
 The answer, as many of you might know, lies primarily in an ingenious invention called the **Transformer architecture**. This isn't just a fancy buzzword; it's the fundamental building block that powers GPT (Generative Pre-trained Transformer) models, and it's what we're going to dive into today.
 
@@ -17,6 +17,7 @@ Join me on a personal journey as we unpack the core components of the Transforme
 Before we jump into the main event, let's briefly acknowledge the heroes that paved the way. For a long time, **Recurrent Neural Networks (RNNs)** and their more sophisticated cousins, **Long Short-Term Memory (LSTMs)** networks, were the kings of sequence processing in Natural Language Processing (NLP).
 
 They processed words one by one, maintaining a "hidden state" that carried information from previous words. This sequential processing, while intuitive, had significant drawbacks:
+
 1.  **Slow:** You couldn't process words in parallel. Each word had to wait for the previous one.
 2.  **Long-Range Dependencies:** Remembering information from words far back in a sentence was incredibly hard, a problem known as the "vanishing/exploding gradient" problem. Imagine trying to connect a pronoun to a noun twenty words earlier – LSTMs struggled with this.
 
@@ -26,7 +27,7 @@ These limitations meant that building truly massive, highly contextual language 
 
 In 2017, a landmark paper titled "Attention Is All You Need" introduced the Transformer. Its core innovation? It completely ditched recurrence and convolutions, relying solely on a mechanism called **self-attention** to draw global dependencies between input and output.
 
-This was a game-changer! Imagine being able to look at *all* words in a sentence simultaneously and figure out how they relate to each other, no matter how far apart they are. This parallel processing capability unlocked unprecedented speed and, more importantly, a superior ability to model long-range dependencies.
+This was a game-changer! Imagine being able to look at _all_ words in a sentence simultaneously and figure out how they relate to each other, no matter how far apart they are. This parallel processing capability unlocked unprecedented speed and, more importantly, a superior ability to model long-range dependencies.
 
 GPT models, at their heart, are essentially a stack of **decoder-only** Transformer blocks. Let's break down what's inside one of these magical blocks.
 
@@ -35,7 +36,7 @@ GPT models, at their heart, are essentially a stack of **decoder-only** Transfor
 Our journey begins with how words are fed into the Transformer.
 
 1.  **Input Embeddings:** Words aren't numbers (directly). First, each word (or sub-word token) is converted into a numerical vector. This process is called **embedding**, where words with similar meanings tend to have similar vector representations. So, "king" and "queen" might be close in this multi-dimensional space.
-2.  **Positional Encoding:** Here's a crucial point: because Transformers process all words in parallel, they inherently lose information about the *order* of words. If "cat chases dog" and "dog chases cat" were represented identically, we'd have a problem!
+2.  **Positional Encoding:** Here's a crucial point: because Transformers process all words in parallel, they inherently lose information about the _order_ of words. If "cat chases dog" and "dog chases cat" were represented identically, we'd have a problem!
     To solve this, we inject **positional information** into the embeddings. This is done by adding a unique vector to each word's embedding based on its position in the sequence. The original paper used sine and cosine functions of different frequencies:
 
     $PE_{(pos, 2i)} = sin(pos / 10000^{2i/d_{model}})$
@@ -43,7 +44,7 @@ Our journey begins with how words are fed into the Transformer.
 
     Where $pos$ is the token's position, $i$ is the dimension index, and $d_{model}$ is the dimension of the embedding. This creates a unique "signature" for each position, allowing the model to understand word order.
 
-These combined *positional-encoded embeddings* are what feed into our Transformer block.
+These combined _positional-encoded embeddings_ are what feed into our Transformer block.
 
 ### The Heartbeat: Multi-Head Self-Attention
 
@@ -52,9 +53,10 @@ This is where the real magic happens. Self-attention allows the model to weigh t
 Think of it like this: if you're reading the sentence "The animal didn't cross the street because **it** was too tired," to understand what "**it**" refers to, your brain quickly scans the previous words (animal, street) and assigns more importance to "animal." Self-attention does something very similar, but mathematically.
 
 For each word (or token) in the input, we create three distinct vectors:
-*   **Query (Q):** What am I looking for? (Like a search query)
-*   **Key (K):** What do I have? (Like an index for a database)
-*   **Value (V):** What information do I want to retrieve? (The actual data)
+
+- **Query (Q):** What am I looking for? (Like a search query)
+- **Key (K):** What do I have? (Like an index for a database)
+- **Value (V):** What information do I want to retrieve? (The actual data)
 
 These Q, K, V vectors are derived by multiplying the input embedding by three different weight matrices ($W_Q, W_K, W_V$) that are learned during training.
 
@@ -63,6 +65,7 @@ The core self-attention mechanism, called **Scaled Dot-Product Attention**, then
 $Attention(Q, K, V) = softmax(\frac{QK^T}{\sqrt{d_k}})V$
 
 Let's break this down:
+
 1.  **$QK^T$**: This is a dot product between the Query of a word and the Key of all other words. It measures how "similar" or "relevant" one word is to another.
 2.  **$\sqrt{d_k}$**: We divide by the square root of the dimension of the Key vectors. This scaling factor prevents the dot products from becoming too large, which could push the `softmax` function into regions with tiny gradients, making training difficult.
 3.  **$softmax$**: This function normalizes the scores, turning them into probabilities. Each score indicates how much attention a word should pay to other words (and itself).
@@ -70,13 +73,13 @@ Let's break this down:
 
 #### Multi-Head Attention: Seeing Things from Different Angles
 
-If one attention "head" is good, wouldn't multiple be better? Yes! Instead of performing one self-attention operation, **Multi-Head Attention** projects the Q, K, and V vectors *multiple times* into different subspaces. Each "head" then performs its own scaled dot-product attention calculation in parallel.
+If one attention "head" is good, wouldn't multiple be better? Yes! Instead of performing one self-attention operation, **Multi-Head Attention** projects the Q, K, and V vectors _multiple times_ into different subspaces. Each "head" then performs its own scaled dot-product attention calculation in parallel.
 
 Why do this? Each head can learn to focus on different types of relationships or aspects of the input. One head might focus on syntactic relationships (e.g., subject-verb agreement), while another focuses on semantic relationships (e.g., word synonyms). The outputs from all heads are then concatenated and linearly transformed back into the expected dimension.
 
 #### Crucial for GPT: Masked Self-Attention
 
-Here's where GPT's generative nature comes into play. When GPT is generating text, it should only be able to attend to *previous* tokens in the sequence, not future ones. If it could see the future, it would simply copy the next word, making it useless for generation.
+Here's where GPT's generative nature comes into play. When GPT is generating text, it should only be able to attend to _previous_ tokens in the sequence, not future ones. If it could see the future, it would simply copy the next word, making it useless for generation.
 
 This is enforced by **masked self-attention**. During the $QK^T$ step, we apply a "mask" that prevents attention to subsequent positions. Mathematically, before the `softmax`, we set the scores for future positions to negative infinity. When `softmax` is applied, these negative infinities become zeros, effectively blocking attention to future tokens. It's like looking through a one-way mirror where you can only see the past.
 
@@ -92,6 +95,7 @@ Crucially, this FFN is applied **identically and independently** to each positio
 ### The Glue: Add & Normalize
 
 Throughout the Transformer block, you'll see two recurring elements:
+
 1.  **Residual Connections ("Add"):** A direct connection from the input of a sub-layer to its output, added to the sub-layer's result. This helps with training very deep networks by allowing gradients to flow more easily, mitigating the vanishing gradient problem.
 2.  **Layer Normalization ("Norm"):** Applied after the residual connection. This normalizes the activations across the features for each sample independently. It stabilizes training and helps the model generalize better.
 
@@ -101,7 +105,7 @@ So, for any sub-layer (e.g., multi-head attention, feed-forward network), the ou
 
 The original Transformer paper introduced an Encoder-Decoder architecture. The Encoder processed the input sequence (e.g., a German sentence), and the Decoder generated the output sequence (e.g., an English translation), attending to both its own output and the Encoder's output.
 
-GPT models, however, are **decoder-only**. They consist solely of a stack of these Transformer decoder blocks (with the crucial masked self-attention). Why? Because GPT's primary task is *generative*: given a sequence of words, predict the *next word*. It's always generating, always looking only at the past to predict the future.
+GPT models, however, are **decoder-only**. They consist solely of a stack of these Transformer decoder blocks (with the crucial masked self-attention). Why? Because GPT's primary task is _generative_: given a sequence of words, predict the _next word_. It's always generating, always looking only at the past to predict the future.
 
 ### Training GPT: Causal Language Modeling
 
@@ -113,10 +117,10 @@ For example, if the input is "The quick brown fox", the model tries to predict "
 
 The Transformer architecture, especially in its GPT-style decoder-only configuration, is revolutionary due to several key aspects:
 
-*   **Parallelization:** No more sequential processing, enabling faster training and larger models.
-*   **Long-Range Dependencies:** Self-attention effectively captures relationships between words regardless of their distance.
-*   **Scalability:** The architecture scales incredibly well with more data and more parameters, leading to emergent abilities in very large models.
-*   **Generative Power:** Masked self-attention allows the model to predict future tokens reliably, forming the basis of sophisticated text generation.
+- **Parallelization:** No more sequential processing, enabling faster training and larger models.
+- **Long-Range Dependencies:** Self-attention effectively captures relationships between words regardless of their distance.
+- **Scalability:** The architecture scales incredibly well with more data and more parameters, leading to emergent abilities in very large models.
+- **Generative Power:** Masked self-attention allows the model to predict future tokens reliably, forming the basis of sophisticated text generation.
 
 ### My Thoughts on the Horizon
 

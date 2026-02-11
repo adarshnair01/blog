@@ -25,7 +25,7 @@ Imagine you're trying to draw a line that separates two groups of data points (s
     $Bias = E[\hat{f}(x)] - f(x)$
     Here, $f(x)$ is the true function, and $E[\hat{f}(x)]$ is the expected (average) prediction of our model over different datasets.
 
-2.  **Variance**: A model with high variance is too complex and sensitive to the specific training data it saw. It might try to draw a wiggly line that perfectly fits *every single training point*, even the noisy ones. If you give it slightly different training data, it would draw a completely different wiggly line. It performs great on training data but poorly on unseen data. This is called **overfitting**.
+2.  **Variance**: A model with high variance is too complex and sensitive to the specific training data it saw. It might try to draw a wiggly line that perfectly fits _every single training point_, even the noisy ones. If you give it slightly different training data, it would draw a completely different wiggly line. It performs great on training data but poorly on unseen data. This is called **overfitting**.
     Variance measures how much the predictions for a given data point vary if we were to retrain the model multiple times on different samples of the training data.
     $Variance = E[(\hat{f}(x) - E[\hat{f}(x)])^2]$
 
@@ -45,12 +45,12 @@ Imagine you have a complex problem to solve, and you gather 100 students. Instea
 
 **How it works:**
 
-*   **Bootstrapping**: The core idea here is "sampling with replacement." From your original training dataset, you create multiple new datasets (bootstrap samples). Each new dataset is the same size as the original, but because you're sampling *with replacement*, some original data points might appear multiple times in a bootstrap sample, while others might not appear at all. This creates diverse subsets of your data.
-*   **Parallel Training**: For each bootstrap sample, you train an independent base model (e.g., a decision tree). Crucially, these models are trained in parallel, completely unaware of what the others are doing.
-*   **Aggregation**: Once all models are trained, their predictions are combined. For regression tasks, this usually means averaging their predictions:
-    $\hat{f}_{Bagging}(x) = \frac{1}{M} \sum_{m=1}^{M} \hat{f}_m(x)$
-    where $M$ is the number of base models, and $\hat{f}_m(x)$ is the prediction of the $m$-th model.
-    For classification tasks, it's typically a majority vote.
+- **Bootstrapping**: The core idea here is "sampling with replacement." From your original training dataset, you create multiple new datasets (bootstrap samples). Each new dataset is the same size as the original, but because you're sampling _with replacement_, some original data points might appear multiple times in a bootstrap sample, while others might not appear at all. This creates diverse subsets of your data.
+- **Parallel Training**: For each bootstrap sample, you train an independent base model (e.g., a decision tree). Crucially, these models are trained in parallel, completely unaware of what the others are doing.
+- **Aggregation**: Once all models are trained, their predictions are combined. For regression tasks, this usually means averaging their predictions:
+  $\hat{f}_{Bagging}(x) = \frac{1}{M} \sum_{m=1}^{M} \hat{f}_m(x)$
+  where $M$ is the number of base models, and $\hat{f}_m(x)$ is the prediction of the $m$-th model.
+  For classification tasks, it's typically a majority vote.
 
 **What does Bagging achieve?**
 Bagging primarily aims to **reduce variance**. By averaging or voting among many independently trained models, the individual errors and sensitivities of each model tend to cancel each other out. Each model might overfit a little differently to its specific bootstrap sample, but when you average them, the overall overfitting is significantly reduced. This makes Bagging highly effective with high-variance, low-bias models like deep decision trees.
@@ -58,8 +58,8 @@ Bagging primarily aims to **reduce variance**. By averaging or voting among many
 **A Star Player: Random Forests**
 The most famous example of a Bagging algorithm is the **Random Forest**. It extends Bagging by introducing an additional layer of randomness:
 
-*   **Bootstrap Samples**: Like standard Bagging, each tree is trained on a bootstrap sample of the data.
-*   **Feature Randomness**: At each split in a decision tree, instead of considering all available features, Random Forest only considers a random subset of features. This further decorrelates the trees, making them even more independent and reducing their variance even more effectively.
+- **Bootstrap Samples**: Like standard Bagging, each tree is trained on a bootstrap sample of the data.
+- **Feature Randomness**: At each split in a decision tree, instead of considering all available features, Random Forest only considers a random subset of features. This further decorrelates the trees, making them even more independent and reducing their variance even more effectively.
 
 Random Forests are incredibly popular due to their robustness, accuracy, and ease of use. They are a fantastic go-to algorithm for many tabular data problems.
 
@@ -69,27 +69,27 @@ If Bagging is about parallel independent work, Boosting is about sequential, cor
 
 **How it works:**
 
-*   **Sequential Training**: Models are trained one after another.
-*   **Error Focus**: Each subsequent model pays more attention to the data points that the previous models misclassified or struggled with.
-*   **Weighted Data**: This 'attention' is often achieved by assigning weights to the training data. Misclassified points receive higher weights, ensuring the next model prioritizes learning from them.
-*   **Weighted Models**: Models that perform better (e.g., accurately classify more samples) are given more "say" in the final prediction.
+- **Sequential Training**: Models are trained one after another.
+- **Error Focus**: Each subsequent model pays more attention to the data points that the previous models misclassified or struggled with.
+- **Weighted Data**: This 'attention' is often achieved by assigning weights to the training data. Misclassified points receive higher weights, ensuring the next model prioritizes learning from them.
+- **Weighted Models**: Models that perform better (e.g., accurately classify more samples) are given more "say" in the final prediction.
 
 **What does Boosting achieve?**
 Boosting primarily aims to **reduce bias**. By iteratively focusing on errors, it builds a strong learner from a series of weak learners. It's excellent at converting many simple, high-bias models into a powerful, low-bias ensemble.
 
 **Key Boosting Algorithms:**
 
-*   **AdaBoost (Adaptive Boosting)**: One of the earliest and most intuitive boosting algorithms. It works by:
-    1.  Training a weak learner on the data.
-    2.  Increasing the weights of misclassified samples.
-    3.  Training a new weak learner on the re-weighted data.
-    4.  Assigning a weight to each weak learner based on its accuracy. More accurate learners get higher weights.
-    5.  The final prediction is a weighted sum (or vote) of all the weak learners:
-        $H(x) = sign(\sum_{m=1}^{M} \alpha_m h_m(x))$
-        where $h_m(x)$ is the prediction of the $m$-th weak learner, and $\alpha_m$ is its assigned weight.
+- **AdaBoost (Adaptive Boosting)**: One of the earliest and most intuitive boosting algorithms. It works by:
+  1.  Training a weak learner on the data.
+  2.  Increasing the weights of misclassified samples.
+  3.  Training a new weak learner on the re-weighted data.
+  4.  Assigning a weight to each weak learner based on its accuracy. More accurate learners get higher weights.
+  5.  The final prediction is a weighted sum (or vote) of all the weak learners:
+      $H(x) = sign(\sum_{m=1}^{M} \alpha_m h_m(x))$
+      where $h_m(x)$ is the prediction of the $m$-th weak learner, and $\alpha_m$ is its assigned weight.
 
-*   **Gradient Boosting Machines (GBM)**: A more generalized and powerful boosting framework. Instead of adjusting data weights, GBMs train subsequent models to predict the "residuals" (the errors) of the previous models. It essentially optimizes a loss function using gradient descent, iteratively pushing the model towards better predictions.
-    *   **XGBoost**, **LightGBM**, and **CatBoost** are highly optimized and incredibly popular implementations of Gradient Boosting, known for their speed and accuracy on tabular datasets, often dominating Kaggle competitions.
+- **Gradient Boosting Machines (GBM)**: A more generalized and powerful boosting framework. Instead of adjusting data weights, GBMs train subsequent models to predict the "residuals" (the errors) of the previous models. It essentially optimizes a loss function using gradient descent, iteratively pushing the model towards better predictions.
+  - **XGBoost**, **LightGBM**, and **CatBoost** are highly optimized and incredibly popular implementations of Gradient Boosting, known for their speed and accuracy on tabular datasets, often dominating Kaggle competitions.
 
 While Bagging reduces variance by averaging diverse, independent models, Boosting reduces bias by combining simple models that sequentially correct each other's mistakes.
 

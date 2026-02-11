@@ -5,6 +5,7 @@ excerpt: "Ever wondered how diverse perspectives can lead to better decisions? I
 tags: ["Machine Learning", "Ensemble Learning", "Data Science", "AI", "Algorithms"]
 author: "Adarsh Nair"
 ---
+
 Hey everyone!
 
 Welcome back to the portfolio journal where we demystify the magic behind modern AI. Today, I want to share one of my absolute favorite concepts in machine learning – one that, to me, embodies the true spirit of collective intelligence: **Ensemble Learning**.
@@ -53,7 +54,7 @@ A Random Forest takes bagging to the next level, specifically for decision trees
 
 This dual source of randomness (data sampling + feature sampling) makes the individual decision trees highly diverse and decorrelated.
 
-**Why is this so effective?** Decision trees, on their own, are prone to overfitting. They can become too specialized to the training data. By averaging many deep, diverse trees in a Random Forest, we drastically reduce the *variance* of the model without significantly increasing its *bias*.
+**Why is this so effective?** Decision trees, on their own, are prone to overfitting. They can become too specialized to the training data. By averaging many deep, diverse trees in a Random Forest, we drastically reduce the _variance_ of the model without significantly increasing its _bias_.
 
 **A bit of Math Intuition for Bagging:**
 If you have $M$ independent models, and each model has a variance of $\sigma^2$ and their errors are uncorrelated, then the variance of their average prediction is given by:
@@ -64,7 +65,7 @@ This simplified formula beautifully illustrates why bagging reduces variance: by
 
 #### 2. Boosting
 
-Now, let's switch gears. Imagine a student who keeps making mistakes on a particular type of math problem. Instead of giving them a new, full textbook each time, a dedicated tutor identifies exactly where they went wrong, explains the concept, and provides *more focused practice* on those specific challenging problems. Each time, the student gets a bit better, specifically targeting their weaknesses. This iterative, corrective process is the heart of Boosting.
+Now, let's switch gears. Imagine a student who keeps making mistakes on a particular type of math problem. Instead of giving them a new, full textbook each time, a dedicated tutor identifies exactly where they went wrong, explains the concept, and provides _more focused practice_ on those specific challenging problems. Each time, the student gets a bit better, specifically targeting their weaknesses. This iterative, corrective process is the heart of Boosting.
 
 **How it works:**
 Boosting builds an ensemble sequentially. Each new base model is trained to **correct the errors** made by the previous models in the sequence. Models aren't independent; they learn from the collective mistakes of their predecessors.
@@ -93,11 +94,12 @@ The final prediction is a weighted sum of all base learners: $H(x) = \text{sign}
 Gradient Boosting is a more generalized and widely used boosting framework. Instead of focusing on sample weights like AdaBoost, GBM focuses on **residuals**.
 
 Here's the simplified idea:
+
 1.  Train an initial model $F_0(x)$ (often just the mean of the target variable).
 2.  Calculate the "residuals" – the errors made by $F_0(x)$. For example, if $y$ is the true value and $F_0(x)$ is the prediction, the residual is $y - F_0(x)$.
 3.  Train a new weak learner ($h_1(x)$) specifically to predict these residuals. Essentially, it learns to fix the mistakes of $F_0(x)$.
 4.  Update the main model: $F_1(x) = F_0(x) + \nu \cdot h_1(x)$, where $\nu$ is a "learning rate" (a small number like 0.1) to prevent overfitting and make the learning process gradual.
-5.  Repeat steps 2-4: calculate new residuals based on $F_1(x)$, train $h_2(x)$ to predict *these* residuals, and update the model to $F_2(x) = F_1(x) + \nu \cdot h_2(x)$, and so on.
+5.  Repeat steps 2-4: calculate new residuals based on $F_1(x)$, train $h_2(x)$ to predict _these_ residuals, and update the model to $F_2(x) = F_1(x) + \nu \cdot h_2(x)$, and so on.
 
 The name "Gradient Boosting" comes from the fact that instead of strictly predicting residuals, each new learner is trained to predict the **negative gradient of the loss function** with respect to the current ensemble's predictions. This is a more general and powerful approach to minimizing any differentiable loss function.
 
@@ -105,13 +107,13 @@ The name "Gradient Boosting" comes from the fact that instead of strictly predic
 
 #### 3. Stacking (Stacked Generalization)
 
-Now for the ultimate team-up! Imagine our movie critic panel again. Instead of just averaging their scores, what if we hired a "super-critic" whose *job* it was to listen to all the individual critics, understand their biases and strengths, and then make a final, refined prediction? This super-critic learns *how to combine* the individual predictions. That's Stacking.
+Now for the ultimate team-up! Imagine our movie critic panel again. Instead of just averaging their scores, what if we hired a "super-critic" whose _job_ it was to listen to all the individual critics, understand their biases and strengths, and then make a final, refined prediction? This super-critic learns _how to combine_ the individual predictions. That's Stacking.
 
 **How it works:**
 Stacking involves two levels of models:
 
 1.  **Level 0 (Base Models):** You train several diverse base models (e.g., a Decision Tree, a Support Vector Machine, a Neural Network) on the training data.
-2.  **Level 1 (Meta-Learner):** The predictions generated by these Level 0 models become the *input features* for a new, "meta-learner" model. The meta-learner is trained to learn the optimal way to combine these base predictions to make the final output.
+2.  **Level 1 (Meta-Learner):** The predictions generated by these Level 0 models become the _input features_ for a new, "meta-learner" model. The meta-learner is trained to learn the optimal way to combine these base predictions to make the final output.
 
 **Benefits:** Stacking can often achieve superior performance because the meta-learner can learn complex relationships between the base models' predictions, potentially correcting their systematic errors in ways that simple averaging or voting cannot.
 
@@ -121,19 +123,19 @@ Stacking involves two levels of models:
 
 You should consider ensemble methods when:
 
-*   **Accuracy is paramount:** When you need the absolute best predictive performance.
-*   **Robustness is key:** When you want a model that performs consistently well across different data variations and is less sensitive to noise or outliers.
-*   **Single models struggle:** If a single model (even after hyperparameter tuning) isn't meeting your performance goals.
-*   **Reducing overfitting/variance (Bagging) or bias (Boosting):** Depending on your specific problem.
+- **Accuracy is paramount:** When you need the absolute best predictive performance.
+- **Robustness is key:** When you want a model that performs consistently well across different data variations and is less sensitive to noise or outliers.
+- **Single models struggle:** If a single model (even after hyperparameter tuning) isn't meeting your performance goals.
+- **Reducing overfitting/variance (Bagging) or bias (Boosting):** Depending on your specific problem.
 
 ### The Trade-offs: A Balanced View
 
 While incredibly powerful, ensemble methods aren't without their considerations:
 
-*   **Computational Cost:** Training multiple models can be much slower and require more computational resources than training a single model.
-*   **Memory Usage:** Storing multiple models can consume more memory.
-*   **Interpretability:** Ensembles are often "black boxes." It's harder to understand *why* an ensemble made a particular prediction compared to a single, simpler model.
-*   **Complexity:** More components mean more moving parts to manage and potentially more hyperparameters to tune.
+- **Computational Cost:** Training multiple models can be much slower and require more computational resources than training a single model.
+- **Memory Usage:** Storing multiple models can consume more memory.
+- **Interpretability:** Ensembles are often "black boxes." It's harder to understand _why_ an ensemble made a particular prediction compared to a single, simpler model.
+- **Complexity:** More components mean more moving parts to manage and potentially more hyperparameters to tune.
 
 ### Conclusion: The Collective Powerhouse
 

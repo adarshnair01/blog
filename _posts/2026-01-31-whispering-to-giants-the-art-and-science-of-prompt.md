@@ -18,7 +18,7 @@ This moment – the gap between what you asked for and what you got – is preci
 
 ### What is Prompt Engineering? More Than Just Asking
 
-At its heart, Prompt Engineering is the discipline of designing and refining inputs (prompts) for Large Language Models (LLMs) to achieve desired outputs. Think of it like this: LLMs are incredibly vast libraries of knowledge and reasoning patterns. They don't *understand* in the human sense, but they are masters at predicting the next most probable word based on the patterns they've learned from trillions of words of text.
+At its heart, Prompt Engineering is the discipline of designing and refining inputs (prompts) for Large Language Models (LLMs) to achieve desired outputs. Think of it like this: LLMs are incredibly vast libraries of knowledge and reasoning patterns. They don't _understand_ in the human sense, but they are masters at predicting the next most probable word based on the patterns they've learned from trillions of words of text.
 
 A prompt is the initial set of conditions, the guiding star, that sets the LLM on a specific trajectory through its immense probabilistic landscape. When you type a prompt, you're essentially setting up a conditional probability:
 
@@ -26,7 +26,7 @@ $$ P(\text{output} | \text{prompt}) $$
 
 This simply means, "What's the probability of generating a particular sequence of words (output), given the input sequence of words (prompt)?" Your job as a prompt engineer is to craft that `prompt` in such a way that it maximizes the probability of getting the `output` you want, and minimizes the probability of getting garbage.
 
-It’s like talking to a super-intelligent, incredibly knowledgeable, but sometimes overly literal alien. You have to be precise, clear, and sometimes even teach it how to think *your* way for that specific task. It's becoming an indispensable skill for anyone working with AI, from developers building applications to researchers exploring new frontiers, and especially for Data Scientists and Machine Learning Engineers looking to leverage these powerful tools efficiently.
+It’s like talking to a super-intelligent, incredibly knowledgeable, but sometimes overly literal alien. You have to be precise, clear, and sometimes even teach it how to think _your_ way for that specific task. It's becoming an indispensable skill for anyone working with AI, from developers building applications to researchers exploring new frontiers, and especially for Data Scientists and Machine Learning Engineers looking to leverage these powerful tools efficiently.
 
 ### Why Does it Matter So Much?
 
@@ -49,26 +49,28 @@ Let's dive into some practical techniques that form the bedrock of effective pro
 This might sound obvious, but it's astonishing how much difference a few clear words can make. LLMs don't read between the lines; they follow instructions.
 
 **Bad Prompt:** "Tell me about climate change."
-*Output: A general overview, potentially very long and unspecific.*
+_Output: A general overview, potentially very long and unspecific._
 
 **Good Prompt:** "Explain the primary causes of anthropogenic climate change to a high school student in no more than 200 words. Focus on greenhouse gases and their sources. Use simple language."
-*Output: Concise, targeted, and audience-appropriate.*
+_Output: Concise, targeted, and audience-appropriate._
 
 **Key Takeaways:**
 
-*   **Be Direct:** State your request clearly.
-*   **Define Audience/Persona:** "Explain to a child," "write as a marketing expert."
-*   **Specify Format:** "In bullet points," "as a JSON object," "in Markdown."
-*   **Set Constraints:** "No more than 5 sentences," "only use facts from X source."
-*   **Use Delimiters:** For separating instructions from content (e.g., triple backticks ```` ``` ````, angle brackets `<>`, XML tags `<tag>`). This helps the model distinguish instructions from the text it needs to process.
+- **Be Direct:** State your request clearly.
+- **Define Audience/Persona:** "Explain to a child," "write as a marketing expert."
+- **Specify Format:** "In bullet points," "as a JSON object," "in Markdown."
+- **Set Constraints:** "No more than 5 sentences," "only use facts from X source."
+- **Use Delimiters:** For separating instructions from content (e.g., triple backticks ` ``` `, angle brackets `<>`, XML tags `<tag>`). This helps the model distinguish instructions from the text it needs to process.
 
-    ```markdown
-    Your task is to summarize the following text, enclosed in triple backticks, for a 5th grader.
+  ```markdown
+  Your task is to summarize the following text, enclosed in triple backticks, for a 5th grader.
+  ```
 
-    ```
-    The recent intergovernmental panel on climate change report highlighted the accelerating rate of global temperature increase, attributing it primarily to human activities, notably the burning of fossil fuels and deforestation. These actions lead to an enhanced greenhouse effect, trapping more heat in the Earth's atmosphere.
-    ```
-    ```
+  The recent intergovernmental panel on climate change report highlighted the accelerating rate of global temperature increase, attributing it primarily to human activities, notably the burning of fossil fuels and deforestation. These actions lead to an enhanced greenhouse effect, trapping more heat in the Earth's atmosphere.
+
+  ```
+
+  ```
 
 #### 2. Role-Playing: Giving the AI a Persona
 
@@ -76,11 +78,11 @@ Assigning a role to the LLM can dramatically alter the tone, style, and even the
 
 **Example:**
 
-*   **Prompt 1 (No Role):** "Explain quantum physics."
-    *Output: A dense, possibly overwhelming explanation.*
+- **Prompt 1 (No Role):** "Explain quantum physics."
+  _Output: A dense, possibly overwhelming explanation._
 
-*   **Prompt 2 (With Role):** "You are a friendly high school physics teacher explaining quantum physics to your class. Break down complex ideas into simple analogies. Start with the idea of particles behaving like waves."
-    *Output: More accessible, engaging, and structured for a specific learning goal.*
+- **Prompt 2 (With Role):** "You are a friendly high school physics teacher explaining quantum physics to your class. Break down complex ideas into simple analogies. Start with the idea of particles behaving like waves."
+  _Output: More accessible, engaging, and structured for a specific learning goal._
 
 This technique is powerful because it conditions the model's entire response generation process. The $P(\text{output} | \text{prompt})$ now includes a strong conditioning on the 'role' token(s) and their associated learned patterns.
 
@@ -106,7 +108,7 @@ Review: "I loved every minute of the concert, truly memorable."
 Sentiment:
 ```
 
-Here, the model isn't *learning* in the traditional sense of updating its weights. Instead, the examples adjust the conditional probability distribution $P(\text{output} | \text{input}, \text{examples})$ such that the model is heavily biased to continue the established pattern. It's essentially completing a sequence based on the preceding pattern, but that pattern happens to encode the desired task.
+Here, the model isn't _learning_ in the traditional sense of updating its weights. Instead, the examples adjust the conditional probability distribution $P(\text{output} | \text{input}, \text{examples})$ such that the model is heavily biased to continue the established pattern. It's essentially completing a sequence based on the preceding pattern, but that pattern happens to encode the desired task.
 
 #### 4. Chain-of-Thought (CoT) Prompting: Thinking Step-by-Step
 
@@ -116,25 +118,26 @@ This is arguably one of the most significant breakthroughs in prompt engineering
 
 LLMs often struggle with multi-step reasoning. If you just ask for the final answer, they might jump to conclusions, make errors, or hallucinate. By forcing them to articulate their thought process, you:
 
-*   **Decompose the Problem:** Break a large problem into smaller, manageable steps.
-*   **Expose Intermediate Reasoning:** Allow the model to show its work, making errors easier to spot.
-*   **Improve Accuracy:** The act of generating intermediate steps often leads to a more accurate final answer.
+- **Decompose the Problem:** Break a large problem into smaller, manageable steps.
+- **Expose Intermediate Reasoning:** Allow the model to show its work, making errors easier to spot.
+- **Improve Accuracy:** The act of generating intermediate steps often leads to a more accurate final answer.
 
 **Example:**
 
 **Bad Prompt:** "If a train leaves station A at 9:00 AM traveling at 60 mph, and another train leaves station B at 10:00 AM traveling at 75 mph, heading towards station A (which is 300 miles away from B), when do they meet?"
 
-*Output: Might give an incorrect time or a simplified explanation.*
+_Output: Might give an incorrect time or a simplified explanation._
 
 **Good Prompt (CoT):**
 "Let's solve this step by step.
+
 1.  First, calculate how far the first train travels before the second train starts.
 2.  Then, determine the remaining distance between the trains.
 3.  Calculate their combined speed (relative speed).
 4.  Finally, divide the remaining distance by their combined speed to find the time until they meet.
-Now, using these steps, please solve the following problem: If a train leaves station A at 9:00 AM traveling at 60 mph, and another train leaves station B at 10:00 AM traveling at 75 mph, heading towards station A (which is 300 miles away from B), when do they meet?"
+    Now, using these steps, please solve the following problem: If a train leaves station A at 9:00 AM traveling at 60 mph, and another train leaves station B at 10:00 AM traveling at 75 mph, heading towards station A (which is 300 miles away from B), when do they meet?"
 
-*Output: The model will typically break down the problem, showing calculations for each step, leading to a much higher chance of a correct answer.*
+_Output: The model will typically break down the problem, showing calculations for each step, leading to a much higher chance of a correct answer._
 
 The `Let's solve this step by step.` phrase is often enough, but explicitly outlining the steps like above can be even more effective for particularly tricky problems.
 
@@ -166,8 +169,9 @@ For integrating LLM outputs into applications or further processing, predictable
 
 **Example:**
 
-```markdown
+````markdown
 Extract the following information from the text below as a JSON object:
+
 - Product Name
 - Price
 - Customer Rating (on a scale of 1-5)
@@ -180,13 +184,10 @@ Text: "The new 'AquaFlow Pro' smart water bottle is a game-changer! Priced at $4
   "Product Name": "AquaFlow Pro",
   "Price": "$49.99",
   "Customer Rating": 4.7,
-  "Key Features": [
-    "real-time hydration tracking",
-    "durable bamboo casing",
-    "Bluetooth connectivity"
-  ]
+  "Key Features": ["real-time hydration tracking", "durable bamboo casing", "Bluetooth connectivity"]
 }
 ```
+````
 
 This ensures the output is machine-readable and ready for downstream tasks in your data pipeline or application.
 
@@ -206,11 +207,11 @@ This scientific method approach is fundamental. It requires patience, critical t
 
 While powerful, prompt engineering isn't a magic bullet:
 
-*   **Hallucinations:** LLMs can still generate plausible-sounding but factually incorrect information. Careful prompting can mitigate this but not eliminate it entirely.
-*   **Bias:** Models reflect biases present in their training data. Prompts need to be designed to minimize reinforcing or generating harmful biases.
-*   **Context Window Limits:** Models have a finite amount of text they can process at once. Very long examples or complex instructions can exceed this limit.
-*   **Prompt Sensitivity:** Minor changes in wording can sometimes lead to drastically different outputs, making robust prompt design challenging.
-*   **Art vs. Science:** There's still a significant "art" to crafting truly effective prompts, relying on intuition and experience alongside scientific principles.
+- **Hallucinations:** LLMs can still generate plausible-sounding but factually incorrect information. Careful prompting can mitigate this but not eliminate it entirely.
+- **Bias:** Models reflect biases present in their training data. Prompts need to be designed to minimize reinforcing or generating harmful biases.
+- **Context Window Limits:** Models have a finite amount of text they can process at once. Very long examples or complex instructions can exceed this limit.
+- **Prompt Sensitivity:** Minor changes in wording can sometimes lead to drastically different outputs, making robust prompt design challenging.
+- **Art vs. Science:** There's still a significant "art" to crafting truly effective prompts, relying on intuition and experience alongside scientific principles.
 
 ### Prompt Engineering for Your Data Science & MLE Portfolio
 

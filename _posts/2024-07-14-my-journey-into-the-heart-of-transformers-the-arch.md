@@ -6,7 +6,7 @@ tags: ["Machine Learning", "NLP", "Deep Learning", "Transformers", "Attention Me
 author: "Adarsh Nair"
 ---
 
-My fascination with Artificial Intelligence truly ignited when I first encountered the magic of Natural Language Processing (NLP). The idea that machines could not just process but *understand* and even *generate* human language felt like science fiction becoming reality. For a long time, recurrent neural networks (RNNs) and their more sophisticated cousins, Long Short-Term Memory (LSTM) networks, were the workhorses of NLP. They were clever, processing words one by one, trying to remember context as they went along.
+My fascination with Artificial Intelligence truly ignited when I first encountered the magic of Natural Language Processing (NLP). The idea that machines could not just process but _understand_ and even _generate_ human language felt like science fiction becoming reality. For a long time, recurrent neural networks (RNNs) and their more sophisticated cousins, Long Short-Term Memory (LSTM) networks, were the workhorses of NLP. They were clever, processing words one by one, trying to remember context as they went along.
 
 But then, in 2017, something truly groundbreaking happened. A paper titled "Attention Is All You Need" dropped, introducing an entirely new neural network architecture: **The Transformer**. It wasn't just an improvement; it was a paradigm shift that has since reshaped the entire landscape of AI, not just in NLP, but also in computer vision and beyond. Today, models like ChatGPT, BERT, and countless others stand on the shoulders of this ingenious design.
 
@@ -25,18 +25,19 @@ The Transformer's fundamental innovation was to break free from this sequential 
 
 This is where the real magic begins. The core idea behind Transformers is **Attention**. Imagine you're reading a sentence like: "The animal didn't cross the street because it was too tired." To correctly understand what "it" refers to, your brain needs to pay attention to "the animal" and "tired," not necessarily "street."
 
-**Self-Attention** takes this concept and applies it to every word in a sentence. Instead of processing words sequentially, each word simultaneously considers every other word in the input sequence to better understand its own meaning. It's like each word asking: "How relevant are *all the other words* to *my meaning* right now?"
+**Self-Attention** takes this concept and applies it to every word in a sentence. Instead of processing words sequentially, each word simultaneously considers every other word in the input sequence to better understand its own meaning. It's like each word asking: "How relevant are _all the other words_ to _my meaning_ right now?"
 
 How does this "attention" manifest mathematically? It's done using three special vectors for each word: **Query (Q)**, **Key (K)**, and **Value (V)**.
 
-*   **Query (Q):** Think of this as what you're looking for, or your search query.
-*   **Key (K):** This is like the index or label for each piece of information available.
-*   **Value (V):** This is the actual information associated with each key.
+- **Query (Q):** Think of this as what you're looking for, or your search query.
+- **Key (K):** This is like the index or label for each piece of information available.
+- **Value (V):** This is the actual information associated with each key.
 
 Let's use an analogy: You're at a library (the sentence).
-*   Your **Query** is what book you're interested in (the meaning of the current word).
-*   Each book in the library has a **Key** (its topic, author, genre – information that helps you decide if it's relevant).
-*   The **Value** is the book itself (the actual information you want to get if the key matches your query).
+
+- Your **Query** is what book you're interested in (the meaning of the current word).
+- Each book in the library has a **Key** (its topic, author, genre – information that helps you decide if it's relevant).
+- The **Value** is the book itself (the actual information you want to get if the key matches your query).
 
 To calculate how much attention a word (its Query) should give to other words (their Keys), we compare them. A common way to compare vectors is the dot product. A high dot product means the Query and Key are very similar.
 
@@ -45,6 +46,7 @@ The formula for **Scaled Dot-Product Attention** is:
 $$ \text{Attention}(Q, K, V) = \text{softmax}\left(\frac{QK^T}{\sqrt{d_k}}\right)V $$
 
 Let's break this down:
+
 1.  **$QK^T$**: This is the dot product between the query vector of one word and the key vectors of all other words (including itself). This gives us a score indicating how much each word should pay attention to every other word.
 2.  **$\frac{1}{\sqrt{d_k}}$**: We divide by the square root of the dimension of the key vectors ($d_k$). This scaling factor helps stabilize the gradients during training, preventing them from becoming too large or too small, especially with large $d_k$ values.
 3.  **$\text{softmax}(\cdot)$**: The softmax function converts these scores into probabilities. Now, for each word, we have a set of weights, showing how much attention it should pay to every other word. These weights sum to 1.
@@ -62,21 +64,21 @@ Multi-Head Attention works similarly. Instead of just one set of Q, K, and V mat
 
 The outputs from these multiple attention heads are then concatenated and linearly transformed back into a single, unified output representation.
 
-$$ \text{MultiHead}(Q, K, V) = \text{Concat}(\text{head}_1, ..., \text{head}_h)W^O $$
+$$ \text{MultiHead}(Q, K, V) = \text{Concat}(\text{head}\_1, ..., \text{head}\_h)W^O $$
 where $\text{head}_i = \text{Attention}(QW_i^Q, KW_i^K, VW_i^V)$, and $W_i^Q, W_i^K, W_i^V$ are projection matrices for each head, and $W^O$ is the final output projection matrix.
 
 This significantly enhances the model's ability to capture complex patterns.
 
 ### Positional Encoding: Giving Words Their Place
 
-A crucial detail: Self-attention processes all words simultaneously, treating them as a "bag of words" in terms of order. This means that if you shuffle the words in a sentence, the self-attention output would technically be the same (aside from which $Q$ interacts with which $K, V$). But word order is *vital* for language understanding! "Dog bites man" is very different from "Man bites dog."
+A crucial detail: Self-attention processes all words simultaneously, treating them as a "bag of words" in terms of order. This means that if you shuffle the words in a sentence, the self-attention output would technically be the same (aside from which $Q$ interacts with which $K, V$). But word order is _vital_ for language understanding! "Dog bites man" is very different from "Man bites dog."
 
 To reintroduce this vital sequential information, Transformers use **Positional Encoding**. Instead of feeding just the word embeddings into the network, we add a special vector (the positional encoding) to each word embedding. This vector uniquely identifies the position of a word in the sequence.
 
 The original paper used sine and cosine functions of varying frequencies to generate these encodings:
 
-$$ PE_{(pos, 2i)} = \sin(pos / 10000^{2i/d_{model}}) $$
-$$ PE_{(pos, 2i+1)} = \cos(pos / 10000^{2i/d_{model}}) $$
+$$ PE*{(pos, 2i)} = \sin(pos / 10000^{2i/d*{model}}) $$
+$$ PE*{(pos, 2i+1)} = \cos(pos / 10000^{2i/d*{model}}) $$
 
 Here, $pos$ is the word's position in the sequence, $i$ is the dimension within the embedding vector, and $d_{model}$ is the dimension of the model (embedding size). The beauty of using sines and cosines is that they allow the model to easily learn relative positions. For example, the difference between $PE_{pos}$ and $PE_{pos+k}$ is consistent regardless of $pos$. It's like giving each word a unique, yet related, address within the sequence.
 
@@ -85,18 +87,23 @@ Here, $pos$ is the word's position in the sequence, $i$ is the dimension within 
 The Transformer architecture is typically composed of an **Encoder** and a **Decoder** stack, though many modern applications use only the Encoder (like BERT) or only the Decoder (like GPT).
 
 #### The Encoder Stack
+
 The Encoder is responsible for understanding the input sequence. It consists of a stack of identical layers. Each layer has two main sub-layers:
+
 1.  **Multi-Head Self-Attention Layer:** As discussed, this allows each word to consider all other words in the input.
 2.  **Position-wise Feed-Forward Network:** This is a simple, fully connected feed-forward network applied independently and identically to each position. It provides a non-linear transformation that helps the model learn more complex relationships.
 
 Crucially, each of these sub-layers has a **residual connection** around it, followed by **layer normalization**.
-*   **Residual Connections:** These connections, also known as skip connections, simply add the input of a sub-layer to its output. This helps combat the vanishing gradient problem in deep networks, making it easier to train very deep models. Output = $\text{LayerNorm}(x + \text{Sublayer}(x))$.
-*   **Layer Normalization:** This normalizes the summed input across the features for each sample independently. It stabilizes learning and speeds up training.
+
+- **Residual Connections:** These connections, also known as skip connections, simply add the input of a sub-layer to its output. This helps combat the vanishing gradient problem in deep networks, making it easier to train very deep models. Output = $\text{LayerNorm}(x + \text{Sublayer}(x))$.
+- **Layer Normalization:** This normalizes the summed input across the features for each sample independently. It stabilizes learning and speeds up training.
 
 #### The Decoder Stack
+
 The Decoder is responsible for generating the output sequence. It also consists of a stack of identical layers, but with an important addition and modification:
-1.  **Masked Multi-Head Self-Attention Layer:** This is similar to the encoder's self-attention, but with one critical difference: it's *masked*. When generating a word, the decoder can only attend to previously generated words and the current word itself. It cannot "cheat" by looking at future words in the target sequence. This masking ensures that the generation process remains autoregressive (predicting one word at a time based on what came before).
-2.  **Encoder-Decoder Multi-Head Attention Layer:** This is where the decoder "looks" at the output of the encoder. The Query vectors come from the previous decoder layer, while the Key and Value vectors come from the *output of the encoder stack*. This allows the decoder to focus on relevant parts of the *input sequence* when generating each word of the output.
+
+1.  **Masked Multi-Head Self-Attention Layer:** This is similar to the encoder's self-attention, but with one critical difference: it's _masked_. When generating a word, the decoder can only attend to previously generated words and the current word itself. It cannot "cheat" by looking at future words in the target sequence. This masking ensures that the generation process remains autoregressive (predicting one word at a time based on what came before).
+2.  **Encoder-Decoder Multi-Head Attention Layer:** This is where the decoder "looks" at the output of the encoder. The Query vectors come from the previous decoder layer, while the Key and Value vectors come from the _output of the encoder stack_. This allows the decoder to focus on relevant parts of the _input sequence_ when generating each word of the output.
 3.  **Position-wise Feed-Forward Network:** Identical to the one in the encoder.
 
 Again, residual connections and layer normalization are applied after each sub-layer.

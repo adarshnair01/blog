@@ -6,7 +6,7 @@ tags: ["Machine Learning", "NLP", "Deep Learning", "Transformers", "AI Architect
 author: "Adarsh Nair"
 ---
 
-My first encounter with the world of Artificial Intelligence felt like stepping into a sci-fi movie. I remember marveling at how models could predict text or translate languages. But there was always a nagging question: how do they *really* understand the context, especially over long sentences?
+My first encounter with the world of Artificial Intelligence felt like stepping into a sci-fi movie. I remember marveling at how models could predict text or translate languages. But there was always a nagging question: how do they _really_ understand the context, especially over long sentences?
 
 For a long time, the kings of sequential data processing were Recurrent Neural Networks (RNNs) and their more sophisticated cousins, LSTMs (Long Short-Term Memory networks). They processed information word by word, carrying a 'memory' of previous words. Imagine reading a book one word at a time, trying to remember the entire plot. It works, but it's slow, and remembering details from the beginning of a very long book becomes incredibly difficult. This inability to capture long-range dependencies efficiently was a significant bottleneck.
 
@@ -18,16 +18,16 @@ So, let's embark on this journey and unravel the genius of Transformers, piece b
 
 At its core, the original Transformer follows an **Encoder-Decoder** structure, much like many machine translation systems.
 
-*   **Encoder:** Takes an input sequence (e.g., an English sentence) and transforms it into a rich, contextual representation. Think of it as truly "understanding" the input.
-*   **Decoder:** Takes that contextual representation from the encoder and generates an output sequence (e.g., a French translation), one word at a time.
+- **Encoder:** Takes an input sequence (e.g., an English sentence) and transforms it into a rich, contextual representation. Think of it as truly "understanding" the input.
+- **Decoder:** Takes that contextual representation from the encoder and generates an output sequence (e.g., a French translation), one word at a time.
 
-Both the Encoder and Decoder are not single layers but rather *stacks* of identical blocks. The original paper used 6 identical encoders and 6 identical decoders stacked on top of each other.
+Both the Encoder and Decoder are not single layers but rather _stacks_ of identical blocks. The original paper used 6 identical encoders and 6 identical decoders stacked on top of each other.
 
 ### The Foundation: Embedding and Positional Encoding
 
 Before any processing can begin, our words need to be converted into numbers that a neural network can understand. This is done via **Word Embeddings**, which convert each word into a dense vector (a list of numbers) representing its meaning. Words with similar meanings will have similar vectors.
 
-However, unlike RNNs, Transformers process all words in a sentence *simultaneously*. This means they lose the crucial information about word order. "Dog bites man" and "Man bites dog" have very different meanings! To compensate, Transformers introduce **Positional Encoding**.
+However, unlike RNNs, Transformers process all words in a sentence _simultaneously_. This means they lose the crucial information about word order. "Dog bites man" and "Man bites dog" have very different meanings! To compensate, Transformers introduce **Positional Encoding**.
 
 Each word embedding gets an additional vector added to it – the positional encoding – which carries information about the word's position in the sequence. It’s like attaching a tiny GPS coordinate to each word. The original paper used sine and cosine functions of different frequencies to generate these unique position vectors:
 
@@ -35,9 +35,10 @@ $PE_{(pos, 2i)} = \sin(pos / 10000^{2i/d_{model}})$
 $PE_{(pos, 2i+1)} = \cos(pos / 10000^{2i/d_{model}})$
 
 Where:
-*   $pos$ is the word's position in the sequence.
-*   $i$ is the dimension within the embedding vector.
-*   $d_{model}$ is the dimension of the embedding (and positional encoding) vectors.
+
+- $pos$ is the word's position in the sequence.
+- $i$ is the dimension within the embedding vector.
+- $d_{model}$ is the dimension of the embedding (and positional encoding) vectors.
 
 This clever approach allows the model to differentiate words based on their position, providing a sense of sequence without relying on recurrence.
 
@@ -58,13 +59,13 @@ Imagine the sentence: "The animal didn't cross the street because it was too tir
 
 Here's how it works: for each word, we create three vectors:
 
-*   **Query (Q):** What I'm looking for.
-*   **Key (K):** What I can offer.
-*   **Value (V):** My actual content.
+- **Query (Q):** What I'm looking for.
+- **Key (K):** What I can offer.
+- **Value (V):** My actual content.
 
 These are obtained by multiplying the word's embedding (plus positional encoding) by three different weight matrices ($W^Q, W^K, W^V$) learned during training.
 
-To calculate the attention output for a word (let's say "it"), its Query vector is dotted with the Key vectors of *all* other words (and itself) in the sentence. This dot product measures how relevant each other word is to "it."
+To calculate the attention output for a word (let's say "it"), its Query vector is dotted with the Key vectors of _all_ other words (and itself) in the sentence. This dot product measures how relevant each other word is to "it."
 
 Then, these scores are scaled down by $\sqrt{d_k}$ (where $d_k$ is the dimension of the Key vectors) to prevent very large values from pushing the softmax function into regions with tiny gradients. After scaling, a **softmax** function is applied, turning these raw scores into probabilities – indicating how much "attention" "it" should pay to each other word.
 
@@ -96,13 +97,13 @@ This layer provides a point-wise, non-linear transformation that allows the mode
 
 ### The Decoder: Generating Output
 
-The decoder stack is similar to the encoder but with a few crucial modifications, as its job is to *generate* a sequence. Each decoder block has three main sub-layers:
+The decoder stack is similar to the encoder but with a few crucial modifications, as its job is to _generate_ a sequence. Each decoder block has three main sub-layers:
 
 1.  **Masked Multi-Head Self-Attention:**
-    This is like the encoder's self-attention, but with a critical difference: **masking**. When generating a word, the decoder should only attend to the words it has *already generated* (and the input word itself). It cannot "cheat" by looking at future words in the target sequence. A mask is applied to the attention scores to block information from subsequent positions by setting their softmax input to negative infinity.
+    This is like the encoder's self-attention, but with a critical difference: **masking**. When generating a word, the decoder should only attend to the words it has _already generated_ (and the input word itself). It cannot "cheat" by looking at future words in the target sequence. A mask is applied to the attention scores to block information from subsequent positions by setting their softmax input to negative infinity.
 
 2.  **Encoder-Decoder Attention (Multi-Head Attention):**
-    This layer performs attention over the *output of the encoder stack*. Here, the Query comes from the *decoder's previous layer*, while the Keys and Values come from the *encoder's final output*. This allows the decoder to focus on relevant parts of the input sequence when generating each output word, providing the necessary contextual information from the source.
+    This layer performs attention over the _output of the encoder stack_. Here, the Query comes from the _decoder's previous layer_, while the Keys and Values come from the _encoder's final output_. This allows the decoder to focus on relevant parts of the input sequence when generating each output word, providing the necessary contextual information from the source.
 
 3.  **Position-wise Feed-Forward Network:**
     Identical to the one in the encoder.

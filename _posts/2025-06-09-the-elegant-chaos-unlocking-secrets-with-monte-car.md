@@ -22,7 +22,7 @@ Ulam, recovering from an illness, was playing solitaire and started thinking abo
 
 At its core, a Monte Carlo simulation is a computational method that relies on repeated random sampling to obtain numerical results. It's especially useful for simulating events, estimating probabilities, and understanding the behavior of complex systems where a direct, analytical solution is impossible or impractical.
 
-Think of it this way: instead of trying to calculate every possible outcome and its probability (which can be infinite or incredibly complex), we *simulate* the process many, many times, each time using random variables. By observing the outcomes of these numerous trials, we can infer the properties of the overall system.
+Think of it this way: instead of trying to calculate every possible outcome and its probability (which can be infinite or incredibly complex), we _simulate_ the process many, many times, each time using random variables. By observing the outcomes of these numerous trials, we can infer the properties of the overall system.
 
 The key principle at play here is the **Law of Large Numbers**. This fundamental theorem of probability states that as you repeat an experiment many times, the average of the results obtained from the large number of trials should be close to the expected value, and will tend to get closer as more trials are performed. So, by "rolling the dice" enough times, the chaos starts to reveal patterns, and the randomness converges towards truth.
 
@@ -32,14 +32,14 @@ Let's dive into a classic, intuitive example that brilliantly illustrates the po
 
 Imagine you have a square target board. Inside this square, you've inscribed a perfect circle that touches all four sides of the square. Now, imagine you're incredibly bad at darts, and you throw darts randomly at the target, always hitting somewhere within the square.
 
-What would you expect? You'd intuitively guess that more darts would land inside the circle than outside, right? And the proportion of darts inside the circle relative to the total darts thrown inside the square should tell us something about the *ratio of the areas* of the circle and the square.
+What would you expect? You'd intuitively guess that more darts would land inside the circle than outside, right? And the proportion of darts inside the circle relative to the total darts thrown inside the square should tell us something about the _ratio of the areas_ of the circle and the square.
 
 Let's set up the math:
 Assume the square has sides of length $2r$. Its area is $A_{square} = (2r)^2 = 4r^2$.
 The inscribed circle has a radius $r$. Its area is $A_{circle} = \pi r^2$.
 
 The ratio of the areas is:
-$$ \frac{A_{circle}}{A_{square}} = \frac{\pi r^2}{4r^2} = \frac{\pi}{4} $$
+$$ \frac{A*{circle}}{A*{square}} = \frac{\pi r^2}{4r^2} = \frac{\pi}{4} $$
 
 So, if we can estimate this ratio by throwing darts, we can estimate $\pi$!
 $$ \pi \approx 4 \times \frac{\text{Number of darts inside circle}}{\text{Total number of darts inside square}} $$
@@ -79,18 +79,18 @@ If you run this (or something similar), you'll find that as `num_trials` increas
 While estimating $\pi$ is a fantastic illustrative example, it's just the tip of the iceberg. Monte Carlo simulations are indispensable in fields where complexity makes analytical solutions nearly impossible:
 
 1.  **Financial Modeling & Risk Assessment:**
-    *   **Option Pricing:** Deriving fair prices for complex financial derivatives (options, futures, etc.) often involves modeling future stock prices, interest rates, and volatilities, which are inherently uncertain. Monte Carlo allows simulating thousands of possible future scenarios to average out potential payoffs and discount them back to today's value.
-    *   **Portfolio Optimization:** Estimating the Value-at-Risk (VaR) or Conditional Value-at-Risk (CVaR) for a portfolio of assets, helping investors understand potential losses under various market conditions.
+    - **Option Pricing:** Deriving fair prices for complex financial derivatives (options, futures, etc.) often involves modeling future stock prices, interest rates, and volatilities, which are inherently uncertain. Monte Carlo allows simulating thousands of possible future scenarios to average out potential payoffs and discount them back to today's value.
+    - **Portfolio Optimization:** Estimating the Value-at-Risk (VaR) or Conditional Value-at-Risk (CVaR) for a portfolio of assets, helping investors understand potential losses under various market conditions.
 2.  **Engineering and Scientific Research:**
-    *   **Particle Physics:** Simulating the behavior of subatomic particles in accelerators or through shielding materials.
-    *   **Fluid Dynamics:** Modeling turbulent flows or complex interactions.
-    *   **Drug Discovery:** Simulating molecular interactions to predict drug efficacy and toxicity.
-    *   **Environmental Modeling:** Predicting the spread of pollutants or the impact of climate change.
+    - **Particle Physics:** Simulating the behavior of subatomic particles in accelerators or through shielding materials.
+    - **Fluid Dynamics:** Modeling turbulent flows or complex interactions.
+    - **Drug Discovery:** Simulating molecular interactions to predict drug efficacy and toxicity.
+    - **Environmental Modeling:** Predicting the spread of pollutants or the impact of climate change.
 3.  **Data Science and Machine Learning:**
-    *   **Bayesian Inference (MCMC):** For complex Bayesian models, calculating the posterior distribution analytically can be impossible. Markov Chain Monte Carlo (MCMC) methods, a class of Monte Carlo algorithms, are used to draw samples from these complex distributions, allowing us to approximate them. This is huge for understanding uncertainty in models.
-    *   **Reinforcement Learning:** Agents can learn optimal policies by simulating interactions with an environment, especially when analytical models of the environment are unavailable or too complex.
-    *   **Uncertainty Quantification:** Estimating the uncertainty in model predictions by simulating various input conditions or model parameters.
-    *   **Feature Engineering/Selection:** Sometimes, one might use MC to simulate data or test the robustness of a feature selection strategy.
+    - **Bayesian Inference (MCMC):** For complex Bayesian models, calculating the posterior distribution analytically can be impossible. Markov Chain Monte Carlo (MCMC) methods, a class of Monte Carlo algorithms, are used to draw samples from these complex distributions, allowing us to approximate them. This is huge for understanding uncertainty in models.
+    - **Reinforcement Learning:** Agents can learn optimal policies by simulating interactions with an environment, especially when analytical models of the environment are unavailable or too complex.
+    - **Uncertainty Quantification:** Estimating the uncertainty in model predictions by simulating various input conditions or model parameters.
+    - **Feature Engineering/Selection:** Sometimes, one might use MC to simulate data or test the robustness of a feature selection strategy.
 
 ### The Recipe for a Monte Carlo Simulation
 
@@ -105,16 +105,16 @@ While the specific implementation varies, most Monte Carlo simulations follow a 
 
 **Advantages:**
 
-*   **Handles Complexity:** Excels where analytical solutions are impossible due to non-linearity, high dimensionality, or complex interactions.
-*   **Intuitive:** The core concept of "many trials" is easy to grasp.
-*   **Provides Distributions:** Unlike point estimates, MC simulations often give you a distribution of possible outcomes, offering a richer understanding of uncertainty.
-*   **Parallelizable:** Each simulation trial is often independent, making it easy to run computations in parallel across multiple processors.
+- **Handles Complexity:** Excels where analytical solutions are impossible due to non-linearity, high dimensionality, or complex interactions.
+- **Intuitive:** The core concept of "many trials" is easy to grasp.
+- **Provides Distributions:** Unlike point estimates, MC simulations often give you a distribution of possible outcomes, offering a richer understanding of uncertainty.
+- **Parallelizable:** Each simulation trial is often independent, making it easy to run computations in parallel across multiple processors.
 
 **Limitations:**
 
-*   **Computationally Intensive:** Requires a very large number of trials to achieve high accuracy, which can be time-consuming and resource-heavy.
-*   **Slow Convergence:** The standard error in a Monte Carlo estimate typically decreases with the square root of the number of samples ($ \frac{1}{\sqrt{N}} $). This means to halve the error, you need to quadruple the number of samples.
-*   **"Curse of Dimensionality":** In very high-dimensional spaces, generating enough random samples to adequately cover the space becomes exponentially difficult.
+- **Computationally Intensive:** Requires a very large number of trials to achieve high accuracy, which can be time-consuming and resource-heavy.
+- **Slow Convergence:** The standard error in a Monte Carlo estimate typically decreases with the square root of the number of samples ($ \frac{1}{\sqrt{N}} $). This means to halve the error, you need to quadruple the number of samples.
+- **"Curse of Dimensionality":** In very high-dimensional spaces, generating enough random samples to adequately cover the space becomes exponentially difficult.
 
 ### Concluding Thoughts
 

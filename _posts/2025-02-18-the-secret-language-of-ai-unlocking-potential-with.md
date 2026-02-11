@@ -8,11 +8,11 @@ author: "Adarsh Nair"
 
 Hey there, fellow explorers of the digital frontier!
 
-I remember the first time I truly felt the raw power of a Large Language Model (LLM). It wasn't just generating text; it was *creating*, *reasoning*, and *solving*. But, like many of you, my initial interactions were a mixed bag. Sometimes I'd get brilliant insights, other times a string of generic fluff. It was like talking to a genius who occasionally misunderstood the entire premise of my question. Frustrating, right?
+I remember the first time I truly felt the raw power of a Large Language Model (LLM). It wasn't just generating text; it was _creating_, _reasoning_, and _solving_. But, like many of you, my initial interactions were a mixed bag. Sometimes I'd get brilliant insights, other times a string of generic fluff. It was like talking to a genius who occasionally misunderstood the entire premise of my question. Frustrating, right?
 
 That's where my journey into Prompt Engineering began – a journey that transformed those hit-or-miss interactions into a deliberate art form, allowing me to consistently coax incredible results from these digital brains. If you've ever tried to get an AI to do exactly what you want, you've already dipped your toes into this exciting field. This post is my personal journal, a walkthrough of what I've learned, and an invitation for you to dive deeper.
 
-### What *Is* Prompt Engineering?
+### What _Is_ Prompt Engineering?
 
 Imagine you're trying to communicate with an incredibly intelligent, but extremely literal, alien. This alien knows everything, has access to all information, and can process it at light speed. But it only understands precisely what you tell it. If you say "tell me about dogs," it might give you a dictionary definition. If you say "Write a heartwarming short story from the perspective of a golden retriever puppy discovering snow for the first time, ending with a cozy nap," you're much more likely to get something magical.
 
@@ -28,7 +28,7 @@ $P(token_{n+1} | \text{context})$
 
 Where $P$ is the probability, $token_{n+1}$ is the next token, and $\text{context}$ is the sequence of all previous tokens (including your prompt).
 
-This means your prompt isn't just a question; it's the *initial context* that sets the entire stage for the LLM's predictive dance. A slight change in context can dramatically shift the probabilities of subsequent tokens, leading to a completely different output. This insight was game-changing for me – it made it clear why "how you ask" is everything.
+This means your prompt isn't just a question; it's the _initial context_ that sets the entire stage for the LLM's predictive dance. A slight change in context can dramatically shift the probabilities of subsequent tokens, leading to a completely different output. This insight was game-changing for me – it made it clear why "how you ask" is everything.
 
 ### My Prompt Engineering Playbook: Core Strategies
 
@@ -44,8 +44,8 @@ This might sound obvious, but it's astonishing how often we rely on implicit ass
 
 **Example:**
 
-*   **Bad Prompt:** "Tell me about the universe."
-*   **Good Prompt:** "Explain the Big Bang theory to a 10-year-old. Use simple language and include an analogy to help them understand the concept of expansion. Keep the explanation under 200 words."
+- **Bad Prompt:** "Tell me about the universe."
+- **Good Prompt:** "Explain the Big Bang theory to a 10-year-old. Use simple language and include an analogy to help them understand the concept of expansion. Keep the explanation under 200 words."
 
 #### 2. Role-Playing: Donning a Digital Persona
 
@@ -57,7 +57,7 @@ Giving the AI a specific persona or role can dramatically influence the tone, st
 
 **Example:**
 
-*   **Prompt:** "You are a seasoned travel blogger specializing in budget European travel. Recommend a 7-day itinerary for exploring Rome on less than €50 a day, including tips for cheap eats and free attractions."
+- **Prompt:** "You are a seasoned travel blogger specializing in budget European travel. Recommend a 7-day itinerary for exploring Rome on less than €50 a day, including tips for cheap eats and free attractions."
 
 #### 3. Few-Shot Learning: Learning by Example
 
@@ -111,6 +111,7 @@ Use: Systems programming, web assembly, performance-critical applications.
 Language: Kotlin
 Use: Android app development, backend web development.
 ```
+
 By giving it examples, the LLM understood the `Language: Use` format and applied it to the new languages.
 
 #### 4. Chain-of-Thought (CoT) Prompting: Thinking Step-by-Step
@@ -127,13 +128,10 @@ Where $Q$ is the initial query, $S_i$ are the intermediate reasoning steps, and 
 
 **Example:**
 
-*   **Prompt:** "There are 15 apples in a basket. You take 3, and your friend takes 2 more. Then, you put 5 back. How many apples are in the basket now? Let's think step by step."
+- **Prompt:** "There are 15 apples in a basket. You take 3, and your friend takes 2 more. Then, you put 5 back. How many apples are in the basket now? Let's think step by step."
 
 The LLM would then typically output something like:
-"1. Initially, there are 15 apples.
-2. You take 3: $15 - 3 = 12$ apples.
-3. Your friend takes 2 more: $12 - 2 = 10$ apples.
-4. You put 5 back: $10 + 5 = 15$ apples.
+"1. Initially, there are 15 apples. 2. You take 3: $15 - 3 = 12$ apples. 3. Your friend takes 2 more: $12 - 2 = 10$ apples. 4. You put 5 back: $10 + 5 = 15$ apples.
 Answer: There are 15 apples in the basket now."
 
 This process significantly improves accuracy on complex tasks.
@@ -152,8 +150,8 @@ Prompt Engineering is rarely a one-shot deal. It's an iterative process of trial
 
 While mastering the prompt text is key, understanding model parameters also helps. Two common ones are:
 
-*   **Temperature:** Controls the randomness of the output. A higher temperature (e.g., 0.7-1.0) means the model takes more risks, leading to creative, diverse, and sometimes surprising results. A lower temperature (e.g., 0.1-0.3) makes the model more deterministic and focused, ideal for factual recall or precise tasks.
-*   **Top-P:** Another way to control diversity, by considering only tokens whose cumulative probability exceeds a certain threshold.
+- **Temperature:** Controls the randomness of the output. A higher temperature (e.g., 0.7-1.0) means the model takes more risks, leading to creative, diverse, and sometimes surprising results. A lower temperature (e.g., 0.1-0.3) makes the model more deterministic and focused, ideal for factual recall or precise tasks.
+- **Top-P:** Another way to control diversity, by considering only tokens whose cumulative probability exceeds a certain threshold.
 
 There are also advanced techniques like **Retrieval Augmented Generation (RAG)**, where you provide the LLM with external knowledge (e.g., from a database or document) before it generates a response, reducing hallucinations and grounding its answers in specific facts. But that's a topic for another deep dive!
 
@@ -165,9 +163,9 @@ Prompt Engineering sits at a fascinating intersection. It's an **art** because i
 
 Even with expert prompting, LLMs have limitations:
 
-*   **Hallucinations:** They can generate plausible-sounding but factually incorrect information. Prompt engineering, especially with RAG, helps mitigate this.
-*   **Bias:** Inherited from their training data, LLMs can perpetuate stereotypes. Careful prompt design can sometimes steer around this, but it remains a significant challenge.
-*   **Context Window Limitations:** LLMs can only process a finite amount of text at once. Very long prompts or documents might get truncated.
+- **Hallucinations:** They can generate plausible-sounding but factually incorrect information. Prompt engineering, especially with RAG, helps mitigate this.
+- **Bias:** Inherited from their training data, LLMs can perpetuate stereotypes. Careful prompt design can sometimes steer around this, but it remains a significant challenge.
+- **Context Window Limitations:** LLMs can only process a finite amount of text at once. Very long prompts or documents might get truncated.
 
 Despite these, the field is evolving at a breakneck pace. New models, techniques, and frameworks are emerging constantly. Becoming proficient in Prompt Engineering isn't just a cool party trick; it's rapidly becoming an essential skill for anyone interacting with or building applications on top of AI.
 

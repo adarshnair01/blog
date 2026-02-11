@@ -18,8 +18,8 @@ Before we dive into the Bayesian rabbit hole, it’s useful to briefly acknowled
 
 The core difference often boils down to how they view **probability** and **parameters**:
 
-*   **Frequentist View**: Parameters (like the true average height of people, or the true success rate of a drug) are fixed, but unknown constants. Probability is defined by the long-run frequency of an event if an experiment were repeated infinitely many times. Data is random; parameters are not.
-*   **Bayesian View**: Parameters are not fixed; they are themselves random variables with their own probability distributions. Probability represents our *degree of belief* in an event. Data is fixed (what we've observed); parameters are what we're uncertain about, and we update our beliefs about them.
+- **Frequentist View**: Parameters (like the true average height of people, or the true success rate of a drug) are fixed, but unknown constants. Probability is defined by the long-run frequency of an event if an experiment were repeated infinitely many times. Data is random; parameters are not.
+- **Bayesian View**: Parameters are not fixed; they are themselves random variables with their own probability distributions. Probability represents our _degree of belief_ in an event. Data is fixed (what we've observed); parameters are what we're uncertain about, and we update our beliefs about them.
 
 Think of it this way: a Frequentist asks, "Given that the coin is fair, how likely is it that I observe 7 heads out of 10 tosses?" A Bayesian asks, "Given that I observed 7 heads out of 10 tosses, how likely is it that the coin is actually fair?" See the subtle but profound shift in perspective?
 
@@ -33,10 +33,10 @@ $$ P(A|B) = \frac{P(B|A)P(A)}{P(B)} $$
 
 At first glance, it might look like a jumble of letters and symbols. But let's break down each component, as if we're dissecting a fascinating puzzle:
 
-*   **$P(A)$ (The Prior Probability)**: This is your *initial belief* or hypothesis about event A, *before* you've seen any new evidence. It's what you think is true based on existing knowledge, past data, or even educated guesses. In our movie example, this might be your initial feeling about the movie's quality based on the director or genre.
-*   **$P(B|A)$ (The Likelihood)**: This tells you "how likely is the evidence $B$, given that your hypothesis $A$ is true?" It measures how well your hypothesis $A$ explains the data $B$ you just observed. If the movie is truly good ($A$), how likely is it to get overwhelmingly positive reviews ($B$)?
-*   **$P(B)$ (The Marginal Likelihood or Evidence)**: This is the overall probability of observing the evidence $B$, regardless of whether $A$ is true or not. It acts as a normalizing constant, ensuring that your updated probabilities sum up to 1. Conceptually, it averages out the likelihood of the evidence across all possible hypotheses.
-*   **$P(A|B)$ (The Posterior Probability)**: This is the star of the show! It's your *updated belief* about event $A$, *after* taking into account the new evidence $B$. This is where the learning happens. It tells you "what is the probability of my hypothesis $A$ being true, given that I've observed the evidence $B$?" This is your refined opinion about the movie's quality after reading the reviews.
+- **$P(A)$ (The Prior Probability)**: This is your _initial belief_ or hypothesis about event A, _before_ you've seen any new evidence. It's what you think is true based on existing knowledge, past data, or even educated guesses. In our movie example, this might be your initial feeling about the movie's quality based on the director or genre.
+- **$P(B|A)$ (The Likelihood)**: This tells you "how likely is the evidence $B$, given that your hypothesis $A$ is true?" It measures how well your hypothesis $A$ explains the data $B$ you just observed. If the movie is truly good ($A$), how likely is it to get overwhelmingly positive reviews ($B$)?
+- **$P(B)$ (The Marginal Likelihood or Evidence)**: This is the overall probability of observing the evidence $B$, regardless of whether $A$ is true or not. It acts as a normalizing constant, ensuring that your updated probabilities sum up to 1. Conceptually, it averages out the likelihood of the evidence across all possible hypotheses.
+- **$P(A|B)$ (The Posterior Probability)**: This is the star of the show! It's your _updated belief_ about event $A$, _after_ taking into account the new evidence $B$. This is where the learning happens. It tells you "what is the probability of my hypothesis $A$ being true, given that I've observed the evidence $B$?" This is your refined opinion about the movie's quality after reading the reviews.
 
 In plain English, Bayes' Theorem says:
 
@@ -50,16 +50,18 @@ Let's illustrate this with a classic, often counter-intuitive example: medical d
 
 Imagine a very rare disease that affects **1 in 1,000 people** ($P(D) = 0.001$).
 A new test for this disease is developed. It's quite accurate:
-*   If a person *has* the disease, the test correctly identifies them as positive **99% of the time** ($P(T+|D) = 0.99$).
-*   If a person is *healthy*, the test correctly identifies them as negative **98% of the time** ($P(T-|H) = 0.98$). This means it incorrectly gives a positive result (a false positive) 2% of the time ($P(T+|H) = 0.02$).
 
-Now, let's say a random person takes the test, and it comes back **positive**. How worried should they be? What is the probability that they *actually have the disease*, given a positive test result?
+- If a person _has_ the disease, the test correctly identifies them as positive **99% of the time** ($P(T+|D) = 0.99$).
+- If a person is _healthy_, the test correctly identifies them as negative **98% of the time** ($P(T-|H) = 0.98$). This means it incorrectly gives a positive result (a false positive) 2% of the time ($P(T+|H) = 0.02$).
+
+Now, let's say a random person takes the test, and it comes back **positive**. How worried should they be? What is the probability that they _actually have the disease_, given a positive test result?
 
 This is exactly what Bayes' Theorem is designed to answer: we want to find $P(D|T+)$.
 
 Let's define our terms for the formula:
-*   $A$ = Has the disease ($D$)
-*   $B$ = Tests positive ($T+$)
+
+- $A$ = Has the disease ($D$)
+- $B$ = Tests positive ($T+$)
 
 So we want to calculate $P(D|T+) = \frac{P(T+|D)P(D)}{P(T+)}$
 
@@ -69,12 +71,12 @@ Let's plug in what we know and calculate what we need:
     $P(D) = 0.001$ (1 in 1000)
     This also means the probability of a random person being healthy ($H$) is $P(H) = 1 - P(D) = 0.999$.
 
-2.  **Likelihood ($P(T+|D)$)**: The probability of testing positive if you *do* have the disease.
+2.  **Likelihood ($P(T+|D)$)**: The probability of testing positive if you _do_ have the disease.
     $P(T+|D) = 0.99$
 
-3.  **Marginal Likelihood ($P(T+)$)**: This is the tricky one. What's the overall probability of *anyone* testing positive? A person can test positive in two ways:
-    *   They have the disease AND test positive ($D$ and $T+$)
-    *   They are healthy AND test positive ($H$ and $T+$ - a false positive)
+3.  **Marginal Likelihood ($P(T+)$)**: This is the tricky one. What's the overall probability of _anyone_ testing positive? A person can test positive in two ways:
+    - They have the disease AND test positive ($D$ and $T+$)
+    - They are healthy AND test positive ($H$ and $T+$ - a false positive)
 
     So, $P(T+) = P(T+|D)P(D) + P(T+|H)P(H)$
     We know $P(T+|H) = 1 - P(T-|H) = 1 - 0.98 = 0.02$.
@@ -111,8 +113,8 @@ For anyone building intelligent systems, working with data, or trying to make se
 
 While powerful, Bayesian statistics isn't without its challenges:
 
-*   **Choosing Priors**: While a strength, selecting an appropriate prior can also be a source of debate. If your prior is too strong or misinformed, it can skew your results. However, techniques exist for choosing "non-informative" priors when you genuinely have little prior knowledge.
-*   **Computational Complexity**: For many real-world problems, calculating the $P(B)$ (the marginal likelihood) can be computationally intensive, especially with complex models or high-dimensional data. This often necessitates the use of advanced sampling techniques like Markov Chain Monte Carlo (MCMC), which can require significant computational resources and expertise.
+- **Choosing Priors**: While a strength, selecting an appropriate prior can also be a source of debate. If your prior is too strong or misinformed, it can skew your results. However, techniques exist for choosing "non-informative" priors when you genuinely have little prior knowledge.
+- **Computational Complexity**: For many real-world problems, calculating the $P(B)$ (the marginal likelihood) can be computationally intensive, especially with complex models or high-dimensional data. This often necessitates the use of advanced sampling techniques like Markov Chain Monte Carlo (MCMC), which can require significant computational resources and expertise.
 
 ### Your Journey into Data-Driven Wisdom
 

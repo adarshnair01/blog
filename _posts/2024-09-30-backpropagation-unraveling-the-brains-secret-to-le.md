@@ -1,12 +1,12 @@
 ---
 title: "Backpropagation: Unraveling the Brain's Secret to Learning from Mistakes"
 date: "2024-09-30"
-excerpt: "Ever wondered how a neural network learns to \"think\" and correct its errors? Dive into the elegant, mathematical dance of Backpropagation, the algorithm that teaches AI to learn from its past."
+excerpt: 'Ever wondered how a neural network learns to "think" and correct its errors? Dive into the elegant, mathematical dance of Backpropagation, the algorithm that teaches AI to learn from its past.'
 tags: ["Machine Learning", "Deep Learning", "Neural Networks", "Backpropagation", "AI"]
 author: "Adarsh Nair"
 ---
 
-Imagine you're learning to ride a bike. You push off, wobble, and then... *thud*. You've made a mistake. What do you do next? You don't just randomly flail around; you subtly adjust your balance, maybe lean a little less, push a little harder with one foot, or steer slightly differently based on *how* you fell. You learn from your error by figuring out which actions contributed to the fall and how to correct them.
+Imagine you're learning to ride a bike. You push off, wobble, and then... _thud_. You've made a mistake. What do you do next? You don't just randomly flail around; you subtly adjust your balance, maybe lean a little less, push a little harder with one foot, or steer slightly differently based on _how_ you fell. You learn from your error by figuring out which actions contributed to the fall and how to correct them.
 
 This intuitive process of learning from mistakes, adjusting actions based on outcomes, is fundamental to intelligence – both biological and artificial. In the world of Artificial Intelligence, specifically with Neural Networks, this intricate dance of learning is orchestrated by a powerful, yet often misunderstood, algorithm: **Backpropagation**.
 
@@ -14,7 +14,7 @@ Today, we're going on a journey, almost like opening a personal journal, to expl
 
 ### The Neuron's Tale: A Quick Refresher
 
-Before we dive into how neural networks learn, let's quickly recap what they *are*. At its heart, a neural network is a collection of interconnected "neurons" organized into layers.
+Before we dive into how neural networks learn, let's quickly recap what they _are_. At its heart, a neural network is a collection of interconnected "neurons" organized into layers.
 
 Each neuron takes inputs, multiplies them by a set of **weights** ($w$), adds a **bias** ($b$), and then passes the result through an non-linear **activation function** ($\sigma$) to produce an output.
 
@@ -23,12 +23,13 @@ $z = \sum (x_i w_i) + b$
 $a = \sigma(z)$
 
 Where:
-*   $x_i$ are the inputs
-*   $w_i$ are the weights
-*   $b$ is the bias
-*   $z$ is the weighted sum (pre-activation)
-*   $\sigma$ is the activation function (e.g., ReLU, Sigmoid)
-*   $a$ is the output (activation) of the neuron
+
+- $x_i$ are the inputs
+- $w_i$ are the weights
+- $b$ is the bias
+- $z$ is the weighted sum (pre-activation)
+- $\sigma$ is the activation function (e.g., ReLU, Sigmoid)
+- $a$ is the output (activation) of the neuron
 
 These neurons are stacked in layers: an **input layer**, one or more **hidden layers**, and an **output layer**. Information flows forward through the network – this is called the **forward pass**. When we feed an image of a cat into a network, it performs a forward pass to predict whether it's a cat or a dog.
 
@@ -63,7 +64,7 @@ The problem, however, is that a neural network can have millions, even billions,
 
 The intuition behind backpropagation is surprisingly simple: it's a systematic way of propagating the error backward through the network, assigning "blame" to each weight and bias based on its contribution to the overall error. It's like tracing back the dominoes to find out which one was the first to fall.
 
-Let's consider a simple scenario. Our network makes a prediction, and it's wrong. The output layer is directly responsible for this error. But that output layer's activations were determined by the weights and biases connecting it to the previous hidden layer. And those hidden layer activations were, in turn, determined by *their* weights and biases, and so on.
+Let's consider a simple scenario. Our network makes a prediction, and it's wrong. The output layer is directly responsible for this error. But that output layer's activations were determined by the weights and biases connecting it to the previous hidden layer. And those hidden layer activations were, in turn, determined by _their_ weights and biases, and so on.
 
 Backpropagation uses the **chain rule** from calculus to efficiently compute these gradients. The chain rule states that if $C$ depends on $y$, and $y$ depends on $x$, then the rate of change of $C$ with respect to $x$ is:
 $\frac{dC}{dx} = \frac{dC}{dy} \cdot \frac{dy}{dx}$
@@ -96,7 +97,7 @@ And for the bias:
 $\frac{\partial L}{\partial b_k} = \frac{\partial L}{\partial z_k} \cdot \frac{\partial z_k}{\partial b_k}$
 Since $\frac{\partial z_k}{\partial b_k} = 1$, then $\frac{\partial L}{\partial b_k} = \delta_k \cdot 1 = \delta_k$
 
-These are the gradients for the weights and biases of the *output layer*.
+These are the gradients for the weights and biases of the _output layer_.
 
 #### 2. Propagating Error to the Hidden Layer
 
@@ -104,13 +105,14 @@ Here's where the "back" in backpropagation truly shines. The hidden layer neuron
 
 To find the gradient for a weight ($w_{ij}$) connecting input neuron $i$ to hidden neuron $j$, we first need the "error signal" for the hidden neuron $j$, which is $\frac{\partial L}{\partial z_j}$.
 
-How does the loss $L$ depend on $z_j$? It depends on $z_j$ because $z_j$ influences $a_j$, which then influences *all* the $z_k$ values in the output layer, which then influence $L$. So we need to sum up the influence from all output neurons $k$:
+How does the loss $L$ depend on $z_j$? It depends on $z_j$ because $z_j$ influences $a_j$, which then influences _all_ the $z_k$ values in the output layer, which then influence $L$. So we need to sum up the influence from all output neurons $k$:
 $\frac{\partial L}{\partial z_j} = \sum_k \left( \frac{\partial L}{\partial z_k} \cdot \frac{\partial z_k}{\partial a_j} \cdot \frac{\partial a_j}{\partial z_j} \right)$
 
 Let's break this down:
-*   $\frac{\partial L}{\partial z_k}$ is the error signal ($\delta_k$) we just calculated for output neuron $k$.
-*   $\frac{\partial z_k}{\partial a_j}$ tells us how much hidden neuron $j$'s activation affects output neuron $k$'s pre-activation. From $z_k = \sum_j (a_j w_{jk}) + b_k$, we see $\frac{\partial z_k}{\partial a_j} = w_{jk}$.
-*   $\frac{\partial a_j}{\partial z_j}$ is simply the derivative of the hidden layer's activation function: $\sigma'(z_j)$.
+
+- $\frac{\partial L}{\partial z_k}$ is the error signal ($\delta_k$) we just calculated for output neuron $k$.
+- $\frac{\partial z_k}{\partial a_j}$ tells us how much hidden neuron $j$'s activation affects output neuron $k$'s pre-activation. From $z_k = \sum_j (a_j w_{jk}) + b_k$, we see $\frac{\partial z_k}{\partial a_j} = w_{jk}$.
+- $\frac{\partial a_j}{\partial z_j}$ is simply the derivative of the hidden layer's activation function: $\sigma'(z_j)$.
 
 So, the error signal for hidden neuron $j$ is:
 $\delta_j = \frac{\partial L}{\partial z_j} = \left( \sum_k \delta_k w_{jk} \right) \cdot \sigma'(z_j)$
@@ -128,8 +130,8 @@ And there you have it! We've calculated gradients for all weights and biases in 
 1.  **Forward Pass**: Feed input data through the network, layer by layer, calculating activations for each neuron until the output prediction ($\hat{y}$) is obtained. Store all intermediate pre-activations ($z$) and activations ($a$).
 2.  **Calculate Loss**: Compare $\hat{y}$ with the true label ($y$) using the chosen loss function $L$.
 3.  **Backward Pass (Backpropagation)**:
-    *   **Output Layer**: Calculate the error signal $\delta$ for the output layer neurons. Compute gradients for the output layer's weights and biases using this $\delta$.
-    *   **Hidden Layers (iterating backward)**: For each hidden layer, calculate its $\delta$ by "propagating" the error signals from the next (already processed) layer backward. Then, use this new $\delta$ to compute the gradients for that hidden layer's weights and biases.
+    - **Output Layer**: Calculate the error signal $\delta$ for the output layer neurons. Compute gradients for the output layer's weights and biases using this $\delta$.
+    - **Hidden Layers (iterating backward)**: For each hidden layer, calculate its $\delta$ by "propagating" the error signals from the next (already processed) layer backward. Then, use this new $\delta$ to compute the gradients for that hidden layer's weights and biases.
 4.  **Update Weights**: Using the calculated gradients, update all weights and biases in the network using the gradient descent rule ($w_{new} = w_{old} - \alpha \frac{\partial L}{\partial w}$).
 
 Repeat this entire process for many iterations (epochs) and mini-batches of data until the network's performance converges.
@@ -138,9 +140,9 @@ Repeat this entire process for many iterations (epochs) and mini-batches of data
 
 Backpropagation is not just an algorithm; it's a computational revolution.
 
-*   **Efficiency**: Without backpropagation, we would have to calculate each weight's gradient by slightly perturbing it and re-running the forward pass. This would be incredibly slow, especially for deep networks. Backprop calculates all gradients in a single backward pass, making it vastly more efficient.
-*   **Scalability**: This efficiency allows us to train neural networks with millions or even billions of parameters, which are the backbone of modern AI systems like image recognition, natural language processing, and autonomous driving.
-*   **Foundation of Deep Learning**: It's the engine that powers every modern deep learning framework, from TensorFlow to PyTorch. Understanding backpropagation is understanding the core of how these powerful models learn.
+- **Efficiency**: Without backpropagation, we would have to calculate each weight's gradient by slightly perturbing it and re-running the forward pass. This would be incredibly slow, especially for deep networks. Backprop calculates all gradients in a single backward pass, making it vastly more efficient.
+- **Scalability**: This efficiency allows us to train neural networks with millions or even billions of parameters, which are the backbone of modern AI systems like image recognition, natural language processing, and autonomous driving.
+- **Foundation of Deep Learning**: It's the engine that powers every modern deep learning framework, from TensorFlow to PyTorch. Understanding backpropagation is understanding the core of how these powerful models learn.
 
 ### Reflecting on Learning
 

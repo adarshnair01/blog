@@ -12,7 +12,7 @@ Enter the Monte Carlo Simulation. It's not a single algorithm but rather a power
 
 ### The Intuition: Playing Dice with the Universe
 
-Imagine trying to figure out the average outcome of a very complex board game with hundreds of variables and branching paths. You *could* try to map out every single possibility (good luck!), or you could play the game a thousand, a million, or even a billion times and simply record the final scores. The average of those scores would give you a pretty good estimate of the *actual* average outcome.
+Imagine trying to figure out the average outcome of a very complex board game with hundreds of variables and branching paths. You _could_ try to map out every single possibility (good luck!), or you could play the game a thousand, a million, or even a billion times and simply record the final scores. The average of those scores would give you a pretty good estimate of the _actual_ average outcome.
 
 That, in essence, is Monte Carlo. Instead of trying to analytically derive an exact answer, we simulate a process many, many times, drawing random samples from the problem's input space. By observing the outcomes of these numerous "experiments," we can approximate the answer. It's less about perfect precision and more about robust, probabilistic estimation.
 
@@ -35,7 +35,7 @@ This is a favorite for introducing Monte Carlo because it's so beautifully intui
 Let's say the square has sides of length 2 units, centered at the origin (from -1 to 1 on both x and y axes). Its area is $2 \times 2 = 4$ square units.
 The circle inscribed within it will have a radius of 1 unit. Its area is $\pi r^2 = \pi (1)^2 = \pi$ square units.
 
-Now, imagine throwing darts randomly at this target. Some darts will land inside the circle, and some will land outside but within the square. If your dart throws are truly random and uniformly distributed across the square, then the ratio of darts landing *inside* the circle to the total number of darts thrown *inside the square* should approximate the ratio of the circle's area to the square's area.
+Now, imagine throwing darts randomly at this target. Some darts will land inside the circle, and some will land outside but within the square. If your dart throws are truly random and uniformly distributed across the square, then the ratio of darts landing _inside_ the circle to the total number of darts thrown _inside the square_ should approximate the ratio of the circle's area to the square's area.
 
 Mathematically, this looks like:
 
@@ -64,30 +64,31 @@ This simple simulation beautifully demonstrates how randomness can help us find 
 Let's move to a more practical, data science-relevant scenario. Imagine you're a project manager for a data science initiative, and you need to estimate the total time required for a project. This project has several tasks, some sequential, some parallel, and each task's duration isn't fixed; it's uncertain.
 
 Suppose our project has three main phases:
-*   **Phase 1: Data Preprocessing** (Tasks A & B can run in parallel)
-    *   Task A (Data Cleaning): Duration is uniformly distributed between 3 and 7 days.
-    *   Task B (Feature Engineering): Duration follows a normal distribution with a mean of 5 days and a standard deviation of 1 day.
-*   **Phase 2: Model Training** (Task C, starts after Phase 1 is complete)
-    *   Task C (Model Development): Duration is uniformly distributed between 2 and 4 days.
-*   **Phase 3: Deployment** (Task D, starts after Phase 2 is complete)
-    *   Task D (API Development & Integration): Duration follows a normal distribution with a mean of 6 days and a standard deviation of 0.5 days.
 
-**How can Monte Carlo help estimate the *total* project completion time?**
+- **Phase 1: Data Preprocessing** (Tasks A & B can run in parallel)
+  - Task A (Data Cleaning): Duration is uniformly distributed between 3 and 7 days.
+  - Task B (Feature Engineering): Duration follows a normal distribution with a mean of 5 days and a standard deviation of 1 day.
+- **Phase 2: Model Training** (Task C, starts after Phase 1 is complete)
+  - Task C (Model Development): Duration is uniformly distributed between 2 and 4 days.
+- **Phase 3: Deployment** (Task D, starts after Phase 2 is complete)
+  - Task D (API Development & Integration): Duration follows a normal distribution with a mean of 6 days and a standard deviation of 0.5 days.
+
+**How can Monte Carlo help estimate the _total_ project completion time?**
 
 1.  **Define**: We want to find the distribution of the total project completion time, given the probabilistic durations of individual tasks and their dependencies.
 2.  **Sample**: For each simulation run (say, 10,000 runs):
-    *   Draw a random duration for Task A from `Uniform(3, 7)`.
-    *   Draw a random duration for Task B from `Normal(mean=5, std=1)`.
-    *   Draw a random duration for Task C from `Uniform(2, 4)`.
-    *   Draw a random duration for Task D from `Normal(mean=6, std=0.5)`.
+    - Draw a random duration for Task A from `Uniform(3, 7)`.
+    - Draw a random duration for Task B from `Normal(mean=5, std=1)`.
+    - Draw a random duration for Task C from `Uniform(2, 4)`.
+    - Draw a random duration for Task D from `Normal(mean=6, std=0.5)`.
 3.  **Calculate**: For this single run:
-    *   Phase 1 completion: Since A and B run in parallel, Phase 1 takes `max(Task A duration, Task B duration)`.
-    *   Total Project Time: `Phase 1 completion + Task C duration + Task D duration`.
+    - Phase 1 completion: Since A and B run in parallel, Phase 1 takes `max(Task A duration, Task B duration)`.
+    - Total Project Time: `Phase 1 completion + Task C duration + Task D duration`.
 4.  **Aggregate**: Store the `Total Project Time` for this run. Repeat 10,000 times.
 5.  **Analyze**: After 10,000 simulations, you'll have 10,000 possible total project completion times. You can then calculate:
-    *   The **average** project completion time.
-    *   The **median** completion time.
-    *   A **percentile**, e.g., "there's a 90% chance the project will be completed within X days." (The 90th percentile of your simulated times). This is incredibly valuable for setting realistic deadlines and managing stakeholder expectations!
+    - The **average** project completion time.
+    - The **median** completion time.
+    - A **percentile**, e.g., "there's a 90% chance the project will be completed within X days." (The 90th percentile of your simulated times). This is incredibly valuable for setting realistic deadlines and managing stakeholder expectations!
 
 This provides a much richer and more robust estimate than simply summing up the average durations, which ignores the impact of variability and parallel tasks.
 
@@ -103,29 +104,29 @@ Like any powerful tool, Monte Carlo comes with its own set of pros and cons.
 
 **Advantages:**
 
-*   **Handles Complexity**: Excels at problems that are too complex for analytical solutions, involving many variables, non-linear relationships, or intricate probability distributions.
-*   **Intuitive**: The concept of simulating experiments repeatedly is easy to grasp, even if the underlying math is intricate.
-*   **Versatility**: Applicable across a vast range of fields: finance, engineering, physics, environmental science, and of course, data science and machine learning.
-*   **Uncertainty Quantification**: Naturally provides a distribution of possible outcomes, allowing for robust risk assessment and confidence intervals.
-*   **Parallelization**: Many simulations are independent, making them excellent candidates for parallel processing, speeding up computation.
+- **Handles Complexity**: Excels at problems that are too complex for analytical solutions, involving many variables, non-linear relationships, or intricate probability distributions.
+- **Intuitive**: The concept of simulating experiments repeatedly is easy to grasp, even if the underlying math is intricate.
+- **Versatility**: Applicable across a vast range of fields: finance, engineering, physics, environmental science, and of course, data science and machine learning.
+- **Uncertainty Quantification**: Naturally provides a distribution of possible outcomes, allowing for robust risk assessment and confidence intervals.
+- **Parallelization**: Many simulations are independent, making them excellent candidates for parallel processing, speeding up computation.
 
 **Disadvantages:**
 
-*   **Computationally Intensive**: Requires a large number of simulations to achieve high accuracy, which can be time-consuming and resource-heavy. Convergence rate can be slow ($O(\frac{1}{\sqrt{N}})$ for some problems, meaning to double accuracy, you need four times the simulations).
-*   **"Garbage In, Garbage Out"**: The accuracy of the output relies heavily on the accuracy of the input probability distributions. If your assumptions about the underlying randomness are wrong, your results will be misleading.
-*   **Random Number Generators**: Relies on good-quality pseudo-random number generators. While modern generators are excellent, they are not truly random.
-*   **Variance Reduction Techniques**: Sometimes, simple Monte Carlo is inefficient. Advanced techniques (e.g., importance sampling, stratified sampling, antithetic variates) are needed to reduce variance and speed up convergence.
+- **Computationally Intensive**: Requires a large number of simulations to achieve high accuracy, which can be time-consuming and resource-heavy. Convergence rate can be slow ($O(\frac{1}{\sqrt{N}})$ for some problems, meaning to double accuracy, you need four times the simulations).
+- **"Garbage In, Garbage Out"**: The accuracy of the output relies heavily on the accuracy of the input probability distributions. If your assumptions about the underlying randomness are wrong, your results will be misleading.
+- **Random Number Generators**: Relies on good-quality pseudo-random number generators. While modern generators are excellent, they are not truly random.
+- **Variance Reduction Techniques**: Sometimes, simple Monte Carlo is inefficient. Advanced techniques (e.g., importance sampling, stratified sampling, antithetic variates) are needed to reduce variance and speed up convergence.
 
 ### Monte Carlo in Data Science and Machine Learning
 
 The applications of Monte Carlo simulations in data science and machine learning are vast and ever-growing:
 
-*   **Uncertainty Quantification**: Estimating confidence intervals for model predictions or parameters, especially when analytical solutions are difficult.
-*   **Bayesian Inference**: Markov Chain Monte Carlo (MCMC) methods are a cornerstone of modern Bayesian statistics, allowing us to sample from complex posterior probability distributions that are intractable to compute directly.
-*   **Reinforcement Learning**: Monte Carlo Tree Search (MCTS) is a key component in AI systems that achieve superhuman performance in games like Go (e.g., AlphaGo). It's also used for Monte Carlo policy evaluation to estimate the value of states or actions.
-*   **Model Evaluation**: While not strictly MC, bootstrapping (resampling with replacement) is a Monte Carlo-like technique used to estimate the sampling distribution of a statistic or assess model robustness.
-*   **Hyperparameter Optimization**: Random Search for hyperparameter tuning can be seen as a Monte Carlo approach, often outperforming Grid Search in high-dimensional spaces.
-*   **Risk Analysis**: As demonstrated with the project completion example, it's widely used in finance for portfolio risk assessment, option pricing, and stress testing.
+- **Uncertainty Quantification**: Estimating confidence intervals for model predictions or parameters, especially when analytical solutions are difficult.
+- **Bayesian Inference**: Markov Chain Monte Carlo (MCMC) methods are a cornerstone of modern Bayesian statistics, allowing us to sample from complex posterior probability distributions that are intractable to compute directly.
+- **Reinforcement Learning**: Monte Carlo Tree Search (MCTS) is a key component in AI systems that achieve superhuman performance in games like Go (e.g., AlphaGo). It's also used for Monte Carlo policy evaluation to estimate the value of states or actions.
+- **Model Evaluation**: While not strictly MC, bootstrapping (resampling with replacement) is a Monte Carlo-like technique used to estimate the sampling distribution of a statistic or assess model robustness.
+- **Hyperparameter Optimization**: Random Search for hyperparameter tuning can be seen as a Monte Carlo approach, often outperforming Grid Search in high-dimensional spaces.
+- **Risk Analysis**: As demonstrated with the project completion example, it's widely used in finance for portfolio risk assessment, option pricing, and stress testing.
 
 ### Conclusion
 

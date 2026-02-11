@@ -76,7 +76,7 @@ Notice how `(` and `)` allow you to break the chain into multiple lines, improvi
 
 ### Tip 2: Unlocking Flexibility with `.pipe()`
 
-Sometimes, you have a custom function that doesn't inherently fit into a method chain because it doesn't take the DataFrame as its *first* argument, or perhaps it doesn't return a DataFrame at all. Or maybe you just want to perform a complex, reusable operation. This is where the `.pipe()` method shines!
+Sometimes, you have a custom function that doesn't inherently fit into a method chain because it doesn't take the DataFrame as its _first_ argument, or perhaps it doesn't return a DataFrame at all. Or maybe you just want to perform a complex, reusable operation. This is where the `.pipe()` method shines!
 
 `df.pipe(func, *args, **kwargs)` takes a function `func` and passes the DataFrame (or Series) as its first argument.
 
@@ -105,6 +105,7 @@ df_piped_cleaned = (
 print("\nNotes column after .pipe() in a chain (filtered to Laptops):")
 print(df_piped_cleaned['Notes'].value_counts())
 ```
+
 `pipe()` is incredibly useful for maintaining a fluent, chained workflow, especially when applying functions that you've defined yourself or third-party functions not designed with Pandas chaining in mind.
 
 ---
@@ -129,6 +130,7 @@ df_optimized['Region'] = df_optimized['Region'].astype('category')
 print("\nOptimized DataFrame memory usage (Product and Region are categories):")
 print(df_optimized[['Product', 'Region']].memory_usage(deep=True))
 ```
+
 You'll likely see a substantial reduction in memory usage. For very large datasets with many low-cardinality string columns, this can be a game-changer, preventing memory errors and speeding up your computations. Imagine if our `Product` column had 1 million rows, but only 5 unique product names. Storing those 5 names repeatedly takes up much more space than storing 5 integer codes!
 
 Mathematically, if you have $N$ rows and $C$ unique categories, storing strings might take $N \times L_{avg}$ bytes (where $L_{avg}$ is average string length). Storing as categories takes $N \times S_{int} + C \times L_{unique}$ bytes, where $S_{int}$ is size of integer (e.g., 4 bytes) and $L_{unique}$ is the size to store each unique string once. If $L_{avg}$ is large or $C \ll N$, the savings are immense.
@@ -156,6 +158,7 @@ df_str_ops['Product_Cleaned'] = df_str_ops['Product'].str.replace('Keyboard', 'G
 print("\nProduct column with 'Keyboard' replaced:")
 print(df_str_ops[['Product', 'Product_Cleaned']].value_counts())
 ```
+
 The `.str` accessor handles `NaN` values gracefully by default (or you can specify `na_action`), preventing errors you might encounter with raw Python string operations. It's essential for tasks like text cleaning, feature engineering from text fields, or simple pattern matching.
 
 ---
@@ -164,9 +167,9 @@ The `.str` accessor handles `NaN` values gracefully by default (or you can speci
 
 `groupby()` is arguably one of the most powerful operations in Pandas. It allows you to split your data into groups based on some criteria, apply a function to each group, and then combine the results. Two incredibly useful methods that come after `groupby()` are `agg()` and `transform()`.
 
-*   **`.agg()` (Aggregate)**: This method computes a summary statistic (like mean, sum, count, min, max) for each group, effectively reducing the number of rows in your DataFrame. It's perfect when you want a *summary* of your groups.
+- **`.agg()` (Aggregate)**: This method computes a summary statistic (like mean, sum, count, min, max) for each group, effectively reducing the number of rows in your DataFrame. It's perfect when you want a _summary_ of your groups.
 
-*   **`.transform()`**: This method performs a group-wise operation but returns a Series (or DataFrame) with the same index and shape as the original DataFrame. It's excellent for *broadcasting* group-level statistics back to the original rows, often used in feature engineering.
+- **`.transform()`**: This method performs a group-wise operation but returns a Series (or DataFrame) with the same index and shape as the original DataFrame. It's excellent for _broadcasting_ group-level statistics back to the original rows, often used in feature engineering.
 
 Let's see them in action:
 
@@ -224,6 +227,7 @@ high_value_customer_products_query = df.query(
 print("\nHigh value products from East region (.query()):")
 print(high_value_customer_products_query[['CustomerID', 'Product', 'TotalSales', 'Quantity', 'Region']].head())
 ```
+
 The `@` prefix in `.query()` allows you to refer to variables in your Python environment, which is incredibly handy. This makes your filtering logic concise and easier to debug, especially when conditions become complex.
 
 ---
@@ -232,9 +236,9 @@ The `@` prefix in `.query()` allows you to refer to variables in your Python env
 
 Pandas has a treasure trove of smaller, specialized methods that can save you a ton of time. Let's look at three:
 
-*   **`.nlargest(n, columns)` and `.nsmallest(n, columns)`**: These methods are fantastic for quickly getting the top or bottom `n` rows based on the values in one or more columns, without explicitly sorting the entire DataFrame. They are often more efficient than `sort_values().head()` for large datasets, especially if you only need a few rows.
+- **`.nlargest(n, columns)` and `.nsmallest(n, columns)`**: These methods are fantastic for quickly getting the top or bottom `n` rows based on the values in one or more columns, without explicitly sorting the entire DataFrame. They are often more efficient than `sort_values().head()` for large datasets, especially if you only need a few rows.
 
-*   **`.explode(column)`**: This gem is a lifesaver when you have "list-like" entries (lists, tuples, sets) in a column and you want to transform each element of the list into a separate row, duplicating the other column values.
+- **`.explode(column)`**: This gem is a lifesaver when you have "list-like" entries (lists, tuples, sets) in a column and you want to transform each element of the list into a separate row, duplicating the other column values.
 
 ```python
 # Get the top 3 highest total sales
@@ -259,6 +263,7 @@ df_exploded_tags = df_with_tags.explode('Tags')
 print("\nDataFrame after explode (showing 'Tags'):")
 print(df_exploded_tags[['OrderID', 'Product', 'Tags']].head(10))
 ```
+
 `explode()` is super useful in scenarios like processing log data where one event might have multiple associated labels, or when dealing with survey data where multiple options can be selected for a single question.
 
 ---
@@ -269,4 +274,4 @@ Pandas is an incredibly deep library, and these tips are just the tip of the ice
 
 Remember, clean, readable, and efficient code isn't just about making your programs run faster; it's about making your data science journey smoother, more understandable, and ultimately, more insightful. Experiment with these tips in your own projects, challenge yourself to refactor existing code, and don't be afraid to dive into the Pandas documentation – it's a goldmine of information!
 
-What are *your* favorite Pandas tips? Share them in the comments! Happy data wrangling!
+What are _your_ favorite Pandas tips? Share them in the comments! Happy data wrangling!

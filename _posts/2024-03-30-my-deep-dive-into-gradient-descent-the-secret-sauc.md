@@ -5,6 +5,7 @@ excerpt: "Ever wondered how your machine learning models actually *learn*? Join 
 tags: ["Machine Learning", "Gradient Descent", "Optimization", "Deep Learning", "Algorithms"]
 author: "Adarsh Nair"
 ---
+
 As a budding data scientist, there are those moments when a concept clicks, when the abstract math suddenly morphs into an intuitive, elegant solution. For me, one of those pivotal "aha!" moments came with understanding Gradient Descent. It's not just an algorithm; it's the very heartbeat of how many machine learning models, from simple linear regression to complex neural networks, find their way to optimal performance.
 
 So, buckle up! In this post, I want to share my personal journey into unraveling Gradient Descent, explaining it in a way that I wish someone had explained it to me – accessible, engaging, and deeply insightful.
@@ -20,12 +21,13 @@ $$ \hat{y} = w x + b $$
 Here, $w$ is the weight (slope) and $b$ is the bias (y-intercept). These are our "parameters" – the settings we need to tune.
 
 A common cost function for linear regression is the Mean Squared Error (MSE):
-$$ J(w, b) = \frac{1}{2m} \sum_{i=1}^{m} (\hat{y}^{(i)} - y^{(i)})^2 $$
+$$ J(w, b) = \frac{1}{2m} \sum\_{i=1}^{m} (\hat{y}^{(i)} - y^{(i)})^2 $$
 Where:
-* $m$ is the number of training examples.
-* $\hat{y}^{(i)}$ is our model's prediction for the $i$-th example.
-* $y^{(i)}$ is the actual value for the $i$-th example.
-* The $\frac{1}{2}$ is just a convention that makes the math a bit cleaner later on when we take derivatives.
+
+- $m$ is the number of training examples.
+- $\hat{y}^{(i)}$ is our model's prediction for the $i$-th example.
+- $y^{(i)}$ is the actual value for the $i$-th example.
+- The $\frac{1}{2}$ is just a convention that makes the math a bit cleaner later on when we take derivatives.
 
 Our mission, should we choose to accept it, is to find the values of $w$ and $b$ that make $J(w, b)$ as small as possible.
 
@@ -37,23 +39,23 @@ This intuitive idea is the core of Gradient Descent.
 
 1.  **Start Somewhere:** We begin by picking some initial, random values for our model parameters ($w$ and $b$). It's like dropping our blindfolded climber anywhere on the landscape.
 
-2.  **Feel the Slope (The Gradient):** At our current position (current values of $w$ and $b$), we need to figure out which way is "downhill." Mathematically, the direction of the steepest ascent is given by the **gradient** of the cost function. Conversely, the direction of the steepest *descent* is the negative of the gradient.
+2.  **Feel the Slope (The Gradient):** At our current position (current values of $w$ and $b$), we need to figure out which way is "downhill." Mathematically, the direction of the steepest ascent is given by the **gradient** of the cost function. Conversely, the direction of the steepest _descent_ is the negative of the gradient.
 
     The gradient is a vector of partial derivatives. For our linear regression example with parameters $w$ and $b$, the gradient of the cost function $J(w, b)$ with respect to $w$ and $b$ would be:
     $$ \nabla J(w, b) = \begin{pmatrix} \frac{\partial J}{\partial w} \\ \frac{\partial J}{\partial b} \end{pmatrix} $$
 
     Let's calculate these partial derivatives for our MSE cost function:
-    $$ \frac{\partial J}{\partial w} = \frac{1}{m} \sum_{i=1}^{m} (\hat{y}^{(i)} - y^{(i)}) x^{(i)} $$
-    $$ \frac{\partial J}{\partial b} = \frac{1}{m} \sum_{i=1}^{m} (\hat{y}^{(i)} - y^{(i)}) $$
+    $$ \frac{\partial J}{\partial w} = \frac{1}{m} \sum*{i=1}^{m} (\hat{y}^{(i)} - y^{(i)}) x^{(i)} $$
+    $$ \frac{\partial J}{\partial b} = \frac{1}{m} \sum*{i=1}^{m} (\hat{y}^{(i)} - y^{(i)}) $$
     (You can derive these using the chain rule! It's a fun exercise if you're into calculus.)
 
 3.  **Take a Step (The Update Rule):** Once we know the direction of steepest descent, we take a step in that direction. How big of a step? That's controlled by a crucial hyperparameter called the **learning rate**, denoted by $\alpha$ (alpha).
 
     The update rule for each parameter ($\theta$ representing either $w$ or $b$) is:
-    $$ \theta_{new} = \theta_{old} - \alpha \frac{\partial J}{\partial \theta_{old}} $$
+    $$ \theta*{new} = \theta*{old} - \alpha \frac{\partial J}{\partial \theta*{old}} $$
     So, for our $w$ and $b$:
-    $$ w_{new} = w_{old} - \alpha \frac{\partial J}{\partial w_{old}} $$
-    $$ b_{new} = b_{old} - \alpha \frac{\partial J}{\partial b_{old}} $$
+    $$ w*{new} = w*{old} - \alpha \frac{\partial J}{\partial w*{old}} $$
+    $$ b*{new} = b*{old} - \alpha \frac{\partial J}{\partial b\_{old}} $$
 
     We repeat steps 2 and 3 iteratively. Each iteration, our parameters $w$ and $b$ get updated, moving us closer and closer to the minimum of the cost function, until ideally, we converge to a point where the cost function is minimized.
 
@@ -67,8 +69,8 @@ Our Gradient Descent algorithm starts at some random point on this surface. It c
 
 The learning rate is perhaps the most critical hyperparameter in Gradient Descent. It dictates the size of the steps we take down the cost function's surface.
 
-*   **If $\alpha$ is too small:** We'll take tiny baby steps. The algorithm will eventually reach the minimum, but it will take a very long time, making training inefficient.
-*   **If $\alpha$ is too large:** We might overshoot the minimum repeatedly, bouncing back and forth across the valley, or even diverge completely and climb *up* the other side of the landscape, never finding the minimum. The cost function might even increase!
+- **If $\alpha$ is too small:** We'll take tiny baby steps. The algorithm will eventually reach the minimum, but it will take a very long time, making training inefficient.
+- **If $\alpha$ is too large:** We might overshoot the minimum repeatedly, bouncing back and forth across the valley, or even diverge completely and climb _up_ the other side of the landscape, never finding the minimum. The cost function might even increase!
 
 Finding the right learning rate often involves trial and error, a process called hyperparameter tuning.
 
@@ -77,19 +79,19 @@ Finding the right learning rate often involves trial and error, a process called
 The core idea of Gradient Descent remains the same, but how we calculate the gradient across our data can vary, leading to different flavors:
 
 1.  **Batch Gradient Descent (BGD):**
-    *   **How it works:** In each iteration, it calculates the gradient of the cost function using *all* the training examples.
-    *   **Pros:** Guaranteed to converge to the global minimum for convex functions, and to a local minimum for non-convex functions (like those in deep learning). The updates are very stable.
-    *   **Cons:** Can be very slow and computationally expensive for large datasets because it has to process all data points before making a single update. Memory intensive.
+    - **How it works:** In each iteration, it calculates the gradient of the cost function using _all_ the training examples.
+    - **Pros:** Guaranteed to converge to the global minimum for convex functions, and to a local minimum for non-convex functions (like those in deep learning). The updates are very stable.
+    - **Cons:** Can be very slow and computationally expensive for large datasets because it has to process all data points before making a single update. Memory intensive.
 
 2.  **Stochastic Gradient Descent (SGD):**
-    *   **How it works:** Instead of using all examples, it calculates the gradient and updates the parameters using *only one training example* at a time.
-    *   **Pros:** Much faster than BGD, especially for large datasets, as it makes an update after every single example. It can escape shallow local minima due to the noisy updates.
-    *   **Cons:** The updates are noisy and less stable. The cost function might not smoothly decrease but rather fluctuate quite a bit, making it harder to determine convergence. It might "oscillate" around the minimum rather than settling precisely.
+    - **How it works:** Instead of using all examples, it calculates the gradient and updates the parameters using _only one training example_ at a time.
+    - **Pros:** Much faster than BGD, especially for large datasets, as it makes an update after every single example. It can escape shallow local minima due to the noisy updates.
+    - **Cons:** The updates are noisy and less stable. The cost function might not smoothly decrease but rather fluctuate quite a bit, making it harder to determine convergence. It might "oscillate" around the minimum rather than settling precisely.
 
 3.  **Mini-Batch Gradient Descent:**
-    *   **How it works:** This is the Goldilocks solution, and by far the most commonly used variant. It calculates the gradient and updates parameters using a small "mini-batch" of training examples (typically 32, 64, 128, or 256 examples) in each iteration.
-    *   **Pros:** Balances the advantages of BGD and SGD. It's much faster than BGD and more stable than SGD. Leveraging matrix operations, mini-batches allow for significant computational efficiency on GPUs.
-    *   **Cons:** Requires careful selection of the mini-batch size.
+    - **How it works:** This is the Goldilocks solution, and by far the most commonly used variant. It calculates the gradient and updates parameters using a small "mini-batch" of training examples (typically 32, 64, 128, or 256 examples) in each iteration.
+    - **Pros:** Balances the advantages of BGD and SGD. It's much faster than BGD and more stable than SGD. Leveraging matrix operations, mini-batches allow for significant computational efficiency on GPUs.
+    - **Cons:** Requires careful selection of the mini-batch size.
 
 ### Beyond the Basics: The Optimizers
 
@@ -99,7 +101,7 @@ While Gradient Descent is the foundational algorithm, modern deep learning libra
 
 Understanding Gradient Descent isn't just about memorizing formulas; it's about grasping the core mechanism by which machines learn from data. It's the engine beneath the hood of countless AI applications we use every day.
 
-For me, realizing that complex models simply "feel" their way to better performance, much like a blindfolded person navigating a landscape, demystified a huge part of machine learning. It empowered me to not just use off-the-shelf algorithms but to truly understand *why* they work and how to troubleshoot them when they don't.
+For me, realizing that complex models simply "feel" their way to better performance, much like a blindfolded person navigating a landscape, demystified a huge part of machine learning. It empowered me to not just use off-the-shelf algorithms but to truly understand _why_ they work and how to troubleshoot them when they don't.
 
 So, the next time you see a machine learning model performing its magic, remember the elegant simplicity and power of Gradient Descent – the silent mountain climber, always striving to reach the bottom of the valley, one calculated step at a time.
 

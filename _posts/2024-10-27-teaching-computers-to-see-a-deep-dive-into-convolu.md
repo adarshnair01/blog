@@ -1,5 +1,5 @@
 ---
-title: "Teaching Computers to \"See\": A Deep Dive into Convolutional Neural Networks"
+title: 'Teaching Computers to "See": A Deep Dive into Convolutional Neural Networks'
 date: "2024-10-27"
 excerpt: "Ever wondered how a computer can instantly tell a cat from a dog, or spot a tumor in an X-ray? It's not magic, it's the incredible power of Convolutional Neural Networks, the bedrock of modern computer vision."
 tags: ["Machine Learning", "Deep Learning", "Computer Vision", "CNNs", "Artificial Intelligence"]
@@ -12,7 +12,7 @@ Today, I want to take you on a journey into one of the most fascinating and impa
 
 As a budding data scientist, I remember first encountering the sheer volume of data in images. A simple 100x100 pixel grayscale image has 10,000 data points. A color image? Multiply that by three for red, green, and blue channels! Imagine trying to feed that into a traditional neural network – the number of connections and parameters would explode, making training computationally impossible and prone to overfitting.
 
-This is where CNNs swoop in, armed with an ingenious approach inspired by our own biological visual system. They don't just "see" pixels; they learn to *understand* what those pixels collectively represent. Let's peel back the layers and see how they do it.
+This is where CNNs swoop in, armed with an ingenious approach inspired by our own biological visual system. They don't just "see" pixels; they learn to _understand_ what those pixels collectively represent. Let's peel back the layers and see how they do it.
 
 ### The "Aha!" Moment: Convolution
 
@@ -25,6 +25,7 @@ A kernel is a small matrix of numbers (e.g., 3x3 or 5x5). The **convolution oper
 Let's look at a simple example with a 5x5 image and a 3x3 kernel:
 
 Original Image (I):
+
 ```
 [[1, 1, 1, 0, 0],
  [0, 1, 1, 1, 0],
@@ -34,6 +35,7 @@ Original Image (I):
 ```
 
 Kernel (K) (an example for detecting vertical edges):
+
 ```
 [[-1, 0, 1],
  [-1, 0, 1],
@@ -41,11 +43,13 @@ Kernel (K) (an example for detecting vertical edges):
 ```
 
 When we convolve (slide and multiply-add) this kernel over the image, say over the top-left 3x3 patch:
+
 ```
 [[1, 1, 1],
  [0, 1, 1],
  [0, 0, 1]]
 ```
+
 The calculation would be:
 $(1 \times -1) + (1 \times 0) + (1 \times 1) +$
 $(0 \times -1) + (1 \times 0) + (1 \times 1) +$
@@ -59,7 +63,7 @@ $$(I * K)(i, j) = \sum_m \sum_n I(i-m, j-n) K(m, n)$$
 
 Here, $I$ is the input image, $K$ is the kernel, and the summations are over the dimensions of the kernel. Don't let the notation scare you; it's just a precise way of describing that sliding, multiplying, and summing process we just discussed!
 
-Different kernels will detect different features – one might look for horizontal edges, another for corners, another for specific textures. The amazing thing is that in a CNN, these kernels are not manually designed; they are *learned* during the training process! The network figures out which kernels are best for identifying the relevant features to solve the task at hand (like classifying a cat).
+Different kernels will detect different features – one might look for horizontal edges, another for corners, another for specific textures. The amazing thing is that in a CNN, these kernels are not manually designed; they are _learned_ during the training process! The network figures out which kernels are best for identifying the relevant features to solve the task at hand (like classifying a cat).
 
 ### Building Blocks of a CNN
 
@@ -69,25 +73,24 @@ A typical CNN architecture consists of several specialized layers, each playing 
 
 This is where the magic happens! We've already discussed the convolution operation. A convolutional layer typically uses multiple kernels, each generating a different feature map. This means our network can simultaneously learn to detect a wide array of features.
 
-*   **Stride:** This parameter determines how many pixels the kernel shifts at each step. A stride of 1 means it moves one pixel at a time, generating a larger feature map. A stride of 2 means it skips a pixel, leading to a smaller feature map but faster computation.
-*   **Padding:** When a kernel slides over an image, pixels at the edges get convolved fewer times than those in the center. To avoid losing information from the edges or shrinking the output size too much, we can add "padding" (typically zero-value pixels) around the border of the input image. 'Same' padding ensures the output feature map has the same spatial dimensions as the input.
-*   **Activation Function:** After the convolution, the output often passes through a non-linear activation function. The most popular choice for CNNs is the **Rectified Linear Unit (ReLU)** function:
+- **Stride:** This parameter determines how many pixels the kernel shifts at each step. A stride of 1 means it moves one pixel at a time, generating a larger feature map. A stride of 2 means it skips a pixel, leading to a smaller feature map but faster computation.
+- **Padding:** When a kernel slides over an image, pixels at the edges get convolved fewer times than those in the center. To avoid losing information from the edges or shrinking the output size too much, we can add "padding" (typically zero-value pixels) around the border of the input image. 'Same' padding ensures the output feature map has the same spatial dimensions as the input.
+- **Activation Function:** After the convolution, the output often passes through a non-linear activation function. The most popular choice for CNNs is the **Rectified Linear Unit (ReLU)** function:
 
-    $$f(x) = \max(0, x)$$
+  $$f(x) = \max(0, x)$$
 
-    ReLU simply converts any negative values to zero, while positive values remain unchanged. This introduces non-linearity, allowing the network to learn more complex patterns and vastly speeding up training compared to older activation functions like sigmoid. Without non-linearity, stacking multiple layers would simply result in a single linear transformation, no matter how deep the network.
+  ReLU simply converts any negative values to zero, while positive values remain unchanged. This introduces non-linearity, allowing the network to learn more complex patterns and vastly speeding up training compared to older activation functions like sigmoid. Without non-linearity, stacking multiple layers would simply result in a single linear transformation, no matter how deep the network.
 
 #### 2. The Pooling Layer (or Subsampling Layer)
 
-After generating feature maps, CNNs often introduce a pooling layer. Its primary goal is to progressively reduce the spatial dimensions (width and height) of the feature maps, which helps in two ways:
-    1.  **Reduces computational load:** Fewer parameters and computations in subsequent layers.
-    2.  **Encourages spatial invariance:** Makes the network more robust to small shifts or distortions in the input image. If a feature (like an edge) shifts a little, the pooling layer might still capture it in the same pooled region.
+After generating feature maps, CNNs often introduce a pooling layer. Its primary goal is to progressively reduce the spatial dimensions (width and height) of the feature maps, which helps in two ways: 1. **Reduces computational load:** Fewer parameters and computations in subsequent layers. 2. **Encourages spatial invariance:** Makes the network more robust to small shifts or distortions in the input image. If a feature (like an edge) shifts a little, the pooling layer might still capture it in the same pooled region.
 
-The most common type is **Max Pooling**. Imagine a 2x2 filter sliding over the feature map (with a stride of 2). Instead of summing, it simply takes the *maximum* value from that 2x2 region and places it into the output.
+The most common type is **Max Pooling**. Imagine a 2x2 filter sliding over the feature map (with a stride of 2). Instead of summing, it simply takes the _maximum_ value from that 2x2 region and places it into the output.
 
 Example of 2x2 Max Pooling:
 
 Input feature map:
+
 ```
 [[1, 1, 2, 4],
  [5, 6, 7, 8],
@@ -96,10 +99,12 @@ Input feature map:
 ```
 
 Output after Max Pooling (2x2 filter, stride 2):
+
 ```
 [[6, 8],
  [3, 4]]
 ```
+
 (From the top-left 2x2 region `[[1,1],[5,6]]`, max is 6. From `[[2,4],[7,8]]`, max is 8, and so on.)
 
 Other pooling types include Average Pooling, but Max Pooling is generally preferred as it's good at preserving the most prominent features.
@@ -135,12 +140,12 @@ Why are CNNs so incredibly effective, especially for image data?
 
 The capabilities of CNNs have revolutionized countless fields:
 
-*   **Image Classification & Object Detection:** Identifying objects within images (e.g., self-driving cars recognizing pedestrians, traffic signs, and other vehicles).
-*   **Facial Recognition:** Unlocking your phone, security surveillance.
-*   **Medical Imaging:** Detecting tumors, diseases, and anomalies in X-rays, MRIs, and CT scans.
-*   **Image Segmentation:** Identifying and delineating the exact boundaries of objects in an image.
-*   **Satellite Imagery Analysis:** Monitoring deforestation, urban development, and agricultural health.
-*   **Content Moderation:** Automatically flagging inappropriate content online.
+- **Image Classification & Object Detection:** Identifying objects within images (e.g., self-driving cars recognizing pedestrians, traffic signs, and other vehicles).
+- **Facial Recognition:** Unlocking your phone, security surveillance.
+- **Medical Imaging:** Detecting tumors, diseases, and anomalies in X-rays, MRIs, and CT scans.
+- **Image Segmentation:** Identifying and delineating the exact boundaries of objects in an image.
+- **Satellite Imagery Analysis:** Monitoring deforestation, urban development, and agricultural health.
+- **Content Moderation:** Automatically flagging inappropriate content online.
 
 ### Wrapping Up
 

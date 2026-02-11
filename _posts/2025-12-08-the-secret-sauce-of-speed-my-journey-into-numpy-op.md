@@ -10,7 +10,7 @@ Hey everyone!
 
 Remember that feeling when you first started diving into the world of data science? The thrill of exploring datasets, building models, and uncovering insights? It's like being an intrepid explorer in a vast digital jungle! But then, a subtle frustration often creeps in. You're working with a massive dataset, and your beautiful Python code, which seemed so quick with smaller samples, suddenly grinds to a halt. Your machine's fan spins up, and you're left staring at a loading spinner, wondering if you did something wrong.
 
-I've been there. Many times. It's like trying to move a mountain of data with a teaspoon. You know there *must* be a better way. And guess what? There is! For most of us in data science and machine learning, the unsung hero behind our numerical operations is often **NumPy**. And today, I want to share my journey into unlocking its true power through optimization techniques. It's not just about writing code that *works*, but writing code that *flies*.
+I've been there. Many times. It's like trying to move a mountain of data with a teaspoon. You know there _must_ be a better way. And guess what? There is! For most of us in data science and machine learning, the unsung hero behind our numerical operations is often **NumPy**. And today, I want to share my journey into unlocking its true power through optimization techniques. It's not just about writing code that _works_, but writing code that _flies_.
 
 ## The Heart of the Matter: Why is NumPy So Fast (and How Can We Make it Faster)?
 
@@ -54,6 +54,7 @@ print(f"NumPy vectorized time: {end_time - start_time:.4f} seconds")
 ```
 
 **Output (approximate, varies by machine):**
+
 ```
 Python loop time: 0.1000 seconds
 NumPy vectorized time: 0.0030 seconds
@@ -65,19 +66,20 @@ The beauty is that most common mathematical operations (`+`, `-`, `*`, `/`, `**`
 
 **Beyond basic arithmetic, explore these vectorized NumPy functions:**
 
-*   `np.sum()`, `np.mean()`, `np.std()`, `np.max()`, `np.min()` for aggregations.
-*   `np.sqrt()`, `np.log()`, `np.exp()`, `np.sin()` for element-wise mathematical functions.
-*   `np.dot()` or `@` for matrix multiplication (a cornerstone of linear algebra and machine learning!).
-*   `np.where()` for conditional logic, replacing `if/else` in loops.
-    ```python
-    # Instead of:
-    # new_list = [x * 2 if x > 5 else x for x in my_list]
-    
-    # Do this:
-    my_array = np.array([1, 6, 3, 8, 2, 7])
-    result = np.where(my_array > 5, my_array * 2, my_array)
-    print(result) # Output: [ 1 12  3 16  2 14]
-    ```
+- `np.sum()`, `np.mean()`, `np.std()`, `np.max()`, `np.min()` for aggregations.
+- `np.sqrt()`, `np.log()`, `np.exp()`, `np.sin()` for element-wise mathematical functions.
+- `np.dot()` or `@` for matrix multiplication (a cornerstone of linear algebra and machine learning!).
+- `np.where()` for conditional logic, replacing `if/else` in loops.
+
+  ```python
+  # Instead of:
+  # new_list = [x * 2 if x > 5 else x for x in my_list]
+
+  # Do this:
+  my_array = np.array([1, 6, 3, 8, 2, 7])
+  result = np.where(my_array > 5, my_array * 2, my_array)
+  print(result) # Output: [ 1 12  3 16  2 14]
+  ```
 
 **My advice:** Every time you find yourself writing a `for` loop that iterates over a NumPy array or performs element-wise operations, stop and ask: "Can this be vectorized?" More often than not, the answer is yes!
 
@@ -103,6 +105,7 @@ print("\nMatrix + Vector:\n", result_vector)
 ```
 
 **Output:**
+
 ```
 Matrix + Scalar:
  [[11 12 13]
@@ -116,6 +119,7 @@ Matrix + Vector:
 ```
 
 The rules of broadcasting can seem a bit quirky at first, but the general idea is:
+
 1.  If dimensions don't match, one array might be "stretched" to match the other.
 2.  If any dimension is 1, it can be stretched to match the other array's dimension.
 3.  Dimensions are compared from the trailing (rightmost) dimension.
@@ -128,40 +132,45 @@ When you perform operations in NumPy, it's crucial to understand when a new arra
 
 Consider these scenarios:
 
-*   **Slicing often returns views:**
-    ```python
-    original_array = np.arange(10)
-    print(f"Original: {original_array}") # [0 1 2 3 4 5 6 7 8 9]
+- **Slicing often returns views:**
 
-    # This is a VIEW of original_array
-    sliced_view = original_array[2:5]
-    print(f"View: {sliced_view}")    # [2 3 4]
+  ```python
+  original_array = np.arange(10)
+  print(f"Original: {original_array}") # [0 1 2 3 4 5 6 7 8 9]
 
-    # If you modify the view, the original also changes!
-    sliced_view[0] = 99
-    print(f"Original after view modification: {original_array}") # [ 0  1 99  3  4  5  6  7  8  9]
-    ```
-    Views are great for efficiency, but be careful! If you need an independent copy, use `.copy()`:
-    ```python
-    independent_copy = original_array[2:5].copy()
-    independent_copy[0] = 77
-    print(f"Original after copy modification: {original_array}") # Still [ 0  1 99  3  4  5  6  7  8  9]
-    print(f"Independent copy: {independent_copy}")             # [77  3  4]
-    ```
+  # This is a VIEW of original_array
+  sliced_view = original_array[2:5]
+  print(f"View: {sliced_view}")    # [2 3 4]
 
-*   **In-place operations (`+=`, `*=`) vs. re-assignment (`=`)**:
-    ```python
-    x = np.arange(3)
-    print(f"x before: {x}") # [0 1 2]
-    x = x + 1 # Creates a NEW array, then re-assigns x to it
-    print(f"x after x = x + 1: {x}") # [1 2 3]
+  # If you modify the view, the original also changes!
+  sliced_view[0] = 99
+  print(f"Original after view modification: {original_array}") # [ 0  1 99  3  4  5  6  7  8  9]
+  ```
 
-    y = np.arange(3)
-    print(f"y before: {y}") # [0 1 2]
-    y += 1 # Often performs the operation IN-PLACE, modifying y directly
-    print(f"y after y += 1: {y}") # [1 2 3]
-    ```
-    While the result is the same, `y += 1` can be more memory efficient by avoiding the creation of an intermediate array. It's not *always* in-place (NumPy sometimes needs to create a new array for certain operations), but it's a good habit to prefer it when possible.
+  Views are great for efficiency, but be careful! If you need an independent copy, use `.copy()`:
+
+  ```python
+  independent_copy = original_array[2:5].copy()
+  independent_copy[0] = 77
+  print(f"Original after copy modification: {original_array}") # Still [ 0  1 99  3  4  5  6  7  8  9]
+  print(f"Independent copy: {independent_copy}")             # [77  3  4]
+  ```
+
+- **In-place operations (`+=`, `*=`) vs. re-assignment (`=`)**:
+
+  ```python
+  x = np.arange(3)
+  print(f"x before: {x}") # [0 1 2]
+  x = x + 1 # Creates a NEW array, then re-assigns x to it
+  print(f"x after x = x + 1: {x}") # [1 2 3]
+
+  y = np.arange(3)
+  print(f"y before: {y}") # [0 1 2]
+  y += 1 # Often performs the operation IN-PLACE, modifying y directly
+  print(f"y after y += 1: {y}") # [1 2 3]
+  ```
+
+  While the result is the same, `y += 1` can be more memory efficient by avoiding the creation of an intermediate array. It's not _always_ in-place (NumPy sometimes needs to create a new array for certain operations), but it's a good habit to prefer it when possible.
 
 By being mindful of when copies are created, you can significantly reduce memory footprint and improve performance, especially when chaining multiple operations.
 
@@ -189,6 +198,7 @@ print(f"Size of int16 array: {int_data_small.nbytes / (1024**2):.2f} MB")
 ```
 
 **Output (approximate):**
+
 ```
 Size of float64 array: 7.63 MB
 Size of float32 array: 3.81 MB
@@ -197,8 +207,9 @@ Size of int16 array: 1.91 MB
 ```
 
 **Why does this matter beyond memory?**
-*   **Cache Performance:** Smaller data types mean more elements can fit into your CPU's cache. When data is in the cache, the CPU can access it much faster than retrieving it from main memory.
-*   **Memory Bandwidth:** Less data to move means faster data transfer between memory and CPU.
+
+- **Cache Performance:** Smaller data types mean more elements can fit into your CPU's cache. When data is in the cache, the CPU can access it much faster than retrieving it from main memory.
+- **Memory Bandwidth:** Less data to move means faster data transfer between memory and CPU.
 
 If your data doesn't require the full precision of `float64` (e.g., image pixel values, simple counts), switching to `float32`, `int32`, `int16`, or even `int8` can yield significant performance gains, especially for memory-bound operations. Always consider the range and precision needs of your data before blindly using defaults.
 
@@ -206,8 +217,8 @@ If your data doesn't require the full precision of `float64` (e.g., image pixel 
 
 This one might sound a bit more technical, but it boils down to how your array's data is actually stored in your computer's memory. NumPy arrays can be stored in two primary orders:
 
-*   **C-order (row-major):** Elements of a row are contiguous in memory. This is the default for NumPy and how C/Python typically store multi-dimensional arrays.
-*   **Fortran-order (column-major):** Elements of a column are contiguous in memory.
+- **C-order (row-major):** Elements of a row are contiguous in memory. This is the default for NumPy and how C/Python typically store multi-dimensional arrays.
+- **Fortran-order (column-major):** Elements of a column are contiguous in memory.
 
 Imagine a book on a shelf. If you read the book row-by-row, it's efficient if the words of each line are next to each other. If you had to jump to different pages for each word in a line, it would be incredibly slow!
 
@@ -232,7 +243,7 @@ print(f"Is F-contiguous? {matrix_f_order.flags['F_CONTIGUOUS']}")
 
 ### 6. Leverage BLAS/LAPACK: The Deep Optimization Within
 
-This isn't an optimization *you* directly implement, but it's important to know about. For heavy-duty linear algebra operations (like matrix multiplication, eigenvalue decomposition, solving linear systems), NumPy often doesn't do the math itself. Instead, it delegates these tasks to highly optimized external libraries like **BLAS (Basic Linear Algebra Subprograms)** and **LAPACK (Linear Algebra Package)**.
+This isn't an optimization _you_ directly implement, but it's important to know about. For heavy-duty linear algebra operations (like matrix multiplication, eigenvalue decomposition, solving linear systems), NumPy often doesn't do the math itself. Instead, it delegates these tasks to highly optimized external libraries like **BLAS (Basic Linear Algebra Subprograms)** and **LAPACK (Linear Algebra Package)**.
 
 These libraries are written in Fortran and C, are meticulously optimized for specific hardware architectures, and often use multi-threading. This is the "secret sauce" that makes `np.dot()` or `@` operator incredibly fast for large matrices.
 
@@ -241,13 +252,13 @@ Ensuring your NumPy installation is linked to an optimized BLAS library (like Op
 ## Practical Tips for Your Optimization Journey
 
 1.  **Benchmark, Benchmark, Benchmark!** Don't guess where your bottlenecks are. Use tools to measure.
-    *   In Jupyter notebooks or IPython, `%timeit` is your best friend for quick timings of single lines or small blocks of code.
-        ```python
-        arr = np.random.rand(10**6)
-        %timeit arr**2
-        %timeit np.square(arr) # Often marginally faster as it's a direct C function call
-        ```
-    *   For more complex functions, Python's built-in `cProfile` module can help you identify which lines of code are taking the most time.
+    - In Jupyter notebooks or IPython, `%timeit` is your best friend for quick timings of single lines or small blocks of code.
+      ```python
+      arr = np.random.rand(10**6)
+      %timeit arr**2
+      %timeit np.square(arr) # Often marginally faster as it's a direct C function call
+      ```
+    - For more complex functions, Python's built-in `cProfile` module can help you identify which lines of code are taking the most time.
 
 2.  **Profile Before Optimizing:** It's tempting to optimize everything, but focus your efforts where they matter most. A small part of your code often accounts for most of the execution time. Find that part, optimize it, and then re-profile.
 

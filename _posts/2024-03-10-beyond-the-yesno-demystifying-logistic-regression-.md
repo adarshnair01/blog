@@ -5,9 +5,10 @@ excerpt: "Ever wondered how algorithms predict if an email is spam, a customer w
 tags: ["Machine Learning", "Logistic Regression", "Classification", "Data Science", "Statistics"]
 author: "Adarsh Nair"
 ---
+
 Hello fellow data explorer!
 
-Today, I want to share a journey into one of the most fundamental yet powerful algorithms in machine learning: Logistic Regression. When I first encountered it, the "regression" in its name confused me. "Isn't regression about predicting continuous numbers, like house prices?" I thought. And you'd be right! That's linear regression. But Logistic Regression, despite its name, isn't about predicting a number; it's about predicting *categories*. It's our friendly go-to for classification tasks.
+Today, I want to share a journey into one of the most fundamental yet powerful algorithms in machine learning: Logistic Regression. When I first encountered it, the "regression" in its name confused me. "Isn't regression about predicting continuous numbers, like house prices?" I thought. And you'd be right! That's linear regression. But Logistic Regression, despite its name, isn't about predicting a number; it's about predicting _categories_. It's our friendly go-to for classification tasks.
 
 Imagine you're trying to figure out if an email is spam or not spam, if a customer will churn or stay, or if a student will pass or fail an exam. These are all binary classification problems, where the outcome is one of two categories. This is where Logistic Regression truly shines.
 
@@ -18,9 +19,10 @@ My initial thought was, "Why can't we just use good old linear regression for th
 Consider a simple dataset where we're predicting if a student passes an exam based on the hours they studied. If we used linear regression, the line might look something like this:
 
 ![Linear Regression for Classification](https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Linear_regression_vs_logistic_regression.svg/1000px-Linear_regression_vs_logistic_regression.svg.png)
-*(Self-note: I can't embed actual images here, but I would link to or conceptually describe such an image showing a straight line trying to fit binary data.)*
+_(Self-note: I can't embed actual images here, but I would link to or conceptually describe such an image showing a straight line trying to fit binary data.)_
 
 The problem becomes clear:
+
 1.  **Output Range:** Linear regression outputs values from $-\infty$ to $+\infty$. How do we interpret a prediction of -0.5 or 1.8 for a "pass/fail" outcome? It just doesn't make intuitive sense for a probability. We need something that gives us a probability between 0 and 1.
 2.  **Thresholding is Brittle:** We could try setting a threshold, say if the prediction is > 0.5, it's a "pass." But the straight line can be heavily influenced by outliers, shifting the decision boundary in an undesirable way. Adding more data points (especially outliers) can drastically change the line and, consequently, our classifications.
 3.  **Non-Linear Relationship:** The relationship between features and classification isn't usually linear. The chances of passing an exam don't increase linearly with study hours; there might be diminishing returns or a threshold effect.
@@ -29,7 +31,7 @@ This is why we need a different approach, one that inherently understands probab
 
 ### The Heart of Logistic Regression: The Sigmoid Function
 
-Instead of predicting the output directly, Logistic Regression predicts the *probability* that an instance belongs to a certain class. For a binary classification problem, it predicts the probability that the output $Y$ is 1 (the positive class), given the input features $X$. We write this as $P(Y=1|X)$.
+Instead of predicting the output directly, Logistic Regression predicts the _probability_ that an instance belongs to a certain class. For a binary classification problem, it predicts the probability that the output $Y$ is 1 (the positive class), given the input features $X$. We write this as $P(Y=1|X)$.
 
 To get a probability (a value between 0 and 1) from a linear combination of features, Logistic Regression employs a special function called the **Sigmoid Function** (or Logistic Function).
 
@@ -44,15 +46,16 @@ Now, to squish $z$ into a probability range, we apply the Sigmoid function, deno
 $h_{\beta}(x) = P(Y=1|X) = \sigma(z) = \frac{1}{1 + e^{-z}}$
 
 Let's break down this beautiful function:
-*   **$e$**: This is Euler's number, approximately 2.71828, the base of the natural logarithm.
-*   **$-z$**: When $z$ is large and positive, $-z$ is a large negative number, making $e^{-z}$ very small (close to 0). So, $\frac{1}{1 + \text{small number}}$ becomes close to 1.
-*   When $z$ is large and negative, $-z$ is a large positive number, making $e^{-z}$ very large. So, $\frac{1}{1 + \text{large number}}$ becomes very small (close to 0).
-*   When $z = 0$, $e^{-0} = 1$, so $\frac{1}{1+1} = \frac{1}{2} = 0.5$.
+
+- **$e$**: This is Euler's number, approximately 2.71828, the base of the natural logarithm.
+- **$-z$**: When $z$ is large and positive, $-z$ is a large negative number, making $e^{-z}$ very small (close to 0). So, $\frac{1}{1 + \text{small number}}$ becomes close to 1.
+- When $z$ is large and negative, $-z$ is a large positive number, making $e^{-z}$ very large. So, $\frac{1}{1 + \text{large number}}$ becomes very small (close to 0).
+- When $z = 0$, $e^{-0} = 1$, so $\frac{1}{1+1} = \frac{1}{2} = 0.5$.
 
 This gives the Sigmoid function its characteristic 'S' shape:
 
 ![Sigmoid Function Plot](https://upload.wikimedia.org/wikipedia/commons/thumb/8/88/Logistic-curve.svg/600px-Logistic-curve.svg.png)
-*(Again, conceptual image. I'd show a graph with x-axis as 'z' and y-axis as 'sigma(z)', showing the S-curve from 0 to 1, crossing 0.5 at z=0.)*
+_(Again, conceptual image. I'd show a graph with x-axis as 'z' and y-axis as 'sigma(z)', showing the S-curve from 0 to 1, crossing 0.5 at z=0.)_
 
 So, our model $h_{\beta}(x)$ now outputs a probability between 0 and 1. If $P(Y=1|X) \ge 0.5$, we classify it as the positive class (1); otherwise, we classify it as the negative class (0). The point where $z=0$ (and thus $P(Y=1|X)=0.5$) becomes our **decision boundary**.
 
@@ -64,20 +67,21 @@ Instead, Logistic Regression uses a cost function called **Log Loss** (also know
 
 Let's look at the cost for a single training example $(x^{(i)}, y^{(i)})$:
 
-*   **If $y^{(i)} = 1$ (the actual class is 1):** We want $h_{\beta}(x^{(i)})$ to be close to 1. The cost for this example is $-\log(h_{\beta}(x^{(i)}))$.
-    *   If $h_{\beta}(x^{(i)})$ is 1 (perfect prediction), $-\log(1) = 0$.
-    *   If $h_{\beta}(x^{(i)})$ is 0.001 (very wrong), $-\log(0.001) \approx 6.9$. This penalizes wrong predictions very heavily when we're confident they are wrong.
-*   **If $y^{(i)} = 0$ (the actual class is 0):** We want $h_{\beta}(x^{(i)})$ to be close to 0. This also means we want $1 - h_{\beta}(x^{(i)})$ to be close to 1. The cost for this example is $-\log(1 - h_{\beta}(x^{(i)}))$.
-    *   If $h_{\beta}(x^{(i)})$ is 0 (perfect prediction), $1 - h_{\beta}(x^{(i)})$ is 1, so $-\log(1) = 0$.
-    *   If $h_{\beta}(x^{(i)})$ is 0.999 (very wrong, predicting 1 when it's 0), $1 - h_{\beta}(x^{(i)})$ is 0.001, so $-\log(0.001) \approx 6.9$. Again, heavy penalty.
+- **If $y^{(i)} = 1$ (the actual class is 1):** We want $h_{\beta}(x^{(i)})$ to be close to 1. The cost for this example is $-\log(h_{\beta}(x^{(i)}))$.
+  - If $h_{\beta}(x^{(i)})$ is 1 (perfect prediction), $-\log(1) = 0$.
+  - If $h_{\beta}(x^{(i)})$ is 0.001 (very wrong), $-\log(0.001) \approx 6.9$. This penalizes wrong predictions very heavily when we're confident they are wrong.
+- **If $y^{(i)} = 0$ (the actual class is 0):** We want $h_{\beta}(x^{(i)})$ to be close to 0. This also means we want $1 - h_{\beta}(x^{(i)})$ to be close to 1. The cost for this example is $-\log(1 - h_{\beta}(x^{(i)}))$.
+  - If $h_{\beta}(x^{(i)})$ is 0 (perfect prediction), $1 - h_{\beta}(x^{(i)})$ is 1, so $-\log(1) = 0$.
+  - If $h_{\beta}(x^{(i)})$ is 0.999 (very wrong, predicting 1 when it's 0), $1 - h_{\beta}(x^{(i)})$ is 0.001, so $-\log(0.001) \approx 6.9$. Again, heavy penalty.
 
 We can combine these two cases into a single elegant formula for the cost of one example:
 
 $\text{Cost}(h_{\beta}(x^{(i)}), y^{(i)}) = -y^{(i)} \log(h_{\beta}(x^{(i)})) - (1 - y^{(i)}) \log(1 - h_{\beta}(x^{(i)}))$
 
 Notice how this works:
-*   If $y^{(i)}=1$, the second term becomes $-(0) \log(\dots) = 0$. The cost is $-\log(h_{\beta}(x^{(i)}))$.
-*   If $y^{(i)}=0$, the first term becomes $-(0) \log(\dots) = 0$. The cost is $-\log(1 - h_{\beta}(x^{(i)}))$.
+
+- If $y^{(i)}=1$, the second term becomes $-(0) \log(\dots) = 0$. The cost is $-\log(h_{\beta}(x^{(i)}))$.
+- If $y^{(i)}=0$, the first term becomes $-(0) \log(\dots) = 0$. The cost is $-\log(1 - h_{\beta}(x^{(i)}))$.
 
 To get the total cost function for all $m$ training examples, we average the costs:
 
@@ -112,17 +116,19 @@ Furthermore, the coefficients $\beta_j$ themselves offer insights. For a continu
 As with any tool, Logistic Regression has its sweet spots and its limitations.
 
 **Strengths:**
-*   **Simplicity and Efficiency:** It's computationally efficient and relatively easy to implement and understand.
-*   **Interpretability:** As discussed, the probabilities and odds ratios provide clear insights into feature importance and model confidence.
-*   **Good Baseline:** It's often an excellent baseline model to start with for binary classification problems.
-*   **Outputs Probabilities:** This is a major advantage for decision-making and ranking.
-*   **Less Prone to Overfitting:** Compared to more complex models, it's generally less prone to severe overfitting, especially with regularization.
+
+- **Simplicity and Efficiency:** It's computationally efficient and relatively easy to implement and understand.
+- **Interpretability:** As discussed, the probabilities and odds ratios provide clear insights into feature importance and model confidence.
+- **Good Baseline:** It's often an excellent baseline model to start with for binary classification problems.
+- **Outputs Probabilities:** This is a major advantage for decision-making and ranking.
+- **Less Prone to Overfitting:** Compared to more complex models, it's generally less prone to severe overfitting, especially with regularization.
 
 **Weaknesses:**
-*   **Assumes Linear Separability:** It works best when the classes are (or can be made) linearly separable in the feature space, meaning a straight line (or hyperplane) can effectively separate them. It models a linear relationship between features and the *log-odds*, not directly the probability.
-*   **Sensitive to Outliers:** Like linear regression, it can be influenced by outliers, especially if they are far from the decision boundary.
-*   **Cannot Capture Complex Relationships:** Without careful feature engineering (e.g., creating interaction terms or polynomial features), Logistic Regression struggles with non-linear decision boundaries.
-*   **Multicollinearity:** When features are highly correlated, it can make the coefficients unstable and harder to interpret, though it doesn't always affect prediction accuracy too much.
+
+- **Assumes Linear Separability:** It works best when the classes are (or can be made) linearly separable in the feature space, meaning a straight line (or hyperplane) can effectively separate them. It models a linear relationship between features and the _log-odds_, not directly the probability.
+- **Sensitive to Outliers:** Like linear regression, it can be influenced by outliers, especially if they are far from the decision boundary.
+- **Cannot Capture Complex Relationships:** Without careful feature engineering (e.g., creating interaction terms or polynomial features), Logistic Regression struggles with non-linear decision boundaries.
+- **Multicollinearity:** When features are highly correlated, it can make the coefficients unstable and harder to interpret, though it doesn't always affect prediction accuracy too much.
 
 ### Conclusion: Your Reliable Classification Companion
 

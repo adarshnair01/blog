@@ -62,42 +62,43 @@ As shown above, `df.isnull().sum()` gives you a quick count for each column. You
 
 **Strategies for Handling Missing Values:**
 
-*   **Deletion (Dropping):**
-    *   **Row-wise Deletion:** If only a few rows have missing values, or if a row has *many* missing values, you might drop the entire row using `df.dropna()`.
-        *   *When to use:* When the number of missing rows is very small compared to your total dataset, or when a row's missing values make it unusable.
-        *   *Caution:* This can lead to significant data loss if not used judiciously. If you have 100,000 rows and drop 1,000, that's fine. If you drop 50,000, you've lost half your information!
-    *   **Column-wise Deletion:** If a column has an overwhelming percentage of missing values (e.g., >70-80%), it might be better to drop the entire column using `df.dropna(axis=1)`.
-        *   *When to use:* When a column provides little to no useful information due to sparsity.
-        *   *Caution:* Always consider if the missing information is truly irrelevant before discarding.
+- **Deletion (Dropping):**
+  - **Row-wise Deletion:** If only a few rows have missing values, or if a row has _many_ missing values, you might drop the entire row using `df.dropna()`.
+    - _When to use:_ When the number of missing rows is very small compared to your total dataset, or when a row's missing values make it unusable.
+    - _Caution:_ This can lead to significant data loss if not used judiciously. If you have 100,000 rows and drop 1,000, that's fine. If you drop 50,000, you've lost half your information!
+  - **Column-wise Deletion:** If a column has an overwhelming percentage of missing values (e.g., >70-80%), it might be better to drop the entire column using `df.dropna(axis=1)`.
+    - _When to use:_ When a column provides little to no useful information due to sparsity.
+    - _Caution:_ Always consider if the missing information is truly irrelevant before discarding.
 
-*   **Imputation (Filling):** Replacing missing values with a substituted value. This is often preferred over deletion to retain more data.
+- **Imputation (Filling):** Replacing missing values with a substituted value. This is often preferred over deletion to retain more data.
+  - **Mean/Median/Mode Imputation:**
+    - **Mean:** For numerical columns, fill missing values with the average of the non-missing values.
+      ```python
+      df['numerical_column'].fillna(df['numerical_column'].mean(), inplace=True)
+      ```
+      _When to use:_ When the data is symmetrically distributed (close to a normal distribution).
+      _Caution:_ Highly sensitive to outliers.
+    - **Median:** For numerical columns, fill with the middle value.
+      ```python
+      df['numerical_column'].fillna(df['numerical_column'].median(), inplace=True)
+      ```
+      _When to use:_ When the data is skewed or contains outliers, as the median is less affected by extreme values than the mean.
+    - **Mode:** For categorical or discrete numerical columns, fill with the most frequent value.
+      ```python
+      df['categorical_column'].fillna(df['categorical_column'].mode()[0], inplace=True)
+      ```
+      _When to use:_ For categorical data, or for numerical data that is highly discrete.
 
-    *   **Mean/Median/Mode Imputation:**
-        *   **Mean:** For numerical columns, fill missing values with the average of the non-missing values.
-            ```python
-            df['numerical_column'].fillna(df['numerical_column'].mean(), inplace=True)
-            ```
-            *When to use:* When the data is symmetrically distributed (close to a normal distribution).
-            *Caution:* Highly sensitive to outliers.
-        *   **Median:** For numerical columns, fill with the middle value.
-            ```python
-            df['numerical_column'].fillna(df['numerical_column'].median(), inplace=True)
-            ```
-            *When to use:* When the data is skewed or contains outliers, as the median is less affected by extreme values than the mean.
-        *   **Mode:** For categorical or discrete numerical columns, fill with the most frequent value.
-            ```python
-            df['categorical_column'].fillna(df['categorical_column'].mode()[0], inplace=True)
-            ```
-            *When to use:* For categorical data, or for numerical data that is highly discrete.
+  - **Forward Fill / Backward Fill:** Propagating the last valid observation forward (or next valid observation backward).
 
-    *   **Forward Fill / Backward Fill:** Propagating the last valid observation forward (or next valid observation backward).
-        ```python
-        df.fillna(method='ffill', inplace=True) # or 'bfill'
-        ```
-        *When to use:* For time series data where the previous (or next) value is a reasonable approximation.
-        *Caution:* Assumes temporal correlation, not suitable for all data types.
+    ```python
+    df.fillna(method='ffill', inplace=True) # or 'bfill'
+    ```
 
-    *   **Advanced Imputation (Brief Mention):** More sophisticated methods like K-Nearest Neighbors (KNN) Imputer (which fills based on similar rows) or regression imputation (predicting missing values using other features) exist, but can be more complex to implement and interpret. For now, mastering mean/median/mode is a fantastic start!
+    _When to use:_ For time series data where the previous (or next) value is a reasonable approximation.
+    _Caution:_ Assumes temporal correlation, not suitable for all data types.
+
+  - **Advanced Imputation (Brief Mention):** More sophisticated methods like K-Nearest Neighbors (KNN) Imputer (which fills based on similar rows) or regression imputation (predicting missing values using other features) exist, but can be more complex to implement and interpret. For now, mastering mean/median/mode is a fantastic start!
 
 My personal rule of thumb: If less than 5% of values are missing in a column, mean/median/mode imputation is often a good, quick fix. If it's more, you need to think carefully about the imputation method or consider dropping the column/rows.
 
@@ -112,6 +113,7 @@ print(f"Number of duplicate rows: {df.duplicated().sum()}")
 df.drop_duplicates(inplace=True)
 print(f"Number of rows after removing duplicates: {len(df)}")
 ```
+
 You can also specify subsets of columns to consider when identifying duplicates (e.g., if you consider rows duplicate only if specific identifier columns match).
 
 ```python
@@ -124,30 +126,30 @@ This is usually one of the first cleaning steps I perform, as it prevents me fro
 
 This type of dirt is sneaky. The data isn't missing, but it's not standardized. Common culprits include:
 
-*   **Case Inconsistency:** "USA", "usa", "U.S.A."
-*   **Whitespace:** " New York", "New York "
-*   **Typos/Variations:** "N/A", "na", "-", "Unknown" all representing missing values (but not as `NaN`).
-*   **Unit Inconsistency:** "100 km", "60 miles" (for distance) or currency symbols.
+- **Case Inconsistency:** "USA", "usa", "U.S.A."
+- **Whitespace:** " New York", "New York "
+- **Typos/Variations:** "N/A", "na", "-", "Unknown" all representing missing values (but not as `NaN`).
+- **Unit Inconsistency:** "100 km", "60 miles" (for distance) or currency symbols.
 
 **Strategies:**
 
-*   **Standardizing Text:**
-    ```python
-    df['country'].str.lower().str.strip().replace('u.s.a.', 'usa', inplace=True)
-    ```
-    `str.lower()` converts to lowercase, `str.strip()` removes leading/trailing whitespace, and `replace()` can standardize specific variations.
-*   **Mapping Categories:** For known variations, you can create a mapping dictionary.
-    ```python
-    status_mapping = {'Pending...': 'Pending', 'Awaiting': 'Pending', 'Completed!': 'Completed'}
-    df['order_status'].replace(status_mapping, inplace=True)
-    ```
-*   **Regular Expressions (Regex):** For complex pattern matching and replacement.
-    ```python
-    # Example: Extracting numbers from a string like '123 cm'
-    df['height_cm'] = df['height'].str.extract('(\d+)').astype(float)
-    ```
-    Regex is a powerful tool but has a steeper learning curve. Start with `replace()` and `str` methods first.
-*   **Identifying Unique Values:** Always use `df['column'].value_counts()` or `df['column'].unique()` to inspect categorical columns. You'll be surprised what you find!
+- **Standardizing Text:**
+  ```python
+  df['country'].str.lower().str.strip().replace('u.s.a.', 'usa', inplace=True)
+  ```
+  `str.lower()` converts to lowercase, `str.strip()` removes leading/trailing whitespace, and `replace()` can standardize specific variations.
+- **Mapping Categories:** For known variations, you can create a mapping dictionary.
+  ```python
+  status_mapping = {'Pending...': 'Pending', 'Awaiting': 'Pending', 'Completed!': 'Completed'}
+  df['order_status'].replace(status_mapping, inplace=True)
+  ```
+- **Regular Expressions (Regex):** For complex pattern matching and replacement.
+  ```python
+  # Example: Extracting numbers from a string like '123 cm'
+  df['height_cm'] = df['height'].str.extract('(\d+)').astype(float)
+  ```
+  Regex is a powerful tool but has a steeper learning curve. Start with `replace()` and `str` methods first.
+- **Identifying Unique Values:** Always use `df['column'].value_counts()` or `df['column'].unique()` to inspect categorical columns. You'll be surprised what you find!
 
 #### 4. The Rogue Rebels: Outliers
 
@@ -155,30 +157,30 @@ Outliers are data points that significantly deviate from other observations. The
 
 **Identifying Outliers:**
 
-*   **Visualizations:** Box plots are fantastic for visualizing outliers. Any points outside the "whiskers" are potential outliers. Histograms can also show unusually sparse regions.
-*   **Statistical Methods:**
-    *   **IQR (Interquartile Range) Method:** This is a robust method not heavily affected by extreme values.
-        1.  Calculate $Q_1$ (25th percentile) and $Q_3$ (75th percentile).
-        2.  Calculate $IQR = Q_3 - Q_1$.
-        3.  Define bounds:
-            *   Lower Bound: $Q_1 - 1.5 \times IQR$
-            *   Upper Bound: $Q_3 + 1.5 \times IQR$
+- **Visualizations:** Box plots are fantastic for visualizing outliers. Any points outside the "whiskers" are potential outliers. Histograms can also show unusually sparse regions.
+- **Statistical Methods:**
+  - **IQR (Interquartile Range) Method:** This is a robust method not heavily affected by extreme values.
+    1.  Calculate $Q_1$ (25th percentile) and $Q_3$ (75th percentile).
+    2.  Calculate $IQR = Q_3 - Q_1$.
+    3.  Define bounds:
+        _ Lower Bound: $Q_1 - 1.5 \times IQR$
+        _ Upper Bound: $Q_3 + 1.5 \times IQR$
         Any data point below the Lower Bound or above the Upper Bound is considered an outlier.
-    *   **Z-score:** For data that is approximately normally distributed. The Z-score measures how many standard deviations an element is from the mean.
-        $Z = \frac{x - \mu}{\sigma}$
-        Where $x$ is the data point, $\mu$ is the mean, and $\sigma$ is the standard deviation. A common threshold for outliers is $|Z| > 3$.
+  - **Z-score:** For data that is approximately normally distributed. The Z-score measures how many standard deviations an element is from the mean.
+    $Z = \frac{x - \mu}{\sigma}$
+    Where $x$ is the data point, $\mu$ is the mean, and $\sigma$ is the standard deviation. A common threshold for outliers is $|Z| > 3$.
 
 **Strategies for Handling Outliers:**
 
-*   **Removal:** If you are certain the outlier is a data entry error, you can remove the row.
-    *   *Caution:* Be extremely careful! Removing data can lead to loss of valuable information. Don't remove outliers just because they "look weird." Some outliers represent critical information (e.g., fraudulent transactions, rare diseases).
-*   **Transformation:** Applying mathematical transformations (like `log` or square root) can reduce the impact of extreme values and make the data distribution more symmetrical.
-    ```python
-    import numpy as np
-    df['transformed_column'] = np.log(df['original_column'])
-    ```
-*   **Winsorization (Capping):** Replacing outliers with a specific percentile value (ee.g., replace values above the 99th percentile with the 99th percentile value). This keeps the data point in the dataset but limits its extreme influence.
-*   **Treating them with Robust Models:** Some machine learning models (like tree-based models such as Random Forests or Gradient Boosting Machines) are inherently more robust to outliers than others (like Linear Regression or K-Means). Sometimes, simply choosing a different model can effectively handle outliers.
+- **Removal:** If you are certain the outlier is a data entry error, you can remove the row.
+  - _Caution:_ Be extremely careful! Removing data can lead to loss of valuable information. Don't remove outliers just because they "look weird." Some outliers represent critical information (e.g., fraudulent transactions, rare diseases).
+- **Transformation:** Applying mathematical transformations (like `log` or square root) can reduce the impact of extreme values and make the data distribution more symmetrical.
+  ```python
+  import numpy as np
+  df['transformed_column'] = np.log(df['original_column'])
+  ```
+- **Winsorization (Capping):** Replacing outliers with a specific percentile value (ee.g., replace values above the 99th percentile with the 99th percentile value). This keeps the data point in the dataset but limits its extreme influence.
+- **Treating them with Robust Models:** Some machine learning models (like tree-based models such as Random Forests or Gradient Boosting Machines) are inherently more robust to outliers than others (like Linear Regression or K-Means). Sometimes, simply choosing a different model can effectively handle outliers.
 
 Always investigate outliers thoroughly. Are they errors? Or are they genuinely unusual but valid observations? The answer dictates your strategy.
 
@@ -188,20 +190,20 @@ Sometimes, a column that should be numerical is read as a string (e.g., '1,000' 
 
 **Identifying and Fixing:**
 
-*   `df.info()` is your primary tool here. Look at the `Dtype` column.
-*   **Converting to Numeric:**
-    ```python
-    df['price'] = pd.to_numeric(df['price'], errors='coerce')
-    # 'errors='coerce'' will turn non-convertible values into NaN, which you then handle with imputation.
-    ```
-*   **Converting to Date/Time:**
-    ```python
-    df['order_date'] = pd.to_datetime(df['order_date'], errors='coerce')
-    ```
-*   **Converting to Category:** For string columns with a limited number of unique values, converting to the 'category' dtype can save memory and speed up operations.
-    ```python
-    df['gender'] = df['gender'].astype('category')
-    ```
+- `df.info()` is your primary tool here. Look at the `Dtype` column.
+- **Converting to Numeric:**
+  ```python
+  df['price'] = pd.to_numeric(df['price'], errors='coerce')
+  # 'errors='coerce'' will turn non-convertible values into NaN, which you then handle with imputation.
+  ```
+- **Converting to Date/Time:**
+  ```python
+  df['order_date'] = pd.to_datetime(df['order_date'], errors='coerce')
+  ```
+- **Converting to Category:** For string columns with a limited number of unique values, converting to the 'category' dtype can save memory and speed up operations.
+  ```python
+  df['gender'] = df['gender'].astype('category')
+  ```
 
 This is often a quick fix, but essential for correct data processing.
 
@@ -222,10 +224,10 @@ Data cleaning isn't a one-and-done operation; it's an iterative process. Here's 
 
 For most of these strategies, your go-to tools will be:
 
-*   **Pandas:** The workhorse for data manipulation in Python. (You've seen it throughout this post!)
-*   **NumPy:** Often used alongside Pandas for numerical operations (e.g., `np.log`).
-*   **Matplotlib/Seaborn:** For powerful data visualizations that help in identifying problems.
-*   **Scikit-learn:** For more advanced imputation techniques, though Pandas provides excellent basic functionality.
+- **Pandas:** The workhorse for data manipulation in Python. (You've seen it throughout this post!)
+- **NumPy:** Often used alongside Pandas for numerical operations (e.g., `np.log`).
+- **Matplotlib/Seaborn:** For powerful data visualizations that help in identifying problems.
+- **Scikit-learn:** For more advanced imputation techniques, though Pandas provides excellent basic functionality.
 
 ### Final Thoughts: Embrace the Mess!
 

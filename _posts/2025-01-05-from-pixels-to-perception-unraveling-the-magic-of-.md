@@ -1,7 +1,7 @@
 ---
 title: "From Pixels to Perception: Unraveling the Magic of Convolutional Neural Networks"
 date: "2025-01-05"
-excerpt: "Ever wondered how computers \"see\" the world, recognizing faces, objects, and even emotions? Dive into the fascinating realm of Convolutional Neural Networks (CNNs), the AI powerhouses behind computer vision, and discover how these intricate architectures teach machines to perceive."
+excerpt: 'Ever wondered how computers "see" the world, recognizing faces, objects, and even emotions? Dive into the fascinating realm of Convolutional Neural Networks (CNNs), the AI powerhouses behind computer vision, and discover how these intricate architectures teach machines to perceive.'
 tags: ["Machine Learning", "Deep Learning", "Computer Vision", "Neural Networks", "CNNs"]
 author: "Adarsh Nair"
 ---
@@ -20,7 +20,7 @@ Before we jump into CNNs, let's briefly consider why a standard, fully connected
 
 Imagine an image. To a computer, it's just a grid of pixel values. A typical color image might be 200 pixels wide, 200 pixels high, and have 3 color channels (Red, Green, Blue). That's $200 \times 200 \times 3 = 120,000$ individual numbers!
 
-If you were to feed this into a traditional neural network, each of these 120,000 pixels would be an input feature. If our first hidden layer had, say, 1,000 neurons, you'd have $120,000 \times 1,000 = 120,000,000$ (120 million!) weights *just for that single layer connection*.
+If you were to feed this into a traditional neural network, each of these 120,000 pixels would be an input feature. If our first hidden layer had, say, 1,000 neurons, you'd have $120,000 \times 1,000 = 120,000,000$ (120 million!) weights _just for that single layer connection_.
 
 This massive number of parameters leads to several critical problems:
 
@@ -55,17 +55,17 @@ Let $I$ be our input image and $K$ be our filter (kernel). The convolution opera
 
 $S(i, j) = (I * K)(i, j) = \sum_m \sum_n I(i-m, j-n) K(m, n)$
 
-*   $I(i-m, j-n)$ represents the pixel value in the input image at a specific location relative to the current position.
-*   $K(m, n)$ represents the weight of the filter at position $(m, n)$.
+- $I(i-m, j-n)$ represents the pixel value in the input image at a specific location relative to the current position.
+- $K(m, n)$ represents the weight of the filter at position $(m, n)$.
 
-**Intuition:** Each filter specializes in detecting a specific feature. For example, one filter might become highly activated (produce a large number) when it encounters a vertical edge, another for a horizontal edge, another for a specific texture. The network *learns* these filter weights during training.
+**Intuition:** Each filter specializes in detecting a specific feature. For example, one filter might become highly activated (produce a large number) when it encounters a vertical edge, another for a horizontal edge, another for a specific texture. The network _learns_ these filter weights during training.
 
-A single convolutional layer typically uses *multiple* filters, each designed (or learned) to detect different patterns. The output of a convolutional layer is a stack of these feature maps, one for each filter.
+A single convolutional layer typically uses _multiple_ filters, each designed (or learned) to detect different patterns. The output of a convolutional layer is a stack of these feature maps, one for each filter.
 
-*   **Stride:** How many pixels the filter shifts at each step. A stride of 1 means it moves one pixel at a time. A stride of 2 means it skips a pixel, effectively downsampling the image.
-*   **Padding:** Sometimes, to preserve the spatial dimensions of the input or to ensure the filter can cover edge pixels, we add a border of zero-valued pixels (padding) around the image.
+- **Stride:** How many pixels the filter shifts at each step. A stride of 1 means it moves one pixel at a time. A stride of 2 means it skips a pixel, effectively downsampling the image.
+- **Padding:** Sometimes, to preserve the spatial dimensions of the input or to ensure the filter can cover edge pixels, we add a border of zero-valued pixels (padding) around the image.
 
-This layer is brilliant because of **parameter sharing**: the same filter (set of weights) is applied across the entire image. This dramatically reduces the number of parameters compared to FCNNs and makes the network translation-invariant for specific features. If a cat's ear is detected by a filter in one part of the image, the *same* filter can detect it elsewhere.
+This layer is brilliant because of **parameter sharing**: the same filter (set of weights) is applied across the entire image. This dramatically reduces the number of parameters compared to FCNNs and makes the network translation-invariant for specific features. If a cat's ear is detected by a filter in one part of the image, the _same_ filter can detect it elsewhere.
 
 ### 2. The Activation Function: Introducing Non-linearity
 
@@ -84,9 +84,9 @@ After convolution and activation, it's common to add a pooling layer. This layer
 1.  **Reduce Spatial Dimensions:** It shrinks the height and width of the feature maps, which reduces the number of parameters and computation in subsequent layers.
 2.  **Increase Robustness to Small Variations:** It helps make the detected features more robust to slight shifts, rotations, or distortions in the input image.
 
-The most popular type is **Max Pooling**. Here's how it works: for each feature map, the pooling layer slides a window (e.g., $2 \times 2$ pixels) over the map and simply takes the *maximum* value within that window.
+The most popular type is **Max Pooling**. Here's how it works: for each feature map, the pooling layer slides a window (e.g., $2 \times 2$ pixels) over the map and simply takes the _maximum_ value within that window.
 
-**Intuition:** If a specific feature (like a strong edge) was detected by a filter in a certain region, Max Pooling ensures that its presence is recorded, regardless of its *exact* location within that region. The precise location becomes less important than the fact that the feature *is* present. This also contributes to the network's ability to handle slight translations (translation invariance).
+**Intuition:** If a specific feature (like a strong edge) was detected by a filter in a certain region, Max Pooling ensures that its presence is recorded, regardless of its _exact_ location within that region. The precise location becomes less important than the fact that the feature _is_ present. This also contributes to the network's ability to handle slight translations (translation invariance).
 
 Other types include Average Pooling (taking the average value) but Max Pooling is generally preferred as it tends to extract the most prominent features.
 
@@ -151,13 +151,13 @@ Let's quickly recap the ingenious aspects of CNNs that make them so effective fo
 
 The impact of CNNs is truly astounding. They are the backbone of modern computer vision, powering:
 
-*   **Image Classification:** Identifying what an image contains (e.g., cat, car, building).
-*   **Object Detection:** Locating and classifying multiple objects within an image (e.g., drawing bounding boxes around cars, pedestrians, traffic lights).
-*   **Image Segmentation:** Assigning a class to *every single pixel* in an image (e.g., distinguishing foreground objects from the background).
-*   **Facial Recognition:** Identifying individuals from images or videos.
-*   **Medical Imaging:** Assisting doctors in detecting tumors, anomalies, and diseases.
-*   **Self-Driving Cars:** Helping vehicles "see" and understand their environment.
-*   **Style Transfer, Image Generation, and more!**
+- **Image Classification:** Identifying what an image contains (e.g., cat, car, building).
+- **Object Detection:** Locating and classifying multiple objects within an image (e.g., drawing bounding boxes around cars, pedestrians, traffic lights).
+- **Image Segmentation:** Assigning a class to _every single pixel_ in an image (e.g., distinguishing foreground objects from the background).
+- **Facial Recognition:** Identifying individuals from images or videos.
+- **Medical Imaging:** Assisting doctors in detecting tumors, anomalies, and diseases.
+- **Self-Driving Cars:** Helping vehicles "see" and understand their environment.
+- **Style Transfer, Image Generation, and more!**
 
 The field is constantly evolving with newer, more complex architectures like ResNet, Inception, VGG, and Transformers (which are also starting to make waves in vision tasks!). The rabbit hole goes even deeper, but understanding these fundamental building blocks is your first and most crucial step.
 

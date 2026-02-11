@@ -66,7 +66,7 @@ print("\nResults are identical:", df_apply.equals(df_vectorized_direct) and df_a
 
 You'll notice that the vectorized direct operation and NumPy function are significantly faster, often by orders of magnitude! This is because Pandas and NumPy operations are implemented in highly optimized C or Fortran code, avoiding the overhead of Python's interpreter loop. When you use `.apply()` with a Python function, you're essentially telling Pandas to loop through your DataFrame row by row and execute your Python function for each one. This overhead can be substantial.
 
-In complexity terms, a vectorized operation on $N$ elements is typically $O(N)$ (linear time), as it performs a constant number of operations per element. An `.apply()` call, while also often $O(N)$ in terms of *iterations*, incurs a much higher constant factor due to Python function call overhead and data type conversions, making it slower in practice for many element-wise operations.
+In complexity terms, a vectorized operation on $N$ elements is typically $O(N)$ (linear time), as it performs a constant number of operations per element. An `.apply()` call, while also often $O(N)$ in terms of _iterations_, incurs a much higher constant factor due to Python function call overhead and data type conversions, making it slower in practice for many element-wise operations.
 
 While `.apply()` is indispensable for truly complex, row-dependent logic where no vectorized equivalent exists (e.g., parsing very complex strings with regex patterns that vary per row), always check for a vectorized alternative first.
 
@@ -76,10 +76,10 @@ One of the biggest hurdles for new Pandas users (and a source of frustrating bug
 
 **The Tip:** Master `loc` for label-based indexing and `iloc` for integer-position based indexing. For single-cell access, use `at` and `iat` for maximum speed.
 
-*   **`df.loc[]` (Label-based indexing):** Use this when you know the *names* of the rows and columns you want. It's inclusive of the end label for slices.
-*   **`df.iloc[]` (Integer-position based indexing):** Use this when you know the *integer positions* (0-based) of the rows and columns, similar to NumPy array slicing. It's exclusive of the end position for slices.
-*   **`df.at[]` (Label-based, single scalar access):** Optimized for getting/setting a single value by row and column label. Much faster than `loc` for this specific use case.
-*   **`df.iat[]` (Integer-position based, single scalar access):** Optimized for getting/setting a single value by integer row and column position. Much faster than `iloc` for this specific use case.
+- **`df.loc[]` (Label-based indexing):** Use this when you know the _names_ of the rows and columns you want. It's inclusive of the end label for slices.
+- **`df.iloc[]` (Integer-position based indexing):** Use this when you know the _integer positions_ (0-based) of the rows and columns, similar to NumPy array slicing. It's exclusive of the end position for slices.
+- **`df.at[]` (Label-based, single scalar access):** Optimized for getting/setting a single value by row and column label. Much faster than `loc` for this specific use case.
+- **`df.iat[]` (Integer-position based, single scalar access):** Optimized for getting/setting a single value by integer row and column position. Much faster than `iloc` for this specific use case.
 
 ```python
 data = {'name': ['Alice', 'Bob', 'Charlie', 'David'],
@@ -115,6 +115,7 @@ print("\n.at[] and .iat[] examples:")
 print("Get score for 'user4' using .at[]:", df.at['user4', 'score'])
 print("Get city for row index 2, col index 2 using .iat[]:", df.iat[2, 2])
 ```
+
 By explicitly using `.loc` and `.iloc`, you make your code clearer, prevent unexpected behavior when chaining operations, and avoid the dreaded `SettingWithCopyWarning` which arises when Pandas thinks you're trying to modify a view of a DataFrame rather than the original.
 
 ### 3. The `pipe()` Method – Chaining Operations with Panache
@@ -166,6 +167,7 @@ df_processed_with_pipe = (df_raw.copy()
 
 print("\nProcessed with .pipe():\n", df_processed_with_pipe)
 ```
+
 The `.pipe()` approach makes the sequence of operations explicit and easy to follow. Each step is a function that takes the current state of the DataFrame and returns a new (or modified) one, enhancing readability and making debugging simpler by isolating transformations.
 
 ### 4. Turbocharge with `Categorical` Dtype: Memory and Speed Wins!
@@ -212,6 +214,7 @@ print("Time for groupby on categorical dtype:")
 time_cat_groupby = timeit.timeit("df_large.groupby('city_cat')['temp'].mean()", globals=globals(), number=10)
 print(f"Time with categorical dtype: {time_cat_groupby:.4f} seconds")
 ```
+
 You'll see a dramatic reduction in memory usage, especially for columns with long string values or a high number of repeated values. The memory consumed by a categorical column can be approximated as $N \times S_{int} + C \times S_{str}$, where $N$ is the number of rows, $S_{int}$ is the memory for an integer code (e.g., 1, 2, 4 bytes), $C$ is the number of unique categories, and $S_{str}$ is the average memory for a string in the categories. Compare this to storing $N \times S_{str}$ for an object column, and the savings are clear for large $N$ and small $C$.
 
 Beyond memory, operations like `groupby()` and sorting can also be significantly faster on `Categorical` data because Pandas can work with the underlying integer codes instead of comparing strings.
@@ -222,8 +225,8 @@ Data often comes in formats that aren't ideal for analysis or machine learning m
 
 **The Tip:** Use `pd.melt()` to transform wide data into a long format, and `df.pivot_table()` to transform long data back into a wide format (with aggregation).
 
-*   **`pd.melt()` (Wide to Long):** Useful when column headers are actually values, not distinct variables.
-*   **`df.pivot_table()` (Long to Wide):** Useful for summarizing data, creating cross-tabulations, or reorganizing data based on specific index, column, and value combinations.
+- **`pd.melt()` (Wide to Long):** Useful when column headers are actually values, not distinct variables.
+- **`df.pivot_table()` (Long to Wide):** Useful for summarizing data, creating cross-tabulations, or reorganizing data based on specific index, column, and value combinations.
 
 ```python
 # Wide data example: Monthly sales for different products
@@ -259,6 +262,7 @@ df_pivot = df_sensor.pivot_table(index=['DeviceID', 'Timestamp'],
 df_pivot.columns.name = None # Remove the column name for 'SensorType'
 print("\nPivoted Sensor Data:\n", df_pivot)
 ```
+
 These functions are invaluable for transforming data into the "tidy" format often required by machine learning libraries (where each row is an observation, and each column is a variable) or for creating insightful summary tables for reports and dashboards.
 
 ### 6. Expressive Filtering with `query()`
@@ -294,6 +298,7 @@ target_product = 'Apple'
 filtered_complex_query = df_sales.query("sales >= @min_sales_threshold and product == @target_product or quantity > 10")
 print(f"\nFiltered (complex .query() with variables) (sales >= {min_sales_threshold} AND product == '{target_product}' OR quantity > 10):\n", filtered_complex_query)
 ```
+
 Notice how `query()` makes the condition much easier to read, especially when combining multiple criteria with `and` and `or`. You can even reference Python variables within your query string using the `@` prefix, which is a neat touch for dynamic filtering.
 
 ### Conclusion

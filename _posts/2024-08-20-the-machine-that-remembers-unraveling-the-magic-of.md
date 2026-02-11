@@ -49,7 +49,8 @@ When we talk about an RNN, we often visualize it in two ways:
               ---
     ... and so on
     ```
-    Each `[RNN_t]` box in the unrolled version uses the *identical* set of weights. This is key!
+
+    Each `[RNN_t]` box in the unrolled version uses the _identical_ set of weights. This is key!
 
 ### Under the Hood: The Mechanics of a Simple RNN
 
@@ -57,20 +58,20 @@ Let's peek inside one of those `[RNN]` boxes. At each time step $t$, a vanilla (
 
 1.  **Updating the Hidden State:** The new hidden state $h_t$ is computed using the current input $x_t$ and the previous hidden state $h_{t-1}$.
     $$h_t = \tanh(W_{hh}h_{t-1} + W_{xh}x_t + b_h)$$
-    *   $x_t$: The input vector at time $t$ (e.g., a word embedding).
-    *   $h_{t-1}$: The hidden state vector from the previous time step. This is the "memory."
-    *   $W_{xh}$: Weight matrix connecting the input to the hidden state.
-    *   $W_{hh}$: Weight matrix connecting the previous hidden state to the current hidden state (this is where the "recurrence" comes from).
-    *   $b_h$: Bias vector for the hidden state.
-    *   $\tanh$: An activation function (often $\tanh$ or ReLU) that squashes the values between -1 and 1, introducing non-linearity.
+    - $x_t$: The input vector at time $t$ (e.g., a word embedding).
+    - $h_{t-1}$: The hidden state vector from the previous time step. This is the "memory."
+    - $W_{xh}$: Weight matrix connecting the input to the hidden state.
+    - $W_{hh}$: Weight matrix connecting the previous hidden state to the current hidden state (this is where the "recurrence" comes from).
+    - $b_h$: Bias vector for the hidden state.
+    - $\tanh$: An activation function (often $\tanh$ or ReLU) that squashes the values between -1 and 1, introducing non-linearity.
 
 2.  **Computing the Output:** The output $y_t$ at time $t$ is typically a function of the current hidden state $h_t$.
     $$y_t = W_{hy}h_t + b_y$$
-    *   $W_{hy}$: Weight matrix connecting the hidden state to the output.
-    *   $b_y$: Bias vector for the output.
-    *   (Sometimes, an activation function like softmax is applied here if it's a classification task, e.g., predicting the next word).
+    - $W_{hy}$: Weight matrix connecting the hidden state to the output.
+    - $b_y$: Bias vector for the output.
+    - (Sometimes, an activation function like softmax is applied here if it's a classification task, e.g., predicting the next word).
 
-Notice how the weights ($W_{xh}, W_{hh}, W_{hy}$) and biases ($b_h, b_y$) are *shared across all time steps*. This is a crucial concept. It means the RNN is learning a set of transformations that apply consistently throughout the entire sequence, making it incredibly efficient for learning sequential patterns.
+Notice how the weights ($W_{xh}, W_{hh}, W_{hy}$) and biases ($b_h, b_y$) are _shared across all time steps_. This is a crucial concept. It means the RNN is learning a set of transformations that apply consistently throughout the entire sequence, making it incredibly efficient for learning sequential patterns.
 
 ### Training an RNN: Backpropagation Through Time (BPTT)
 
@@ -92,9 +93,9 @@ The vanishing gradient problem, in particular, was a major roadblock for vanilla
 The limitations of vanilla RNNs sparked a revolution, leading to more sophisticated architectures designed to combat vanishing gradients and better capture long-term dependencies. The two most prominent are:
 
 1.  **Long Short-Term Memory (LSTM) Networks**: Invented by Hochreiter and Schmidhuber in 1997, LSTMs introduced a "cell state" ($C_t$) that runs parallel to the hidden state ($h_t$). This cell state acts like a conveyor belt, carrying information across many time steps with minimal modification. LSTMs regulate information flow into and out of this cell state using special **gates**:
-    *   **Forget Gate**: Decides what information to throw away from the cell state.
-    *   **Input Gate**: Decides what new information to store in the cell state.
-    *   **Output Gate**: Decides what part of the cell state to output as the hidden state.
+    - **Forget Gate**: Decides what information to throw away from the cell state.
+    - **Input Gate**: Decides what new information to store in the cell state.
+    - **Output Gate**: Decides what part of the cell state to output as the hidden state.
 
     These gates are controlled by sigmoid functions and point-wise multiplications, allowing the LSTM to selectively remember or forget information. This gating mechanism is the key to their success in remembering relevant information over long sequences.
 
@@ -106,17 +107,17 @@ Both LSTMs and GRUs have become the de-facto standard for sequence modeling, lar
 
 The ability of RNNs, LSTMs, and GRUs to process sequential data has opened doors to incredible applications across various domains:
 
-*   **Natural Language Processing (NLP)**:
-    *   **Machine Translation**: Translating sentences from one language to another (e.g., Google Translate).
-    *   **Text Generation**: Generating human-like text, poems, or code.
-    *   **Sentiment Analysis**: Determining the emotional tone of a piece of text.
-    *   **Speech Recognition**: Converting spoken language into text.
-    *   **Named Entity Recognition**: Identifying names of people, organizations, locations in text.
-*   **Time Series Analysis**:
-    *   **Stock Price Prediction**: Forecasting future stock prices based on historical data.
-    *   **Weather Forecasting**: Predicting weather patterns.
-*   **Image Captioning**: Combining CNNs (for image feature extraction) with RNNs (for generating descriptive captions).
-*   **Music Generation**: Composing new melodies or extending existing ones.
+- **Natural Language Processing (NLP)**:
+  - **Machine Translation**: Translating sentences from one language to another (e.g., Google Translate).
+  - **Text Generation**: Generating human-like text, poems, or code.
+  - **Sentiment Analysis**: Determining the emotional tone of a piece of text.
+  - **Speech Recognition**: Converting spoken language into text.
+  - **Named Entity Recognition**: Identifying names of people, organizations, locations in text.
+- **Time Series Analysis**:
+  - **Stock Price Prediction**: Forecasting future stock prices based on historical data.
+  - **Weather Forecasting**: Predicting weather patterns.
+- **Image Captioning**: Combining CNNs (for image feature extraction) with RNNs (for generating descriptive captions).
+- **Music Generation**: Composing new melodies or extending existing ones.
 
 ### My Journey Continues: Your Turn!
 

@@ -4,6 +4,7 @@ date: "2024-02-10"
 excerpt: "This is my first blog post on my new portfolio website."
 author: "Adarsh Nair"
 ---
+
 # Welcome to My Blog!
 
 This is the first post on my new blog. Since my portfolio is built with React, I decided to integrate a markdown-based blog directly into the site.

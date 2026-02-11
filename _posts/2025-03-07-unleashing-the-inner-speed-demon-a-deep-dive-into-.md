@@ -8,9 +8,9 @@ author: "Adarsh Nair"
 
 Hello fellow data adventurers!
 
-Today, I want to share a journey that I believe is fundamental to becoming a truly effective data scientist or machine learning engineer: understanding and mastering **NumPy optimization**. I remember vividly staring at my screen, frustrated as a simple operation on a large dataset took minutes, sometimes even hours. I knew Python was powerful, but this sluggishness felt... wrong. Then I discovered the magic of NumPy, and it wasn't just about using it; it was about *understanding how to use it optimally*.
+Today, I want to share a journey that I believe is fundamental to becoming a truly effective data scientist or machine learning engineer: understanding and mastering **NumPy optimization**. I remember vividly staring at my screen, frustrated as a simple operation on a large dataset took minutes, sometimes even hours. I knew Python was powerful, but this sluggishness felt... wrong. Then I discovered the magic of NumPy, and it wasn't just about using it; it was about _understanding how to use it optimally_.
 
-Think of it like this: You've got a super-fast race car (NumPy). You can drive it like a regular sedan, or you can learn the track, master the gears, and truly push it to its limits. This blog post is about learning to race that car. We'll explore the *why* behind NumPy's speed and, more importantly, the *how* of making your code perform like a champion.
+Think of it like this: You've got a super-fast race car (NumPy). You can drive it like a regular sedan, or you can learn the track, master the gears, and truly push it to its limits. This blog post is about learning to race that car. We'll explore the _why_ behind NumPy's speed and, more importantly, the _how_ of making your code perform like a champion.
 
 ### The Heart of the Matter: Why is NumPy So Fast?
 
@@ -95,44 +95,48 @@ x_values = np.linspace(-10, 10, 10_000_000)
 a, b, c = 2, 3, 5
 y_values = a * x_values**2 + b * x_values + c
 ```
+
 This is inherently vectorized and extremely efficient. No need for loops!
 
 #### 2. Choose the Right NumPy Function
 
 NumPy is vast, and often there are multiple ways to achieve a goal. Some functions are more optimized for specific tasks than others.
 
-*   **Matrix Multiplication**: Use `@` operator or `np.dot()` for matrix multiplication. Avoid manual loops or element-wise multiplication followed by summing unless that's specifically what you intend.
-    ```python
-    matrix_a = np.random.rand(1000, 500)
-    matrix_b = np.random.rand(500, 1000)
+- **Matrix Multiplication**: Use `@` operator or `np.dot()` for matrix multiplication. Avoid manual loops or element-wise multiplication followed by summing unless that's specifically what you intend.
 
-    # Fast matrix multiplication
-    result_mat_mul = matrix_a @ matrix_b # or np.dot(matrix_a, matrix_b)
-    ```
-    The `@` operator (available since Python 3.5) is specifically designed for matrix multiplication and delegates to highly optimized BLAS (Basic Linear Algebra Subprograms) routines.
+  ```python
+  matrix_a = np.random.rand(1000, 500)
+  matrix_b = np.random.rand(500, 1000)
 
-*   **Aggregations**: `np.sum()`, `np.mean()`, `np.max()`, `np.min()` are far more efficient than summing with a loop or using Python's built-in `sum()` on a NumPy array.
-    ```python
-    large_array = np.random.rand(10_000_000)
+  # Fast matrix multiplication
+  result_mat_mul = matrix_a @ matrix_b # or np.dot(matrix_a, matrix_b)
+  ```
 
-    start_time = time.time()
-    total_sum_np = np.sum(large_array)
-    end_time = time.time()
-    print(f"NumPy sum: {end_time - start_time:.6f} seconds")
+  The `@` operator (available since Python 3.5) is specifically designed for matrix multiplication and delegates to highly optimized BLAS (Basic Linear Algebra Subprograms) routines.
 
-    start_time = time.time()
-    total_sum_py = sum(large_array) # This works, but is slower
-    end_time = time.time()
-    print(f"Python sum: {end_time - start_time:.6f} seconds")
-    ```
+- **Aggregations**: `np.sum()`, `np.mean()`, `np.max()`, `np.min()` are far more efficient than summing with a loop or using Python's built-in `sum()` on a NumPy array.
+
+  ```python
+  large_array = np.random.rand(10_000_000)
+
+  start_time = time.time()
+  total_sum_np = np.sum(large_array)
+  end_time = time.time()
+  print(f"NumPy sum: {end_time - start_time:.6f} seconds")
+
+  start_time = time.time()
+  total_sum_py = sum(large_array) # This works, but is slower
+  end_time = time.time()
+  print(f"Python sum: {end_time - start_time:.6f} seconds")
+  ```
 
 #### 3. Data Types: Smaller is Often Faster (and Lighter!)
 
 NumPy allows you to specify the data type (`dtype`) for your arrays. Using smaller, more appropriate data types can significantly reduce memory consumption and often speed up computations, especially on large datasets.
 
-*   `np.int64` (default integer) vs. `np.int8` (for values -128 to 127).
-*   `np.float64` (default float) vs. `np.float32`.
-*   `np.bool_` for boolean flags.
+- `np.int64` (default integer) vs. `np.int8` (for values -128 to 127).
+- `np.float64` (default float) vs. `np.float32`.
+- `np.bool_` for boolean flags.
 
 Each `np.int64` takes 8 bytes, while `np.int8` takes only 1 byte. For an array of 10 million integers, using `int8` instead of `int64` saves $10 \times 10^6 \times (8 - 1) = 70$ megabytes of RAM! Less memory means less data to move around, which improves cache locality and overall speed.
 
@@ -144,14 +148,16 @@ arr_int8 = np.random.randint(0, 101, size=10_000_000, dtype=np.int8)
 print(f"Size of int64 array: {arr_int64.nbytes / (1024**2):.2f} MB")
 print(f"Size of int8 array: {arr_int8.nbytes / (1024**2):.2f} MB")
 ```
+
 Notice the memory difference! Operations on smaller data types can be faster as well, as more data fits into the CPU's cache.
 
 #### 4. Broadcasting: The Unsung Hero of Efficiency
 
-Broadcasting is NumPy's way of dealing with arrays of different shapes during arithmetic operations. It allows you to perform operations between arrays that would normally require them to have the exact same shape. The magic is that it does this *without creating explicit copies of the smaller array* to match the larger one, saving both memory and computation time.
+Broadcasting is NumPy's way of dealing with arrays of different shapes during arithmetic operations. It allows you to perform operations between arrays that would normally require them to have the exact same shape. The magic is that it does this _without creating explicit copies of the smaller array_ to match the larger one, saving both memory and computation time.
 
 **How it works (simplified rule):**
 When operating on two arrays, NumPy compares their shapes element-wise, starting from the trailing dimensions.
+
 1.  If the dimensions are equal, or one of them is 1, they are compatible.
 2.  If one dimension is 1, it's "stretched" to match the other.
 3.  If dimensions are incompatible, an error is raised.
@@ -173,6 +179,7 @@ print(result_broadcast)
 #  [14 25 36]
 #  [17 28 39]]
 ```
+
 Here, `row_vector` (shape `(3,)`) is broadcast across the rows of `matrix` (shape `(3, 3)`). NumPy effectively "stretches" `row_vector` to match the `(3,3)` shape conceptually, performing the addition efficiently. Without broadcasting, you'd have to manually tile `row_vector` to create a `(3,3)` array, which consumes more memory and time.
 
 #### 5. In-Place Operations: When Memory Matters
@@ -194,6 +201,7 @@ my_large_array *= 2
 end_time = time.time()
 print(f"In-place operation: {end_time - start_time:.6f} seconds")
 ```
+
 While the timing difference might be small for a single operation, over many operations or with memory constraints, `a *= b` can be more efficient than `a = a * b` because it avoids the overhead of allocating and deallocating memory for temporary arrays.
 
 #### 6. Understand Memory Layout (C-order vs. Fortran-order)
@@ -202,8 +210,8 @@ This is a more advanced topic but crucial for truly squeezing out performance in
 
 NumPy arrays store data in a contiguous block of memory. How these elements are arranged matters for CPU cache efficiency.
 
-*   **C-contiguous (row-major order)**: Elements of a row are contiguous in memory. This is the default in NumPy. Accessing elements row by row is fast.
-*   **Fortran-contiguous (column-major order)**: Elements of a column are contiguous in memory.
+- **C-contiguous (row-major order)**: Elements of a row are contiguous in memory. This is the default in NumPy. Accessing elements row by row is fast.
+- **Fortran-contiguous (column-major order)**: Elements of a column are contiguous in memory.
 
 When you iterate or operate along a certain axis, if that access pattern aligns with the memory layout, your CPU can fetch data into its cache more efficiently, leading to faster computations.
 
@@ -240,15 +248,16 @@ col_sum_f = np.sum(fortran_matrix, axis=0) # Faster on Fortran-ordered
 end_time = time.time()
 print(f"Sum along columns (axis=0) on Fortran-matrix: {end_time - start_time:.4f} seconds")
 ```
+
 The differences might be subtle for smaller arrays but become significant for larger ones. If your algorithm primarily processes data column-wise on a C-contiguous array, consider reshaping it or transposing it (`arr.T`) to make it column-contiguous before processing.
 
 ### Beyond Core NumPy: When You Need More Power
 
 Even with all these optimizations, sometimes pure NumPy isn't enough. When you hit those limits, here are a few tools to consider:
 
-*   **Numba**: A Just-In-Time (JIT) compiler that can take Python functions (especially those with loops) and compile them to fast machine code. It's fantastic for accelerating those rare loops you *can't* vectorize.
-*   **Cython**: Allows you to write C extensions for Python. You can declare static types and write C-like code that integrates seamlessly with Python, offering C-level performance.
-*   **Dask**: For computations that are larger than your available RAM, Dask extends NumPy's array capabilities to distributed and out-of-core computing.
+- **Numba**: A Just-In-Time (JIT) compiler that can take Python functions (especially those with loops) and compile them to fast machine code. It's fantastic for accelerating those rare loops you _can't_ vectorize.
+- **Cython**: Allows you to write C extensions for Python. You can declare static types and write C-like code that integrates seamlessly with Python, offering C-level performance.
+- **Dask**: For computations that are larger than your available RAM, Dask extends NumPy's array capabilities to distributed and out-of-core computing.
 
 These are powerful tools, but always remember the golden rule: **optimize with pure NumPy first!** Most of the time, the solutions presented above will be sufficient.
 

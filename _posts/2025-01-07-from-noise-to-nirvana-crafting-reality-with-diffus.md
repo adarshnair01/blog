@@ -6,7 +6,7 @@ tags: ["Machine Learning", "Deep Learning", "Generative AI", "Diffusion Models",
 author: "Adarsh Nair"
 ---
 
-As a budding data scientist and machine learning enthusiast, I’m constantly amazed by the leaps and bounds our field is making. We’ve seen AIs master games, translate languages, and even write poetry. But nothing quite captured my imagination like the explosion of generative AI – models that don't just understand data, but *create* it. For years, Generative Adversarial Networks (GANs) were the undisputed kings, producing stunningly realistic images. Yet, they often felt a bit like a temperamental genius – brilliant but prone to mode collapse and tricky to train. Then, something new entered the scene, something that felt almost magical: Diffusion Models.
+As a budding data scientist and machine learning enthusiast, I’m constantly amazed by the leaps and bounds our field is making. We’ve seen AIs master games, translate languages, and even write poetry. But nothing quite captured my imagination like the explosion of generative AI – models that don't just understand data, but _create_ it. For years, Generative Adversarial Networks (GANs) were the undisputed kings, producing stunningly realistic images. Yet, they often felt a bit like a temperamental genius – brilliant but prone to mode collapse and tricky to train. Then, something new entered the scene, something that felt almost magical: Diffusion Models.
 
 It's been fascinating to watch these models evolve from complex research papers to the powerhouse behind tools like DALL-E 2, Midjourney, and Stable Diffusion, which are now ubiquitous in creative industries and social media feeds. They've democratized digital art creation, putting tools previously requiring years of artistic training into the hands of anyone with an idea and a prompt. My journey into understanding them felt a lot like unwrapping a complex gift, piece by piece, only to find an even more beautiful mechanism inside.
 
@@ -25,21 +25,22 @@ Diffusion Models offer a compelling alternative, marrying the stability of VAEs 
 
 Imagine you have a beautiful, pristine photograph. Now, imagine slowly, meticulously adding tiny, imperceptible specks of noise to it. You do this again and again, for hundreds or even thousands of steps, until the original image is completely obscured, utterly dissolved into pure, random static – like white noise on an old TV screen.
 
-Diffusion models operate on a profound principle: if we can *learn* how to perfectly *reverse* this gradual process of noise addition, we can start with pure noise and "denoise" it step-by-step until a coherent, entirely new image emerges. It's like taking a sculpture and systematically eroding it into a pile of dust, then learning precisely how to re-sculpt it from that dust back into its original form – or even a new form entirely. This elegant, two-part process is at the heart of diffusion models.
+Diffusion models operate on a profound principle: if we can _learn_ how to perfectly _reverse_ this gradual process of noise addition, we can start with pure noise and "denoise" it step-by-step until a coherent, entirely new image emerges. It's like taking a sculpture and systematically eroding it into a pile of dust, then learning precisely how to re-sculpt it from that dust back into its original form – or even a new form entirely. This elegant, two-part process is at the heart of diffusion models.
 
 ### Part 1: The Forward (Noising) Process
 
-This part is simple, fixed, and non-learnable. We define a *Markov chain* that gradually adds Gaussian (random) noise to an image. Let $x_0$ be our original image. We define a sequence of noisy images $x_1, x_2, \ldots, x_T$, where $x_T$ is essentially pure noise.
+This part is simple, fixed, and non-learnable. We define a _Markov chain_ that gradually adds Gaussian (random) noise to an image. Let $x_0$ be our original image. We define a sequence of noisy images $x_1, x_2, \ldots, x_T$, where $x_T$ is essentially pure noise.
 
 At each step $t$, we add a small amount of Gaussian noise, controlled by a variance schedule $\beta_t$. The equation for this step looks like this:
 
 $q(x_t|x_{t-1}) = \mathcal{N}(x_t; \sqrt{1-\beta_t} x_{t-1}, \beta_t \mathbf{I})$
 
 Here:
-*   $q(x_t|x_{t-1})$ is the conditional probability distribution of $x_t$ given $x_{t-1}$.
-*   $\mathcal{N}$ denotes a Gaussian (Normal) distribution.
-*   $\sqrt{1-\beta_t} x_{t-1}$ is the mean, where $\beta_t$ is a small constant (e.g., from 0.0001 to 0.02) that increases over time, meaning more noise is added in later steps.
-*   $\beta_t \mathbf{I}$ is the variance.
+
+- $q(x_t|x_{t-1})$ is the conditional probability distribution of $x_t$ given $x_{t-1}$.
+- $\mathcal{N}$ denotes a Gaussian (Normal) distribution.
+- $\sqrt{1-\beta_t} x_{t-1}$ is the mean, where $\beta_t$ is a small constant (e.g., from 0.0001 to 0.02) that increases over time, meaning more noise is added in later steps.
+- $\beta_t \mathbf{I}$ is the variance.
 
 This means that $x_t$ is essentially a slightly noisier version of $x_{t-1}$. As $t$ approaches $T$, $x_t$ becomes indistinguishable from pure noise.
 
@@ -75,7 +76,7 @@ So, how do we teach this U-Net to be a noise predictor? During training, we:
 2.  **Sample a random timestep $t$** between 1 and $T$.
 3.  **Generate a noisy version $x_t$** by applying noise to $x_0$ using the direct sampling formula: $x_t = \sqrt{\bar{\alpha}_t} x_0 + \sqrt{1-\bar{\alpha}_t} \epsilon$, where $\epsilon$ is the true noise added.
 4.  **Feed $x_t$ and $t$ into our U-Net model** $\epsilon_\theta$. The model tries to predict the noise: $\epsilon_\theta(x_t, t)$.
-5.  **Calculate the loss:** The model's prediction is compared to the *actual* noise $\epsilon$ that was added. We use a simple mean squared error (MSE) loss:
+5.  **Calculate the loss:** The model's prediction is compared to the _actual_ noise $\epsilon$ that was added. We use a simple mean squared error (MSE) loss:
 
     $L_t = ||\epsilon - \epsilon_\theta(x_t, t)||^2$
 
@@ -87,24 +88,24 @@ Once our model is trained, the generation process is like watching a sculptor at
 
 1.  **Start with pure random noise:** We sample $x_T$ from a standard Gaussian distribution, $\mathcal{N}(0, \mathbf{I})$. This is our "blank canvas" of pure static.
 2.  **Iterative Denoising:** We then loop backward from $T$ down to 1. At each step $t$:
-    *   We use our trained model $\epsilon_\theta(x_t, t)$ to predict the noise in $x_t$.
-    *   Using this predicted noise, we calculate $\mu_\theta(x_t, t)$ and $\Sigma_\theta(x_t, t)$.
-    *   We then sample $x_{t-1}$ from the Gaussian distribution $\mathcal{N}(x_{t-1}; \mu_\theta(x_t, t), \Sigma_\theta(x_t, t))$.
-    *   This gradually removes noise, revealing more and more structure.
+    - We use our trained model $\epsilon_\theta(x_t, t)$ to predict the noise in $x_t$.
+    - Using this predicted noise, we calculate $\mu_\theta(x_t, t)$ and $\Sigma_\theta(x_t, t)$.
+    - We then sample $x_{t-1}$ from the Gaussian distribution $\mathcal{N}(x_{t-1}; \mu_\theta(x_t, t), \Sigma_\theta(x_t, t))$.
+    - This gradually removes noise, revealing more and more structure.
 3.  **The Final Image:** After $T$ steps, we arrive at $x_0$, a brand new, high-quality image that our model has conjured from pure chaos!
 
 This iterative process is why generating an image with a diffusion model can sometimes take longer than with a GAN, which produces an image in a single pass. However, the quality and diversity of the results often make this wait worthwhile.
 
 ### Conditional Generation: Guiding the Imagination
 
-Perhaps the most exciting aspect of diffusion models, especially for users, is their ability to perform **conditional generation**. We don't just want *any* image; we want *a specific image* – "a cybernetic cat lounging on a cloud," or "an astronaut riding a horse in a photorealistic style."
+Perhaps the most exciting aspect of diffusion models, especially for users, is their ability to perform **conditional generation**. We don't just want _any_ image; we want _a specific image_ – "a cybernetic cat lounging on a cloud," or "an astronaut riding a horse in a photorealistic style."
 
 To achieve this, we "condition" the denoising process. During training, alongside $x_t$ and $t$, we also feed in an additional input that describes what we want. This could be:
 
-*   **Class labels:** "Generate a dog."
-*   **Text embeddings:** The most common and powerful form, where a separate model (like CLIP) converts a text prompt into a numerical vector that captures its meaning. This vector is then incorporated into the U-Net, often through cross-attention mechanisms, guiding the denoising process towards the desired output.
+- **Class labels:** "Generate a dog."
+- **Text embeddings:** The most common and powerful form, where a separate model (like CLIP) converts a text prompt into a numerical vector that captures its meaning. This vector is then incorporated into the U-Net, often through cross-attention mechanisms, guiding the denoising process towards the desired output.
 
-One particularly clever technique is **Classifier-Free Guidance**. During training, the model is sometimes shown the conditioning (e.g., text prompt) and sometimes not (with a null embedding). During generation, we can extrapolate between the model's prediction with and without the conditioning to amplify the influence of the text prompt, leading to incredibly vivid and coherent results that strongly adhere to the prompt. It's like telling the model, "Really, *really* emphasize the 'cybernetic cat' part!"
+One particularly clever technique is **Classifier-Free Guidance**. During training, the model is sometimes shown the conditioning (e.g., text prompt) and sometimes not (with a null embedding). During generation, we can extrapolate between the model's prediction with and without the conditioning to amplify the influence of the text prompt, leading to incredibly vivid and coherent results that strongly adhere to the prompt. It's like telling the model, "Really, _really_ emphasize the 'cybernetic cat' part!"
 
 ### Why Diffusion Models Are So Good
 

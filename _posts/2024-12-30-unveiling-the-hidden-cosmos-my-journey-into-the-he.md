@@ -8,7 +8,7 @@ author: "Adarsh Nair"
 
 Hey everyone!
 
-Have you ever tried to describe a really complex idea to someone, and found yourself wishing you could just *show* them? Like explaining the intricate gears of a watch without showing the watch itself, or trying to describe the vastness of a city without a map. That's often how I feel when I'm confronted with high-dimensional data.
+Have you ever tried to describe a really complex idea to someone, and found yourself wishing you could just _show_ them? Like explaining the intricate gears of a watch without showing the watch itself, or trying to describe the vastness of a city without a map. That's often how I feel when I'm confronted with high-dimensional data.
 
 Imagine trying to understand a dataset where each data point isn't just described by two or three features (like height, weight, and age), but by hundreds, or even thousands! Think about an image: each pixel can be a feature. Or a piece of text: each word's presence or absence. Our human brains, wonderful as they are, struggle past three dimensions. This "Curse of Dimensionality" is a real headache for data scientists. How do you find patterns, clusters, or anomalies when you can't even visualize the data?
 
@@ -16,9 +16,9 @@ This is where dimensionality reduction techniques come in, and today, I want to 
 
 ### Meet t-SNE: Your Data's Personal Cartographer
 
-At its core, t-SNE's goal is simple yet profound: take a dataset where each point lives in a high-dimensional space and project it down into a much lower-dimensional space (usually 2D or 3D) in a way that *preserves the relationships between nearby points*. It doesn't care much about how far apart things are globally, but it cares deeply about who your neighbors are.
+At its core, t-SNE's goal is simple yet profound: take a dataset where each point lives in a high-dimensional space and project it down into a much lower-dimensional space (usually 2D or 3D) in a way that _preserves the relationships between nearby points_. It doesn't care much about how far apart things are globally, but it cares deeply about who your neighbors are.
 
-Think of it like this: if you have a group of friends who always hang out together in real life (high-dimensional space), t-SNE tries to make sure they're still hanging out together on its map (low-dimensional space). It’s less concerned if your friend group is on the other side of the park from another friend group; it just wants to make sure *your* group stays tight.
+Think of it like this: if you have a group of friends who always hang out together in real life (high-dimensional space), t-SNE tries to make sure they're still hanging out together on its map (low-dimensional space). It’s less concerned if your friend group is on the other side of the park from another friend group; it just wants to make sure _your_ group stays tight.
 
 ### How t-SNE Works: A Probabilistic Dance
 
@@ -87,24 +87,27 @@ To get the most out of t-SNE, you need to understand its key parameters:
 t-SNE is a phenomenal tool, but like any powerful algorithm, it comes with its own quirks and limitations.
 
 #### Strengths:
-*   **Reveals Complex Structures**: t-SNE excels at finding and visualizing intricate, non-linear relationships and clusters in your data that other linear methods (like PCA) might miss.
-*   **Beautiful Visualizations**: The maps produced by t-SNE are often stunningly clear, showing distinct clusters and sub-clusters, making it incredibly useful for exploratory data analysis (EDA).
-*   **Handles Manifold Learning**: It implicitly performs well on data that lies on a "manifold" (a lower-dimensional surface embedded in a higher-dimensional space), like a rolled-up scroll.
+
+- **Reveals Complex Structures**: t-SNE excels at finding and visualizing intricate, non-linear relationships and clusters in your data that other linear methods (like PCA) might miss.
+- **Beautiful Visualizations**: The maps produced by t-SNE are often stunningly clear, showing distinct clusters and sub-clusters, making it incredibly useful for exploratory data analysis (EDA).
+- **Handles Manifold Learning**: It implicitly performs well on data that lies on a "manifold" (a lower-dimensional surface embedded in a higher-dimensional space), like a rolled-up scroll.
 
 #### Caveats (Things to be mindful of):
-*   **No Global Structure Preservation**: This is crucial: the distances *between* clusters in a t-SNE plot are not meaningful. Only the relative distances *within* a cluster, and the fact that clusters are separated, matter. You can't infer that two clusters that appear far apart on the map are necessarily "more different" in high-dimensional space than two clusters that appear closer. Think of it like a constellation map: the stars in a constellation are grouped, but the distance between constellations on the map tells you nothing about their true distance in space.
-*   **Computational Cost**: For very large datasets ($N > 100,000$), t-SNE can be slow because its complexity is $O(N^2)$ (it needs to calculate pairwise distances). Faster approximations like Barnes-Hut t-SNE (implemented in libraries like `scikit-learn`) or newer algorithms like UMAP address this.
-*   **Stochasticity**: Because it starts with a random initialization and involves probabilities, different runs of t-SNE on the same data with the same parameters can yield slightly different-looking plots. The underlying clusters should remain consistent, but their orientation or exact positions might vary.
-*   **Parameter Sensitivity**: The output of t-SNE is quite sensitive to the perplexity value. It often requires some experimentation to find a "sweet spot" for your dataset.
-*   **Not for Feature Extraction**: t-SNE is primarily a visualization tool. You shouldn't use the low-dimensional embeddings from t-SNE as features for subsequent machine learning models, as they don't preserve global distances or linearly separable information.
+
+- **No Global Structure Preservation**: This is crucial: the distances _between_ clusters in a t-SNE plot are not meaningful. Only the relative distances _within_ a cluster, and the fact that clusters are separated, matter. You can't infer that two clusters that appear far apart on the map are necessarily "more different" in high-dimensional space than two clusters that appear closer. Think of it like a constellation map: the stars in a constellation are grouped, but the distance between constellations on the map tells you nothing about their true distance in space.
+- **Computational Cost**: For very large datasets ($N > 100,000$), t-SNE can be slow because its complexity is $O(N^2)$ (it needs to calculate pairwise distances). Faster approximations like Barnes-Hut t-SNE (implemented in libraries like `scikit-learn`) or newer algorithms like UMAP address this.
+- **Stochasticity**: Because it starts with a random initialization and involves probabilities, different runs of t-SNE on the same data with the same parameters can yield slightly different-looking plots. The underlying clusters should remain consistent, but their orientation or exact positions might vary.
+- **Parameter Sensitivity**: The output of t-SNE is quite sensitive to the perplexity value. It often requires some experimentation to find a "sweet spot" for your dataset.
+- **Not for Feature Extraction**: t-SNE is primarily a visualization tool. You shouldn't use the low-dimensional embeddings from t-SNE as features for subsequent machine learning models, as they don't preserve global distances or linearly separable information.
 
 ### When to Embrace t-SNE
 
 I typically reach for t-SNE when I want to:
-*   **Explore new datasets**: Understand hidden structures, identify potential clusters, or spot outliers.
-*   **Verify hypotheses**: Does my data naturally separate into the groups I expect?
-*   **Visualize the output of other models**: See how embeddings from deep learning models (like word embeddings or image embeddings) cluster.
+
+- **Explore new datasets**: Understand hidden structures, identify potential clusters, or spot outliers.
+- **Verify hypotheses**: Does my data naturally separate into the groups I expect?
+- **Visualize the output of other models**: See how embeddings from deep learning models (like word embeddings or image embeddings) cluster.
 
 ### Conclusion: Your Visual Superpower
 
-t-SNE isn't just an algorithm; it's a window into the otherwise unseen complexity of high-dimensional data. It empowers us, as data scientists, to go beyond simple statistics and truly *see* the patterns, connections, and anomalies that lie hidden within our datasets. While it requires a careful hand with its parameters and a nuanced understanding of its output, mastering t-SNE adds a truly powerful visual superpower to your data science toolkit. So next time you're facing a high-dimensional maze, don't just compute – visualize!
+t-SNE isn't just an algorithm; it's a window into the otherwise unseen complexity of high-dimensional data. It empowers us, as data scientists, to go beyond simple statistics and truly _see_ the patterns, connections, and anomalies that lie hidden within our datasets. While it requires a careful hand with its parameters and a nuanced understanding of its output, mastering t-SNE adds a truly powerful visual superpower to your data science toolkit. So next time you're facing a high-dimensional maze, don't just compute – visualize!

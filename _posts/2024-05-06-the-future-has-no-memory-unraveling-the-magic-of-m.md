@@ -5,17 +5,18 @@ excerpt: "Ever wondered how complex systems like weather or website links manage
 tags: ["Markov Chains", "Probability", "Data Science", "Machine Learning", "Stochastic Processes"]
 author: "Adarsh Nair"
 ---
+
 Hello fellow data enthusiasts and curious minds!
 
 Today, I want to take you on a journey into one of the most elegant and surprisingly powerful concepts in probability theory and data science: **Markov Chains**. It's a concept that sounds complex, but at its heart, it's about making predictions in systems where the past only matters insofar as it affects the current state. Think of it as a system with a very short-term memory.
 
 ### A Walk in the Park: Or, Why My Future Doesn't Depend on My Great-Grandfather's Weather
 
-Imagine you're trying to predict tomorrow's weather. Do you need to know if it rained on this exact day 200 years ago? Probably not. You're much more interested in *today's* weather. If it's sunny today, there's a certain chance it will be sunny tomorrow. If it's raining, the chances might shift. The key insight here is that **the future state of the system depends only on its current state, not on the sequence of events that led to the current state.** This, my friends, is the essence of the **Markov Property**.
+Imagine you're trying to predict tomorrow's weather. Do you need to know if it rained on this exact day 200 years ago? Probably not. You're much more interested in _today's_ weather. If it's sunny today, there's a certain chance it will be sunny tomorrow. If it's raining, the chances might shift. The key insight here is that **the future state of the system depends only on its current state, not on the sequence of events that led to the current state.** This, my friends, is the essence of the **Markov Property**.
 
 ### What Exactly is a Markov Chain?
 
-Formally, a Markov Chain is a **stochastic process** (a sequence of random variables) that satisfies the Markov property. In simpler terms, it's a sequence of "states" that a system can be in, where the probability of moving to any future state depends *only* on the current state. It's like a choose-your-own-adventure book where you only ever look at the page you're currently on to decide your next move, never at the chapters you've already read.
+Formally, a Markov Chain is a **stochastic process** (a sequence of random variables) that satisfies the Markov property. In simpler terms, it's a sequence of "states" that a system can be in, where the probability of moving to any future state depends _only_ on the current state. It's like a choose-your-own-adventure book where you only ever look at the page you're currently on to decide your next move, never at the chapters you've already read.
 
 Let's break down the key components:
 
@@ -38,11 +39,12 @@ From R [0.2     0.3     0.5]
 ```
 
 What does this matrix tell us?
-*   If today is Sunny (row S), there's a 70% chance it will be Sunny tomorrow, a 20% chance it will be Cloudy, and a 10% chance it will be Rainy.
-*   If today is Cloudy (row C), there's a 30% chance it will be Sunny tomorrow, a 40% chance it will be Cloudy, and a 30% chance it will be Rainy.
-*   And so on for Rainy days.
 
-Notice an important property: **each row of the transition matrix must sum to 1**. This makes sense, right? If you're in a given state, you *must* transition to one of the possible states (including staying in the same state), so the probabilities of all possible next states must add up to 100%.
+- If today is Sunny (row S), there's a 70% chance it will be Sunny tomorrow, a 20% chance it will be Cloudy, and a 10% chance it will be Rainy.
+- If today is Cloudy (row C), there's a 30% chance it will be Sunny tomorrow, a 40% chance it will be Cloudy, and a 30% chance it will be Rainy.
+- And so on for Rainy days.
+
+Notice an important property: **each row of the transition matrix must sum to 1**. This makes sense, right? If you're in a given state, you _must_ transition to one of the possible states (including staying in the same state), so the probabilities of all possible next states must add up to 100%.
 
 ### Predicting the Future: A Step-by-Step Example
 
@@ -85,22 +87,22 @@ Finding this $\pi$ often involves solving a system of linear equations (includin
 
 Markov Chains are far from just a theoretical curiosity. They power many real-world applications in diverse fields:
 
-*   **Google's PageRank Algorithm:** One of the most famous applications! Google originally used a Markov Chain model to rank web pages. Each webpage is a state, and links between pages are transitions. The stationary distribution of this Markov Chain represents the "importance" of each page – the more likely you are to end up on a page during a random walk, the higher its rank.
-*   **Natural Language Processing (NLP):**
-    *   **Text Generation:** Markov Chains can model the probability of the next word given the current word, leading to surprisingly coherent (and sometimes hilarious) generated text.
-    *   **Part-of-Speech Tagging:** Predicting if a word is a noun, verb, etc., based on the preceding word's tag.
-    *   **Speech Recognition:** Modeling sequences of phonemes or words.
-*   **Bioinformatics & Genetics:** Modeling DNA sequences, protein folding, and evolutionary processes where changes happen step-by-step.
-*   **Financial Modeling:** Predicting stock prices (though the "memoryless" property can be a strong assumption here!), modeling credit risk, and simulating market behavior.
-*   **Reinforcement Learning (RL):** Markov Decision Processes (MDPs), which are fundamental to RL, are essentially Markov Chains with an added layer of actions and rewards.
-*   **Queueing Theory:** Analyzing waiting lines in call centers, supermarkets, or computer networks.
+- **Google's PageRank Algorithm:** One of the most famous applications! Google originally used a Markov Chain model to rank web pages. Each webpage is a state, and links between pages are transitions. The stationary distribution of this Markov Chain represents the "importance" of each page – the more likely you are to end up on a page during a random walk, the higher its rank.
+- **Natural Language Processing (NLP):**
+  - **Text Generation:** Markov Chains can model the probability of the next word given the current word, leading to surprisingly coherent (and sometimes hilarious) generated text.
+  - **Part-of-Speech Tagging:** Predicting if a word is a noun, verb, etc., based on the preceding word's tag.
+  - **Speech Recognition:** Modeling sequences of phonemes or words.
+- **Bioinformatics & Genetics:** Modeling DNA sequences, protein folding, and evolutionary processes where changes happen step-by-step.
+- **Financial Modeling:** Predicting stock prices (though the "memoryless" property can be a strong assumption here!), modeling credit risk, and simulating market behavior.
+- **Reinforcement Learning (RL):** Markov Decision Processes (MDPs), which are fundamental to RL, are essentially Markov Chains with an added layer of actions and rewards.
+- **Queueing Theory:** Analyzing waiting lines in call centers, supermarkets, or computer networks.
 
 ### Limitations and Extensions
 
-While incredibly powerful, the strict "memoryless" Markov Property can sometimes be a limitation. What if the next state *does* depend on the last two states, or three?
+While incredibly powerful, the strict "memoryless" Markov Property can sometimes be a limitation. What if the next state _does_ depend on the last two states, or three?
 
-*   **Higher-Order Markov Chains:** We can extend the definition to include more past states. For instance, a second-order Markov Chain would consider $P(X_{n+1} | X_n, X_{n-1})$. This increases the number of states dramatically (e.g., if states are words, now states are pairs of words), making the transition matrix much larger.
-*   **Hidden Markov Models (HMMs):** This is a significant extension where the states themselves are not directly observable ("hidden"). We only observe some output that is probabilistically related to the hidden state. HMMs are foundational in speech recognition, bioinformatics, and many sequence modeling tasks.
+- **Higher-Order Markov Chains:** We can extend the definition to include more past states. For instance, a second-order Markov Chain would consider $P(X_{n+1} | X_n, X_{n-1})$. This increases the number of states dramatically (e.g., if states are words, now states are pairs of words), making the transition matrix much larger.
+- **Hidden Markov Models (HMMs):** This is a significant extension where the states themselves are not directly observable ("hidden"). We only observe some output that is probabilistically related to the hidden state. HMMs are foundational in speech recognition, bioinformatics, and many sequence modeling tasks.
 
 ### Conclusion
 

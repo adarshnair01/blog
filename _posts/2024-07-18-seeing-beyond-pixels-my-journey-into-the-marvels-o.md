@@ -18,7 +18,7 @@ Think about it: an image to a computer is just a grid of numbers. For a grayscal
 
 ### Why Is "Seeing" So Hard for Machines? The World is Messy!
 
-Before we dive into how computers *do* see, let's appreciate why it's been such a difficult problem for decades. Our visual system is incredibly robust. We can recognize a friend whether they're standing close or far, in bright light or dim, wearing a hat or not. For a computer, these variations are massive hurdles:
+Before we dive into how computers _do_ see, let's appreciate why it's been such a difficult problem for decades. Our visual system is incredibly robust. We can recognize a friend whether they're standing close or far, in bright light or dim, wearing a hat or not. For a computer, these variations are massive hurdles:
 
 1.  **Viewpoint Variation:** A chair looks different from the front, side, or top.
 2.  **Scale Variation:** An object appears larger or smaller depending on its distance.
@@ -32,7 +32,7 @@ Early attempts at Computer Vision relied heavily on hand-crafted features – en
 
 ### The Deep Learning Revolution: Letting Machines Learn to "See"
 
-The true breakthrough came with the advent of deep learning, particularly with a specific architecture called **Convolutional Neural Networks (CNNs)**. Instead of telling the computer *what* features to look for, we started giving it massive amounts of data and letting it *learn* the features itself.
+The true breakthrough came with the advent of deep learning, particularly with a specific architecture called **Convolutional Neural Networks (CNNs)**. Instead of telling the computer _what_ features to look for, we started giving it massive amounts of data and letting it _learn_ the features itself.
 
 Imagine a baby learning to distinguish between different objects. They don't have a pre-programmed "edge detector." Instead, they observe, experiment, and slowly build an internal model of the world. CNNs operate on a similar principle.
 
@@ -48,7 +48,7 @@ CNNs are a special type of neural network primarily designed to process pixel da
     $S(i, j) = (I * K)(i, j) = \sum_m \sum_n I(i-m, j-n) K(m, n)$
     Where $I$ is the input image, $K$ is the kernel (filter), and $S$ is the output feature map. The sum is over the indices $m$ and $n$ of the kernel. This essentially means we're multiplying and summing pixel values in the input image with the kernel's values.
 
-    Crucially, these filters are *not* hand-designed. During training, the network learns the optimal values for these filters to best perform the given task.
+    Crucially, these filters are _not_ hand-designed. During training, the network learns the optimal values for these filters to best perform the given task.
 
 2.  **Activation Functions (e.g., ReLU):** After a convolution, the output often passes through a non-linear activation function like ReLU (Rectified Linear Unit), which simply outputs $f(x) = \max(0, x)$. This introduces non-linearity, allowing the network to learn more complex patterns than if it were just linear transformations.
 
@@ -64,15 +64,15 @@ What makes CNNs so revolutionary is their ability to learn features hierarchical
 
 With CNNs, computers can now tackle a wide range of sophisticated visual tasks:
 
-*   **Image Classification:** Answering "What is in this image?" This is the fundamental task, assigning a single label to an entire image (e.g., "This image contains a cat"). Famous architectures like AlexNet, VGG, ResNet, and Inception revolutionized this domain.
+- **Image Classification:** Answering "What is in this image?" This is the fundamental task, assigning a single label to an entire image (e.g., "This image contains a cat"). Famous architectures like AlexNet, VGG, ResNet, and Inception revolutionized this domain.
 
-*   **Object Detection:** Answering "What objects are in this image, and where exactly are they?" This involves not only classifying objects but also drawing bounding boxes around each instance. Technologies like R-CNN, YOLO (You Only Look Once), and SSD are pivotal here, used in everything from self-driving cars to retail analytics.
+- **Object Detection:** Answering "What objects are in this image, and where exactly are they?" This involves not only classifying objects but also drawing bounding boxes around each instance. Technologies like R-CNN, YOLO (You Only Look Once), and SSD are pivotal here, used in everything from self-driving cars to retail analytics.
 
-*   **Semantic Segmentation:** Answering "What is each pixel in this image?" Here, every single pixel is classified into a category, creating a detailed mask that outlines objects and regions with pixel-level precision. This is crucial for understanding the exact boundaries of objects, used in medical imaging or augmented reality.
+- **Semantic Segmentation:** Answering "What is each pixel in this image?" Here, every single pixel is classified into a category, creating a detailed mask that outlines objects and regions with pixel-level precision. This is crucial for understanding the exact boundaries of objects, used in medical imaging or augmented reality.
 
-*   **Instance Segmentation:** Taking semantic segmentation a step further, instance segmentation differentiates between individual instances of the same object. For example, it would not just label all pixels belonging to "car," but distinguish "car 1," "car 2," and "car 3." Mask R-CNN is a leading example.
+- **Instance Segmentation:** Taking semantic segmentation a step further, instance segmentation differentiates between individual instances of the same object. For example, it would not just label all pixels belonging to "car," but distinguish "car 1," "car 2," and "car 3." Mask R-CNN is a leading example.
 
-*   **Other Applications:** Beyond these, Computer Vision powers facial recognition, pose estimation (understanding human body posture), optical character recognition (OCR), video surveillance, augmented reality, and even generating new images and videos (Generative Adversarial Networks - GANs).
+- **Other Applications:** Beyond these, Computer Vision powers facial recognition, pose estimation (understanding human body posture), optical character recognition (OCR), video surveillance, augmented reality, and even generating new images and videos (Generative Adversarial Networks - GANs).
 
 ### My Dive into the Code (A Glimpse)
 
@@ -89,11 +89,11 @@ My portfolio showcases several projects where I've applied these concepts. For i
 
 Despite the incredible progress, Computer Vision is far from a solved problem.
 
-*   **Data Hunger:** Deep learning models require massive amounts of labeled data, which can be expensive and time-consuming to acquire.
-*   **Computational Cost:** Training state-of-the-art models demands significant computational resources (GPUs).
-*   **Interpretability:** Understanding *why* a complex neural network makes a particular decision remains a challenge. They can still feel like "black boxes."
-*   **Robustness and Generalization:** Models can be surprisingly brittle when faced with unseen variations or adversarial attacks (subtle, imperceptible changes to an image that fool the model).
-*   **Ethical Considerations:** The power of Computer Vision in areas like surveillance and facial recognition raises critical questions about privacy, bias, and responsible AI development.
+- **Data Hunger:** Deep learning models require massive amounts of labeled data, which can be expensive and time-consuming to acquire.
+- **Computational Cost:** Training state-of-the-art models demands significant computational resources (GPUs).
+- **Interpretability:** Understanding _why_ a complex neural network makes a particular decision remains a challenge. They can still feel like "black boxes."
+- **Robustness and Generalization:** Models can be surprisingly brittle when faced with unseen variations or adversarial attacks (subtle, imperceptible changes to an image that fool the model).
+- **Ethical Considerations:** The power of Computer Vision in areas like surveillance and facial recognition raises critical questions about privacy, bias, and responsible AI development.
 
 The future of Computer Vision is exciting. We're seeing advancements in self-supervised learning (where models learn from unlabeled data), few-shot learning (learning from very little data), multimodal AI (combining vision with language or other senses), and the development of more efficient and interpretable models.
 

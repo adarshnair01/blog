@@ -8,13 +8,13 @@ author: "Adarsh Nair"
 
 Hey everyone!
 
-As a data scientist, one of the most rewarding parts of my job is demystifying the magic behind artificial intelligence. We often hear about AI "learning" or "being trained," but what does that *actually* mean under the hood? It's not magic, it's mathematics! And at the heart of nearly every deep learning model lies an incredibly elegant algorithm called **Backpropagation**.
+As a data scientist, one of the most rewarding parts of my job is demystifying the magic behind artificial intelligence. We often hear about AI "learning" or "being trained," but what does that _actually_ mean under the hood? It's not magic, it's mathematics! And at the heart of nearly every deep learning model lies an incredibly elegant algorithm called **Backpropagation**.
 
 When I first encountered Backpropagation, it felt like trying to untangle a bowl of spaghetti – lots of interconnected parts, and understanding how one piece influenced another seemed daunting. But once it clicked, it unlocked a whole new level of understanding about how neural networks actually become intelligent. Today, I want to share that "click" with you, breaking down this fundamental concept into digestible pieces, just as I wish someone had done for me.
 
 ### The Big Problem: How Does a Neural Network Get Smart?
 
-Imagine you're teaching a very complex robot how to recognize a cat. You show it a picture of a cat, and it might initially say, "That's a shoe!" Clearly, it's wrong. You need to tell it *how* wrong it is, and then, crucially, you need to help it adjust its internal "understanding" so that next time, it gets a little closer to "cat."
+Imagine you're teaching a very complex robot how to recognize a cat. You show it a picture of a cat, and it might initially say, "That's a shoe!" Clearly, it's wrong. You need to tell it _how_ wrong it is, and then, crucially, you need to help it adjust its internal "understanding" so that next time, it gets a little closer to "cat."
 
 This is precisely the challenge a neural network faces. A neural network, at its core, is just a series of interconnected "neurons" organized into layers. Each connection between neurons has a **weight** associated with it, representing the strength or importance of that connection. When you feed an image (or any data) into the network, it goes through a **forward pass**:
 
@@ -32,13 +32,13 @@ Here, $L$ is the loss, $y_{true}$ is the actual correct answer, and $y_{pred}$ i
 
 ### Enter Backpropagation: The "Backward Pass"
 
-This is where the magic happens. Backpropagation is the algorithm that allows us to efficiently calculate *how much* each individual weight in the network contributed to the overall error, and therefore, how much to adjust it. Think of it as an elaborate blame assignment process.
+This is where the magic happens. Backpropagation is the algorithm that allows us to efficiently calculate _how much_ each individual weight in the network contributed to the overall error, and therefore, how much to adjust it. Think of it as an elaborate blame assignment process.
 
-It gets its name because, after calculating the loss at the *output* of the network, we propagate this error *backward* through the layers, from the output layer all the way back to the input layer. For each weight and bias in the network, Backpropagation calculates its **gradient** with respect to the loss function.
+It gets its name because, after calculating the loss at the _output_ of the network, we propagate this error _backward_ through the layers, from the output layer all the way back to the input layer. For each weight and bias in the network, Backpropagation calculates its **gradient** with respect to the loss function.
 
 #### Why Gradients?
 
-In machine learning, "gradient" is just a fancy word for the slope of a multi-variable function. If we want to minimize our loss function $L$, we need to know which "direction" to go in. The gradient tells us the direction of the steepest *increase* in loss. Naturally, to *decrease* the loss, we want to move in the *opposite* direction of the gradient.
+In machine learning, "gradient" is just a fancy word for the slope of a multi-variable function. If we want to minimize our loss function $L$, we need to know which "direction" to go in. The gradient tells us the direction of the steepest _increase_ in loss. Naturally, to _decrease_ the loss, we want to move in the _opposite_ direction of the gradient.
 
 Mathematically, for a single weight $w$, we want to find $\frac{\partial L}{\partial w}$. This partial derivative tells us how much the loss $L$ changes when the weight $w$ changes, holding all other weights constant.
 
@@ -65,16 +65,15 @@ $L \leftarrow y_{pred} \leftarrow \text{activation} \leftarrow \text{sum} \lefta
     First, we calculate how much the loss $L$ changes with respect to the network's final output prediction, $y_{pred}$. This is $\frac{\partial L}{\partial y_{pred}}$. This is our "error signal."
 
 2.  **Move backward, layer by layer:**
-    Now, we need to know how much each weight contributed to this error. Let's consider a weight $w_k$ in the *last* layer of the network. The output $y_{pred}$ depends on the weighted sum that fed into the output neuron ($\text{net}_k$), which itself depends on $w_k$.
+    Now, we need to know how much each weight contributed to this error. Let's consider a weight $w_k$ in the _last_ layer of the network. The output $y_{pred}$ depends on the weighted sum that fed into the output neuron ($\text{net}_k$), which itself depends on $w_k$.
 
     Using the chain rule:
     $\frac{\partial L}{\partial w_k} = \frac{\partial L}{\partial y_{pred}} \cdot \frac{\partial y_{pred}}{\partial \text{net}_k} \cdot \frac{\partial \text{net}_k}{\partial w_k}$
+    - $\frac{\partial L}{\partial y_{pred}}$: This is the error signal we just calculated.
+    - $\frac{\partial y_{pred}}{\partial \text{net}_k}$: This is the derivative of the activation function used in the output layer with respect to its input.
+    - $\frac{\partial \text{net}_k}{\partial w_k}$: This is simply the input to the neuron that $w_k$ is connected to (before being multiplied by $w_k$).
 
-    *   $\frac{\partial L}{\partial y_{pred}}$: This is the error signal we just calculated.
-    *   $\frac{\partial y_{pred}}{\partial \text{net}_k}$: This is the derivative of the activation function used in the output layer with respect to its input.
-    *   $\frac{\partial \text{net}_k}{\partial w_k}$: This is simply the input to the neuron that $w_k$ is connected to (before being multiplied by $w_k$).
-
-    What's brilliant is that the $\frac{\partial L}{\partial y_{pred}}$ term, which represents the "upstream" error from the loss function, gets passed backward. When we move to the *previous* layer, we use the error signal calculated for the current layer as the "upstream gradient" for the next calculation.
+    What's brilliant is that the $\frac{\partial L}{\partial y_{pred}}$ term, which represents the "upstream" error from the loss function, gets passed backward. When we move to the _previous_ layer, we use the error signal calculated for the current layer as the "upstream gradient" for the next calculation.
 
     For a weight $w_j$ in a hidden layer, its calculation might look something like:
 
@@ -94,12 +93,13 @@ The update rule is simple:
 $w_{new} = w_{old} - \eta \cdot \frac{\partial L}{\partial w}$
 
 Here:
-*   $w_{new}$ is the adjusted weight.
-*   $w_{old}$ is the current weight.
-*   $\eta$ (eta) is the **learning rate**, a crucial hyperparameter. It controls how big a step we take in the direction opposite to the gradient. A small learning rate means slow but steady learning; a large one can lead to overshooting the optimal weights.
-*   $\frac{\partial L}{\partial w}$ is the gradient we just calculated, telling us the direction of steepest ascent of the loss.
 
-By subtracting the gradient (multiplied by the learning rate), we are effectively moving our weights in the direction that *decreases* the loss.
+- $w_{new}$ is the adjusted weight.
+- $w_{old}$ is the current weight.
+- $\eta$ (eta) is the **learning rate**, a crucial hyperparameter. It controls how big a step we take in the direction opposite to the gradient. A small learning rate means slow but steady learning; a large one can lead to overshooting the optimal weights.
+- $\frac{\partial L}{\partial w}$ is the gradient we just calculated, telling us the direction of steepest ascent of the loss.
+
+By subtracting the gradient (multiplied by the learning rate), we are effectively moving our weights in the direction that _decreases_ the loss.
 
 We repeat this entire process – forward pass, calculate loss, backward pass (Backpropagation), update weights – tens, hundreds, thousands, or even millions of times, showing the network different examples. Each cycle is called an **epoch**. With each epoch, the weights get incrementally better, the loss decreases, and the network's predictions become more accurate.
 

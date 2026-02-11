@@ -15,13 +15,14 @@ When I first encountered Markov Chains, my mind immediately went to things like 
 Imagine you're tracking the weather in your city. It can be Sunny, Cloudy, or Rainy. Each day, the weather changes, or it might stay the same. This sequence of weather conditions over time is a **stochastic process** – a fancy term for a system that evolves probabilistically over time.
 
 In a Markov Chain, this system has distinct **states**. In our weather example, the states are:
-*   State 1: Sunny
-*   State 2: Cloudy
-*   State 3: Rainy
+
+- State 1: Sunny
+- State 2: Cloudy
+- State 3: Rainy
 
 Now, the weather doesn't just jump randomly. If it's sunny today, there's a certain probability it will be sunny tomorrow, a certain probability it will be cloudy, and a certain probability it will be rainy. These are called **transition probabilities**. They describe the likelihood of moving from one state to another.
 
-Here's where the "memoryless" magic comes in – the defining characteristic known as the **Markov Property**. It states that the probability of moving to any future state depends *only* on the current state and *not* on the sequence of events that preceded it.
+Here's where the "memoryless" magic comes in – the defining characteristic known as the **Markov Property**. It states that the probability of moving to any future state depends _only_ on the current state and _not_ on the sequence of events that preceded it.
 
 Think about it: when you check the weather forecast, meteorologists primarily consider today's conditions to predict tomorrow's. They don't typically need to know if it was sunny three days ago or a week ago to make their immediate prediction.
 
@@ -29,31 +30,32 @@ Mathematically, if $X_n$ represents the state of our system at time $n$, the Mar
 
 $P(X_{n+1} = j | X_n = i, X_{n-1} = k, \dots, X_0 = l) = P(X_{n+1} = j | X_n = i)$
 
-This equation simply says that the probability of being in state $j$ at the next time step ($n+1$), given all past states up to the current state ($n$), is equal to the probability of being in state $j$ given *only* the current state ($n$). It's a powerful simplification that makes these models incredibly tractable.
+This equation simply says that the probability of being in state $j$ at the next time step ($n+1$), given all past states up to the current state ($n$), is equal to the probability of being in state $j$ given _only_ the current state ($n$). It's a powerful simplification that makes these models incredibly tractable.
 
 ### Visualizing the Journey: State Transition Diagrams
 
 To make this even clearer, we can draw a **state transition diagram**. This is a directed graph where:
-*   Nodes (circles) represent the states.
-*   Edges (arrows) represent possible transitions between states.
-*   The numbers on the arrows are the transition probabilities.
+
+- Nodes (circles) represent the states.
+- Edges (arrows) represent possible transitions between states.
+- The numbers on the arrows are the transition probabilities.
 
 Let's create a simple weather example:
 
-*   If it's Sunny today:
-    *   0.8 probability it's Sunny tomorrow
-    *   0.1 probability it's Cloudy tomorrow
-    *   0.1 probability it's Rainy tomorrow
-*   If it's Cloudy today:
-    *   0.3 probability it's Sunny tomorrow
-    *   0.4 probability it's Cloudy tomorrow
-    *   0.3 probability it's Rainy tomorrow
-*   If it's Rainy today:
-    *   0.2 probability it's Sunny tomorrow
-    *   0.2 probability it's Cloudy tomorrow
-    *   0.6 probability it's Rainy tomorrow
+- If it's Sunny today:
+  - 0.8 probability it's Sunny tomorrow
+  - 0.1 probability it's Cloudy tomorrow
+  - 0.1 probability it's Rainy tomorrow
+- If it's Cloudy today:
+  - 0.3 probability it's Sunny tomorrow
+  - 0.4 probability it's Cloudy tomorrow
+  - 0.3 probability it's Rainy tomorrow
+- If it's Rainy today:
+  - 0.2 probability it's Sunny tomorrow
+  - 0.2 probability it's Cloudy tomorrow
+  - 0.6 probability it's Rainy tomorrow
 
-Notice that for each state, the probabilities of transitioning to *all possible next states* must sum to 1. (0.8 + 0.1 + 0.1 = 1.0 for Sunny). This makes sense, as the weather *has* to be one of those states tomorrow!
+Notice that for each state, the probabilities of transitioning to _all possible next states_ must sum to 1. (0.8 + 0.1 + 0.1 = 1.0 for Sunny). This makes sense, as the weather _has_ to be one of those states tomorrow!
 
 ```
 [Sunny] ----0.8----> [Sunny]
@@ -66,6 +68,7 @@ Notice that for each state, the probabilities of transitioning to *all possible 
   |  v       |  v
 [Rainy] ----0.6----> [Rainy]
 ```
+
 (Note: This is a simplified textual representation; a proper diagram would have arrows connecting all possible transitions from each state.)
 
 ### The Math Behind the Magic: The Transition Matrix
@@ -80,11 +83,11 @@ $P = \begin{pmatrix}
 0.2 & 0.2 & 0.6
 \end{pmatrix}$
 
-*   The element $P_{ij}$ (row $i$, column $j$) is the probability of moving from state $i$ to state $j$.
-*   For example, $P_{12} = 0.1$ means the probability of going from Sunny (state 1) to Cloudy (state 2) is 0.1.
-*   As we noted, the sum of probabilities in each row must be 1.
+- The element $P_{ij}$ (row $i$, column $j$) is the probability of moving from state $i$ to state $j$.
+- For example, $P_{12} = 0.1$ means the probability of going from Sunny (state 1) to Cloudy (state 2) is 0.1.
+- As we noted, the sum of probabilities in each row must be 1.
 
-Now for the cool part: What if we want to know the probability of the weather being Sunny in *two* days, given it's Sunny today? Or in three days?
+Now for the cool part: What if we want to know the probability of the weather being Sunny in _two_ days, given it's Sunny today? Or in three days?
 
 If you multiply the transition matrix $P$ by itself, you get $P^2$. The elements of $P^2$ represent the two-step transition probabilities.
 $P_{ij}^{(2)}$ is the probability of going from state $i$ to state $j$ in two steps.
@@ -116,8 +119,8 @@ The simplicity and mathematical elegance of Markov Chains belie their immense po
 1.  **Google PageRank (Web Analytics):** Perhaps one of the most famous applications. Google's original PageRank algorithm, which determines the importance of webpages, can be modeled as a Markov Chain. Each webpage is a "state." The links between pages are "transitions." A user randomly clicking links from page to page forms a Markov Chain. The steady-state distribution of this chain gives the long-term probability of a user being on any given page, effectively measuring its importance or "rank." High-ranking pages are those that users are likely to end up on frequently during a random walk.
 
 2.  **Natural Language Processing (NLP):**
-    *   **Text Generation:** Markov Chains can predict the next word in a sequence based on the current word (or the last few words for higher-order chains). This is a foundational technique for simple predictive text, auto-completion, and even generating basic sentences that mimic a particular writing style.
-    *   **Part-of-Speech Tagging:** Determining if a word is a noun, verb, adjective, etc., often uses Hidden Markov Models (an extension of Markov Chains) where the underlying grammatical states are "hidden" but influence the observed words.
+    - **Text Generation:** Markov Chains can predict the next word in a sequence based on the current word (or the last few words for higher-order chains). This is a foundational technique for simple predictive text, auto-completion, and even generating basic sentences that mimic a particular writing style.
+    - **Part-of-Speech Tagging:** Determining if a word is a noun, verb, adjective, etc., often uses Hidden Markov Models (an extension of Markov Chains) where the underlying grammatical states are "hidden" but influence the observed words.
 
 3.  **Recommendation Systems:** Think about "next item prediction" in e-commerce or streaming platforms. If you watched Movie A, what's the likelihood you'll watch Movie B next? This sequence of user actions can be modeled as a Markov Chain, helping platforms suggest relevant content.
 
@@ -129,11 +132,12 @@ The simplicity and mathematical elegance of Markov Chains belie their immense po
 
 ### Limitations and Beyond
 
-While incredibly powerful, the strict "memoryless" Markov Property isn't always a perfect fit for every real-world scenario. Sometimes, the past *does* matter beyond just the immediate previous state. For example, predicting a student's performance might not just depend on their last test score, but on their scores over the entire semester.
+While incredibly powerful, the strict "memoryless" Markov Property isn't always a perfect fit for every real-world scenario. Sometimes, the past _does_ matter beyond just the immediate previous state. For example, predicting a student's performance might not just depend on their last test score, but on their scores over the entire semester.
 
 This is where more advanced concepts come in:
-*   **Higher-Order Markov Chains:** These chains "remember" more than just the immediate previous state (e.g., the last two or three states).
-*   **Hidden Markov Models (HMMs):** These are used when the states themselves aren't directly observable, but they influence something we *can* observe. Imagine trying to infer a person's mood (happy, sad, neutral – the hidden states) based on their tone of voice (the observable output).
+
+- **Higher-Order Markov Chains:** These chains "remember" more than just the immediate previous state (e.g., the last two or three states).
+- **Hidden Markov Models (HMMs):** These are used when the states themselves aren't directly observable, but they influence something we _can_ observe. Imagine trying to infer a person's mood (happy, sad, neutral – the hidden states) based on their tone of voice (the observable output).
 
 ### Concluding Thoughts
 

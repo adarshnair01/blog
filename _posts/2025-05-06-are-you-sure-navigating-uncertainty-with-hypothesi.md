@@ -16,7 +16,7 @@ When I first encountered hypothesis testing, it felt like learning a secret hand
 
 ### The Big Question: Is There Really a Difference?
 
-At its heart, hypothesis testing is about answering one fundamental question: *Is an observed difference or relationship in our data real, or could it just be due to random chance?*
+At its heart, hypothesis testing is about answering one fundamental question: _Is an observed difference or relationship in our data real, or could it just be due to random chance?_
 
 Imagine you're running an e-commerce store. You decide to change your checkout process, hoping it increases conversion rates. After a week, you see an improvement: conversion rates went from 2% to 2.2%. Great! But is that 0.2% increase a genuine improvement, or just a lucky fluctuation in user behavior? This is exactly the kind of question hypothesis testing helps us answer.
 
@@ -26,13 +26,13 @@ The first step in any hypothesis test is to clearly state what we're trying to p
 
 Think of it like a courtroom drama:
 
-*   **The Null Hypothesis ($H_0$)**: This is the default assumption, the status quo, the "nothing new is happening" statement. It's like assuming a defendant is "innocent until proven guilty." In our e-commerce example, $H_0$ would be: "The new checkout process has **no effect** on the conversion rate. Any observed difference is due to random chance."
-    *   Mathematically, for comparing conversion rates, we might write: $H_0: p_{new} = p_{old}$ (where $p$ is the population conversion rate).
+- **The Null Hypothesis ($H_0$)**: This is the default assumption, the status quo, the "nothing new is happening" statement. It's like assuming a defendant is "innocent until proven guilty." In our e-commerce example, $H_0$ would be: "The new checkout process has **no effect** on the conversion rate. Any observed difference is due to random chance."
+  - Mathematically, for comparing conversion rates, we might write: $H_0: p_{new} = p_{old}$ (where $p$ is the population conversion rate).
 
-*   **The Alternative Hypothesis ($H_1$ or $H_A$)**: This is what we're trying to find evidence for, the "guilty" verdict. It contradicts the null hypothesis. In our example, $H_1$ would be: "The new checkout process **does have an effect** on the conversion rate (specifically, it increased it)."
-    *   Mathematically: $H_1: p_{new} > p_{old}$ (if we expect an increase) or $H_1: p_{new} \neq p_{old}$ (if we just expect *any* difference, up or down).
+- **The Alternative Hypothesis ($H_1$ or $H_A$)**: This is what we're trying to find evidence for, the "guilty" verdict. It contradicts the null hypothesis. In our example, $H_1$ would be: "The new checkout process **does have an effect** on the conversion rate (specifically, it increased it)."
+  - Mathematically: $H_1: p_{new} > p_{old}$ (if we expect an increase) or $H_1: p_{new} \neq p_{old}$ (if we just expect _any_ difference, up or down).
 
-We always start by assuming the null hypothesis is true. Our goal with hypothesis testing is to gather enough evidence *against* the null hypothesis to **reject** it in favor of the alternative. If we don't have enough evidence, we **fail to reject** the null. Notice I said "fail to reject," not "accept." This is crucial! It means we just don't have enough proof to say otherwise, not that we've proven the null is definitively true.
+We always start by assuming the null hypothesis is true. Our goal with hypothesis testing is to gather enough evidence _against_ the null hypothesis to **reject** it in favor of the alternative. If we don't have enough evidence, we **fail to reject** the null. Notice I said "fail to reject," not "accept." This is crucial! It means we just don't have enough proof to say otherwise, not that we've proven the null is definitively true.
 
 ### Step 2: Choosing Your Weapon (The Test Statistic)
 
@@ -40,10 +40,10 @@ Once we have our hypotheses, we need a way to quantify how much our observed dat
 
 A test statistic is a single value, calculated from your sample data, that summarizes the evidence against the null hypothesis. The choice of test statistic depends on the type of data you have and the question you're asking. Common test statistics include:
 
-*   **Z-statistic:** Often used when dealing with means of large samples or proportions, and when the population standard deviation is known.
-*   **T-statistic:** Similar to the Z-statistic, but used when the population standard deviation is unknown (which is most of the time!) and we're estimating it from the sample. It's particularly useful for smaller sample sizes.
-*   **Chi-squared ($\chi^2$) statistic:** Used for categorical data, to test for relationships between variables (e.g., gender and preference for a product) or to see if observed frequencies differ from expected frequencies.
-*   **F-statistic:** Used in ANOVA (Analysis of Variance) to compare means across three or more groups.
+- **Z-statistic:** Often used when dealing with means of large samples or proportions, and when the population standard deviation is known.
+- **T-statistic:** Similar to the Z-statistic, but used when the population standard deviation is unknown (which is most of the time!) and we're estimating it from the sample. It's particularly useful for smaller sample sizes.
+- **Chi-squared ($\chi^2$) statistic:** Used for categorical data, to test for relationships between variables (e.g., gender and preference for a product) or to see if observed frequencies differ from expected frequencies.
+- **F-statistic:** Used in ANOVA (Analysis of Variance) to compare means across three or more groups.
 
 Let's stick with our e-commerce example where we're comparing two conversion rates (proportions). A common test for this is a Z-test for two proportions. The general idea is to see how many standard errors separate our observed difference from the difference expected under the null hypothesis (which is usually zero).
 
@@ -57,30 +57,32 @@ These formulas essentially tell us: "How many 'standard deviations' away from th
 
 ### Step 3: Quantifying the Evidence (The P-value)
 
-This is often the most misunderstood part, but it's incredibly powerful once you grasp it. The **p-value** is the probability of observing data as extreme as (or more extreme than) what you actually got, *assuming the null hypothesis is true*.
+This is often the most misunderstood part, but it's incredibly powerful once you grasp it. The **p-value** is the probability of observing data as extreme as (or more extreme than) what you actually got, _assuming the null hypothesis is true_.
 
 Let's rephrase that for our e-commerce example:
-"If the new checkout process *actually had no effect* on conversion rates ($H_0$ is true), how likely would we be to see an increase of 0.2% (or more) purely by random chance in our sample data?"
+"If the new checkout process _actually had no effect_ on conversion rates ($H_0$ is true), how likely would we be to see an increase of 0.2% (or more) purely by random chance in our sample data?"
 
-*   A **small p-value** (e.g., 0.01) means: "If $H_0$ were true, seeing our observed data would be very unlikely (only 1% chance). This suggests our data provides strong evidence *against* $H_0$."
-*   A **large p-value** (e.g., 0.45) means: "If $H_0$ were true, seeing our observed data would be quite common (45% chance). This means our data does *not* provide strong evidence against $H_0$."
+- A **small p-value** (e.g., 0.01) means: "If $H_0$ were true, seeing our observed data would be very unlikely (only 1% chance). This suggests our data provides strong evidence _against_ $H_0$."
+- A **large p-value** (e.g., 0.45) means: "If $H_0$ were true, seeing our observed data would be quite common (45% chance). This means our data does _not_ provide strong evidence against $H_0$."
 
-It's crucial to remember what the p-value *is not*:
-*   It's **not** the probability that the null hypothesis is true.
-*   It's **not** the probability that the alternative hypothesis is false.
-*   It's **not** a measure of the size or importance of the effect. A very small p-value can come from a very small, practically insignificant effect if your sample size is huge.
+It's crucial to remember what the p-value _is not_:
+
+- It's **not** the probability that the null hypothesis is true.
+- It's **not** the probability that the alternative hypothesis is false.
+- It's **not** a measure of the size or importance of the effect. A very small p-value can come from a very small, practically insignificant effect if your sample size is huge.
 
 ### Step 4: Setting the Bar (The Significance Level, $\alpha$)
 
 Before we even look at our data, we need to decide how much evidence is "enough" to reject the null hypothesis. This threshold is called the **significance level**, denoted by $\alpha$ (alpha).
 
 Common values for $\alpha$ are 0.05 (5%), 0.01 (1%), or 0.10 (10%).
-*   If we choose $\alpha = 0.05$, we're saying: "We are willing to accept a 5% chance of incorrectly rejecting the null hypothesis when it is actually true." This is also known as a **Type I error**.
+
+- If we choose $\alpha = 0.05$, we're saying: "We are willing to accept a 5% chance of incorrectly rejecting the null hypothesis when it is actually true." This is also known as a **Type I error**.
 
 Our decision rule is simple:
 
-*   If **p-value $\le \alpha$**: We have enough evidence to **reject the null hypothesis**. We conclude that the observed effect is statistically significant.
-*   If **p-value $> \alpha$**: We **fail to reject the null hypothesis**. We conclude that we do not have enough evidence to say the observed effect is statistically significant.
+- If **p-value $\le \alpha$**: We have enough evidence to **reject the null hypothesis**. We conclude that the observed effect is statistically significant.
+- If **p-value $> \alpha$**: We **fail to reject the null hypothesis**. We conclude that we do not have enough evidence to say the observed effect is statistically significant.
 
 ### A Quick Example: A/B Testing Our Checkout Process
 
@@ -89,14 +91,14 @@ Let's put it all together with our e-commerce checkout process example.
 **Scenario:** We want to test if a new checkout design (Version B) increases conversion rate compared to the old design (Version A).
 
 1.  **Hypotheses:**
-    *   $H_0$: The new design has no effect on conversion rate. ($p_B = p_A$)
-    *   $H_1$: The new design increases conversion rate. ($p_B > p_A$) (This is a one-sided test)
+    - $H_0$: The new design has no effect on conversion rate. ($p_B = p_A$)
+    - $H_1$: The new design increases conversion rate. ($p_B > p_A$) (This is a one-sided test)
 
 2.  **Significance Level:** Let's choose $\alpha = 0.05$.
 
 3.  **Collect Data:** We run an A/B test for a week:
-    *   Version A: 10,000 visitors, 200 conversions (2.0%)
-    *   Version B: 10,000 visitors, 225 conversions (2.25%)
+    - Version A: 10,000 visitors, 200 conversions (2.0%)
+    - Version B: 10,000 visitors, 225 conversions (2.25%)
 
 4.  **Calculate Test Statistic:** (For simplicity, I'll provide the result rather than the detailed calculation here, which involves pooled proportions and standard errors.)
     Let's say our calculated Z-statistic for comparing these two proportions turns out to be $Z \approx 2.15$.
@@ -104,22 +106,22 @@ Let's put it all together with our e-commerce checkout process example.
 5.  **Calculate P-value:** Using a standard normal distribution table or statistical software, for a one-sided test with $Z = 2.15$, the p-value is approximately $0.016$.
 
 6.  **Make a Decision:**
-    *   Our p-value ($0.016$) is less than our significance level ($\alpha = 0.05$).
-    *   **Decision:** Reject the null hypothesis.
+    - Our p-value ($0.016$) is less than our significance level ($\alpha = 0.05$).
+    - **Decision:** Reject the null hypothesis.
 
-7.  **Conclusion:** We have statistically significant evidence (at the 0.05 level) to conclude that the new checkout process (Version B) *does* increase the conversion rate compared to the old design (Version A).
+7.  **Conclusion:** We have statistically significant evidence (at the 0.05 level) to conclude that the new checkout process (Version B) _does_ increase the conversion rate compared to the old design (Version A).
 
 ### Understanding Errors: The Trade-off
 
 No statistical test is perfect. We can make two types of errors:
 
-*   **Type I Error (False Positive, $\alpha$):** Rejecting the null hypothesis when it's actually true.
-    *   In our example: Concluding the new checkout *works*, when in reality, it doesn't (and we just got lucky with the data).
-    *   The probability of a Type I error is set by your $\alpha$ value. If $\alpha = 0.05$, there's a 5% chance of making a Type I error.
+- **Type I Error (False Positive, $\alpha$):** Rejecting the null hypothesis when it's actually true.
+  - In our example: Concluding the new checkout _works_, when in reality, it doesn't (and we just got lucky with the data).
+  - The probability of a Type I error is set by your $\alpha$ value. If $\alpha = 0.05$, there's a 5% chance of making a Type I error.
 
-*   **Type II Error (False Negative, $\beta$):** Failing to reject the null hypothesis when it's actually false.
-    *   In our example: Concluding the new checkout *doesn't work* (or at least, we can't prove it does), when in reality, it *does* improve conversion rates.
-    *   The probability of a Type II error is denoted by $\beta$.
+- **Type II Error (False Negative, $\beta$):** Failing to reject the null hypothesis when it's actually false.
+  - In our example: Concluding the new checkout _doesn't work_ (or at least, we can't prove it does), when in reality, it _does_ improve conversion rates.
+  - The probability of a Type II error is denoted by $\beta$.
 
 There's a trade-off between these two errors. Reducing the chance of a Type I error (e.g., by lowering $\alpha$ from 0.05 to 0.01) increases the chance of a Type II error, and vice-versa. We choose $\alpha$ based on the consequences of each type of error in our specific context. If a false positive is very costly (e.g., launching an expensive, ineffective drug), we might choose a very small $\alpha$.
 
@@ -127,18 +129,19 @@ There's a trade-off between these two errors. Reducing the chance of a Type I er
 
 Hypothesis testing isn't just for A/B tests! It's the backbone of decision-making across many fields:
 
-*   **Medicine:** Does a new drug reduce symptoms better than a placebo?
-*   **Manufacturing:** Does a new process reduce defects?
-*   **Marketing:** Does a new ad campaign lead to higher engagement?
-*   **Machine Learning:** Is the performance difference between two models statistically significant, or just noise? (This often involves techniques like McNemar's test or t-tests on cross-validation folds).
-*   **Quality Control:** Is a product's average weight significantly different from the advertised weight?
+- **Medicine:** Does a new drug reduce symptoms better than a placebo?
+- **Manufacturing:** Does a new process reduce defects?
+- **Marketing:** Does a new ad campaign lead to higher engagement?
+- **Machine Learning:** Is the performance difference between two models statistically significant, or just noise? (This often involves techniques like McNemar's test or t-tests on cross-validation folds).
+- **Quality Control:** Is a product's average weight significantly different from the advertised weight?
 
 You'll encounter many different types of tests as you dive deeper:
-*   **Two-sample t-tests:** Comparing means of two independent groups.
-*   **Paired t-tests:** Comparing means of the same group before and after an intervention.
-*   **ANOVA (Analysis of Variance):** Comparing means of three or more groups.
-*   **Chi-squared tests:** For analyzing relationships between categorical variables.
-*   **Regression coefficient tests:** To see if a predictor variable has a statistically significant relationship with the outcome.
+
+- **Two-sample t-tests:** Comparing means of two independent groups.
+- **Paired t-tests:** Comparing means of the same group before and after an intervention.
+- **ANOVA (Analysis of Variance):** Comparing means of three or more groups.
+- **Chi-squared tests:** For analyzing relationships between categorical variables.
+- **Regression coefficient tests:** To see if a predictor variable has a statistically significant relationship with the outcome.
 
 ### My Journey with Hypothesis Testing
 

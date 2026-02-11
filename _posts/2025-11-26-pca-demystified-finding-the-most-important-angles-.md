@@ -27,7 +27,7 @@ Let's ground this with an analogy. Imagine you're an artist trying to sketch a p
 PCA works similarly:
 
 1.  **Finding the First Principal Component (PC1):** PCA searches for a direction (a line) through your data that best explains the spread, or variance, of the data. If you project all your data points onto this line, they would be as spread out as possible. This direction captures the most "information."
-2.  **Finding the Second Principal Component (PC2):** After finding PC1, PCA then looks for another direction that also explains a lot of the remaining variance, but with a crucial constraint: it must be **orthogonal** (perpendicular) to PC1. Why orthogonal? To ensure that PC2 captures *new*, non-redundant information that wasn't already captured by PC1.
+2.  **Finding the Second Principal Component (PC2):** After finding PC1, PCA then looks for another direction that also explains a lot of the remaining variance, but with a crucial constraint: it must be **orthogonal** (perpendicular) to PC1. Why orthogonal? To ensure that PC2 captures _new_, non-redundant information that wasn't already captured by PC1.
 3.  **And so on...:** This process continues, finding subsequent principal components that are orthogonal to all previous ones and capture the maximum remaining variance.
 
 Each Principal Component is a linear combination of your original features. It’s like saying, "This new dimension is 30% Feature A, 50% Feature B, and 20% Feature C."
@@ -49,11 +49,12 @@ Where $x$ is the original value, $\mu$ is the mean, and $\sigma$ is the standard
 #### Step 2: Calculate the Covariance Matrix
 
 The covariance matrix tells us how much each pair of features varies together.
-*   **Positive covariance** means if one feature increases, the other tends to increase.
-*   **Negative covariance** means if one feature increases, the other tends to decrease.
-*   **Zero covariance** means there's no linear relationship between them.
 
-The diagonal elements of the covariance matrix are the variances of each individual feature, while the off-diagonal elements are the covariances between pairs of features. This matrix is symmetric. Understanding these relationships is crucial because PCA aims to find new directions that *de-correlate* these features.
+- **Positive covariance** means if one feature increases, the other tends to increase.
+- **Negative covariance** means if one feature increases, the other tends to decrease.
+- **Zero covariance** means there's no linear relationship between them.
+
+The diagonal elements of the covariance matrix are the variances of each individual feature, while the off-diagonal elements are the covariances between pairs of features. This matrix is symmetric. Understanding these relationships is crucial because PCA aims to find new directions that _de-correlate_ these features.
 
 For two variables, $X$ and $Y$, the covariance is:
 $$ Cov(X, Y) = E[(X - E[X])(Y - E[Y])] $$
@@ -62,8 +63,8 @@ $$ Cov(X, Y) = E[(X - E[X])(Y - E[Y])] $$
 
 This is the mathematical core of PCA.
 
-*   **Eigenvectors**: Imagine a special kind of vector that, when transformed by a matrix (in our case, the covariance matrix), only gets stretched or shrunk, but doesn't change its direction. These special vectors are called **eigenvectors**. In PCA, the eigenvectors of the covariance matrix are our **Principal Components**. They point in the directions of maximum variance in the data.
-*   **Eigenvalues**: Each eigenvector has a corresponding **eigenvalue**, which tells us the magnitude of the "stretch" or "shrink." In PCA, an eigenvalue quantifies the amount of variance captured along its corresponding eigenvector (Principal Component). A larger eigenvalue means that eigenvector captures more variance, hence more "information."
+- **Eigenvectors**: Imagine a special kind of vector that, when transformed by a matrix (in our case, the covariance matrix), only gets stretched or shrunk, but doesn't change its direction. These special vectors are called **eigenvectors**. In PCA, the eigenvectors of the covariance matrix are our **Principal Components**. They point in the directions of maximum variance in the data.
+- **Eigenvalues**: Each eigenvector has a corresponding **eigenvalue**, which tells us the magnitude of the "stretch" or "shrink." In PCA, an eigenvalue quantifies the amount of variance captured along its corresponding eigenvector (Principal Component). A larger eigenvalue means that eigenvector captures more variance, hence more "information."
 
 The fundamental equation describing this relationship is:
 $$ Av = \lambda v $$
@@ -82,8 +83,8 @@ Finally, you transform your original standardized data into the new, lower-dimen
 ### The Superpowers of PCA: Why Bother?
 
 1.  **Dimensionality Reduction:** This is the most obvious benefit. By reducing the number of features, you make your datasets smaller, which leads to:
-    *   Faster training times for machine learning models.
-    *   Reduced storage requirements.
+    - Faster training times for machine learning models.
+    - Reduced storage requirements.
 2.  **Noise Reduction:** Features with low variance often represent noise. By focusing on components with high variance, PCA inherently reduces the impact of this noise, potentially improving model performance.
 3.  **Visualization:** It's impossible to visualize data with hundreds of dimensions. PCA allows you to reduce complex datasets to 2 or 3 principal components, making them plottable and much easier to gain insights from.
 4.  **Improved Model Performance (Sometimes):** While not always guaranteed, reducing dimensionality can help combat overfitting, especially when you have many highly correlated features. Simpler models often generalize better.
@@ -92,20 +93,20 @@ Finally, you transform your original standardized data into the new, lower-dimen
 
 PCA is powerful, but not a silver bullet:
 
-*   **Linearity Assumption:** PCA only finds *linear* relationships between features. If the true underlying relationships are non-linear (e.g., curved patterns), PCA might not be the most effective method. Kernel PCA is an extension that can handle non-linearity.
-*   **Interpretability:** The new principal components are linear combinations of original features. This means PC1 might be "0.4 * income + 0.3 * age - 0.2 * education." While mathematically sound, interpreting what this new combined feature *means* in real-world terms can sometimes be challenging.
-*   **Scaling Sensitivity:** As we saw in Step 1, PCA is highly sensitive to the scaling of your features. Always standardize your data before applying PCA.
-*   **Information Loss:** By reducing dimensionality, you *do* lose some information. The goal is to lose the least important information while retaining the most.
+- **Linearity Assumption:** PCA only finds _linear_ relationships between features. If the true underlying relationships are non-linear (e.g., curved patterns), PCA might not be the most effective method. Kernel PCA is an extension that can handle non-linearity.
+- **Interpretability:** The new principal components are linear combinations of original features. This means PC1 might be "0.4 _ income + 0.3 _ age - 0.2 * education." While mathematically sound, interpreting what this new combined feature *means\* in real-world terms can sometimes be challenging.
+- **Scaling Sensitivity:** As we saw in Step 1, PCA is highly sensitive to the scaling of your features. Always standardize your data before applying PCA.
+- **Information Loss:** By reducing dimensionality, you _do_ lose some information. The goal is to lose the least important information while retaining the most.
 
 ### When to Use PCA
 
 PCA is a fantastic tool for:
 
-*   **Exploratory Data Analysis (EDA):** Visualizing high-dimensional data.
-*   **Preprocessing for Machine Learning Models:** Reducing the number of input features for models like SVMs, neural networks, or logistic regression.
-*   **Image Compression:** Reducing the number of pixels while retaining visual quality.
-*   **Facial Recognition:** Extracting key "eigenfaces" from image data.
-*   **Genomics and Bioinformatics:** Analyzing gene expression data.
+- **Exploratory Data Analysis (EDA):** Visualizing high-dimensional data.
+- **Preprocessing for Machine Learning Models:** Reducing the number of input features for models like SVMs, neural networks, or logistic regression.
+- **Image Compression:** Reducing the number of pixels while retaining visual quality.
+- **Facial Recognition:** Extracting key "eigenfaces" from image data.
+- **Genomics and Bioinformatics:** Analyzing gene expression data.
 
 ### A Peek at the Code (Python with scikit-learn)
 

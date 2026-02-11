@@ -5,6 +5,7 @@ excerpt: "Ever wondered how computers 'see' and understand images? Join me as we
 tags: ["Machine Learning", "Deep Learning", "Computer Vision", "CNNs", "Artificial Intelligence"]
 author: "Adarsh Nair"
 ---
+
 Hello there, fellow explorers of the digital frontier!
 
 Have you ever paused to think about how effortlessly your brain identifies a cat, whether it's curled up on a sofa, stretched out in the sun, or even just a fleeting glimpse in a blurry photo? It’s a marvel of pattern recognition we often take for granted. Now, imagine teaching a computer to do the same. This isn't just about showing it a picture and saying "cat." It's about enabling it to grasp the essence of "cat-ness" – the ears, the whiskers, the fur texture, regardless of lighting, angle, or background clutter.
@@ -27,15 +28,15 @@ How does it work?
 2.  At each position, it performs an element-wise multiplication with the corresponding pixels in the image patch it's currently covering.
 3.  All these products are then summed up to produce a single output pixel.
 
-This single output pixel represents how strongly that specific feature (e.g., a vertical edge) is present in that particular region of the image. The entire process of sliding the kernel across the image and calculating these sums creates a new, smaller image called a **feature map** (or **activation map**). This feature map effectively tells us *where* a particular feature (like a vertical edge) is located in the original image.
+This single output pixel represents how strongly that specific feature (e.g., a vertical edge) is present in that particular region of the image. The entire process of sliding the kernel across the image and calculating these sums creates a new, smaller image called a **feature map** (or **activation map**). This feature map effectively tells us _where_ a particular feature (like a vertical edge) is located in the original image.
 
 Mathematically, the convolution operation $(I * K)(i, j)$ at position $(i, j)$ for an input image $I$ and a kernel $K$ can be expressed as:
 
-$$ (I * K)(i, j) = \sum_m \sum_n I(i-m, j-n) K(m, n) $$
+$$ (I \* K)(i, j) = \sum_m \sum_n I(i-m, j-n) K(m, n) $$
 
 Don't let the math intimidate you! It simply describes the sliding, multiplying, and summing process we just talked about. Here, $I(i-m, j-n)$ refers to the pixel values in the input image under the kernel, and $K(m, n)$ are the values in our kernel.
 
-**Key Insight: Parameter Sharing.** A remarkable aspect of convolution is that the *same* kernel is applied across the *entire* image. This is incredibly powerful because it means if a feature (like an edge) is useful in one part of the image, it's likely useful everywhere else. This dramatically reduces the number of parameters the network needs to learn, making CNNs much more efficient than traditional neural networks for image processing. Each kernel specializes in detecting a different feature. One might look for horizontal edges, another for corners, another for specific textures, and so on.
+**Key Insight: Parameter Sharing.** A remarkable aspect of convolution is that the _same_ kernel is applied across the _entire_ image. This is incredibly powerful because it means if a feature (like an edge) is useful in one part of the image, it's likely useful everywhere else. This dramatically reduces the number of parameters the network needs to learn, making CNNs much more efficient than traditional neural networks for image processing. Each kernel specializes in detecting a different feature. One might look for horizontal edges, another for corners, another for specific textures, and so on.
 
 ### Activation Functions: Adding the "Spice" of Non-Linearity
 
@@ -56,9 +57,9 @@ The most common type of pooling is **Max Pooling**. Here's how it works:
 1.  A small window (e.g., 2x2) slides across the feature map.
 2.  Within that window, only the maximum value is taken as the output.
 
-Imagine you've detected a strong vertical edge in a 2x2 region. Max pooling simply tells you "Yes, there's a strong vertical edge *somewhere* in this 2x2 area," rather than precisely where it is. This makes the network slightly invariant to small translations. Even if the cat shifts slightly to the left, the max pooling layer will still "see" the same strong features, just from a slightly different pixel.
+Imagine you've detected a strong vertical edge in a 2x2 region. Max pooling simply tells you "Yes, there's a strong vertical edge _somewhere_ in this 2x2 area," rather than precisely where it is. This makes the network slightly invariant to small translations. Even if the cat shifts slightly to the left, the max pooling layer will still "see" the same strong features, just from a slightly different pixel.
 
-Other pooling methods exist, like Average Pooling (taking the average value), but Max Pooling often performs better because it emphasizes the *presence* of a feature, not just its average intensity.
+Other pooling methods exist, like Average Pooling (taking the average value), but Max Pooling often performs better because it emphasizes the _presence_ of a feature, not just its average intensity.
 
 ### The Grand Architecture: Stacking Layers
 
@@ -68,9 +69,9 @@ A typical CNN architecture is built by stacking these fundamental layers in sequ
 
 As the image data passes through more and more convolutional layers, something fascinating happens:
 
-*   **Early layers** (closer to the input) learn to detect very simple, low-level features, like edges, lines, and basic textures.
-*   **Deeper layers** combine these simple features into more complex, abstract representations. For instance, edges might combine to form corners, corners and lines might form simple shapes, and these shapes might eventually combine to form parts of objects (like an ear, an eye, or a nose).
-*   **The deepest layers** can then recognize highly abstract concepts, like "a whole cat," "a car wheel," or "a human face."
+- **Early layers** (closer to the input) learn to detect very simple, low-level features, like edges, lines, and basic textures.
+- **Deeper layers** combine these simple features into more complex, abstract representations. For instance, edges might combine to form corners, corners and lines might form simple shapes, and these shapes might eventually combine to form parts of objects (like an ear, an eye, or a nose).
+- **The deepest layers** can then recognize highly abstract concepts, like "a whole cat," "a car wheel," or "a human face."
 
 This hierarchical learning of features is a cornerstone of CNNs' power. The network automatically learns a rich, multi-level representation of the input image, from pixels to profound concepts.
 
@@ -82,7 +83,7 @@ These fully connected layers take the high-level features learned by the convolu
 
 ### How Does a CNN Learn? Training the "Eyes"
 
-So, how do these kernels and weights in the fully connected layers know *what* to detect? They learn through a process called **backpropagation** and **gradient descent**.
+So, how do these kernels and weights in the fully connected layers know _what_ to detect? They learn through a process called **backpropagation** and **gradient descent**.
 
 Initially, the kernels are filled with random numbers. When an image is fed through the network, it makes a prediction. If that prediction is wrong (e.g., it says "dog" for a "cat" picture), the network calculates the "error." This error is then propagated backward through the network, allowing it to adjust the values in its kernels and weights slightly, nudging them in the direction that would have reduced the error. Over thousands, or even millions, of training examples, the network fine-tunes its kernels to become expert feature detectors, gradually learning to recognize patterns with incredible accuracy.
 
@@ -99,12 +100,12 @@ The success of CNNs isn't accidental. It stems from several elegantly simple des
 
 The impact of CNNs is truly everywhere:
 
-*   **Image Classification:** Identifying objects in photos (e.g., ImageNet competition).
-*   **Object Detection:** Locating and identifying multiple objects within an image (e.g., self-driving cars detecting pedestrians and traffic signs using models like YOLO or Faster R-CNN).
-*   **Facial Recognition:** Unlocking your phone, airport security.
-*   **Medical Imaging:** Detecting tumors or anomalies in X-rays and MRIs.
-*   **Satellite Imagery Analysis:** Monitoring deforestation, urban development.
-*   **Content Moderation:** Automatically flagging inappropriate images.
+- **Image Classification:** Identifying objects in photos (e.g., ImageNet competition).
+- **Object Detection:** Locating and identifying multiple objects within an image (e.g., self-driving cars detecting pedestrians and traffic signs using models like YOLO or Faster R-CNN).
+- **Facial Recognition:** Unlocking your phone, airport security.
+- **Medical Imaging:** Detecting tumors or anomalies in X-rays and MRIs.
+- **Satellite Imagery Analysis:** Monitoring deforestation, urban development.
+- **Content Moderation:** Automatically flagging inappropriate images.
 
 From helping us organize our photo libraries to powering autonomous vehicles and aiding medical diagnoses, CNNs have transformed the way machines interact with the visual world.
 

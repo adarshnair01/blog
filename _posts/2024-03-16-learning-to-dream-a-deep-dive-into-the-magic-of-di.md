@@ -5,16 +5,17 @@ excerpt: "Ever wondered how AI conjures stunning images, realistic faces, or eve
 tags: ["Machine Learning", "Deep Learning", "Generative AI", "Diffusion Models", "AI Art"]
 author: "Adarsh Nair"
 ---
+
 As a young student, I was always captivated by the idea of creation. Not just building things with my hands, but the very act of bringing something new into existence. Fast forward to today, and I find myself utterly spellbound by the creative power of Artificial Intelligence, particularly a groundbreaking family of models called **Diffusion Models**. You've probably seen their breathtaking work in tools like DALL-E 2, Midjourney, or Stable Diffusion – generating everything from photorealistic landscapes to fantastical creatures, all from a simple text prompt.
 
 When I first encountered these models, it felt like pure magic. How could a computer learn to "dream" and paint such intricate masterpieces? It seemed like an alchemist's secret. But as I peeled back the layers, I discovered that the magic isn't in some unknowable force, but in elegant mathematics and clever engineering. It's a journey from pure static noise to coherent, beautiful imagery, step by careful step. And today, I want to share that journey with you.
 
-### What Even *Are* Generative Models?
+### What Even _Are_ Generative Models?
 
 Before we dive into diffusion, let's quickly frame what generative models are. In machine learning, we often talk about two main types of tasks:
 
-1.  **Discriminative Models:** These are classifiers. They learn to *distinguish* between different types of data. Think of an AI that tells you if an image contains a cat or a dog. It discriminates.
-2.  **Generative Models:** These are creators. They learn the underlying *distribution* of a dataset and then use that knowledge to *generate* new data points that resemble the original training data. An AI that can draw a new, never-before-seen cat or dog image is a generative model.
+1.  **Discriminative Models:** These are classifiers. They learn to _distinguish_ between different types of data. Think of an AI that tells you if an image contains a cat or a dog. It discriminates.
+2.  **Generative Models:** These are creators. They learn the underlying _distribution_ of a dataset and then use that knowledge to _generate_ new data points that resemble the original training data. An AI that can draw a new, never-before-seen cat or dog image is a generative model.
 
 For years, Generative Adversarial Networks (GANs) dominated this space, but they often struggled with training stability and generating diverse outputs. Then came Diffusion Models, and they completely changed the game.
 
@@ -22,7 +23,7 @@ For years, Generative Adversarial Networks (GANs) dominated this space, but they
 
 Imagine you have a beautiful painting. Now, imagine taking that painting and slowly, gently, sprinkling tiny grains of sand onto it. Then more, and more, until eventually, the painting is completely obscured by a thick layer of sand, becoming nothing but a field of random static.
 
-The core idea of Diffusion Models is to learn how to **reverse this process**. If you start with the pure static (noise) and you know how the sand was added, can you learn to *remove* the sand, grain by grain, until the original painting (or a new, similar one) emerges?
+The core idea of Diffusion Models is to learn how to **reverse this process**. If you start with the pure static (noise) and you know how the sand was added, can you learn to _remove_ the sand, grain by grain, until the original painting (or a new, similar one) emerges?
 
 This elegant concept is what makes Diffusion Models so powerful. They are trained to systematically denoise an image, transforming pure noise into meaningful data.
 
@@ -40,12 +41,13 @@ Mathematically, this looks like:
 $q(x_t | x_{t-1}) = \mathcal{N}(x_t; \sqrt{1-\beta_t} x_{t-1}, \beta_t \mathbf{I})$
 
 Here:
-*   $x_t$ is the image at timestep $t$.
-*   $x_{t-1}$ is the image from the previous timestep.
-*   $\mathcal{N}$ denotes a normal (Gaussian) distribution.
-*   $\beta_t$ is a small, positive value (the "variance schedule"). It controls how much noise is added at each step. Typically, $\beta_t$ increases over time, meaning we add more noise in later steps.
-*   $\sqrt{1-\beta_t}$ determines how much of the previous image we retain.
-*   $\mathbf{I}$ is the identity matrix, meaning the noise is added independently to each pixel.
+
+- $x_t$ is the image at timestep $t$.
+- $x_{t-1}$ is the image from the previous timestep.
+- $\mathcal{N}$ denotes a normal (Gaussian) distribution.
+- $\beta_t$ is a small, positive value (the "variance schedule"). It controls how much noise is added at each step. Typically, $\beta_t$ increases over time, meaning we add more noise in later steps.
+- $\sqrt{1-\beta_t}$ determines how much of the previous image we retain.
+- $\mathbf{I}$ is the identity matrix, meaning the noise is added independently to each pixel.
 
 A beautiful property of this process is that we can directly sample $x_t$ from $x_0$ using the following equation, which is derived by repeatedly applying the step-by-step definition:
 
@@ -53,7 +55,7 @@ $q(x_t | x_0) = \mathcal{N}(x_t; \sqrt{\bar{\alpha_t}} x_0, (1-\bar{\alpha_t}) \
 
 where $\alpha_t = 1 - \beta_t$ and $\bar{\alpha_t} = \prod_{s=1}^t \alpha_s$.
 
-This equation is crucial for training, as it allows us to directly get a noisy version of $x_0$ at *any* timestep $t$, without having to simulate all previous steps. By the time we reach $x_T$, if $T$ is large enough and $\beta_t$ values are well-chosen, $x_T$ will be almost indistinguishable from pure Gaussian noise.
+This equation is crucial for training, as it allows us to directly get a noisy version of $x_0$ at _any_ timestep $t$, without having to simulate all previous steps. By the time we reach $x_T$, if $T$ is large enough and $\beta_t$ values are well-chosen, $x_T$ will be almost indistinguishable from pure Gaussian noise.
 
 Think of it like repeatedly blurring an image and then adding random sprinkles until it's just a field of colorful static. This forward process is deterministic and known. The real challenge, and the magic, lies in reversing it.
 
@@ -61,7 +63,7 @@ Think of it like repeatedly blurring an image and then adding random sprinkles u
 
 Our goal is to learn the reverse of the forward process: how to go from $x_t$ back to $x_{t-1}$. This means we want to find the conditional probability $p_\theta(x_{t-1} | x_t)$.
 
-The *true* reverse transition $q(x_{t-1} | x_t)$ is complex and depends on the initial image $x_0$. However, it turns out that if $\beta_t$ are small, $q(x_{t-1} | x_t)$ is also a Gaussian distribution. Even more conveniently, the true posterior $q(x_{t-1} | x_t, x_0)$ *is* tractable and also Gaussian!
+The _true_ reverse transition $q(x_{t-1} | x_t)$ is complex and depends on the initial image $x_0$. However, it turns out that if $\beta_t$ are small, $q(x_{t-1} | x_t)$ is also a Gaussian distribution. Even more conveniently, the true posterior $q(x_{t-1} | x_t, x_0)$ _is_ tractable and also Gaussian!
 
 $q(x_{t-1} | x_t, x_0) = \mathcal{N}(x_{t-1}; \tilde{\mu}(x_t, x_0), \tilde{\beta_t} \mathbf{I})$
 
@@ -76,7 +78,7 @@ We can rearrange this to express $x_0$ in terms of $x_t$ and $\epsilon$:
 
 $x_0 = \frac{1}{\sqrt{\bar{\alpha_t}}} (x_t - \sqrt{1-\bar{\alpha_t}} \epsilon)$
 
-Now, we train a neural network, often called $\epsilon_\theta(x_t, t)$, to predict this noise $\epsilon$. Once we have $\epsilon_\theta(x_t, t)$, we can substitute it back into the equation for $x_0$ to get an *estimate* of the original image, $\hat{x}_0$. With $\hat{x}_0$, we can then compute an estimate for $\tilde{\mu}(x_t, \hat{x}_0)$!
+Now, we train a neural network, often called $\epsilon_\theta(x_t, t)$, to predict this noise $\epsilon$. Once we have $\epsilon_\theta(x_t, t)$, we can substitute it back into the equation for $x_0$ to get an _estimate_ of the original image, $\hat{x}_0$. With $\hat{x}_0$, we can then compute an estimate for $\tilde{\mu}(x_t, \hat{x}_0)$!
 
 So, the reverse process involves our neural network $p_\theta(x_{t-1} | x_t)$, which approximates $q(x_{t-1} | x_t)$, modeled as a Gaussian where its mean is estimated from $x_t$ and the predicted noise.
 
@@ -93,7 +95,7 @@ Training a Diffusion Model is surprisingly simple, especially compared to the co
 3.  **Generate a noisy version:** Use the forward process equation to directly generate $x_t$ from $x_0$ by adding a specific amount of noise $\epsilon$.
     $x_t = \sqrt{\bar{\alpha_t}} x_0 + \sqrt{1-\bar{\alpha_t}} \epsilon$
 4.  **Train the network:** Feed $x_t$ and $t$ into your neural network, $\epsilon_\theta(x_t, t)$. The network's job is to predict the noise $\epsilon$ that was added in step 3.
-5.  **Calculate the loss:** The training objective is to minimize the difference between the *actual* noise $\epsilon$ (which we know because we added it) and the *predicted* noise $\epsilon_\theta(x_t, t)$.
+5.  **Calculate the loss:** The training objective is to minimize the difference between the _actual_ noise $\epsilon$ (which we know because we added it) and the _predicted_ noise $\epsilon_\theta(x_t, t)$.
     $L = ||\epsilon - \epsilon_\theta(x_t, t)||^2$
 
 This is a simple mean squared error loss. The neural network that performs this task is often a **U-Net** architecture. U-Nets are great for image-to-image tasks because they can capture both fine-grained details and high-level structure by using skip connections between encoder and decoder paths. This allows them to preserve spatial information while processing features at different scales.
@@ -106,11 +108,11 @@ Once our $\epsilon_\theta$ network is trained, generating a new image is like wa
 
 1.  **Start with random noise:** Generate a sample $x_T$ from a standard Gaussian distribution (pure static). This is our "lump of clay."
 2.  **Iterate backwards:** For $t = T, T-1, ..., 1$:
-    *   **Predict the noise:** Use our trained network $\epsilon_\theta(x_t, t)$ to predict the noise component in $x_t$.
-    *   **Denoise:** Calculate $x_{t-1}$ by subtracting the predicted noise. The exact formula for this step is derived from the true reverse mean $\tilde{\mu}$ and the predicted noise. A common version is:
-        $x_{t-1} = \frac{1}{\sqrt{\alpha_t}} \left(x_t - \frac{1-\alpha_t}{\sqrt{1-\bar{\alpha_t}}} \epsilon_\theta(x_t, t)\right) + \sigma_t z$
-        where $z \sim \mathcal{N}(0, \mathbf{I})$ (a small amount of *new* noise for stochasticity) and $\sigma_t^2$ is related to $\beta_t$.
-    *   This step effectively nudges the noisy image towards a slightly less noisy version, predicting what the image *should* look like at the previous timestep.
+    - **Predict the noise:** Use our trained network $\epsilon_\theta(x_t, t)$ to predict the noise component in $x_t$.
+    - **Denoise:** Calculate $x_{t-1}$ by subtracting the predicted noise. The exact formula for this step is derived from the true reverse mean $\tilde{\mu}$ and the predicted noise. A common version is:
+      $x_{t-1} = \frac{1}{\sqrt{\alpha_t}} \left(x_t - \frac{1-\alpha_t}{\sqrt{1-\bar{\alpha_t}}} \epsilon_\theta(x_t, t)\right) + \sigma_t z$
+      where $z \sim \mathcal{N}(0, \mathbf{I})$ (a small amount of _new_ noise for stochasticity) and $\sigma_t^2$ is related to $\beta_t$.
+    - This step effectively nudges the noisy image towards a slightly less noisy version, predicting what the image _should_ look like at the previous timestep.
 3.  **Reveal the masterpiece:** After $T$ steps, you will have $x_0$, a brand new, high-quality image generated by the model!
 
 This process is fascinating because the model doesn't just "paint" directly. It sculpts by removing imperfections, guided by what it learned about how data becomes noise.
@@ -127,12 +129,12 @@ This process is fascinating because the model doesn't just "paint" directly. It 
 
 While best known for stunning image generation, Diffusion Models are proving to be incredibly versatile across various domains:
 
-*   **Image Editing:** Inpainting (filling missing parts), outpainting (extending images), style transfer, super-resolution.
-*   **Video Generation:** Animating sequences from text prompts or existing images.
-*   **Audio Synthesis:** Generating realistic speech, music, or sound effects.
-*   **3D Content Creation:** Generating 3D models from text or 2D images.
-*   **Drug Discovery:** Designing new molecules with desired properties.
-*   **Scientific Simulation:** Generating realistic simulations for complex systems.
+- **Image Editing:** Inpainting (filling missing parts), outpainting (extending images), style transfer, super-resolution.
+- **Video Generation:** Animating sequences from text prompts or existing images.
+- **Audio Synthesis:** Generating realistic speech, music, or sound effects.
+- **3D Content Creation:** Generating 3D models from text or 2D images.
+- **Drug Discovery:** Designing new molecules with desired properties.
+- **Scientific Simulation:** Generating realistic simulations for complex systems.
 
 ### The Journey Continues
 

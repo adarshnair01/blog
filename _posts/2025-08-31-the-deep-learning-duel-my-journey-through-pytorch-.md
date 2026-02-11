@@ -50,7 +50,7 @@ Imagine a simple function: $f(x) = x^2$. The derivative, $df/dx = 2x$. If we had
 
 #### PyTorch: The Dynamic Graph Evangelist
 
-PyTorch's approach to computation graphs is famously **dynamic**. What does this mean? It means the computation graph is built *on the fly* as your code executes. Each forward pass of data through your network constructs a new graph.
+PyTorch's approach to computation graphs is famously **dynamic**. What does this mean? It means the computation graph is built _on the fly_ as your code executes. Each forward pass of data through your network constructs a new graph.
 
 Think of it like cooking a new dish every time. You read the recipe (your model definition), and you perform the steps, creating the "graph" of ingredients and actions as you go. If you decide to add a pinch of this or that based on taste (an `if` statement or loop), you can easily change the recipe in real-time.
 
@@ -64,21 +64,24 @@ print("PyTorch: dz/dx at x=2 is", x.grad.item()) # Expected: 2*x = 4
 ```
 
 This dynamic nature offers several advantages:
+
 1.  **Debugging:** It feels just like debugging regular Python code. You can use standard debuggers, print statements, and step through your model line by line, inspecting tensors at any point.
 2.  **Flexibility:** Easily handle variable-length inputs, recurrent neural networks (RNNs), and complex control flow (like `if` statements and loops) within your model architecture, as the graph adapts with each pass.
 3.  **Intuitiveness:** For many, this "imperative" style feels more natural and Pythonic.
 
 #### TensorFlow: From Static Powerhouse to Eager Explorer (TF2.x)
 
-Historically, TensorFlow (especially TF1.x) used a **static computation graph**. This meant you first defined the *entire* graph (all operations, placeholders for data) before you ran any computations within a session.
+Historically, TensorFlow (especially TF1.x) used a **static computation graph**. This meant you first defined the _entire_ graph (all operations, placeholders for data) before you ran any computations within a session.
 
 Imagine designing an entire factory blueprint before a single bolt is turned. Once the blueprint is complete, it's highly optimized and efficient for production, but making changes mid-operation is difficult.
 
 The advantages of static graphs in TF1.x included:
+
 1.  **Optimization:** The framework could perform global optimizations on the entire graph before execution, potentially leading to faster training and inference.
 2.  **Deployment:** The graph could be saved and deployed independently of the Python code, making it easier to run models on different platforms (mobile, C++, etc.).
 
 However, static graphs came with significant drawbacks:
+
 1.  **Debugging:** Infamously difficult. Debugging involved inspecting the graph definition, not the actual values flowing through it until runtime.
 2.  **Complexity:** Handling dynamic control flow was cumbersome, often requiring special TensorFlow operators.
 3.  **Steep Learning Curve:** The session-based execution model felt less intuitive than standard Python.
@@ -104,11 +107,12 @@ While core functionalities have converged, the broader ecosystems still offer di
 #### TensorFlow's Production Prowess
 
 Historically, TensorFlow has been the king of production deployment. Google's vast resources and experience in deploying AI at scale have manifested in a comprehensive ecosystem:
-*   **TensorFlow Serving:** A flexible, high-performance serving system for machine learning models in production.
-*   **TensorFlow Lite:** For deploying models on mobile and embedded devices.
-*   **TensorFlow.js:** For running ML models directly in the browser or Node.js.
-*   **TPU Support:** Seamless integration with Google's Tensor Processing Units for ultra-fast training.
-*   **Keras:** Integrated as TensorFlow's high-level API, Keras makes building and experimenting with neural networks incredibly fast and easy. It abstracts away much of the low-level TensorFlow details, allowing you to focus on the model architecture.
+
+- **TensorFlow Serving:** A flexible, high-performance serving system for machine learning models in production.
+- **TensorFlow Lite:** For deploying models on mobile and embedded devices.
+- **TensorFlow.js:** For running ML models directly in the browser or Node.js.
+- **TPU Support:** Seamless integration with Google's Tensor Processing Units for ultra-fast training.
+- **Keras:** Integrated as TensorFlow's high-level API, Keras makes building and experimenting with neural networks incredibly fast and easy. It abstracts away much of the low-level TensorFlow details, allowing you to focus on the model architecture.
 
 This maturity made TensorFlow a natural choice for large enterprises aiming for robust, scalable AI solutions.
 
@@ -117,10 +121,11 @@ This maturity made TensorFlow a natural choice for large enterprises aiming for 
 PyTorch, emerging from Facebook AI Research (FAIR), quickly became the darling of the research community due to its flexibility, Pythonic nature, and ease of debugging. This led to a massive surge in research papers and open-source projects being implemented in PyTorch.
 
 Over time, PyTorch has rapidly built out its own production capabilities:
-*   **TorchScript:** A way to serialize and optimize PyTorch models, allowing them to be run in C++ environments, often without the need for Python.
-*   **PyTorch Mobile:** For deploying models on iOS and Android.
-*   **ONNX (Open Neural Network Exchange):** A standard for representing ML models, allowing interoperability between frameworks (e.g., train in PyTorch, deploy with ONNX Runtime).
-*   **PyTorch Lightning / Fastai:** These high-level libraries built on PyTorch aim to simplify common deep learning tasks, reduce boilerplate code, and promote best practices, similar to how Keras simplifies TensorFlow. They are increasingly popular for making PyTorch more production-friendly.
+
+- **TorchScript:** A way to serialize and optimize PyTorch models, allowing them to be run in C++ environments, often without the need for Python.
+- **PyTorch Mobile:** For deploying models on iOS and Android.
+- **ONNX (Open Neural Network Exchange):** A standard for representing ML models, allowing interoperability between frameworks (e.g., train in PyTorch, deploy with ONNX Runtime).
+- **PyTorch Lightning / Fastai:** These high-level libraries built on PyTorch aim to simplify common deep learning tasks, reduce boilerplate code, and promote best practices, similar to how Keras simplifies TensorFlow. They are increasingly popular for making PyTorch more production-friendly.
 
 PyTorch is no longer just for researchers; its growing ecosystem makes it a strong contender for production-grade applications.
 
@@ -129,17 +134,19 @@ PyTorch is no longer just for researchers; its growing ecosystem makes it a stro
 Given their convergence, the choice often comes down to personal preference, team expertise, and specific project requirements.
 
 **Choose PyTorch if:**
-*   **You're doing cutting-edge research or experimentation.** Its flexibility and dynamic graph make it easier to implement novel architectures, debug complex models, and iterate quickly. Many new research papers release their code in PyTorch.
-*   **You prefer a more "Pythonic" and imperative coding style.** If you enjoy the feeling of writing standard Python and want to leverage its debugging tools directly, PyTorch might feel more natural.
-*   **Your primary goal is rapid prototyping and development cycle.**
-*   **You're starting out and want a potentially gentler entry point.** (Though with TF2.x, this gap has narrowed).
+
+- **You're doing cutting-edge research or experimentation.** Its flexibility and dynamic graph make it easier to implement novel architectures, debug complex models, and iterate quickly. Many new research papers release their code in PyTorch.
+- **You prefer a more "Pythonic" and imperative coding style.** If you enjoy the feeling of writing standard Python and want to leverage its debugging tools directly, PyTorch might feel more natural.
+- **Your primary goal is rapid prototyping and development cycle.**
+- **You're starting out and want a potentially gentler entry point.** (Though with TF2.x, this gap has narrowed).
 
 **Choose TensorFlow if:**
-*   **Your project demands robust, large-scale production deployment.** Especially if you need to deploy across a wide range of devices (mobile, web, embedded) and use tools like TF Serving.
-*   **You are working within a Google-centric ecosystem** (e.g., using Google Cloud AI Platform, TPUs).
-*   **You value a highly mature, broad, and well-documented ecosystem** that covers everything from data preprocessing to deployment and monitoring.
-*   **You are working on an existing project that already uses TensorFlow.**
-*   **You prefer the high-level abstraction of Keras** for quickly building and deploying models.
+
+- **Your project demands robust, large-scale production deployment.** Especially if you need to deploy across a wide range of devices (mobile, web, embedded) and use tools like TF Serving.
+- **You are working within a Google-centric ecosystem** (e.g., using Google Cloud AI Platform, TPUs).
+- **You value a highly mature, broad, and well-documented ecosystem** that covers everything from data preprocessing to deployment and monitoring.
+- **You are working on an existing project that already uses TensorFlow.**
+- **You prefer the high-level abstraction of Keras** for quickly building and deploying models.
 
 ### The Grand Convergence: A Win for Everyone
 

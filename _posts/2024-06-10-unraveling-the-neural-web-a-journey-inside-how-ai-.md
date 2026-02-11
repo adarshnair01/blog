@@ -5,11 +5,12 @@ excerpt: "Ever wondered how machines learn to see, hear, or even dream? Join me 
 tags: ["Neural Networks", "Deep Learning", "Machine Learning", "AI", "Data Science"]
 author: "Adarsh Nair"
 ---
+
 Hello there, curious mind!
 
 Today, I want to take you on a journey, a deep dive into something truly fascinating that's reshaping our world: **Neural Networks**. If you've ever marveled at Netflix recommendations, Google's uncanny search results, or even your phone unlocking with just a glance, you've been touched by the magic of these digital brains. As someone who spends a lot of time wrestling with data and algorithms, I find them endlessly captivating, a beautiful blend of biology, mathematics, and computer science.
 
-But what *are* they, really? And how do they work? Let's peel back the layers together.
+But what _are_ they, really? And how do they work? Let's peel back the layers together.
 
 ### The Spark: Mimicking the Human Brain
 
@@ -26,6 +27,7 @@ Enter the **artificial neuron**, often called a **perceptron**. It's a much simp
 Imagine you have a single decision to make. Let's say, "Should I bring an umbrella today?"
 
 Your decision might be influenced by several factors:
+
 1.  Is it cloudy? (Yes/No)
 2.  Is there a weather warning? (Yes/No)
 3.  Did I leave my umbrella at home yesterday? (Yes/No)
@@ -70,27 +72,29 @@ Each neuron in a given layer is typically connected to every neuron in the next 
 
 ### How Do They Learn? The Magic of Training
 
-This is perhaps the most mind-bending part: how do these networks actually *learn*? Initially, all those weights and biases ($w$s and $b$s) are just random numbers. So, when you first feed an image of a cat into a freshly initialized network, it's going to tell you it's a toaster oven, or a bicycle, or something equally absurd.
+This is perhaps the most mind-bending part: how do these networks actually _learn_? Initially, all those weights and biases ($w$s and $b$s) are just random numbers. So, when you first feed an image of a cat into a freshly initialized network, it's going to tell you it's a toaster oven, or a bicycle, or something equally absurd.
 
 The learning process involves repeatedly showing the network examples (data) and adjusting its weights and biases until its predictions become accurate. This is where the "training" comes in.
 
 Here's the simplified breakdown:
 
 1.  **Forward Pass**: We feed an input (e.g., an image of a cat) through the network. It makes a prediction (e.g., "it's a dog").
-2.  **Calculate the Loss**: We compare the network's prediction ($\hat{y}$) with the actual correct answer ($y$) (which we know, because this is training data). The difference between what it *predicted* and what it *should have predicted* is called the **loss** or **error**. A common loss function for regression tasks is **Mean Squared Error (MSE)**:
+2.  **Calculate the Loss**: We compare the network's prediction ($\hat{y}$) with the actual correct answer ($y$) (which we know, because this is training data). The difference between what it _predicted_ and what it _should have predicted_ is called the **loss** or **error**. A common loss function for regression tasks is **Mean Squared Error (MSE)**:
 
     $MSE = \frac{1}{N} \sum_{i=1}^{N} (y_i - \hat{y}_i)^2$
 
     For classification, **Cross-Entropy Loss** is often used. The goal is always to minimize this loss.
-3.  **Backpropagation**: This is the ingenious part! Once we know how wrong the network was, we need to figure out *which* weights and biases contributed most to that error and how to adjust them to reduce the error. Imagine you're playing a game of "hot or cold" with your network. The loss function tells you how "cold" you are. Backpropagation is the process of figuring out which way to move (adjust weights) to get "hotter" (reduce loss).
 
-    This process uses calculus, specifically the **chain rule**, to calculate the **gradient** of the loss function with respect to each weight and bias in the network. The gradient tells us the direction of the steepest increase in the loss. Since we want to *decrease* the loss, we move in the opposite direction of the gradient. This iterative optimization technique is called **Gradient Descent**.
+3.  **Backpropagation**: This is the ingenious part! Once we know how wrong the network was, we need to figure out _which_ weights and biases contributed most to that error and how to adjust them to reduce the error. Imagine you're playing a game of "hot or cold" with your network. The loss function tells you how "cold" you are. Backpropagation is the process of figuring out which way to move (adjust weights) to get "hotter" (reduce loss).
+
+    This process uses calculus, specifically the **chain rule**, to calculate the **gradient** of the loss function with respect to each weight and bias in the network. The gradient tells us the direction of the steepest increase in the loss. Since we want to _decrease_ the loss, we move in the opposite direction of the gradient. This iterative optimization technique is called **Gradient Descent**.
 
     Each weight $w$ is updated like this:
 
     $w_{new} = w_{old} - \alpha \frac{\partial Loss}{\partial w}$
 
     Here, $\frac{\partial Loss}{\partial w}$ is the gradient, and $\alpha$ (alpha) is the **learning rate**. The learning rate controls how big of a step we take in the direction of improvement. Too large, and we might overshoot the optimal weights; too small, and training will be incredibly slow.
+
 4.  **Repeat**: We repeat this entire process thousands, millions, or even billions of times with different training examples. With each iteration, the weights and biases get subtly adjusted, and the network gradually learns to make more accurate predictions.
 
 It's truly like teaching a child. You show them an apple, tell them it's an apple. If they say "banana," you gently correct them, and over time, they learn.
@@ -112,15 +116,15 @@ Without non-linear activation functions, a deep neural network, no matter how ma
 
 What we've discussed is the foundational "feedforward" neural network. But the field of Deep Learning is vast and exciting!
 
-*   **Convolutional Neural Networks (CNNs)**: Specifically designed for processing grid-like data like images. They use "filters" to detect features like edges, textures, and shapes, making them incredibly powerful for computer vision tasks.
-*   **Recurrent Neural Networks (RNNs)**: Built to handle sequential data like text, audio, and time series. They have a "memory" that allows information to persist across steps in a sequence, making them suitable for tasks like language translation and speech recognition.
-*   **Transformers**: The latest breakthrough, especially in Natural Language Processing (NLP), powering models like ChatGPT. They use an "attention mechanism" to weigh the importance of different parts of the input sequence, overcoming some limitations of RNNs.
+- **Convolutional Neural Networks (CNNs)**: Specifically designed for processing grid-like data like images. They use "filters" to detect features like edges, textures, and shapes, making them incredibly powerful for computer vision tasks.
+- **Recurrent Neural Networks (RNNs)**: Built to handle sequential data like text, audio, and time series. They have a "memory" that allows information to persist across steps in a sequence, making them suitable for tasks like language translation and speech recognition.
+- **Transformers**: The latest breakthrough, especially in Natural Language Processing (NLP), powering models like ChatGPT. They use an "attention mechanism" to weigh the importance of different parts of the input sequence, overcoming some limitations of RNNs.
 
 And beyond architectures, there are advanced optimization algorithms (Adam, RMSprop), regularization techniques (Dropout, L1/L2) to prevent overfitting, and countless other innovations that push the boundaries of what AI can do.
 
 ### The Power and the Promise
 
-Neural Networks are powerful because they can automatically learn complex features from raw data, eliminating the need for manual feature engineering that often plagues traditional machine learning. They are universal function approximators, meaning that with enough neurons and data, they can theoretically learn to approximate *any* continuous function. This incredible adaptability, combined with the availability of massive datasets and powerful computing resources, is what has fueled the current AI revolution.
+Neural Networks are powerful because they can automatically learn complex features from raw data, eliminating the need for manual feature engineering that often plagues traditional machine learning. They are universal function approximators, meaning that with enough neurons and data, they can theoretically learn to approximate _any_ continuous function. This incredible adaptability, combined with the availability of massive datasets and powerful computing resources, is what has fueled the current AI revolution.
 
 From diagnosing diseases to composing music, from powering self-driving cars to translating languages in real-time, neural networks are at the heart of it all.
 

@@ -1,7 +1,7 @@
 ---
 title: "Demystifying the Magic: A Deep Dive into Convolutional Neural Networks"
 date: "2025-12-01"
-excerpt: "Ever wondered how computers \"see\" the world? Join me on a journey to unravel the incredible architecture of Convolutional Neural Networks, the bedrock of modern computer vision."
+excerpt: 'Ever wondered how computers "see" the world? Join me on a journey to unravel the incredible architecture of Convolutional Neural Networks, the bedrock of modern computer vision.'
 tags: ["Machine Learning", "Deep Learning", "Computer Vision", "CNNs", "Neural Networks"]
 author: "Adarsh Nair"
 ---
@@ -16,7 +16,7 @@ Today, I want to pull back the curtain and explore the core ideas behind these i
 
 Before CNNs, treating an image with traditional neural networks was like trying to read a book one pixel at a time, completely out of context. Imagine an image as a giant grid of numbers (pixel values). A typical color image might be 256x256 pixels, with three color channels (Red, Green, Blue). That's $256 \times 256 \times 3 = 196,608$ numbers!
 
-If you were to feed these numbers directly into a traditional "fully connected" neural network, each of these ~200,000 numbers would need to be connected to every neuron in the *next* layer. That's an astronomical number of connections and parameters to learn, making the network computationally expensive, prone to overfitting, and terrible at recognizing patterns that might shift slightly in an image (like a cat slightly to the left vs. slightly to the right). It lacked the spatial understanding that's so crucial for vision.
+If you were to feed these numbers directly into a traditional "fully connected" neural network, each of these ~200,000 numbers would need to be connected to every neuron in the _next_ layer. That's an astronomical number of connections and parameters to learn, making the network computationally expensive, prone to overfitting, and terrible at recognizing patterns that might shift slightly in an image (like a cat slightly to the left vs. slightly to the right). It lacked the spatial understanding that's so crucial for vision.
 
 This is where CNNs shine. They are designed to exploit the spatial structure of images.
 
@@ -28,17 +28,17 @@ At the core of a convolutional layer is something called a **filter** or **kerne
 
 Let's imagine our input image is a simple grayscale image (just one channel of pixel values). The filter will slide across this image, performing a dot product (element-wise multiplication and then summing) with the small section of the image it's currently "covering." The result of this operation becomes a single pixel in a new output image, which we call a **feature map**.
 
-$$ (I * K)(i, j) = \sum_m \sum_n I(i-m, j-n)K(m, n) $$
+$$ (I \* K)(i, j) = \sum_m \sum_n I(i-m, j-n)K(m, n) $$
 
 Don't let the math scare you! This formula just says: "To get the value at position $(i,j)$ in our new feature map, take a small 'window' of the original image $I$ (centered around $i,j$), flip our filter $K$ both horizontally and vertically (though in deep learning, we often skip the flip for simplicity and just call it cross-correlation), multiply corresponding elements, and sum them all up."
 
-#### What do these filters *do*?
+#### What do these filters _do_?
 
-This is the truly mind-blowing part. During the training process, the CNN *learns* the optimal values for the numbers within these filters. Different filters learn to detect different features:
+This is the truly mind-blowing part. During the training process, the CNN _learns_ the optimal values for the numbers within these filters. Different filters learn to detect different features:
 
-*   One filter might become an **edge detector**, activating strongly when it sees a sharp change in pixel intensity (like the outline of an object).
-*   Another might detect specific textures or patterns.
-*   Yet another could be looking for corners or curves.
+- One filter might become an **edge detector**, activating strongly when it sees a sharp change in pixel intensity (like the outline of an object).
+- Another might detect specific textures or patterns.
+- Yet another could be looking for corners or curves.
 
 As the filter slides across the entire image, it creates a **feature map**. If a filter detects a vertical edge, for example, the feature map will show high values wherever that vertical edge appeared in the original image.
 
@@ -68,9 +68,9 @@ After a convolutional layer and activation, it's common to add a **pooling layer
 
 The most common type is **Max Pooling**. Here's how it works:
 
-*   A pooling window (e.g., 2x2) slides across the feature map.
-*   For each window, it simply takes the *maximum* value.
-*   This maximum value becomes a single pixel in the new, smaller feature map.
+- A pooling window (e.g., 2x2) slides across the feature map.
+- For each window, it simply takes the _maximum_ value.
+- This maximum value becomes a single pixel in the new, smaller feature map.
 
 Imagine a 2x2 pooling window with a stride of 2. It will essentially divide the feature map into 2x2 blocks and pick the strongest activation (the max value) from each block. This dramatically reduces the spatial dimensions (e.g., a 28x28 feature map becomes 14x14).
 
@@ -83,10 +83,10 @@ Now, let's put these pieces together to see how a complete CNN is structured:
 1.  **Input Layer:** This is where your raw image (e.g., 256x256x3) enters the network.
 
 2.  **Convolutional Base (Feature Extraction):** This is where the magic happens. You'll typically find several blocks of:
-    *   **Convolutional Layer:** Applies filters to the input, creating feature maps.
-    *   **Activation Layer (ReLU):** Introduces non-linearity.
-    *   **Pooling Layer (Max Pooling):** Downsamples the feature maps, making them smaller and more robust.
-    *   *These blocks are often stacked multiple times.* As you go deeper into the network, the filters in later convolutional layers learn to detect more complex, abstract features by combining the simpler features detected by earlier layers. For instance, an early layer might detect edges, a middle layer might combine edges to form shapes (like eyes or ears), and a deep layer might combine shapes to recognize a face.
+    - **Convolutional Layer:** Applies filters to the input, creating feature maps.
+    - **Activation Layer (ReLU):** Introduces non-linearity.
+    - **Pooling Layer (Max Pooling):** Downsamples the feature maps, making them smaller and more robust.
+    - _These blocks are often stacked multiple times._ As you go deeper into the network, the filters in later convolutional layers learn to detect more complex, abstract features by combining the simpler features detected by earlier layers. For instance, an early layer might detect edges, a middle layer might combine edges to form shapes (like eyes or ears), and a deep layer might combine shapes to recognize a face.
 
 3.  **Flattening Layer:** After the convolutional and pooling layers have extracted all the high-level features, the 3D output (e.g., a stack of 10x10 feature maps) needs to be converted into a 1D vector. This is done by "flattening" it, essentially unrolling all the numbers into a single long list.
 
@@ -118,8 +118,8 @@ The architectural design choices of CNNs give them distinct advantages:
 
 While CNNs were born for computer vision, their core idea of local pattern detection has found surprising applications beyond images:
 
-*   **Natural Language Processing (NLP):** CNNs can process text by treating words as features, effectively detecting patterns in sequences of words (like phrases or sentiments).
-*   **Time Series Analysis:** They can identify patterns and anomalies in sequential data, such as sensor readings or financial data.
+- **Natural Language Processing (NLP):** CNNs can process text by treating words as features, effectively detecting patterns in sequences of words (like phrases or sentiments).
+- **Time Series Analysis:** They can identify patterns and anomalies in sequential data, such as sensor readings or financial data.
 
 ### Conclusion: A New Era of Vision
 

@@ -24,7 +24,7 @@ PCA offers a powerful solution to these problems by reducing the number of featu
 
 ## The Core Idea: Finding the Best Angle (The Shadow Analogy)
 
-Let's start with an analogy. Imagine you have a 3D object – say, a complex sculpture – and you want to capture its essence with just a 2D photograph. If you take a picture from an arbitrary angle, you might miss some important details. But if you carefully choose the *best* angle, you can get a photograph that tells you the most about the sculpture's overall shape and structure.
+Let's start with an analogy. Imagine you have a 3D object – say, a complex sculpture – and you want to capture its essence with just a 2D photograph. If you take a picture from an arbitrary angle, you might miss some important details. But if you carefully choose the _best_ angle, you can get a photograph that tells you the most about the sculpture's overall shape and structure.
 
 PCA does something similar with your data. It doesn't just throw away features; instead, it finds the "best angles" to look at your data from. These "best angles" are new axes (called **Principal Components**), chosen in such a way that when you project your data onto them, you preserve as much of the original data's variance (spread, information) as possible.
 
@@ -51,14 +51,15 @@ where $\mathbf{1}$ is a column vector of ones, and $\mu$ is the row vector of me
 ### Step 2: Calculating the Covariance Matrix
 
 This is a crucial step. The covariance matrix tells us how much two variables change together.
-*   A positive covariance means they tend to increase or decrease together.
-*   A negative covariance means one tends to increase as the other decreases.
-*   A covariance close to zero means they are largely independent.
+
+- A positive covariance means they tend to increase or decrease together.
+- A negative covariance means one tends to increase as the other decreases.
+- A covariance close to zero means they are largely independent.
 
 For a dataset with $p$ features, the covariance matrix $\Sigma$ will be a $p \times p$ symmetric matrix.
 
-*   The diagonal elements $\Sigma_{jj}$ represent the **variance** of the $j$-th feature (how much it varies from its mean).
-*   The off-diagonal elements $\Sigma_{jk}$ (where $j \neq k$) represent the **covariance** between the $j$-th and $k$-th features.
+- The diagonal elements $\Sigma_{jj}$ represent the **variance** of the $j$-th feature (how much it varies from its mean).
+- The off-diagonal elements $\Sigma_{jk}$ (where $j \neq k$) represent the **covariance** between the $j$-th and $k$-th features.
 
 The formula for the covariance matrix of our centered data $X'$ (with $n$ samples) is:
 
@@ -70,9 +71,9 @@ Why is this matrix so important? Because it encapsulates all the relationships (
 
 Here's where the magic really happens. Once we have the covariance matrix $\Sigma$, we need to find its **eigenvectors** and **eigenvalues**. These special vectors and values are the true heroes of PCA.
 
-*   **Eigenvectors:** Imagine a transformation (like stretching or rotating your data). An eigenvector of a matrix is a special vector that, when transformed by that matrix, only scales (stretches or shrinks) but doesn't change direction. In the context of PCA, the eigenvectors of the covariance matrix represent the **principal components** – our "best angles" or directions of maximum variance in the data. They are orthogonal (perpendicular) to each other.
+- **Eigenvectors:** Imagine a transformation (like stretching or rotating your data). An eigenvector of a matrix is a special vector that, when transformed by that matrix, only scales (stretches or shrinks) but doesn't change direction. In the context of PCA, the eigenvectors of the covariance matrix represent the **principal components** – our "best angles" or directions of maximum variance in the data. They are orthogonal (perpendicular) to each other.
 
-*   **Eigenvalues:** Each eigenvector has a corresponding eigenvalue. The eigenvalue tells us how much "strength" or "magnitude" the eigenvector has. In PCA, the eigenvalue associated with each principal component quantifies the amount of variance captured along that component's direction. A larger eigenvalue means that its corresponding eigenvector (principal component) captures more variance from the original data.
+- **Eigenvalues:** Each eigenvector has a corresponding eigenvalue. The eigenvalue tells us how much "strength" or "magnitude" the eigenvector has. In PCA, the eigenvalue associated with each principal component quantifies the amount of variance captured along that component's direction. A larger eigenvalue means that its corresponding eigenvector (principal component) captures more variance from the original data.
 
 The fundamental equation linking a matrix $A$ (our covariance matrix $\Sigma$), an eigenvector $v$, and its eigenvalue $\lambda$ is:
 
@@ -117,18 +118,18 @@ While PCA is incredibly useful, it's not a silver bullet:
 
 1.  **Linearity Assumption:** PCA assumes that the principal components are linear combinations of the original features. If your data has complex non-linear relationships, PCA might not be the best choice (other techniques like Kernel PCA or t-SNE might be more suitable).
 2.  **Scale Sensitivity:** PCA is sensitive to the scaling of your features. Features with larger ranges or higher variances will naturally contribute more to the first principal components. Therefore, it's almost always crucial to **standardize** (scale) your data (e.g., using `StandardScaler` in Python's scikit-learn) before applying PCA.
-3.  **Interpretability:** The new principal components are linear combinations of the original features. While they capture variance, interpreting what a specific principal component *means* in real-world terms can sometimes be challenging. For instance, "PC1 = 0.4\*featureA + 0.7\*featureB - 0.2\*featureC" might not have a direct, intuitive business meaning.
-4.  **Information Loss:** PCA is a lossy transformation. By reducing dimensions, you are inherently discarding some information, specifically the variance captured by the discarded components. The goal is to lose the *least important* information.
+3.  **Interpretability:** The new principal components are linear combinations of the original features. While they capture variance, interpreting what a specific principal component _means_ in real-world terms can sometimes be challenging. For instance, "PC1 = 0.4\*featureA + 0.7\*featureB - 0.2\*featureC" might not have a direct, intuitive business meaning.
+4.  **Information Loss:** PCA is a lossy transformation. By reducing dimensions, you are inherently discarding some information, specifically the variance captured by the discarded components. The goal is to lose the _least important_ information.
 
 ## Real-World Applications
 
 PCA is widely used across various domains:
 
-*   **Image Compression and Recognition:** Reducing the dimensionality of image pixel data to speed up processing and storage (e.g., face recognition systems).
-*   **Bioinformatics:** Analyzing high-dimensional gene expression data to identify patterns or reduce noise.
-*   **Finance:** Analyzing stock market data, risk management, and portfolio optimization by reducing the number of correlated financial instruments.
-*   **Customer Segmentation:** Identifying underlying patterns in vast amounts of customer behavior data to segment them more effectively.
-*   **Medical Diagnosis:** Extracting key features from medical imaging or patient records to aid in diagnosis.
+- **Image Compression and Recognition:** Reducing the dimensionality of image pixel data to speed up processing and storage (e.g., face recognition systems).
+- **Bioinformatics:** Analyzing high-dimensional gene expression data to identify patterns or reduce noise.
+- **Finance:** Analyzing stock market data, risk management, and portfolio optimization by reducing the number of correlated financial instruments.
+- **Customer Segmentation:** Identifying underlying patterns in vast amounts of customer behavior data to segment them more effectively.
+- **Medical Diagnosis:** Extracting key features from medical imaging or patient records to aid in diagnosis.
 
 ## Conclusion: Embracing Simplicity in Complexity
 

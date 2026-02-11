@@ -6,7 +6,7 @@ tags: ["Markov Chains", "Probability", "Stochastic Processes", "Data Science", "
 author: "Adarsh Nair"
 ---
 
-Lying in bed, staring at the ceiling, my mind often wanders to the simple routines that make up our lives. Waking up, making coffee, checking emails, getting to work. Each step seems to lead to the next, almost predictably. But what if the only thing that *truly* mattered for my next action was my current action, and nothing else from my past? What if I could predict my future, even without remembering my history?
+Lying in bed, staring at the ceiling, my mind often wanders to the simple routines that make up our lives. Waking up, making coffee, checking emails, getting to work. Each step seems to lead to the next, almost predictably. But what if the only thing that _truly_ mattered for my next action was my current action, and nothing else from my past? What if I could predict my future, even without remembering my history?
 
 Sounds a bit like a superpower, right? Well, in the world of data science and machine learning, this "superpower" has a name: **Markov Chains**. They're a fundamental concept, incredibly simple at their core, yet capable of modeling complex real-world phenomena. If you've ever typed a sentence and had your phone suggest the next word, or seen a weather forecast predicting rain after a cloudy day, you've witnessed Markov Chains in action.
 
@@ -14,13 +14,13 @@ Today, I want to take you on a journey through the elegant simplicity and surpri
 
 ### The Heart of the Matter: The Markov Property (No Memory, No Problem!)
 
-Imagine you're playing a board game. Your next move depends entirely on where you are *right now* on the board, not on all the previous squares you've landed on, nor the dice rolls from five turns ago. That, my friends, is the essence of the **Markov Property**:
+Imagine you're playing a board game. Your next move depends entirely on where you are _right now_ on the board, not on all the previous squares you've landed on, nor the dice rolls from five turns ago. That, my friends, is the essence of the **Markov Property**:
 
 **The future is independent of the past given the present.**
 
-Let's unpack that. It means that to predict the next state (or event), all you need to know is the *current* state. Any information about how you arrived at this current state is irrelevant. Your previous journey doesn't change the probability of your next step.
+Let's unpack that. It means that to predict the next state (or event), all you need to know is the _current_ state. Any information about how you arrived at this current state is irrelevant. Your previous journey doesn't change the probability of your next step.
 
-Think about the weather. If it's cloudy today, the chance of rain tomorrow depends primarily on it being cloudy *today*, not on whether it was sunny last week, rainy two days ago, and then cloudy yesterday. The "cloudy today" state is sufficient to determine the probabilities for tomorrow's weather.
+Think about the weather. If it's cloudy today, the chance of rain tomorrow depends primarily on it being cloudy _today_, not on whether it was sunny last week, rainy two days ago, and then cloudy yesterday. The "cloudy today" state is sufficient to determine the probabilities for tomorrow's weather.
 
 This "memoryless" property is what makes Markov Chains so elegant and, frankly, so powerful in modeling sequences.
 
@@ -33,27 +33,27 @@ To truly understand Markov Chains, let's break them down into their core compone
 2.  **Transitions:** These are the movements or changes from one state to another. From `Sunny`, you might transition to `Cloudy`. From `Studying`, you might transition to `Eating`.
 
 3.  **Transition Probabilities:** This is where the "probability" in Markov Chains comes in. For every possible transition from one state to another, there's a probability associated with it. For example:
-    *   If it's `Sunny` today, there's a 70% chance it stays `Sunny` tomorrow, a 20% chance it becomes `Cloudy`, and a 10% chance it becomes `Rainy`.
-    *   If it's `Cloudy` today, there's a 30% chance it becomes `Sunny`, a 40% chance it stays `Cloudy`, and a 30% chance it becomes `Rainy`.
+    - If it's `Sunny` today, there's a 70% chance it stays `Sunny` tomorrow, a 20% chance it becomes `Cloudy`, and a 10% chance it becomes `Rainy`.
+    - If it's `Cloudy` today, there's a 30% chance it becomes `Sunny`, a 40% chance it stays `Cloudy`, and a 30% chance it becomes `Rainy`.
 
-Crucially, these probabilities must sum to 1 for all transitions *out of* a given state. You have to go *somewhere*!
+Crucially, these probabilities must sum to 1 for all transitions _out of_ a given state. You have to go _somewhere_!
 
 #### A Simple Example: My Mood Swings (A highly simplified model!)
 
-Let's say my internal states are `Happy`, `Neutral`, `Grumpy`. And, being a creature of habit (and the Markov Property), my next mood depends *only* on my current mood.
+Let's say my internal states are `Happy`, `Neutral`, `Grumpy`. And, being a creature of habit (and the Markov Property), my next mood depends _only_ on my current mood.
 
-*   If I'm `Happy` today:
-    *   50% chance I'm `Happy` tomorrow
-    *   40% chance I'm `Neutral` tomorrow
-    *   10% chance I'm `Grumpy` tomorrow
-*   If I'm `Neutral` today:
-    *   30% chance I'm `Happy` tomorrow
-    *   30% chance I'm `Neutral` tomorrow
-    *   40% chance I'm `Grumpy` tomorrow
-*   If I'm `Grumpy` today:
-    *   10% chance I'm `Happy` tomorrow
-    *   20% chance I'm `Neutral` tomorrow
-    *   70% chance I'm `Grumpy` tomorrow
+- If I'm `Happy` today:
+  - 50% chance I'm `Happy` tomorrow
+  - 40% chance I'm `Neutral` tomorrow
+  - 10% chance I'm `Grumpy` tomorrow
+- If I'm `Neutral` today:
+  - 30% chance I'm `Happy` tomorrow
+  - 30% chance I'm `Neutral` tomorrow
+  - 40% chance I'm `Grumpy` tomorrow
+- If I'm `Grumpy` today:
+  - 10% chance I'm `Happy` tomorrow
+  - 20% chance I'm `Neutral` tomorrow
+  - 70% chance I'm `Grumpy` tomorrow
 
 We can visualize this as a **state diagram** where circles are states and arrows are transitions with their probabilities.
 
@@ -73,13 +73,14 @@ We can visualize this as a **state diagram** where circles are states and arrows
  |  |   |   |
  Grumpy<-----0.7----
 ```
+
 (Apologies for the ASCII art, but it gets the point across!)
 
 ### The Math Behind the Magic: Transition Matrices
 
 While state diagrams are great for intuition, mathematicians (and data scientists!) love matrices. We can represent our transition probabilities in a **transition matrix**, often denoted as $P$.
 
-Each row in the matrix represents the *current* state, and each column represents the *next* state. The entry $p_{ij}$ is the probability of moving from state $i$ to state $j$.
+Each row in the matrix represents the _current_ state, and each column represents the _next_ state. The entry $p_{ij}$ is the probability of moving from state $i$ to state $j$.
 
 For my mood example, let's order our states as (Happy, Neutral, Grumpy):
 
@@ -91,7 +92,7 @@ $P = \begin{pmatrix}
 
 Notice that each row sums to 1. This is a crucial property of a transition matrix.
 
-Now, here's where it gets interesting! If we know our initial state (or, more commonly, an initial *probability distribution* over our states), we can predict the probability distribution for future states.
+Now, here's where it gets interesting! If we know our initial state (or, more commonly, an initial _probability distribution_ over our states), we can predict the probability distribution for future states.
 
 Let $\pi_0$ be a row vector representing our initial probability distribution. For example, if I wake up `Happy` with 100% certainty, then $\pi_0 = \begin{pmatrix} 1 & 0 & 0 \end{pmatrix}$.
 
@@ -105,16 +106,16 @@ This matrix multiplication allows us to project probabilities far into the futur
 
 As we peer further into the future of a Markov Chain, some fascinating properties emerge:
 
-*   **Irreducibility:** Can you get from *any* state to *any other* state (not necessarily in one step)? If yes, the chain is irreducible. This is important for many long-term behaviors. My mood chain is irreducible because eventually, I can go from `Grumpy` to `Happy` (even if it takes a few steps via `Neutral`).
+- **Irreducibility:** Can you get from _any_ state to _any other_ state (not necessarily in one step)? If yes, the chain is irreducible. This is important for many long-term behaviors. My mood chain is irreducible because eventually, I can go from `Grumpy` to `Happy` (even if it takes a few steps via `Neutral`).
 
-*   **Aperiodicity:** Does the chain always return to a state in a fixed cycle, or can it return at irregular intervals? If it's not trapped in a fixed cycle (e.g., Happy -> Grumpy -> Happy -> Grumpy...), it's aperiodic.
+- **Aperiodicity:** Does the chain always return to a state in a fixed cycle, or can it return at irregular intervals? If it's not trapped in a fixed cycle (e.g., Happy -> Grumpy -> Happy -> Grumpy...), it's aperiodic.
 
-*   **Stationary Distribution (Steady State):** If a Markov Chain is both irreducible and aperiodic (and some other technical conditions), it will eventually reach a point where the probability distribution over its states no longer changes, even after more transitions. This is called the **stationary distribution**, denoted as $\pi$.
+- **Stationary Distribution (Steady State):** If a Markov Chain is both irreducible and aperiodic (and some other technical conditions), it will eventually reach a point where the probability distribution over its states no longer changes, even after more transitions. This is called the **stationary distribution**, denoted as $\pi$.
 
-    Mathematically, this means $\pi P = \pi$.
-    Intuitively, it means that if you run the process long enough, the proportion of time spent in each state will settle into a fixed pattern. For my mood, after many days, there will be a certain long-term probability of me being `Happy`, `Neutral`, or `Grumpy`, regardless of my initial mood. This is a incredibly powerful concept for understanding the long-term behavior of a system.
+  Mathematically, this means $\pi P = \pi$.
+  Intuitively, it means that if you run the process long enough, the proportion of time spent in each state will settle into a fixed pattern. For my mood, after many days, there will be a certain long-term probability of me being `Happy`, `Neutral`, or `Grumpy`, regardless of my initial mood. This is a incredibly powerful concept for understanding the long-term behavior of a system.
 
-*   **Absorbing States:** Some chains have "absorbing states," which are states you can enter but cannot leave. Think of a "Game Over" state in a game, or a "bankrupt" state in finance. Once you're in an absorbing state, you're stuck there.
+- **Absorbing States:** Some chains have "absorbing states," which are states you can enter but cannot leave. Think of a "Game Over" state in a game, or a "bankrupt" state in finance. Once you're in an absorbing state, you're stuck there.
 
 ### Where Do We See Markov Chains in Action?
 
@@ -137,12 +138,13 @@ Markov Chains, despite their apparent simplicity, are the backbone of numerous r
 
 ### The Memoryless Limitation (And Why It's Often Okay)
 
-The biggest "catch" with Markov Chains is their memoryless property. In many real-world scenarios, the future *does* depend on more than just the immediate present. For instance, my mood might not just depend on my mood *today*, but also on whether I got enough sleep *last night* and if I had a big presentation *earlier in the week*.
+The biggest "catch" with Markov Chains is their memoryless property. In many real-world scenarios, the future _does_ depend on more than just the immediate present. For instance, my mood might not just depend on my mood _today_, but also on whether I got enough sleep _last night_ and if I had a big presentation _earlier in the week_.
 
 However, this limitation is often mitigated by:
-*   **Defining richer states:** Instead of just `Happy`, `Neutral`, `Grumpy`, I could define states like `Happy (after good sleep)`, `Happy (after bad sleep)`. This effectively bakes "memory" into the state definition.
-*   **Higher-order Markov Chains:** Instead of depending only on the *last* state, a second-order Markov Chain depends on the *last two* states, a third-order on the *last three*, and so on. This adds memory at the cost of significantly increasing the number of possible states.
-*   **Hidden Markov Models (HMMs):** These are an extension where the underlying states are *hidden* or unobservable, and we only observe some probabilistic output of those states. This allows for more complex modeling where noise and uncertainty are present.
+
+- **Defining richer states:** Instead of just `Happy`, `Neutral`, `Grumpy`, I could define states like `Happy (after good sleep)`, `Happy (after bad sleep)`. This effectively bakes "memory" into the state definition.
+- **Higher-order Markov Chains:** Instead of depending only on the _last_ state, a second-order Markov Chain depends on the _last two_ states, a third-order on the _last three_, and so on. This adds memory at the cost of significantly increasing the number of possible states.
+- **Hidden Markov Models (HMMs):** These are an extension where the underlying states are _hidden_ or unobservable, and we only observe some probabilistic output of those states. This allows for more complex modeling where noise and uncertainty are present.
 
 Despite these limitations, the simplicity and analytical tractability of basic Markov Chains make them an indispensable tool in a data scientist's arsenal, especially as a foundational concept.
 

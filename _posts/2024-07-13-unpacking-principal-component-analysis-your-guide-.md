@@ -14,7 +14,7 @@ So, grab your imaginary hiking boots, because we're about to scale the mountains
 
 Imagine you're trying to describe a person to someone who has never seen them. You could list every single detail: their exact height in millimeters, the precise shade of their hair, the number of freckles on their nose, the length of each finger, their shoe size, their favorite color, their current mood... The list goes on and on.
 
-While each piece of information might be technically true, many of them are redundant or just plain unhelpful in forming a *general understanding* of the person. You'd quickly overwhelm your listener, and they might miss the forest for the trees.
+While each piece of information might be technically true, many of them are redundant or just plain unhelpful in forming a _general understanding_ of the person. You'd quickly overwhelm your listener, and they might miss the forest for the trees.
 
 In the world of data, we face a similar problem. Datasets often come with hundreds, sometimes thousands, of "features" or "dimensions." Each feature represents a different characteristic of our data points. For example, a dataset of images might have features for every single pixel's color intensity. A medical dataset might have hundreds of diagnostic measurements for each patient.
 
@@ -25,13 +25,13 @@ This "high dimensionality" creates several issues:
 3.  **Noise and Redundancy:** Many features might be highly correlated (e.g., height in inches and height in centimeters) or simply represent noise that confuses our models.
 4.  **Difficulty in Visualization:** We can easily visualize data in 2D or 3D. Beyond that, it becomes impossible for the human eye to grasp the relationships.
 
-This is where PCA steps in. Its mission? To take a high-dimensional dataset and transform it into a lower-dimensional one, while *retaining as much of the original variance (information) as possible*. It's like finding the most concise yet accurate summary of our person, without losing their defining characteristics.
+This is where PCA steps in. Its mission? To take a high-dimensional dataset and transform it into a lower-dimensional one, while _retaining as much of the original variance (information) as possible_. It's like finding the most concise yet accurate summary of our person, without losing their defining characteristics.
 
 ### PCA: Finding the "Essence"
 
 At its heart, PCA is a dimensionality reduction technique. But how does it decide what information to keep and what to discard? It's all about **variance**.
 
-Think about our person description again. What are the most important characteristics? Probably their height, build, hair color, and maybe eye color. These features tend to *vary* significantly across people and help us distinguish one person from another. Knowing their exact earlobe size, while a detail, probably doesn't help as much in a general description.
+Think about our person description again. What are the most important characteristics? Probably their height, build, hair color, and maybe eye color. These features tend to _vary_ significantly across people and help us distinguish one person from another. Knowing their exact earlobe size, while a detail, probably doesn't help as much in a general description.
 
 PCA works similarly. It looks for directions (called **principal components**) in your data along which the data varies the most. These directions capture the most "spread" or "information."
 
@@ -51,14 +51,14 @@ To truly appreciate PCA, we need to peek behind the curtain and understand the k
 
 #### 1. Variance and Covariance
 
-*   **Variance** measures how spread out a single feature's data points are. High variance means the data points are widely distributed; low variance means they are clustered tightly.
-    $$Var(X) = \frac{1}{n-1}\sum_{i=1}^n (x_i - \bar{x})^2$$
-    Here, $x_i$ is each data point, $\bar{x}$ is the mean, and $n$ is the number of data points.
+- **Variance** measures how spread out a single feature's data points are. High variance means the data points are widely distributed; low variance means they are clustered tightly.
+  $$Var(X) = \frac{1}{n-1}\sum_{i=1}^n (x_i - \bar{x})^2$$
+  Here, $x_i$ is each data point, $\bar{x}$ is the mean, and $n$ is the number of data points.
 
-*   **Covariance** measures how two features vary together.
-    *   Positive covariance: If one feature increases, the other tends to increase.
-    *   Negative covariance: If one feature increases, the other tends to decrease.
-    *   Zero covariance: The features are independent.
+- **Covariance** measures how two features vary together.
+  - Positive covariance: If one feature increases, the other tends to increase.
+  - Negative covariance: If one feature increases, the other tends to decrease.
+  - Zero covariance: The features are independent.
     $$Cov(X,Y) = \frac{1}{n-1}\sum_{i=1}^n (x_i - \bar{x})(y_i - \bar{y})$$
     A **Covariance Matrix** is then created, showing the covariance between all pairs of features in your dataset. The diagonal elements are the variances of each feature, and off-diagonal elements are the covariances between different features. This matrix is crucial because it tells us how our features relate to each other's spread.
 
@@ -71,13 +71,15 @@ Imagine a matrix $A$ (our covariance matrix). When we multiply a vector $v$ by $
 The equation for this is:
 $$Av = \lambda v$$
 Here:
-*   $A$ is our covariance matrix.
-*   $v$ is an **eigenvector**, which represents a principal component – a direction in our data space.
-*   $\lambda$ is the **eigenvalue** corresponding to that eigenvector. It tells us how much variance is captured along that eigenvector's direction. A larger eigenvalue means that eigenvector captures more variance.
+
+- $A$ is our covariance matrix.
+- $v$ is an **eigenvector**, which represents a principal component – a direction in our data space.
+- $\lambda$ is the **eigenvalue** corresponding to that eigenvector. It tells us how much variance is captured along that eigenvector's direction. A larger eigenvalue means that eigenvector captures more variance.
 
 So, in PCA:
-*   The **eigenvectors** of the covariance matrix are our **principal components**. They are the new axes that capture the most variance.
-*   The **eigenvalues** tell us the **magnitude of variance** captured along each principal component.
+
+- The **eigenvectors** of the covariance matrix are our **principal components**. They are the new axes that capture the most variance.
+- The **eigenvalues** tell us the **magnitude of variance** captured along each principal component.
 
 ### The PCA Recipe: Step-by-Step
 
@@ -99,32 +101,34 @@ And voilà! You now have a transformed dataset with fewer features, where each n
 
 PCA isn't just a theoretical concept; it's incredibly useful in the real world:
 
-*   **Visualization:** Reducing high-dimensional data to 2 or 3 components allows us to plot and visually explore clusters or patterns that were hidden before.
-*   **Noise Reduction:** Components with very small eigenvalues often represent noise. By discarding these, PCA can effectively denoise your data.
-*   **Feature Extraction:** Instead of using all original features, you can use the principal components as new, more informative features for your machine learning models. This can significantly improve model performance and speed.
-*   **Image Compression:** PCA can be used to compress images by retaining only the most significant principal components of pixel data, reducing storage needs.
+- **Visualization:** Reducing high-dimensional data to 2 or 3 components allows us to plot and visually explore clusters or patterns that were hidden before.
+- **Noise Reduction:** Components with very small eigenvalues often represent noise. By discarding these, PCA can effectively denoise your data.
+- **Feature Extraction:** Instead of using all original features, you can use the principal components as new, more informative features for your machine learning models. This can significantly improve model performance and speed.
+- **Image Compression:** PCA can be used to compress images by retaining only the most significant principal components of pixel data, reducing storage needs.
 
 ### Pros and Cons
 
 Like any tool, PCA has its strengths and weaknesses:
 
 **Pros:**
-*   **Reduces Dimensionality:** Solves the curse of dimensionality, speeds up training.
-*   **Removes Redundancy:** Creates uncorrelated features (principal components).
-*   **Reduces Noise:** Can filter out less informative features.
-*   **Improves Generalization:** By focusing on the most important variance, it can help models generalize better to new data.
+
+- **Reduces Dimensionality:** Solves the curse of dimensionality, speeds up training.
+- **Removes Redundancy:** Creates uncorrelated features (principal components).
+- **Reduces Noise:** Can filter out less informative features.
+- **Improves Generalization:** By focusing on the most important variance, it can help models generalize better to new data.
 
 **Cons:**
-*   **Loss of Interpretability:** Principal components are linear combinations of original features, making it hard to interpret what a specific component "means" in real-world terms (e.g., "PC1 is a combination of height, weight, and age" – what does that truly represent?).
-*   **Assumes Linearity:** PCA only works well if the principal components are linear combinations of the features. If your data has complex non-linear relationships, PCA might not be the best choice (though kernel PCA can address this).
-*   **Sensitive to Scaling:** As mentioned, features with larger scales will have a disproportionate impact if not standardized.
+
+- **Loss of Interpretability:** Principal components are linear combinations of original features, making it hard to interpret what a specific component "means" in real-world terms (e.g., "PC1 is a combination of height, weight, and age" – what does that truly represent?).
+- **Assumes Linearity:** PCA only works well if the principal components are linear combinations of the features. If your data has complex non-linear relationships, PCA might not be the best choice (though kernel PCA can address this).
+- **Sensitive to Scaling:** As mentioned, features with larger scales will have a disproportionate impact if not standardized.
 
 ### When Should You Use PCA?
 
-*   When dealing with a high number of features where some might be redundant or correlated.
-*   When computational performance is an issue due to high dimensionality.
-*   When you need to visualize data that has more than 3 dimensions.
-*   As a pre-processing step to improve the performance of other machine learning algorithms.
+- When dealing with a high number of features where some might be redundant or correlated.
+- When computational performance is an issue due to high dimensionality.
+- When you need to visualize data that has more than 3 dimensions.
+- As a pre-processing step to improve the performance of other machine learning algorithms.
 
 ### Wrapping Up
 

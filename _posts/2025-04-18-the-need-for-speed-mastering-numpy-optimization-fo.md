@@ -12,7 +12,7 @@ Hello future data scientists and curious coders!
 
 If you've spent any time working with data in Python, you've undoubtedly encountered NumPy. It's the bedrock for numerical computing, a true superhero that allows us to perform complex mathematical operations on arrays and matrices with impressive speed. But sometimes, even superheroes need a little training to unlock their full potential.
 
-I remember my early days, proudly writing Python code to process large datasets. I'd hit "run" and then... wait. And wait. Sometimes I'd even grab a coffee, come back, and it would still be churning! Then I discovered NumPy, and it felt like magic. Loops that took minutes suddenly finished in seconds. But even with NumPy, there comes a point where you need *more* speed. Where every millisecond counts. That's when I realized the power of **NumPy Optimization**. It's not just about using NumPy; it's about using it *smartly*.
+I remember my early days, proudly writing Python code to process large datasets. I'd hit "run" and then... wait. And wait. Sometimes I'd even grab a coffee, come back, and it would still be churning! Then I discovered NumPy, and it felt like magic. Loops that took minutes suddenly finished in seconds. But even with NumPy, there comes a point where you need _more_ speed. Where every millisecond counts. That's when I realized the power of **NumPy Optimization**. It's not just about using NumPy; it's about using it _smartly_.
 
 Today, I want to share some of the techniques I've learned to squeeze every last drop of performance out of my NumPy code. Think of this as a training manual to turn your data science projects into turbocharged machines!
 
@@ -20,13 +20,14 @@ Today, I want to share some of the techniques I've learned to squeeze every last
 
 ### Why is NumPy Already So Fast (and Why Isn't it Always Enough)?
 
-Before we dive into making NumPy faster, let's briefly understand *why* it's already a performance marvel compared to standard Python lists.
+Before we dive into making NumPy faster, let's briefly understand _why_ it's already a performance marvel compared to standard Python lists.
 
 The secret sauce is simple:
+
 1.  **Under the Hood:** NumPy arrays are implemented in C and Fortran, languages famous for their raw speed. When you perform an operation on a NumPy array, you're essentially calling highly optimized C/Fortran code, not slow Python loops.
 2.  **Contiguous Memory:** NumPy arrays store their elements in a contiguous block of memory. Imagine all your books perfectly lined up on one long shelf, one after another. This allows the CPU to access data much faster because it knows exactly where the next piece of data is. Python lists, on the other hand, store references to objects scattered throughout memory, making access slower.
 
-So, if it's already so fast, why optimize? Because it's easy to accidentally write "Pythonic" code within NumPy that negates its core advantages. We need to learn to *think* in NumPy.
+So, if it's already so fast, why optimize? Because it's easy to accidentally write "Pythonic" code within NumPy that negates its core advantages. We need to learn to _think_ in NumPy.
 
 ---
 
@@ -121,9 +122,9 @@ Data types (dtypes) are crucial for both memory efficiency and speed. By default
 
 If you know your data doesn't require such high precision (e.g., pixel values from 0-255, counts that won't exceed 32,000, or floating-point numbers where `float32` is sufficient), you can specify smaller dtypes:
 
-*   `np.float32` (4 bytes) instead of `np.float64` (8 bytes)
-*   `np.int8` (1 byte), `np.int16` (2 bytes), `np.int32` (4 bytes) instead of `np.int64` (8 bytes)
-*   `np.uint8` (unsigned, 1 byte, good for images)
+- `np.float32` (4 bytes) instead of `np.float64` (8 bytes)
+- `np.int8` (1 byte), `np.int16` (2 bytes), `np.int32` (4 bytes) instead of `np.int64` (8 bytes)
+- `np.uint8` (unsigned, 1 byte, good for images)
 
 ```python
 # Default float64
@@ -170,7 +171,8 @@ for i in range(10**5):
 end_time = time.time()
 print(f"NumPy pre-allocation took: {end_time - start_time:.4f} seconds")
 ```
-*(Note: Even better would be `np.arange(10**5) * 2` for full vectorization, but this example focuses on the pre-allocation concept when you *must* loop or fill iteratively)*
+
+_(Note: Even better would be `np.arange(10\*\*5) _ 2` for full vectorization, but this example focuses on the pre-allocation concept when you _must_ loop or fill iteratively)\*
 
 ---
 
@@ -189,8 +191,9 @@ Consider a 2D array:
 ```
 
 In C-contiguous order, the elements are stored as `A, B, C, D, E, F, G, H, I` in memory.
-*   Accessing `arr[row, col]` then `arr[row, col+1]` (moving along a row) is fast.
-*   Accessing `arr[row, col]` then `arr[row+1, col]` (moving down a column) is slower because it has to skip over entire rows to get to the next element.
+
+- Accessing `arr[row, col]` then `arr[row, col+1]` (moving along a row) is fast.
+- Accessing `arr[row, col]` then `arr[row+1, col]` (moving down a column) is slower because it has to skip over entire rows to get to the next element.
 
 While for most common operations NumPy handles this efficiently, if you're writing custom, element-wise loops (which, ideally, you're avoiding!), be mindful of how you access elements. Always try to iterate or access data in the order it's stored for maximum cache efficiency.
 
@@ -200,7 +203,7 @@ While for most common operations NumPy handles this efficiently, if you're writi
 
 NumPy's built-in functions like `np.sum()`, `np.mean()`, `np.dot()`, `np.max()`, etc., are highly optimized. Always use them instead of trying to roll your own logic.
 
-Furthermore, some NumPy functions allow you to specify an `out` parameter. This means instead of creating a *new* array to store the result, NumPy will place the result directly into a pre-existing array you provide. This avoids unnecessary memory allocations and deallocations, which can be beneficial for performance, especially in loops or memory-constrained environments.
+Furthermore, some NumPy functions allow you to specify an `out` parameter. This means instead of creating a _new_ array to store the result, NumPy will place the result directly into a pre-existing array you provide. This avoids unnecessary memory allocations and deallocations, which can be beneficial for performance, especially in loops or memory-constrained environments.
 
 ```python
 a = np.random.rand(10**6)
@@ -228,6 +231,7 @@ How do you know if your optimizations are working? You measure them! In Jupyter 
 %timeit np.random.rand(10**6)**2
 %timeit [x**2 for x in np.random.rand(10**6)]
 ```
+
 The output will clearly show the difference, giving you empirical evidence for your optimization efforts.
 
 ---
@@ -235,13 +239,15 @@ The output will clearly show the difference, giving you empirical evidence for y
 ### Beyond NumPy: When Even Optimization Isn't Enough
 
 Sometimes, even after applying all these NumPy optimization tricks, your code might still be too slow. This usually happens when:
-*   You have inherently sequential operations that can't be fully vectorized.
-*   Your data is too large to fit into memory, or processing is incredibly CPU-intensive.
+
+- You have inherently sequential operations that can't be fully vectorized.
+- Your data is too large to fit into memory, or processing is incredibly CPU-intensive.
 
 In such cases, you might look into:
-*   **Numba:** A JIT (Just-In-Time) compiler that can take Python functions (especially those with loops) and compile them into fast machine code, often rivaling C/Fortran performance.
-*   **Dask:** For "out-of-core" (data too big for RAM) or parallel computing, Dask scales NumPy-like operations across multiple cores or even clusters.
-*   **Cython:** Allows you to write C extensions for Python directly, giving you ultimate control over performance.
+
+- **Numba:** A JIT (Just-In-Time) compiler that can take Python functions (especially those with loops) and compile them into fast machine code, often rivaling C/Fortran performance.
+- **Dask:** For "out-of-core" (data too big for RAM) or parallel computing, Dask scales NumPy-like operations across multiple cores or even clusters.
+- **Cython:** Allows you to write C extensions for Python directly, giving you ultimate control over performance.
 
 These are more advanced topics, but it's good to know they exist when you hit the limits of pure NumPy.
 

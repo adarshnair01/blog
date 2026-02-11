@@ -1,14 +1,14 @@
 ---
 title: "Unpacking GPT: A High-Schooler's Deep Dive into the Architecture Behind the AI Magic"
 date: "2024-08-24"
-excerpt: "Ever wondered how GPT seems to \"think\" and generate human-like text? Let's pull back the curtain and explore the ingenious architectural blueprint that makes these language models so incredibly powerful."
+excerpt: 'Ever wondered how GPT seems to "think" and generate human-like text? Let''s pull back the curtain and explore the ingenious architectural blueprint that makes these language models so incredibly powerful.'
 tags: ["Machine Learning", "Natural Language Processing", "GPT", "Transformer Architecture", "Deep Learning"]
 author: "Adarsh Nair"
 ---
 
 Hey everyone!
 
-Remember that feeling when you first encountered GPT-3 or ChatGPT? That initial awe, maybe a little bit of wonder, mixed with "how on Earth does it *do* that?" I certainly do. It felt like magic, capable of writing poems, debugging code, explaining complex topics, and even holding surprisingly coherent conversations. For a long time, I just accepted it as "advanced AI," but the engineer in me kept nagging: *how does it actually work?*
+Remember that feeling when you first encountered GPT-3 or ChatGPT? That initial awe, maybe a little bit of wonder, mixed with "how on Earth does it _do_ that?" I certainly do. It felt like magic, capable of writing poems, debugging code, explaining complex topics, and even holding surprisingly coherent conversations. For a long time, I just accepted it as "advanced AI," but the engineer in me kept nagging: _how does it actually work?_
 
 This blog post is my attempt to demystify the core architecture of GPT. We're going to break down the "T" (Transformer) and the "GP" (Generative Pre-trained) and understand the elegant principles that empower these language models. Don't worry if you're new to some of these terms; we'll build our understanding step-by-step, like assembling a cool Lego set.
 
@@ -16,7 +16,7 @@ This blog post is my attempt to demystify the core architecture of GPT. We're go
 
 Before GPT, most powerful Natural Language Processing (NLP) models relied on something called Recurrent Neural Networks (RNNs) or their cousins, LSTMs. These models processed text word-by-word, maintaining a "memory" of previous words. They were okay, but they struggled with very long sentences and couldn't easily process multiple words at once.
 
-Then came the Transformer, introduced in the seminal 2017 paper "Attention Is All You Need." This paper revolutionized NLP by proposing an architecture that *didn't* need to process words sequentially. Instead, it could look at all words in a sentence simultaneously, weighing their importance to each other. This breakthrough unlocked parallel processing, making models much faster to train and much more capable.
+Then came the Transformer, introduced in the seminal 2017 paper "Attention Is All You Need." This paper revolutionized NLP by proposing an architecture that _didn't_ need to process words sequentially. Instead, it could look at all words in a sentence simultaneously, weighing their importance to each other. This breakthrough unlocked parallel processing, making models much faster to train and much more capable.
 
 The Transformer is the bedrock of GPT. Let's dig into its most critical component: **Self-Attention**.
 
@@ -24,13 +24,13 @@ The Transformer is the bedrock of GPT. Let's dig into its most critical componen
 
 Imagine you're reading a sentence like, "The animal didn't cross the street because it was too wide." What does "it" refer to? Logically, "the street." Now consider, "The animal didn't cross the street because it was too tired." Here, "it" refers to "the animal." As humans, we effortlessly understand this context. Self-attention allows the model to do something similar.
 
-For every word in a sentence, self-attention helps the model decide *how much* to focus on other words to understand that current word better. It creates a weighted sum of all other words, where the weights are determined by how relevant those words are.
+For every word in a sentence, self-attention helps the model decide _how much_ to focus on other words to understand that current word better. It creates a weighted sum of all other words, where the weights are determined by how relevant those words are.
 
 How does it do this? Through three key vectors for each word: **Query (Q)**, **Key (K)**, and **Value (V)**. Think of it like this:
 
-*   **Query (Q):** What am I looking for? (e.g., "I'm looking for words related to 'it' in my sentence.")
-*   **Key (K):** What do I have? (e.g., "Here's what each word in the sentence represents.")
-*   **Value (V):** What information does this word provide? (e.g., "If you find me relevant, here's my actual content.")
+- **Query (Q):** What am I looking for? (e.g., "I'm looking for words related to 'it' in my sentence.")
+- **Key (K):** What do I have? (e.g., "Here's what each word in the sentence represents.")
+- **Value (V):** What information does this word provide? (e.g., "If you find me relevant, here's my actual content.")
 
 The self-attention mechanism works by:
 
@@ -54,8 +54,8 @@ One challenge with self-attention is that it processes all words simultaneously.
 
 To solve this, the Transformer adds **Positional Encoding**. Before feeding the word embeddings into the attention layers, a special vector (the positional encoding) is added to each word's embedding. This vector contains information about the word's position in the sequence. These aren't learned; they're fixed mathematical patterns, usually sines and cosines of varying frequencies:
 
-$ PE_{(pos, 2i)} = \sin(pos / 10000^{2i/d_{model}}) $
-$ PE_{(pos, 2i+1)} = \cos(pos / 10000^{2i/d_{model}}) $
+$ PE*{(pos, 2i)} = \sin(pos / 10000^{2i/d*{model}}) $
+$ PE*{(pos, 2i+1)} = \cos(pos / 10000^{2i/d*{model}}) $
 
 Where $pos$ is the position of the word, $i$ is the dimension within the embedding, and $d_{model}$ is the total dimension of the embedding. This way, each word's initial representation now includes both its meaning and its position, allowing the attention mechanism to implicitly use order information.
 
@@ -63,9 +63,9 @@ Where $pos$ is the position of the word, $i$ is the dimension within the embeddi
 
 Beyond attention, the Transformer block also includes:
 
-*   **Feed-Forward Networks (FFN):** After the attention layer, each position independently passes through a simple feed-forward network. This allows the model to process the attended information further.
-*   **Residual Connections:** To help with training very deep networks, a "shortcut" is added. The input to each sub-layer (attention or FFN) is added to its output. This helps gradients flow more easily during backpropagation, preventing vanishing gradients.
-*   **Layer Normalization:** Applied after the residual connection, layer normalization helps stabilize the training process by normalizing the inputs to the next layer across the features, rather than across the batch (as in batch normalization).
+- **Feed-Forward Networks (FFN):** After the attention layer, each position independently passes through a simple feed-forward network. This allows the model to process the attended information further.
+- **Residual Connections:** To help with training very deep networks, a "shortcut" is added. The input to each sub-layer (attention or FFN) is added to its output. This helps gradients flow more easily during backpropagation, preventing vanishing gradients.
+- **Layer Normalization:** Applied after the residual connection, layer normalization helps stabilize the training process by normalizing the inputs to the next layer across the features, rather than across the batch (as in batch normalization).
 
 These components are stacked together to form many "Transformer blocks" or "layers," allowing the model to learn increasingly complex representations of the input text.
 
@@ -75,9 +75,9 @@ Now that we understand the "T," let's look at the "GP."
 
 #### Generative: Creating New Text
 
-GPT stands for **Generative Pre-trained Transformer**. The "Generative" part means it's designed to *generate* new text. Unlike models that might classify text (e.g., "Is this movie review positive or negative?"), GPT's primary task is to predict the *next word* given all the previous words. This is called **autoregressive** generation.
+GPT stands for **Generative Pre-trained Transformer**. The "Generative" part means it's designed to _generate_ new text. Unlike models that might classify text (e.g., "Is this movie review positive or negative?"), GPT's primary task is to predict the _next word_ given all the previous words. This is called **autoregressive** generation.
 
-To ensure it's truly generative and not "cheating" by looking ahead, GPT uses a special type of self-attention called **Masked Self-Attention**. In this variant, when the model is calculating the attention for a particular word, it is prevented from "attending" to any future words in the sequence. It can only look at the word itself and the words *before* it. This is crucial for its ability to generate text naturally, word by word, just like a human writer.
+To ensure it's truly generative and not "cheating" by looking ahead, GPT uses a special type of self-attention called **Masked Self-Attention**. In this variant, when the model is calculating the attention for a particular word, it is prevented from "attending" to any future words in the sequence. It can only look at the word itself and the words _before_ it. This is crucial for its ability to generate text naturally, word by word, just like a human writer.
 
 #### Pre-trained: Learning from the World's Text
 
@@ -89,7 +89,7 @@ This massive exposure to diverse human language allows GPT to learn an incredibl
 
 ### Putting it Together: The GPT Architecture
 
-Unlike the original Transformer architecture, which had both an "Encoder" (to understand input) and a "Decoder" (to generate output), GPT is a **decoder-only Transformer**. It essentially uses many stacked *decoder blocks* from the original Transformer, but with that crucial masked self-attention.
+Unlike the original Transformer architecture, which had both an "Encoder" (to understand input) and a "Decoder" (to generate output), GPT is a **decoder-only Transformer**. It essentially uses many stacked _decoder blocks_ from the original Transformer, but with that crucial masked self-attention.
 
 Here's the simplified flow for generation:
 
@@ -97,10 +97,10 @@ Here's the simplified flow for generation:
 2.  **Embeddings:** The words in your prompt are converted into numerical vectors (embeddings).
 3.  **Positional Encoding:** Positional information is added to these embeddings.
 4.  **Stacked Decoder Blocks:** These vectors pass through many layers of decoder blocks.
-    *   Each block has **masked self-attention** (only looks at previous words).
-    *   It then has a **feed-forward network**.
-    *   Layer normalization and residual connections are everywhere.
-5.  **Output Layer:** The final output of the last decoder block is fed into a linear layer, followed by a softmax function. This produces a probability distribution over the *entire vocabulary* for the next word.
+    - Each block has **masked self-attention** (only looks at previous words).
+    - It then has a **feed-forward network**.
+    - Layer normalization and residual connections are everywhere.
+5.  **Output Layer:** The final output of the last decoder block is fed into a linear layer, followed by a softmax function. This produces a probability distribution over the _entire vocabulary_ for the next word.
 6.  **Sampling:** The model then samples a word from this probability distribution (e.g., if "space" has an 80% chance and "star" has a 10% chance, it's highly likely to pick "space").
 7.  **Loop:** The newly generated word is added to the original prompt, and the entire process repeats, predicting the next word, until a stop condition is met (e.g., it generates an "end-of-sequence" token, or reaches a maximum length).
 
@@ -116,6 +116,6 @@ The fundamental architecture (the Transformer with masked self-attention) remain
 
 Stepping back, it's truly remarkable how a relatively simple, yet brilliantly designed, architecture like the Transformer, when scaled up massively and trained on the vastness of human language, can produce something as intelligent and versatile as GPT.
 
-We've explored the core components: the power of self-attention to weigh word relationships, the multi-headed approach for diverse insights, positional encoding to preserve order, and the decoder-only, masked self-attention structure that allows GPT to be *generative*.
+We've explored the core components: the power of self-attention to weigh word relationships, the multi-headed approach for diverse insights, positional encoding to preserve order, and the decoder-only, masked self-attention structure that allows GPT to be _generative_.
 
-It's not just about predicting the next word; it's about learning the intricate patterns and relationships within language that allow it to *understand* and *create*. The journey from "magical black box" to "understandable engineering marvel" is incredibly rewarding, and I hope this deep dive has shed some light on the ingenious brain behind our AI companions. The world of AI is moving fast, but understanding these foundational architectures is key to not just using, but truly shaping its future. Keep learning, keep exploring!
+It's not just about predicting the next word; it's about learning the intricate patterns and relationships within language that allow it to _understand_ and _create_. The journey from "magical black box" to "understandable engineering marvel" is incredibly rewarding, and I hope this deep dive has shed some light on the ingenious brain behind our AI companions. The world of AI is moving fast, but understanding these foundational architectures is key to not just using, but truly shaping its future. Keep learning, keep exploring!

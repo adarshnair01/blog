@@ -12,7 +12,7 @@ When I first dipped my toes into the vast ocean of Machine Learning, I was immed
 
 Think about how you make decisions every day. Should I bring an umbrella? "Is it cloudy outside? If yes, is there a high chance of rain? If yes, bring umbrella." That's a decision tree in action! Today, we’re going to unravel the magic behind these fascinating structures, understanding how they learn to make predictions, from predicting house prices to classifying different types of tumors.
 
-### What Exactly *Is* a Decision Tree?
+### What Exactly _Is_ a Decision Tree?
 
 At its core, a Decision Tree is a **flowchart-like structure** where each internal node represents a "test" on an attribute (e.g., "Is the outlook sunny?"), each branch represents the outcome of the test, and each leaf node represents a class label (for classification) or a numerical value (for regression). The topmost node in the tree is called the **root node**.
 
@@ -22,7 +22,7 @@ The goal of a Decision Tree is to partition the data into subsets that are as "p
 
 ### How Do Decision Trees Learn to Split? The Art of Impurity Reduction
 
-This is where the real "learning" happens, and it's where we get a little deeper into the technical side. How does a tree decide which question to ask first? Or second? The answer lies in finding the *best possible split* at each step. This "best split" is determined by how much it reduces the "impurity" or "disorder" within the data subsets it creates.
+This is where the real "learning" happens, and it's where we get a little deeper into the technical side. How does a tree decide which question to ask first? Or second? The answer lies in finding the _best possible split_ at each step. This "best split" is determined by how much it reduces the "impurity" or "disorder" within the data subsets it creates.
 
 Let's break down the most common metrics used for this:
 
@@ -39,8 +39,9 @@ The formula for Gini Impurity for a node $t$ is:
 $$G(t) = 1 - \sum_{i=1}^{C} (p_i)^2$$
 
 Where:
-*   $C$ is the number of classes.
-*   $p_i$ is the proportion of observations belonging to class $i$ in the node $t$.
+
+- $C$ is the number of classes.
+- $p_i$ is the proportion of observations belonging to class $i$ in the node $t$.
 
 **Intuition:** The lower the Gini Impurity, the better the split. The algorithm tries to find a split that results in the greatest decrease in Gini Impurity.
 
@@ -59,11 +60,12 @@ Decision Trees use **Information Gain** to decide on the best split. Information
 $$IG(S, A) = H(S) - \sum_{v \in Values(A)} \frac{|S_v|}{|S|} H(S_v)$$
 
 Where:
-*   $S$ is the set of data before the split.
-*   $A$ is the attribute being split on.
-*   $Values(A)$ are the possible values of attribute $A$.
-*   $S_v$ is the subset of $S$ for which attribute $A$ has value $v$.
-*   $|S_v|$ and $|S|$ are the number of elements in subset $S_v$ and set $S$ respectively.
+
+- $S$ is the set of data before the split.
+- $A$ is the attribute being split on.
+- $Values(A)$ are the possible values of attribute $A$.
+- $S_v$ is the subset of $S$ for which attribute $A$ has value $v$.
+- $|S_v|$ and $|S|$ are the number of elements in subset $S_v$ and set $S$ respectively.
 
 **Intuition:** We want to find a split that provides the most "information" about the target variable, thereby reducing uncertainty the most.
 
@@ -78,9 +80,10 @@ The MSE for a node $t$ is calculated as:
 $$MSE(t) = \frac{1}{N} \sum_{i \in t} (y_i - \hat{y}_t)^2$$
 
 Where:
-*   $N$ is the number of data points in node $t$.
-*   $y_i$ is the actual target value for data point $i$.
-*   $\hat{y}_t$ is the predicted target value for node $t$ (usually the mean of all $y_i$ in that node).
+
+- $N$ is the number of data points in node $t$.
+- $y_i$ is the actual target value for data point $i$.
+- $\hat{y}_t$ is the predicted target value for node $t$ (usually the mean of all $y_i$ in that node).
 
 **Intuition:** A split is considered "good" if it significantly reduces the overall MSE of the resulting child nodes compared to the parent node. This means the values within each child node become more tightly clustered around their respective means.
 
@@ -94,17 +97,17 @@ The algorithm for building a Decision Tree works in a greedy, top-down, recursiv
 4.  **Create Child Nodes:** Split the data into subsets based on the chosen best split and create child nodes.
 5.  **Recurse:** Repeat steps 2-4 for each new child node, treating it as a new root for its subset of data.
 6.  **Stop:** The process continues until a stopping condition is met. This could be:
-    *   The node becomes perfectly pure.
-    *   All data points in a node have the same feature values (no more splits possible).
-    *   A pre-defined maximum depth for the tree is reached.
-    *   The number of data points in a node falls below a minimum threshold.
-    *   The reduction in impurity from any potential split is too small.
+    - The node becomes perfectly pure.
+    - All data points in a node have the same feature values (no more splits possible).
+    - A pre-defined maximum depth for the tree is reached.
+    - The number of data points in a node falls below a minimum threshold.
+    - The reduction in impurity from any potential split is too small.
 
-This greedy approach means the algorithm makes the *locally optimal* choice at each step, hoping it leads to a *globally optimal* tree. While not always guaranteed, it works remarkably well in practice.
+This greedy approach means the algorithm makes the _locally optimal_ choice at each step, hoping it leads to a _globally optimal_ tree. While not always guaranteed, it works remarkably well in practice.
 
 ### Strengths of Decision Trees: Why We Love Them
 
-1.  **Interpretability & Visual Appeal:** This is perhaps their biggest superpower. You can literally draw a Decision Tree and follow its logic. It's a "white-box" model, meaning you can easily understand *why* a particular prediction was made. This is invaluable in fields like medicine or finance where explainability is crucial.
+1.  **Interpretability & Visual Appeal:** This is perhaps their biggest superpower. You can literally draw a Decision Tree and follow its logic. It's a "white-box" model, meaning you can easily understand _why_ a particular prediction was made. This is invaluable in fields like medicine or finance where explainability is crucial.
 2.  **Handles Both Numerical and Categorical Data:** With appropriate encoding, Decision Trees can seamlessly work with different data types.
 3.  **No Feature Scaling Required:** Unlike many other algorithms (like SVMs or K-Nearest Neighbors), Decision Trees are not sensitive to the scale of features. You don't need to normalize or standardize your data.
 4.  **Can Model Non-linear Relationships:** They don't assume a linear relationship between features and the target, making them versatile for complex datasets.
@@ -115,9 +118,9 @@ This greedy approach means the algorithm makes the *locally optimal* choice at e
 No model is perfect, and Decision Trees have their quirks:
 
 1.  **Overfitting:** This is their Achilles' heel. A tree can become excessively complex, growing too deep and learning the noise in the training data rather than the underlying patterns. It will perform exceptionally well on training data but poorly on unseen data.
-    *   **Solution: Pruning!** This is like trimming a plant to make it healthier.
-        *   **Pre-pruning:** Stopping the tree from growing too deep in the first place (e.g., setting a `max_depth`, `min_samples_leaf`, `min_impurity_decrease`).
-        *   **Post-pruning:** Growing a full tree and then removing branches that provide little predictive power (e.g., using Cost-Complexity Pruning).
+    - **Solution: Pruning!** This is like trimming a plant to make it healthier.
+      - **Pre-pruning:** Stopping the tree from growing too deep in the first place (e.g., setting a `max_depth`, `min_samples_leaf`, `min_impurity_decrease`).
+      - **Post-pruning:** Growing a full tree and then removing branches that provide little predictive power (e.g., using Cost-Complexity Pruning).
 
 2.  **Instability:** Small changes in the training data can sometimes lead to a completely different tree structure. This makes them somewhat sensitive.
 
@@ -129,8 +132,8 @@ No model is perfect, and Decision Trees have their quirks:
 
 While single Decision Trees are powerful, their weaknesses (especially overfitting and instability) can be significantly mitigated by combining multiple trees. This leads us to **ensemble methods**, which are some of the most powerful and widely used algorithms in machine learning:
 
-*   **Random Forests:** Build many Decision Trees independently and average their predictions (for regression) or take a majority vote (for classification). This technique, called **Bagging**, greatly reduces variance and overfitting.
-*   **Gradient Boosting (e.g., XGBoost, LightGBM):** Build trees sequentially, where each new tree tries to correct the errors of the previous ones. This technique, called **Boosting**, focuses on reducing bias.
+- **Random Forests:** Build many Decision Trees independently and average their predictions (for regression) or take a majority vote (for classification). This technique, called **Bagging**, greatly reduces variance and overfitting.
+- **Gradient Boosting (e.g., XGBoost, LightGBM):** Build trees sequentially, where each new tree tries to correct the errors of the previous ones. This technique, called **Boosting**, focuses on reducing bias.
 
 These ensemble methods leverage the strengths of individual Decision Trees while compensating for their weaknesses, creating incredibly robust and accurate models.
 

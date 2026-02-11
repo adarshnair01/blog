@@ -24,8 +24,8 @@ Let's dive in!
 
 One of the first hurdles many face with Pandas is selecting data. You might start with bracket notation (`df[...]`), which is flexible but can be ambiguous and sometimes leads to unexpected behaviors or warnings (like `SettingWithCopyWarning`). Enter `loc` and `iloc` – your precise GPS for data selection.
 
-*   `loc` is **label-based**: You use row and column *labels* (names) to select data.
-*   `iloc` is **integer-location based**: You use integer *positions* (0-indexed) to select data.
+- `loc` is **label-based**: You use row and column _labels_ (names) to select data.
+- `iloc` is **integer-location based**: You use integer _positions_ (0-indexed) to select data.
 
 In my early days, I'd often mix these up or rely on just `[]`. Learning to consistently use `loc` and `iloc` for explicit selection brought clarity and prevented subtle bugs.
 
@@ -66,7 +66,8 @@ print(df.iloc[0:3, [1, 4]])
 print("\nValue at row 1, col 3 (Bob's course_math) (using .iloc):")
 print(df.iloc[1, 2])
 ```
-*Takeaway:* Always use `loc` or `iloc` for explicit and unambiguous data selection and assignment. It makes your code clearer and less prone to errors.
+
+_Takeaway:_ Always use `loc` or `iloc` for explicit and unambiguous data selection and assignment. It makes your code clearer and less prone to errors.
 
 ## Tip 2: Embrace Method Chaining – Write Cleaner, Faster Code
 
@@ -96,9 +97,10 @@ top_students_chained = (
 )
 print(top_students_chained)
 ```
+
 *Note the `lambda x:` inside `assign`. This is a powerful trick! It allows `assign` to refer to columns created *within* the current `assign` call, making chains even more flexible.*
 
-*Takeaway:* Chain your operations whenever possible. Your code will be more readable, memory-efficient, and often faster.
+_Takeaway:_ Chain your operations whenever possible. Your code will be more readable, memory-efficient, and often faster.
 
 ## Tip 3: Vectorization is Your Superpower – Ditching Slow Loops
 
@@ -131,7 +133,7 @@ print(df[['name', 'course_math', 'course_science', 'total_score_vectorized']].he
 
 The difference in performance isn't just noticeable; for large datasets, it can be the difference between seconds and hours.
 
-*Takeaway:* Always look for built-in Pandas or NumPy functions to perform operations across Series or DataFrames. If you find yourself writing a `for` loop to iterate row-by-row, pause and ask, "Is there a vectorized way to do this?" (Hint: almost always, yes!).
+_Takeaway:_ Always look for built-in Pandas or NumPy functions to perform operations across Series or DataFrames. If you find yourself writing a `for` loop to iterate row-by-row, pause and ask, "Is there a vectorized way to do this?" (Hint: almost always, yes!).
 
 ## Tip 4: The Power of `Categorical` Dtype – Slimming Down Your Data
 
@@ -156,16 +158,17 @@ df.info(memory_usage='deep')
 print("\nOriginal 'city' dtype:", df['city'].dtype)
 print("New 'city_category' dtype:", df['city_category'].dtype)
 ```
+
 You'll often see a significant reduction in memory usage for such columns. For datasets with millions of rows and a few categorical columns, this can make the difference between your script crashing or running smoothly.
 
-*Takeaway:* When you have string columns with a limited set of unique values, convert them to `Categorical` dtype. Your memory will thank you, and some operations might even speed up.
+_Takeaway:_ When you have string columns with a limited set of unique values, convert them to `Categorical` dtype. Your memory will thank you, and some operations might even speed up.
 
 ## Tip 5: Reshaping Data with `melt()` and `pivot_table()` – Tidy Data's Best Friends
 
 Data rarely comes in the exact shape you need for analysis or machine learning models. Sometimes it's "wide" (too many columns), sometimes "long" (too many rows for a single observation). `melt()` and `pivot_table()` are the dynamic duo for reshaping data.
 
-*   `melt()` transforms "wide" data into "long" format. It's like unpivoting, taking multiple columns and stacking them into two new columns: one for the variable names and one for their corresponding values.
-*   `pivot_table()` (or `pivot()`) transforms "long" data into "wide" format. It aggregates data, creating new columns from unique values in an existing column.
+- `melt()` transforms "wide" data into "long" format. It's like unpivoting, taking multiple columns and stacking them into two new columns: one for the variable names and one for their corresponding values.
+- `pivot_table()` (or `pivot()`) transforms "long" data into "wide" format. It aggregates data, creating new columns from unique values in an existing column.
 
 I remember struggling to get data into the right format for plotting or for certain machine learning libraries. Understanding `melt` and `pivot_table` made "tidy data" a reality for me, aligning with Hadley Wickham's principle where each variable is a column, each observation is a row, and each type of observational unit is a table.
 
@@ -200,7 +203,7 @@ print("\nDataFrame after pivoting back (long to wide, aggregated):")
 print(df_pivot.head())
 ```
 
-*Takeaway:* Learn to reshape data effectively with `melt()` and `pivot_table()`. It's indispensable for preparing data for analysis, visualization, and modeling.
+_Takeaway:_ Learn to reshape data effectively with `melt()` and `pivot_table()`. It's indispensable for preparing data for analysis, visualization, and modeling.
 
 ## Tip 6: `pipe()` for Custom Function Flow – Your Own Fluent API
 
@@ -230,9 +233,10 @@ df_processed = (
 )
 print(df_processed)
 ```
+
 Notice how `df_input` in `add_passing_status` automatically receives the DataFrame from the previous step in the chain. You can also pass additional arguments to your piped function as demonstrated with `passing_score`.
 
-*Takeaway:* Use `pipe()` to seamlessly integrate custom functions into your Pandas method chains, keeping your code fluent and organized.
+_Takeaway:_ Use `pipe()` to seamlessly integrate custom functions into your Pandas method chains, keeping your code fluent and organized.
 
 ## Tip 7: `explode()` for Unpacking Lists – When Data Isn't Flat
 
@@ -270,9 +274,10 @@ print(df_exploded[['name', 'tags']].head(8)) # Show more to demonstrate duplicat
 print("\nShape before explode:", df_tags.shape)
 print("Shape after explode:", df_exploded.shape) # Notice the increase in rows!
 ```
+
 The original 10 rows expanded to 18 rows because rows with multiple tags were duplicated for each tag. This makes it much easier to, for example, count how many students are associated with each tag.
 
-*Takeaway:* When your DataFrame cells contain list-like objects and you need to treat each item in the list as a separate observation, `explode()` is your go-to function for flattening that data.
+_Takeaway:_ When your DataFrame cells contain list-like objects and you need to treat each item in the list as a separate observation, `explode()` is your go-to function for flattening that data.
 
 ## Wrapping Up: Keep Exploring!
 

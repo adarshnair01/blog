@@ -18,7 +18,7 @@ For us, an image is a scene, a memory, a moment. For a computer, an image is jus
 
 Think of a digital image as a giant spreadsheet. Each cell in this spreadsheet is called a **pixel** (picture element). In a grayscale image, each pixel holds a single number representing its intensity, typically from 0 (black) to 255 (white).
 
-For a color image, it's a bit more complex. Most color images use the **RGB (Red, Green, Blue)** model. So, for each pixel, there are *three* numbers, one for the intensity of red, one for green, and one for blue. Combining these three values in different proportions creates millions of colors.
+For a color image, it's a bit more complex. Most color images use the **RGB (Red, Green, Blue)** model. So, for each pixel, there are _three_ numbers, one for the intensity of red, one for green, and one for blue. Combining these three values in different proportions creates millions of colors.
 
 For example, a small $3 \times 3$ grayscale image might look like this to a computer:
 
@@ -61,12 +61,13 @@ Other kernels can be designed for blurring (e.g., a Gaussian kernel for smoothin
 #### 2. Beyond Edges: Describing Shapes and Textures
 
 As the field progressed, researchers developed more sophisticated algorithms to extract richer features:
-*   **HOG (Histogram of Oriented Gradients):** This technique describes the local appearance and shape of objects by creating a histogram of gradient orientations in localized regions of an image. It was very effective for human detection.
-*   **SIFT (Scale-Invariant Feature Transform):** SIFT could detect and describe local features that were robust to changes in image scale, rotation, and illumination. This allowed for reliable object recognition even if the object appeared smaller, rotated, or in different lighting conditions.
+
+- **HOG (Histogram of Oriented Gradients):** This technique describes the local appearance and shape of objects by creating a histogram of gradient orientations in localized regions of an image. It was very effective for human detection.
+- **SIFT (Scale-Invariant Feature Transform):** SIFT could detect and describe local features that were robust to changes in image scale, rotation, and illumination. This allowed for reliable object recognition even if the object appeared smaller, rotated, or in different lighting conditions.
 
 These methods relied on expert knowledge to design algorithms that could identify specific patterns. They were ingenious for their time, but they had limitations. They struggled with variations in lighting, viewpoint, and object deformation. A tiny change in conditions could break the carefully crafted feature detectors. It was like teaching a child to recognize a cat by giving them a detailed checklist of "must have pointy ears," "must have whiskers," "must have a tail," and then having them fail if the cat was sleeping in a ball or partially hidden.
 
-We needed a more adaptive, more *intelligent* way for computers to learn to see.
+We needed a more adaptive, more _intelligent_ way for computers to learn to see.
 
 ### The Deep Learning Revolution: Learning to See for Themselves
 
@@ -79,7 +80,7 @@ Imagine the human visual cortex: different parts of your brain are responsible f
 A typical CNN architecture is a sequence of layers, each performing a specific transformation on the input image.
 
 1.  **Convolutional Layers:**
-    This is the heart of a CNN. Remember those handcrafted filters? In a convolutional layer, the filters (or kernels) are not predefined; they are **learnable parameters**. The network *learns* the optimal filters during training.
+    This is the heart of a CNN. Remember those handcrafted filters? In a convolutional layer, the filters (or kernels) are not predefined; they are **learnable parameters**. The network _learns_ the optimal filters during training.
 
     A convolutional layer applies multiple filters to the input image. Each filter slides across the image, just like our edge detection kernel, performing the element-wise multiplication and sum. The output of one filter over the entire image is called a **feature map**. Each feature map highlights a particular characteristic learned by that filter (e.g., vertical edges, horizontal lines, specific textures).
 
@@ -102,18 +103,20 @@ A typical CNN architecture is a sequence of layers, each performing a specific t
 
 3.  **Pooling Layers (Max Pooling):**
     Pooling layers are used to reduce the spatial dimensions (width and height) of the feature maps, which helps in two ways:
-    *   **Reduces computation:** Fewer parameters mean faster processing.
-    *   **Introduces translation invariance:** It makes the network less sensitive to the exact position of a feature. If an edge shifts slightly, the pooling layer will still likely detect it.
+    - **Reduces computation:** Fewer parameters mean faster processing.
+    - **Introduces translation invariance:** It makes the network less sensitive to the exact position of a feature. If an edge shifts slightly, the pooling layer will still likely detect it.
 
     **Max Pooling** is a common type. It takes a small window (e.g., $2 \times 2$) from the feature map and outputs the maximum value within that window.
 
     For example, if we have a $2 \times 2$ window:
+
     $$
     \begin{pmatrix}
     10 & 20 \\
     5 & 15
     \end{pmatrix}
     $$
+
     Max pooling would output $20$.
 
     This essentially summarizes the presence of a feature in a region, discarding less important details and keeping the most prominent ones.
@@ -131,6 +134,7 @@ The magic of CNNs lies in their ability to learn these feature hierarchies. The 
 #### Training a CNN: Learning from Experience
 
 How do these filters learn? Through a process called **training**.
+
 1.  We feed the CNN a vast dataset of images, each labeled with its correct category (e.g., an image of a cat labeled "cat").
 2.  The network makes a prediction.
 3.  We calculate a **loss function** (e.g., cross-entropy loss) that measures how far off the prediction was from the true label.
@@ -143,13 +147,13 @@ It's like a child learning by trial and error. "Is this a cat?" "No, that's a do
 
 The transformation brought about by deep learning has made computer vision applicable to an astonishing array of real-world problems:
 
-*   **Autonomous Vehicles:** Object detection (cars, pedestrians, traffic signs), lane keeping, depth perception, and navigation.
-*   **Medical Imaging:** Detecting tumors in MRI scans, identifying diseases from X-rays, analyzing microscopic images for pathology.
-*   **Facial Recognition:** Security systems, unlocking smartphones, identity verification.
-*   **Augmented Reality (AR):** Overlaying digital information onto the real world (e.g., Pokémon GO, AR filters on social media).
-*   **Industrial Automation:** Quality control on assembly lines, robotic picking and placing, defect detection.
-*   **Security and Surveillance:** Anomaly detection, crowd analysis.
-*   **Retail:** Inventory management, checkout-free stores, customer behavior analysis.
+- **Autonomous Vehicles:** Object detection (cars, pedestrians, traffic signs), lane keeping, depth perception, and navigation.
+- **Medical Imaging:** Detecting tumors in MRI scans, identifying diseases from X-rays, analyzing microscopic images for pathology.
+- **Facial Recognition:** Security systems, unlocking smartphones, identity verification.
+- **Augmented Reality (AR):** Overlaying digital information onto the real world (e.g., Pokémon GO, AR filters on social media).
+- **Industrial Automation:** Quality control on assembly lines, robotic picking and placing, defect detection.
+- **Security and Surveillance:** Anomaly detection, crowd analysis.
+- **Retail:** Inventory management, checkout-free stores, customer behavior analysis.
 
 The list goes on, constantly expanding as researchers push the boundaries of what's possible.
 
@@ -157,17 +161,18 @@ The list goes on, constantly expanding as researchers push the boundaries of wha
 
 While computer vision has achieved incredible feats, it's far from a solved problem. Significant challenges remain:
 
-*   **Robustness:** Real-world conditions are messy – varying lighting, occlusions (objects partially hidden), unusual viewpoints, and adverse weather conditions can still confuse even the best models.
-*   **Data Scarcity and Bias:** High-quality, labeled image datasets are expensive and time-consuming to create. Furthermore, biases in training data can lead to models that perform poorly or unfairly for certain demographics or conditions.
-*   **Explainability (XAI):** Deep learning models are often "black boxes." Understanding *why* a model made a particular decision (e.g., why did it misclassify this patient's X-ray?) is crucial, especially in high-stakes applications like medicine or autonomous driving.
-*   **Real-time Performance:** Many applications require instantaneous processing, which demands efficient models and powerful hardware.
-*   **Ethical Considerations:** The power of computer vision raises important ethical questions around privacy (facial recognition), fairness (bias in algorithms), and potential misuse.
+- **Robustness:** Real-world conditions are messy – varying lighting, occlusions (objects partially hidden), unusual viewpoints, and adverse weather conditions can still confuse even the best models.
+- **Data Scarcity and Bias:** High-quality, labeled image datasets are expensive and time-consuming to create. Furthermore, biases in training data can lead to models that perform poorly or unfairly for certain demographics or conditions.
+- **Explainability (XAI):** Deep learning models are often "black boxes." Understanding _why_ a model made a particular decision (e.g., why did it misclassify this patient's X-ray?) is crucial, especially in high-stakes applications like medicine or autonomous driving.
+- **Real-time Performance:** Many applications require instantaneous processing, which demands efficient models and powerful hardware.
+- **Ethical Considerations:** The power of computer vision raises important ethical questions around privacy (facial recognition), fairness (bias in algorithms), and potential misuse.
 
 The future of computer vision is bright, focusing on areas like:
-*   **Few-shot and Zero-shot Learning:** Teaching models to learn from very little data, or even generalize to unseen categories.
-*   **Generative Models:** Creating realistic images and videos (e.g., deepfakes, but also for synthetic data generation to augment datasets).
-*   **Multimodal Learning:** Combining vision with other senses like language (e.g., image captioning, visual question answering) or audio.
-*   **Edge AI:** Running powerful vision models directly on devices (e.g., smartphones, drones) without relying on cloud infrastructure.
+
+- **Few-shot and Zero-shot Learning:** Teaching models to learn from very little data, or even generalize to unseen categories.
+- **Generative Models:** Creating realistic images and videos (e.g., deepfakes, but also for synthetic data generation to augment datasets).
+- **Multimodal Learning:** Combining vision with other senses like language (e.g., image captioning, visual question answering) or audio.
+- **Edge AI:** Running powerful vision models directly on devices (e.g., smartphones, drones) without relying on cloud infrastructure.
 
 ### My Journey Continues
 

@@ -26,7 +26,7 @@ Imagine you have a beautiful, pristine photograph. Now, imagine adding a tiny bi
 
 Diffusion Models work by doing precisely this, but in reverse!
 
-The brilliant insight is this: **If we can learn how to systematically *add* noise to an image, can we also learn how to systematically *remove* it, step by step, until we recover the original image?**
+The brilliant insight is this: **If we can learn how to systematically _add_ noise to an image, can we also learn how to systematically _remove_ it, step by step, until we recover the original image?**
 
 This process is broken down into two main parts:
 
@@ -48,15 +48,16 @@ The neat trick is that this entire process is a Markov chain, meaning each step 
 $q(x_t | x_{t-1}) = \mathcal{N}(x_t; \sqrt{1-\beta_t} x_{t-1}, \beta_t \mathbf{I})$
 
 Where:
-*   $\mathcal{N}$ denotes a Gaussian (Normal) distribution.
-*   $x_t$ is the noisy image at timestep $t$.
-*   $x_{t-1}$ is the image at the previous timestep.
-*   $\beta_t$ is a small, positive variance schedule that controls how much noise is added at each step. It typically increases over time (i.e., we add more noise at later steps).
-*   $\mathbf{I}$ is the identity matrix, meaning the noise is added independently to each pixel.
+
+- $\mathcal{N}$ denotes a Gaussian (Normal) distribution.
+- $x_t$ is the noisy image at timestep $t$.
+- $x_{t-1}$ is the image at the previous timestep.
+- $\beta_t$ is a small, positive variance schedule that controls how much noise is added at each step. It typically increases over time (i.e., we add more noise at later steps).
+- $\mathbf{I}$ is the identity matrix, meaning the noise is added independently to each pixel.
 
 This formula essentially says: "To get $x_t$, take $x_{t-1}$, scale it down slightly (by $\sqrt{1-\beta_t}$), and then add some Gaussian noise with variance $\beta_t$."
 
-One of the most elegant aspects of Diffusion Models is that we can actually sample $x_t$ for *any* timestep $t$ directly from $x_0$ without iteratively applying the noise for each step. This "cool trick" is thanks to the properties of Gaussian distributions:
+One of the most elegant aspects of Diffusion Models is that we can actually sample $x_t$ for _any_ timestep $t$ directly from $x_0$ without iteratively applying the noise for each step. This "cool trick" is thanks to the properties of Gaussian distributions:
 
 $q(x_t | x_0) = \mathcal{N}(x_t; \sqrt{\bar{\alpha}_t} x_0, (1-\bar{\alpha}_t) \mathbf{I})$
 
@@ -76,7 +77,7 @@ $p_\theta(x_{t-1} | x_t) = \mathcal{N}(x_{t-1}; \mu_\theta(x_t, t), \Sigma_\thet
 
 Here, $\mu_\theta$ and $\Sigma_\theta$ are the mean and covariance that our neural network (parameterized by $\theta$) learns to predict at each step $t$, given the noisy image $x_t$.
 
-The beauty here is that we don't *directly* predict $x_{t-1}$ or its mean $\mu_\theta$. Instead, the model is trained to predict the *noise* $\epsilon$ that was added to $x_0$ to create $x_t$. Remember $x_t = \sqrt{\bar{\alpha}_t} x_0 + \sqrt{1-\bar{\alpha}_t} \epsilon$? We can rearrange this to solve for $x_0$:
+The beauty here is that we don't _directly_ predict $x_{t-1}$ or its mean $\mu_\theta$. Instead, the model is trained to predict the _noise_ $\epsilon$ that was added to $x_0$ to create $x_t$. Remember $x_t = \sqrt{\bar{\alpha}_t} x_0 + \sqrt{1-\bar{\alpha}_t} \epsilon$? We can rearrange this to solve for $x_0$:
 
 $x_0 = \frac{1}{\sqrt{\bar{\alpha}_t}} (x_t - \sqrt{1-\bar{\alpha}_t} \epsilon)$
 
@@ -105,16 +106,17 @@ Once our Diffusion Model is trained, generating a new image is like watching a m
 
 1.  **Start with pure random noise:** We generate $x_T$ from a standard Gaussian distribution, $\mathcal{N}(0, \mathbf{I})$. This is our "blank canvas" of static.
 2.  **Iterate backwards from $T$ down to $1$:** For each step $t$:
-    *   Feed $x_t$ and the current timestep $t$ into our trained U-Net to predict the noise $\epsilon_\theta(x_t, t)$.
-    *   Use this predicted noise to estimate $x_{t-1}$. A common simplified sampling step (derived from the mathematical relationship between $x_t$, $x_0$, and $\epsilon$) looks like this:
+    - Feed $x_t$ and the current timestep $t$ into our trained U-Net to predict the noise $\epsilon_\theta(x_t, t)$.
+    - Use this predicted noise to estimate $x_{t-1}$. A common simplified sampling step (derived from the mathematical relationship between $x_t$, $x_0$, and $\epsilon$) looks like this:
 
-        $x_{t-1} = \frac{1}{\sqrt{\alpha_t}} (x_t - \frac{1-\alpha_t}{\sqrt{1-\bar{\alpha}_t}} \epsilon_\theta(x_t, t)) + \sigma_t z$
+      $x_{t-1} = \frac{1}{\sqrt{\alpha_t}} (x_t - \frac{1-\alpha_t}{\sqrt{1-\bar{\alpha}_t}} \epsilon_\theta(x_t, t)) + \sigma_t z$
 
-        Where:
-        *   $\sigma_t$ is a variance term (often related to $\beta_t$).
-        *   $z \sim \mathcal{N}(0, \mathbf{I})$ is additional random noise, ensuring diversity in generations (stochasticity).
+      Where:
+      - $\sigma_t$ is a variance term (often related to $\beta_t$).
+      - $z \sim \mathcal{N}(0, \mathbf{I})$ is additional random noise, ensuring diversity in generations (stochasticity).
 
     This formula essentially uses the predicted noise $\epsilon_\theta$ to "subtract" noise from $x_t$ and move towards a less noisy $x_{t-1}$.
+
 3.  **The final output $x_0$ is your generated image!** Each step refines the image, adding detail and coherence, until a clear, often stunning, image appears.
 
 ### Why Diffusion Models Are So Good
@@ -128,12 +130,12 @@ Once our Diffusion Model is trained, generating a new image is like watching a m
 
 While spectacular image generation is what put Diffusion Models on the map, their potential extends much further:
 
-*   **Image Editing:** Inpainting (filling missing parts), outpainting (extending images), style transfer, super-resolution.
-*   **Video Generation:** Creating realistic video sequences.
-*   **Audio Generation:** Synthesizing speech, music, or sound effects.
-*   **3D Object Generation:** Creating novel 3D models.
-*   **Drug Discovery:** Generating new molecular structures with desired properties.
-*   **Data Augmentation:** Creating synthetic data to boost training sets for other models.
+- **Image Editing:** Inpainting (filling missing parts), outpainting (extending images), style transfer, super-resolution.
+- **Video Generation:** Creating realistic video sequences.
+- **Audio Generation:** Synthesizing speech, music, or sound effects.
+- **3D Object Generation:** Creating novel 3D models.
+- **Drug Discovery:** Generating new molecular structures with desired properties.
+- **Data Augmentation:** Creating synthetic data to boost training sets for other models.
 
 ### Challenges and the Future
 

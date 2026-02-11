@@ -14,7 +14,7 @@ So, buckle up! We're about to embark on a journey into the world of Markov Chain
 
 ## What's a Markov Chain, Anyway? The Memoryless Marvel
 
-At its core, a Markov Chain is a mathematical model for a sequence of events where the probability of each event depends *only* on the state achieved in the previous event. It doesn't care about the entire history of how it got there. This unique property is called the **Markov Property** or the **memoryless property**.
+At its core, a Markov Chain is a mathematical model for a sequence of events where the probability of each event depends _only_ on the state achieved in the previous event. It doesn't care about the entire history of how it got there. This unique property is called the **Markov Property** or the **memoryless property**.
 
 Think of it like this: You're playing a board game. Your next move (e.g., advancing 3 spaces, drawing a card) only depends on the square you are currently on. It doesn't matter if you got to that square by rolling a double six three turns ago or by landing on a "Go Back 3 Spaces" square. Your current position is all that dictates your next set of possibilities.
 
@@ -34,14 +34,14 @@ If it's Rainy today, what are the chances it will be Sunny or Rainy tomorrow?
 
 These probabilities are our transition probabilities. Let's assign some hypothetical values:
 
-*   If it's **Sunny** today:
-    *   Probability of being **Sunny** tomorrow: $P_{SS} = 0.9$ (90%)
-    *   Probability of being **Rainy** tomorrow: $P_{SR} = 0.1$ (10%)
-*   If it's **Rainy** today:
-    *   Probability of being **Sunny** tomorrow: $P_{RS} = 0.4$ (40%)
-    *   Probability of being **Rainy** tomorrow: $P_{RR} = 0.6$ (60%)
+- If it's **Sunny** today:
+  - Probability of being **Sunny** tomorrow: $P_{SS} = 0.9$ (90%)
+  - Probability of being **Rainy** tomorrow: $P_{SR} = 0.1$ (10%)
+- If it's **Rainy** today:
+  - Probability of being **Sunny** tomorrow: $P_{RS} = 0.4$ (40%)
+  - Probability of being **Rainy** tomorrow: $P_{RR} = 0.6$ (60%)
 
-Notice that for each current state, the probabilities of all possible next states must sum up to 1 (or 100%). For instance, $P_{SS} + P_{SR} = 0.9 + 0.1 = 1$. This makes sense: it *has* to be either sunny or rainy tomorrow!
+Notice that for each current state, the probabilities of all possible next states must sum up to 1 (or 100%). For instance, $P_{SS} + P_{SR} = 0.9 + 0.1 = 1$. This makes sense: it _has_ to be either sunny or rainy tomorrow!
 
 ## The Transition Matrix: Your Crystal Ball
 
@@ -99,6 +99,7 @@ We want to solve:
 $ \begin{pmatrix} \pi_S & \pi_R \end{pmatrix} \begin{pmatrix} 0.9 & 0.1 \\ 0.4 & 0.6 \end{pmatrix} = \begin{pmatrix} \pi_S & \pi_R \end{pmatrix} $
 
 This gives us a system of linear equations:
+
 1.  $ 0.9\pi_S + 0.4\pi_R = \pi_S $
 2.  $ 0.1\pi_S + 0.6\pi_R = \pi_R $
 3.  $ \pi_S + \pi_R = 1 $ (Our sum-to-one constraint)
@@ -116,28 +117,29 @@ So, our stationary distribution is $ \pi = \begin{pmatrix} 0.8 & 0.2 \end{pmatri
 This means that, in the long run, our hypothetical town will be sunny 80% of the time and rainy 20% of the time, regardless of what the weather was like when we started observing! This is incredibly powerful for understanding the long-term behavior of systems.
 
 For a stationary distribution to exist and be unique, the Markov Chain needs to satisfy a couple of properties:
-*   **Irreducible:** You can get from any state to any other state (perhaps indirectly). Our weather chain is irreducible because you can go from Sunny to Rainy and from Rainy to Sunny.
-*   **Aperiodic:** The system doesn't get stuck in a fixed cycle. For example, if it's always Sunny-Rainy-Sunny-Rainy, that would be periodic. Our weather chain isn't strictly periodic.
+
+- **Irreducible:** You can get from any state to any other state (perhaps indirectly). Our weather chain is irreducible because you can go from Sunny to Rainy and from Rainy to Sunny.
+- **Aperiodic:** The system doesn't get stuck in a fixed cycle. For example, if it's always Sunny-Rainy-Sunny-Rainy, that would be periodic. Our weather chain isn't strictly periodic.
 
 ## Where Do We Use Markov Chains? Real-World Magic!
 
 Now for the exciting part: how do these abstract mathematical concepts translate into real-world applications in Data Science and Machine Learning? The answer is "everywhere!"
 
 1.  **Natural Language Processing (NLP):**
-    *   **Text Generation:** Markov Chains can predict the next word in a sentence based on the current word (or few words). This is the basis for predictive text on your phone and even simple chatbots. You train a model on a large corpus of text, calculate transition probabilities between words, and then generate new text by following those probabilities.
-    *   **Part-of-Speech Tagging:** Determining if a word is a noun, verb, adjective, etc., often uses Hidden Markov Models (HMMs), an extension of Markov Chains.
-    *   **Speech Recognition:** HMMs are also fundamental here, modeling the probability of one sound transitioning to another.
+    - **Text Generation:** Markov Chains can predict the next word in a sentence based on the current word (or few words). This is the basis for predictive text on your phone and even simple chatbots. You train a model on a large corpus of text, calculate transition probabilities between words, and then generate new text by following those probabilities.
+    - **Part-of-Speech Tagging:** Determining if a word is a noun, verb, adjective, etc., often uses Hidden Markov Models (HMMs), an extension of Markov Chains.
+    - **Speech Recognition:** HMMs are also fundamental here, modeling the probability of one sound transitioning to another.
 
 2.  **Google PageRank:** The original algorithm that powered Google's search engine was essentially a giant Markov Chain! Each webpage was a "state," and links between pages were "transitions." The PageRank of a page was its long-term stationary probability – how likely a "random surfer" would end up on that page after many clicks. Higher probability meant higher importance.
 
 3.  **Bioinformatics:**
-    *   **DNA Sequencing:** Markov Chains and HMMs are used to model DNA sequences, identify genes, and predict protein structures by analyzing patterns and transitions between nucleotide bases.
+    - **DNA Sequencing:** Markov Chains and HMMs are used to model DNA sequences, identify genes, and predict protein structures by analyzing patterns and transitions between nucleotide bases.
 
 4.  **Recommendation Systems:**
-    *   Consider a user browsing an e-commerce site. Their journey through products can be modeled as a sequence of states. A Markov Chain can predict the next product they're likely to view or purchase based on their current viewing habits, leading to personalized recommendations.
+    - Consider a user browsing an e-commerce site. Their journey through products can be modeled as a sequence of states. A Markov Chain can predict the next product they're likely to view or purchase based on their current viewing habits, leading to personalized recommendations.
 
 5.  **Financial Modeling (with caution!):**
-    *   While financial markets are notoriously complex, simple Markov Chains can sometimes model the probability of a stock price moving up, down, or staying the same based on its current trend. However, the memoryless property is a significant simplification in finance, where historical context often matters.
+    - While financial markets are notoriously complex, simple Markov Chains can sometimes model the probability of a stock price moving up, down, or staying the same based on its current trend. However, the memoryless property is a significant simplification in finance, where historical context often matters.
 
 ## The Simple Power of Probabilistic Thinking
 

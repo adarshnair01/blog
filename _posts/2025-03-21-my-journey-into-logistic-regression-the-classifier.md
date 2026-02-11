@@ -1,7 +1,7 @@
 ---
-title: "My Journey into Logistic Regression: The Classifier That Says \"Maybe\""
+title: 'My Journey into Logistic Regression: The Classifier That Says "Maybe"'
 date: "2025-03-21"
-excerpt: "Ever wondered how computers decide between \"yes\" and \"no,\" or \"spam\" and \"not spam\"? Join me as we unravel Logistic Regression, the elegant algorithm that turns simple predictions into powerful probabilistic insights."
+excerpt: 'Ever wondered how computers decide between "yes" and "no," or "spam" and "not spam"? Join me as we unravel Logistic Regression, the elegant algorithm that turns simple predictions into powerful probabilistic insights.'
 tags: ["Machine Learning", "Logistic Regression", "Classification", "Data Science", "Statistics"]
 author: "Adarsh Nair"
 ---
@@ -10,7 +10,7 @@ Hey there, fellow explorers of the data universe!
 
 Today, I want to share a story about an algorithm that truly opened my eyes to the practical magic of machine learning: **Logistic Regression**. When I first started diving into data science, I was fascinated by how computers could "learn" from data. But a common initial hurdle for many, including my past self, is understanding how we move beyond simple number prediction (regression) to predicting categories (classification).
 
-Imagine you're trying to figure out if a student will pass an exam based on how many hours they studied. Or if an email is spam or not. These aren't "what grade will they get?" (a number), but "will they pass?" (a 'yes' or 'no'). This is where Logistic Regression steps in, not just to give a 'yes' or 'no', but to tell us, with a surprising degree of confidence, the *probability* of that 'yes' or 'no'. It's the classifier that says "maybe," and then gives you the odds.
+Imagine you're trying to figure out if a student will pass an exam based on how many hours they studied. Or if an email is spam or not. These aren't "what grade will they get?" (a number), but "will they pass?" (a 'yes' or 'no'). This is where Logistic Regression steps in, not just to give a 'yes' or 'no', but to tell us, with a surprising degree of confidence, the _probability_ of that 'yes' or 'no'. It's the classifier that says "maybe," and then gives you the odds.
 
 ### The Problem with "Yes" or "No" and Linear Regression
 
@@ -21,7 +21,7 @@ $ \hat{y} = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + ... + \beta_n x_n $
 
 Where $\hat{y}$ is our predicted outcome, and $x_i$ are our features (like hours studied, previous scores, etc.).
 
-But think about it: if our linear model spits out a value like 1.5, what does that mean for "Pass" or "Fail"? Or -0.2? It's nonsensical. The outcome of a classification task *must* be between 0 and 1 (representing probabilities) or just 0/1 directly. A linear model isn't constrained to this range, and trying to set a threshold (e.g., "if $\hat{y} > 0.5$, then Pass") feels arbitrary and isn't grounded in probability theory. We need something that naturally squashes our output into a neat 0 to 1 range.
+But think about it: if our linear model spits out a value like 1.5, what does that mean for "Pass" or "Fail"? Or -0.2? It's nonsensical. The outcome of a classification task _must_ be between 0 and 1 (representing probabilities) or just 0/1 directly. A linear model isn't constrained to this range, and trying to set a threshold (e.g., "if $\hat{y} > 0.5$, then Pass") feels arbitrary and isn't grounded in probability theory. We need something that naturally squashes our output into a neat 0 to 1 range.
 
 ### Enter the Sigmoid: The S-Shaped Secret Sauce
 
@@ -34,6 +34,7 @@ $ \sigma(z) = \frac{1}{1 + e^{-z}} $
 Where $e$ is Euler's number (approximately 2.718), and $z$ is any real number.
 
 What's so special about this function?
+
 1.  **It squashes any real number into the range (0, 1).** No matter how big or small $z$ is, $\sigma(z)$ will always be between 0 and 1.
 2.  **It's monotonic.** As $z$ increases, $\sigma(z)$ always increases.
 3.  **It has a smooth gradient.** This is super important for how the algorithm learns.
@@ -54,7 +55,7 @@ Then, we pass this $z$ through the sigmoid function to get our predicted probabi
 
 $ P(Y=1|\mathbf{x}) = \sigma(\mathbf{w}^T \mathbf{x}) = \frac{1}{1 + e^{-(\mathbf{w}^T \mathbf{x})}} $
 
-This $P(Y=1|\mathbf{x})$ is the probability that our output variable $Y$ is 1 (e.g., the student *passes*) given the input features $\mathbf{x}$. The probability of $Y=0$ (e.g., the student *fails*) would simply be $1 - P(Y=1|\mathbf{x})$.
+This $P(Y=1|\mathbf{x})$ is the probability that our output variable $Y$ is 1 (e.g., the student _passes_) given the input features $\mathbf{x}$. The probability of $Y=0$ (e.g., the student _fails_) would simply be $1 - P(Y=1|\mathbf{x})$.
 
 So, instead of predicting a raw numerical value, Logistic Regression predicts a probability, which is exactly what we need for classification!
 
@@ -62,8 +63,8 @@ So, instead of predicting a raw numerical value, Logistic Regression predicts a 
 
 Once we have a probability, how do we make a final "yes" or "no" decision? We set a threshold. The most common threshold is 0.5.
 
-*   If $P(Y=1|\mathbf{x}) > 0.5$, we classify it as 1 (e.g., "Pass").
-*   If $P(Y=1|\mathbf{x}) \le 0.5$, we classify it as 0 (e.g., "Fail").
+- If $P(Y=1|\mathbf{x}) > 0.5$, we classify it as 1 (e.g., "Pass").
+- If $P(Y=1|\mathbf{x}) \le 0.5$, we classify it as 0 (e.g., "Fail").
 
 Remember that when $z=0$, $\sigma(z)=0.5$. This means our classification boundary occurs when $\mathbf{w}^T \mathbf{x} = 0$. Geometrically, this equation defines a line (in 2D), a plane (in 3D), or a hyperplane (in higher dimensions) that separates the two classes. This is our **decision boundary**. Everything on one side of the boundary gets classified as 1, and everything on the other side as 0.
 
@@ -77,21 +78,22 @@ For Logistic Regression, we use a different kind of error function, called the *
 
 The Binary Cross-Entropy Loss for a single training example $(\mathbf{x}^{(i)}, y^{(i)})$ is:
 
-$ L(h_{\mathbf{w}}(\mathbf{x}^{(i)}), y^{(i)}) = -[y^{(i)} \log(h_{\mathbf{w}}(\mathbf{x}^{(i)})) + (1 - y^{(i)}) \log(1 - h_{\mathbf{w}}(\mathbf{x}^{(i)}))] $
+$ L(h*{\mathbf{w}}(\mathbf{x}^{(i)}), y^{(i)}) = -[y^{(i)} \log(h*{\mathbf{w}}(\mathbf{x}^{(i)})) + (1 - y^{(i)}) \log(1 - h\_{\mathbf{w}}(\mathbf{x}^{(i)}))] $
 
 Where $h_{\mathbf{w}}(\mathbf{x}^{(i)})$ is our predicted probability $P(Y=1|\mathbf{x}^{(i)})$, and $y^{(i)}$ is the true label (0 or 1).
 
 Let's break this down intuitively:
-*   If the true label $y^{(i)}$ is 1: The first term $y^{(i)} \log(h_{\mathbf{w}}(\mathbf{x}^{(i)}))$ becomes $\log(h_{\mathbf{w}}(\mathbf{x}^{(i)}))$. The second term $(1 - y^{(i)}) \log(1 - h_{\mathbf{w}}(\mathbf{x}^{(i)}))$ becomes 0. So the loss is $-\log(h_{\mathbf{w}}(\mathbf{x}^{(i)}))$.
-    *   If our model predicted $h_{\mathbf{w}}(\mathbf{x}^{(i)})$ to be close to 1 (correctly confident), $\log(1)$ is 0, so the loss is small.
-    *   If our model predicted $h_{\mathbf{w}}(\mathbf{x}^{(i)})$ to be close to 0 (confidently wrong), $\log(0)$ approaches negative infinity, making the loss (with the negative sign) very large. This heavily penalizes confident wrong predictions.
-*   If the true label $y^{(i)}$ is 0: The first term becomes 0. The second term becomes $\log(1 - h_{\mathbf{w}}(\mathbf{x}^{(i)}))$. So the loss is $-\log(1 - h_{\mathbf{w}}(\mathbf{x}^{(i)}))$.
-    *   If our model predicted $h_{\mathbf{w}}(\mathbf{x}^{(i)})$ to be close to 0 (correctly confident), $1 - h_{\mathbf{w}}(\mathbf{x}^{(i)})$ is close to 1, $\log(1)$ is 0, so the loss is small.
-    *   If our model predicted $h_{\mathbf{w}}(\mathbf{x}^{(i)})$ to be close to 1 (confidently wrong), $1 - h_{\mathbf{w}}(\mathbf{x}^{(i)})$ is close to 0, $\log(0)$ approaches negative infinity, making the loss (with the negative sign) very large.
+
+- If the true label $y^{(i)}$ is 1: The first term $y^{(i)} \log(h_{\mathbf{w}}(\mathbf{x}^{(i)}))$ becomes $\log(h_{\mathbf{w}}(\mathbf{x}^{(i)}))$. The second term $(1 - y^{(i)}) \log(1 - h_{\mathbf{w}}(\mathbf{x}^{(i)}))$ becomes 0. So the loss is $-\log(h_{\mathbf{w}}(\mathbf{x}^{(i)}))$.
+  - If our model predicted $h_{\mathbf{w}}(\mathbf{x}^{(i)})$ to be close to 1 (correctly confident), $\log(1)$ is 0, so the loss is small.
+  - If our model predicted $h_{\mathbf{w}}(\mathbf{x}^{(i)})$ to be close to 0 (confidently wrong), $\log(0)$ approaches negative infinity, making the loss (with the negative sign) very large. This heavily penalizes confident wrong predictions.
+- If the true label $y^{(i)}$ is 0: The first term becomes 0. The second term becomes $\log(1 - h_{\mathbf{w}}(\mathbf{x}^{(i)}))$. So the loss is $-\log(1 - h_{\mathbf{w}}(\mathbf{x}^{(i)}))$.
+  - If our model predicted $h_{\mathbf{w}}(\mathbf{x}^{(i)})$ to be close to 0 (correctly confident), $1 - h_{\mathbf{w}}(\mathbf{x}^{(i)})$ is close to 1, $\log(1)$ is 0, so the loss is small.
+  - If our model predicted $h_{\mathbf{w}}(\mathbf{x}^{(i)})$ to be close to 1 (confidently wrong), $1 - h_{\mathbf{w}}(\mathbf{x}^{(i)})$ is close to 0, $\log(0)$ approaches negative infinity, making the loss (with the negative sign) very large.
 
 The overall cost function $J(\mathbf{w})$ is the average loss across all $m$ training examples:
 
-$ J(\mathbf{w}) = -\frac{1}{m} \sum_{i=1}^{m} [y^{(i)} \log(h_{\mathbf{w}}(\mathbf{x}^{(i)})) + (1 - y^{(i)}) \log(1 - h_{\mathbf{w}}(\mathbf{x}^{(i)}))] $
+$ J(\mathbf{w}) = -\frac{1}{m} \sum*{i=1}^{m} [y^{(i)} \log(h*{\mathbf{w}}(\mathbf{x}^{(i)})) + (1 - y^{(i)}) \log(1 - h\_{\mathbf{w}}(\mathbf{x}^{(i)}))] $
 
 This Cross-Entropy Loss function has a beautiful property: it's **convex** when paired with the sigmoid function. This means there's only one global minimum, ensuring that algorithms like **Gradient Descent** can reliably find the optimal weights.
 
@@ -112,26 +114,29 @@ So, an increase of one unit in $x_i$ (while holding other features constant) cha
 Like any tool, Logistic Regression has its sweet spots and its challenges.
 
 **Strengths:**
-*   **Simplicity and Interpretability:** It's relatively easy to understand and implement. The coefficients provide insights into feature importance and direction.
-*   **Probabilistic Output:** It naturally provides probabilities, which are invaluable for decision-making (e.g., "This patient has an 80% chance of having the disease, so let's run more tests").
-*   **Good Baseline:** Often a go-to first model for binary classification problems due to its speed and reasonable performance.
-*   **Robust to Noise (for certain types of noise):** Can be less sensitive to irrelevant features than some complex models if proper regularization is applied.
-*   **Handles Linearly Separable Data Well:** Excels when the classes can be separated by a straight line or plane.
+
+- **Simplicity and Interpretability:** It's relatively easy to understand and implement. The coefficients provide insights into feature importance and direction.
+- **Probabilistic Output:** It naturally provides probabilities, which are invaluable for decision-making (e.g., "This patient has an 80% chance of having the disease, so let's run more tests").
+- **Good Baseline:** Often a go-to first model for binary classification problems due to its speed and reasonable performance.
+- **Robust to Noise (for certain types of noise):** Can be less sensitive to irrelevant features than some complex models if proper regularization is applied.
+- **Handles Linearly Separable Data Well:** Excels when the classes can be separated by a straight line or plane.
 
 **Limitations:**
-*   **Assumes Linearity (of log-odds):** It assumes a linear relationship between the input features and the *log-odds* of the outcome. If the relationship is highly non-linear, Logistic Regression might perform poorly unless you engineer new, non-linear features.
-*   **Not Great for Complex Relationships:** For highly complex, non-linear decision boundaries, more advanced models like Support Vector Machines with non-linear kernels, Decision Trees, or Neural Networks often outperform it.
-*   **Sensitive to Outliers:** Extreme values in the features can heavily influence the decision boundary.
-*   **Multicollinearity:** If features are highly correlated with each other, it can make the interpretation of individual coefficients unstable and less reliable.
+
+- **Assumes Linearity (of log-odds):** It assumes a linear relationship between the input features and the _log-odds_ of the outcome. If the relationship is highly non-linear, Logistic Regression might perform poorly unless you engineer new, non-linear features.
+- **Not Great for Complex Relationships:** For highly complex, non-linear decision boundaries, more advanced models like Support Vector Machines with non-linear kernels, Decision Trees, or Neural Networks often outperform it.
+- **Sensitive to Outliers:** Extreme values in the features can heavily influence the decision boundary.
+- **Multicollinearity:** If features are highly correlated with each other, it can make the interpretation of individual coefficients unstable and less reliable.
 
 ### Real-World Applications
 
 Logistic Regression is a workhorse in data science, powering countless applications:
-*   **Spam Detection:** Is an email spam or not?
-*   **Medical Diagnosis:** Is a tumor benign or malignant? Does a patient have a certain disease?
-*   **Credit Risk Assessment:** Is a loan applicant likely to default?
-*   **Marketing:** Will a customer click on an ad? Will they churn (cancel a subscription)?
-*   **Sentiment Analysis:** Is a movie review positive or negative?
+
+- **Spam Detection:** Is an email spam or not?
+- **Medical Diagnosis:** Is a tumor benign or malignant? Does a patient have a certain disease?
+- **Credit Risk Assessment:** Is a loan applicant likely to default?
+- **Marketing:** Will a customer click on an ad? Will they churn (cancel a subscription)?
+- **Sentiment Analysis:** Is a movie review positive or negative?
 
 ### Conclusion: A Humble Yet Powerful Tool
 

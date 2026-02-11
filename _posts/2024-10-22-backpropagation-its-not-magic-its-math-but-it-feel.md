@@ -8,7 +8,7 @@ author: "Adarsh Nair"
 
 Hello fellow data adventurers! Today, I want to pull back the curtain on one of the most fundamental and, dare I say, magical algorithms in the world of Artificial Intelligence: **Backpropagation**. If you've ever been amazed by what neural networks can do – recognizing faces, translating languages, generating art – then you've witnessed Backpropagation in action. It's the engine that powers their learning.
 
-For a long time, the inner workings of neural networks felt like a black box to me. They took input, gave output, and somehow got better over time. But *how*? How does a network of interconnected "neurons" figure out what adjustments to make to its zillions of internal parameters to improve its performance? The answer, my friends, is Backpropagation. And as you'll see, it's not magic, but rather an elegant application of calculus – specifically, the **chain rule**.
+For a long time, the inner workings of neural networks felt like a black box to me. They took input, gave output, and somehow got better over time. But _how_? How does a network of interconnected "neurons" figure out what adjustments to make to its zillions of internal parameters to improve its performance? The answer, my friends, is Backpropagation. And as you'll see, it's not magic, but rather an elegant application of calculus – specifically, the **chain rule**.
 
 Let's embark on this journey together to demystify it!
 
@@ -18,11 +18,11 @@ Before we dive into Backpropagation, let's quickly recap what a neural network d
 
 A neural network works similarly. It's a series of layers, each containing artificial "neurons." Each neuron takes inputs, performs a weighted sum, adds a bias, and then passes it through an activation function to produce an output. These outputs become inputs for the next layer, and so on, until we get the final output.
 
-*   **Inputs:** What we feed the network (e.g., pixels of an image, words in a sentence).
-*   **Weights ($w$):** These are the "strength" of the connections between neurons. Think of them as knobs you can turn.
-*   **Biases ($b$):** These are like an extra "nudge" for each neuron, allowing it to activate more easily or with more difficulty.
-*   **Activation Functions ($\sigma$):** Non-linear functions (like ReLU, Sigmoid, Tanh) that introduce complexity, allowing the network to learn non-linear relationships.
-*   **Output:** The network's prediction (e.g., "this is a cat," "the stock price will go up").
+- **Inputs:** What we feed the network (e.g., pixels of an image, words in a sentence).
+- **Weights ($w$):** These are the "strength" of the connections between neurons. Think of them as knobs you can turn.
+- **Biases ($b$):** These are like an extra "nudge" for each neuron, allowing it to activate more easily or with more difficulty.
+- **Activation Functions ($\sigma$):** Non-linear functions (like ReLU, Sigmoid, Tanh) that introduce complexity, allowing the network to learn non-linear relationships.
+- **Output:** The network's prediction (e.g., "this is a cat," "the stock price will go up").
 
 When we first initialize a neural network, its weights and biases are usually random. So, its initial predictions are likely way off, just like a child's first attempt at riding a bike. This "offness" is what we call **error** or **loss**.
 
@@ -36,11 +36,12 @@ Where $y_{pred}$ is the network's output and $y_{true}$ is the actual correct an
 
 How do we minimize the loss? This is where **Gradient Descent** comes in. Imagine you're blindfolded on a mountainous terrain, and your goal is to find the lowest point (the minimum loss). You can't see the whole landscape, but you can feel the slope right where you are. To go downhill, you take a step in the direction opposite to the steepest ascent.
 
-In mathematical terms, the "slope" is the **gradient**. The gradient tells us the direction of the steepest increase in the loss function. So, to *decrease* the loss, we move in the opposite direction of the gradient.
+In mathematical terms, the "slope" is the **gradient**. The gradient tells us the direction of the steepest increase in the loss function. So, to _decrease_ the loss, we move in the opposite direction of the gradient.
 
 For each weight $w$ and bias $b$ in our network, we need to know:
-*   How much does a tiny change in $w$ affect the total loss $L$? ($\frac{\partial L}{\partial w}$)
-*   How much does a tiny change in $b$ affect the total loss $L$? ($\frac{\partial L}{\partial b}$)
+
+- How much does a tiny change in $w$ affect the total loss $L$? ($\frac{\partial L}{\partial w}$)
+- How much does a tiny change in $b$ affect the total loss $L$? ($\frac{\partial L}{\partial b}$)
 
 These are partial derivatives. Once we have them, we update our weights and biases using a learning rate $\eta$:
 
@@ -53,9 +54,9 @@ The learning rate $\eta$ controls the size of our steps. Too small, and learning
 
 Here's the tricky part: a typical neural network can have millions of weights and biases. How do we calculate these partial derivatives efficiently? This is where Backpropagation shines.
 
-If we simply tried to calculate $\frac{\partial L}{\partial w}$ for every single weight independently, it would be computationally impossible for large networks. Instead, Backpropagation leverages a clever trick: it computes the gradients layer by layer, starting from the output layer and moving *backward* to the input layer.
+If we simply tried to calculate $\frac{\partial L}{\partial w}$ for every single weight independently, it would be computationally impossible for large networks. Instead, Backpropagation leverages a clever trick: it computes the gradients layer by layer, starting from the output layer and moving _backward_ to the input layer.
 
-Think of it like this: After a child crashes their bike, we don't just say, "You crashed!" We try to figure out *why*. Was it the steering? The pedaling? The balance? We attribute blame. In a neural network, the output layer directly causes the error. But that error was influenced by the hidden layers before it, and those hidden layers were influenced by the layers before them, and so on.
+Think of it like this: After a child crashes their bike, we don't just say, "You crashed!" We try to figure out _why_. Was it the steering? The pedaling? The balance? We attribute blame. In a neural network, the output layer directly causes the error. But that error was influenced by the hidden layers before it, and those hidden layers were influenced by the layers before them, and so on.
 
 Backpropagation allows us to efficiently distribute the "blame" (the error signal) from the output back to every single weight and bias in the network, telling each one precisely how much it contributed to the final error.
 
@@ -80,10 +81,11 @@ And similarly for bias:
 $\frac{\partial L}{\partial b} = \frac{\partial L}{\partial a} \cdot \frac{\partial a}{\partial z} \cdot \frac{\partial z}{\partial b}$
 
 Let's break down each term:
-*   $\frac{\partial L}{\partial a}$: How much does the loss change with respect to this neuron's output? This is the "error signal" coming from further down the chain.
-*   $\frac{\partial a}{\partial z}$: This is simply the derivative of our activation function, $\sigma'(z)$. It tells us how sensitive the neuron's output is to its weighted input sum.
-*   $\frac{\partial z}{\partial w_k}$: From $z = \sum_k w_k a_k + b$, this is just $a_k$ (the input from the previous neuron).
-*   $\frac{\partial z}{\partial b}$: From $z = \sum_k w_k a_k + b$, this is just $1$.
+
+- $\frac{\partial L}{\partial a}$: How much does the loss change with respect to this neuron's output? This is the "error signal" coming from further down the chain.
+- $\frac{\partial a}{\partial z}$: This is simply the derivative of our activation function, $\sigma'(z)$. It tells us how sensitive the neuron's output is to its weighted input sum.
+- $\frac{\partial z}{\partial w_k}$: From $z = \sum_k w_k a_k + b$, this is just $a_k$ (the input from the previous neuron).
+- $\frac{\partial z}{\partial b}$: From $z = \sum_k w_k a_k + b$, this is just $1$.
 
 So, for a single neuron, the updates involve:
 
@@ -95,10 +97,11 @@ The term $\frac{\partial L}{\partial a} \cdot \sigma'(z)$ is crucial; it's often
 ### Walking Through a Simple Network (The Essence of Backpropagation)
 
 Let's formalize this for a multi-layered network. We'll denote:
-*   $a^l$: the activation (output) of a neuron in layer $l$.
-*   $z^l$: the weighted sum (net input) of a neuron in layer $l$.
-*   $w^{l}$: the weights connecting layer $l-1$ to layer $l$.
-*   $b^{l}$: the biases for layer $l$.
+
+- $a^l$: the activation (output) of a neuron in layer $l$.
+- $z^l$: the weighted sum (net input) of a neuron in layer $l$.
+- $w^{l}$: the weights connecting layer $l-1$ to layer $l$.
+- $b^{l}$: the biases for layer $l$.
 
 The forward pass is:
 $z^l = w^l a^{l-1} + b^l$
@@ -121,16 +124,17 @@ $\frac{\partial L}{\partial b^3} = \delta^3$
 
 **Step 2: Propagate the Error Backward to Hidden Layers**
 
-Now, here's the "back" part. We need to calculate the error signal $\delta^2$ for the hidden layer (layer 2). This error depends on the error in the *next* layer (layer 3) and how strongly layer 2's outputs influenced layer 3.
+Now, here's the "back" part. We need to calculate the error signal $\delta^2$ for the hidden layer (layer 2). This error depends on the error in the _next_ layer (layer 3) and how strongly layer 2's outputs influenced layer 3.
 
-The key insight is that the error from layer $l+1$ is passed back to layer $l$, weighted by the connections $w^{l+1}$ that lead *from* layer $l$ *to* layer $l+1$.
+The key insight is that the error from layer $l+1$ is passed back to layer $l$, weighted by the connections $w^{l+1}$ that lead _from_ layer $l$ _to_ layer $l+1$.
 
 $\delta^l = \left( (w^{l+1})^T \delta^{l+1} \right) \odot \sigma'(z^l)$
 
 Let's unpack this:
-*   $(w^{l+1})^T \delta^{l+1}$: This is the sum of the error signals from the next layer, weighted by the transposed weights. It's essentially asking: "How much did my output contribute to the errors in the next layer, considering the strength of the connections?"
-*   $\odot$: This is the element-wise product (Hadamard product).
-*   $\sigma'(z^l)$: We multiply by the derivative of the activation function for layer $l$. This scales the error based on how steep the activation function was at that neuron's weighted sum. If the neuron was "saturated" (e.g., in the flat part of a sigmoid), its output doesn't change much even if its input changes, so its error signal will be small.
+
+- $(w^{l+1})^T \delta^{l+1}$: This is the sum of the error signals from the next layer, weighted by the transposed weights. It's essentially asking: "How much did my output contribute to the errors in the next layer, considering the strength of the connections?"
+- $\odot$: This is the element-wise product (Hadamard product).
+- $\sigma'(z^l)$: We multiply by the derivative of the activation function for layer $l$. This scales the error based on how steep the activation function was at that neuron's weighted sum. If the neuron was "saturated" (e.g., in the flat part of a sigmoid), its output doesn't change much even if its input changes, so its error signal will be small.
 
 Once we have $\delta^l$ for a hidden layer, we can calculate its gradients for weights and biases:
 
@@ -141,7 +145,7 @@ We repeat this process, calculating $\delta$ for each layer backward until we re
 
 **Step 3: Update Weights and Biases**
 
-After calculating all the gradients ($\frac{\partial L}{\partial w}$ and $\frac{\partial L}{\partial b}$) for *all* layers, we then update all the weights and biases using our learning rate $\eta$ and the Gradient Descent rule:
+After calculating all the gradients ($\frac{\partial L}{\partial w}$ and $\frac{\partial L}{\partial b}$) for _all_ layers, we then update all the weights and biases using our learning rate $\eta$ and the Gradient Descent rule:
 
 $w^{l} \leftarrow w^{l} - \eta \frac{\partial L}{\partial w^{l}}$
 $b^{l} \leftarrow b^{l} - \eta \frac{\partial L}{\partial b^{l}}$
@@ -159,9 +163,9 @@ The error signal $\delta_j^l$ (for neuron $j$ in layer $l$) essentially tells us
 
 Backpropagation is not just a mathematical curiosity; it's the bedrock upon which modern deep learning is built. Before Backpropagation was widely understood and efficiently implemented, training multi-layered neural networks was impractical. It provided the computational efficiency needed to:
 
-*   **Train deep networks:** Enabling networks with many hidden layers to learn complex features.
-*   **Scale up:** Allowing the use of massive datasets and millions of parameters.
-*   **Unlock AI breakthroughs:** Powering advancements in computer vision, natural language processing, speech recognition, and countless other fields.
+- **Train deep networks:** Enabling networks with many hidden layers to learn complex features.
+- **Scale up:** Allowing the use of massive datasets and millions of parameters.
+- **Unlock AI breakthroughs:** Powering advancements in computer vision, natural language processing, speech recognition, and countless other fields.
 
 It's the algorithm that transformed neural networks from a promising but limited idea into the dominant paradigm in AI.
 

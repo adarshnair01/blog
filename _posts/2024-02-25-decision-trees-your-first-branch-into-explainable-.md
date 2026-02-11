@@ -4,9 +4,10 @@ date: "2024-02-25"
 excerpt: "Ever wondered how computers make complex choices step-by-step? Decision Trees offer an incredibly intuitive and powerful way for machines to mimic our own logical decision-making process."
 author: "Adarsh Nair"
 ---
+
 Hey there, fellow explorer of the data universe! Today, I want to share a foundational concept in machine learning that's as intuitive as it is powerful: Decision Trees. If you've ever followed a flowchart or played a 'choose-your-own-adventure' book, you've already got a head start on understanding them!
 
-### What Exactly *Are* Decision Trees?
+### What Exactly _Are_ Decision Trees?
 
 Imagine you're trying to decide if you should go for a run. You might ask: "Is it raining?" If yes, you might ask: "Do I have an umbrella?" If no, you might ask: "Is it too cold?" Each question leads you down a different path until you reach a final decision: 'Run' or 'Don't Run'.
 
@@ -14,7 +15,7 @@ That's precisely what a Decision Tree does for computers! It's a flowchart-like 
 
 ### How Do They 'Think'? Building the Tree
 
-The magic lies in how a Decision Tree decides *which* questions to ask and in what order. The goal is to split the data at each node in a way that best separates the different classes. We want to make the resulting subsets as 'pure' as possible, meaning each subset contains mostly instances of a single class.
+The magic lies in how a Decision Tree decides _which_ questions to ask and in what order. The goal is to split the data at each node in a way that best separates the different classes. We want to make the resulting subsets as 'pure' as possible, meaning each subset contains mostly instances of a single class.
 
 To do this, algorithms look for the 'best split' using measures of **impurity**. Two common ones are:
 
@@ -28,15 +29,15 @@ When building the tree, the algorithm at each step selects the feature (the 'que
 
 ### The Upsides: Why We Love Them
 
-*   **Interpretability**: This is their superpower! You can literally trace the path from the root to a leaf to understand *why* a decision was made. This 'explainability' is crucial in many fields.
-*   **Simple to Understand & Visualize**: Flowcharts are naturally intuitive.
-*   **Handles Different Data Types**: They can work with both numerical (like temperature) and categorical (like 'raining' or 'not raining') data.
-*   **Little Data Preprocessing**: They don't require feature scaling or normalization.
+- **Interpretability**: This is their superpower! You can literally trace the path from the root to a leaf to understand _why_ a decision was made. This 'explainability' is crucial in many fields.
+- **Simple to Understand & Visualize**: Flowcharts are naturally intuitive.
+- **Handles Different Data Types**: They can work with both numerical (like temperature) and categorical (like 'raining' or 'not raining') data.
+- **Little Data Preprocessing**: They don't require feature scaling or normalization.
 
 ### The Downsides: What to Watch Out For
 
-*   **Overfitting**: A common challenge is that deep trees can become too complex, learning the noise in the training data rather than the underlying patterns. This leads to poor performance on new, unseen data.
-*   **Instability**: Small changes in the training data can sometimes lead to a completely different tree structure.
+- **Overfitting**: A common challenge is that deep trees can become too complex, learning the noise in the training data rather than the underlying patterns. This leads to poor performance on new, unseen data.
+- **Instability**: Small changes in the training data can sometimes lead to a completely different tree structure.
 
 To combat overfitting, techniques like **pruning** (removing branches that have little predictive power) are used. Even more powerfully, multiple Decision Trees can be combined into **ensemble methods** like Random Forests or Gradient Boosting, creating incredibly robust models – but that's a story for another blog post!
 

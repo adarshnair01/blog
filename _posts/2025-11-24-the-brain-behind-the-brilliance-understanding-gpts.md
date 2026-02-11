@@ -25,10 +25,11 @@ The world needed something new – a way to process entire sequences at once, pa
 In 2017, a groundbreaking paper titled "Attention Is All You Need" introduced the Transformer architecture, and it fundamentally changed the landscape of Natural Language Processing (NLP). The key innovation? It completely ditched recurrence and convolution, relying solely on a mechanism called "attention." This allowed models to process all words in a sentence simultaneously, vastly improving training speed and their ability to capture long-range dependencies.
 
 The original Transformer architecture had two main parts: an **Encoder** and a **Decoder**.
-*   The **Encoder** takes an input sequence (e.g., a sentence in English) and transforms it into a rich, contextual representation.
-*   The **Decoder** then takes this representation and generates an output sequence (e.g., the same sentence translated into French).
 
-**Here's a crucial point for understanding GPT:** GPT models are **Decoder-only** Transformers. They are designed for *generation*, predicting the next word in a sequence. This means they are inherently built to create text, rather than just encoding or translating it.
+- The **Encoder** takes an input sequence (e.g., a sentence in English) and transforms it into a rich, contextual representation.
+- The **Decoder** then takes this representation and generates an output sequence (e.g., the same sentence translated into French).
+
+**Here's a crucial point for understanding GPT:** GPT models are **Decoder-only** Transformers. They are designed for _generation_, predicting the next word in a sequence. This means they are inherently built to create text, rather than just encoding or translating it.
 
 Let's dissect the core components of the GPT's Decoder block.
 
@@ -50,21 +51,22 @@ Where $E(x_i)$ is the word embedding and $P_i$ is the positional embedding for p
 
 #### 2. Masked Multi-Head Self-Attention: The "Looking at Itself" Mechanism
 
-This is arguably the most brilliant and complex part of the Transformer. "Attention" in a neural network context means giving different weights to different parts of the input when processing a specific piece of information. "Self-attention" means that each word in a sequence pays attention to *all other words in the same sequence* (including itself) to understand its context.
+This is arguably the most brilliant and complex part of the Transformer. "Attention" in a neural network context means giving different weights to different parts of the input when processing a specific piece of information. "Self-attention" means that each word in a sequence pays attention to _all other words in the same sequence_ (including itself) to understand its context.
 
 Imagine you're trying to understand the word "bank" in a sentence. Is it a river bank or a financial bank? You'd look at the surrounding words to figure it out. Self-attention does something similar.
 
 Here's a simplified breakdown:
-*   **Query (Q), Key (K), Value (V):** For each input vector (our word + positional embedding), we create three different vectors: a Query, a Key, and a Value. Think of the Query as "what I'm looking for," the Key as "what I have," and the Value as "what I am."
-*   **Calculating Attention Scores:** To figure out how much attention each word should pay to every other word, we calculate a score. This is typically done by taking the dot product of the Query of the current word with the Key of every other word. A high dot product means they are semantically related.
-*   **Scaling and Softmax:** These scores are then scaled down (to prevent very large values from dominating) by dividing by the square root of the key dimension, $\sqrt{d_k}$, and then passed through a `softmax` function. Softmax turns these scores into probabilities that sum to 1, indicating how much "attention" to pay.
-    $ Attention(Q, K, V) = \text{softmax}(\frac{QK^T}{\sqrt{d_k}})V $
-    The result of this operation is that each word's representation becomes a weighted sum of all other words' Value vectors, where the weights are the attention scores. This means each word now has a context-rich representation.
+
+- **Query (Q), Key (K), Value (V):** For each input vector (our word + positional embedding), we create three different vectors: a Query, a Key, and a Value. Think of the Query as "what I'm looking for," the Key as "what I have," and the Value as "what I am."
+- **Calculating Attention Scores:** To figure out how much attention each word should pay to every other word, we calculate a score. This is typically done by taking the dot product of the Query of the current word with the Key of every other word. A high dot product means they are semantically related.
+- **Scaling and Softmax:** These scores are then scaled down (to prevent very large values from dominating) by dividing by the square root of the key dimension, $\sqrt{d_k}$, and then passed through a `softmax` function. Softmax turns these scores into probabilities that sum to 1, indicating how much "attention" to pay.
+  $ Attention(Q, K, V) = \text{softmax}(\frac{QK^T}{\sqrt{d_k}})V $
+  The result of this operation is that each word's representation becomes a weighted sum of all other words' Value vectors, where the weights are the attention scores. This means each word now has a context-rich representation.
 
 **The GPT Twist: Masked Self-Attention**
-Since GPT is a generative model designed to predict the *next* word, it cannot "peek" at future words during training. If it could see the word it's supposed to predict, it wouldn't be learning anything useful.
+Since GPT is a generative model designed to predict the _next_ word, it cannot "peek" at future words during training. If it could see the word it's supposed to predict, it wouldn't be learning anything useful.
 
-This is where **Masked Self-Attention** comes in. During the attention calculation, we apply a "mask" that prevents any token from attending to subsequent tokens. Effectively, when calculating the attention for word $i$, we set the attention scores for all words $j > i$ to negative infinity *before* applying the softmax. This makes their softmax probability zero, meaning word $i$ only attends to words $1$ through $i$. This is crucial for maintaining the auto-regressive (left-to-right generation) property of GPT.
+This is where **Masked Self-Attention** comes in. During the attention calculation, we apply a "mask" that prevents any token from attending to subsequent tokens. Effectively, when calculating the attention for word $i$, we set the attention scores for all words $j > i$ to negative infinity _before_ applying the softmax. This makes their softmax probability zero, meaning word $i$ only attends to words $1$ through $i$. This is crucial for maintaining the auto-regressive (left-to-right generation) property of GPT.
 
 **Multi-Head Attention:**
 Instead of having just one set of Q, K, V matrices, the Transformer uses multiple "attention heads." Each head learns to focus on different aspects of the relationships between words. For example, one head might learn to identify subject-verb relationships, while another might focus on pronoun coreference. The outputs from all these heads are then concatenated and linearly transformed back into a single vector. This allows the model to capture diverse contextual information simultaneously.
@@ -80,9 +82,10 @@ Where $W_1, b_1, W_2, b_2$ are learnable parameters.
 #### 4. Residual Connections and Layer Normalization: Stability and Depth
 
 Two more essential components found in each Decoder block are:
-*   **Residual Connections:** Introduced by ResNet, these allow information to skip over one or more layers. This helps with the vanishing gradient problem in deep networks, making it easier to train very deep models. The output of a sub-layer is added back to its input: $ Output = Input + Sublayer(Input) $.
-*   **Layer Normalization:** Applied after each sub-layer (attention and FFN), layer normalization stabilizes training by normalizing the inputs to the next layer across the feature dimension for each sample. This ensures that the activations across the network remain in a healthy range.
-    $ LN(x) = \gamma \frac{x - \mu}{\sigma} + \beta $
+
+- **Residual Connections:** Introduced by ResNet, these allow information to skip over one or more layers. This helps with the vanishing gradient problem in deep networks, making it easier to train very deep models. The output of a sub-layer is added back to its input: $ Output = Input + Sublayer(Input) $.
+- **Layer Normalization:** Applied after each sub-layer (attention and FFN), layer normalization stabilizes training by normalizing the inputs to the next layer across the feature dimension for each sample. This ensures that the activations across the network remain in a healthy range.
+  $ LN(x) = \gamma \frac{x - \mu}{\sigma} + \beta $
     Where $\mu$ and $\sigma$ are the mean and standard deviation of the input $x$ across its features, and $\gamma$ and $\beta$ are learnable scaling and shifting parameters.
 
 ### Stacking the Blocks: The Deep GPT Architecture
@@ -93,7 +96,7 @@ A full GPT model isn't just one Decoder block; it's a stack of many identical bl
 
 After passing through all the stacked Decoder blocks, the final output for each position is a high-dimensional vector. This vector is then fed into a linear layer (also called a "projection layer") followed by a `softmax` activation function.
 
-The linear layer transforms the vector into a set of logits, which are raw scores for every word in the model's vocabulary. The `softmax` function then converts these logits into probabilities, where each probability represents the likelihood of that particular word being the *next* word in the sequence. The word with the highest probability is typically chosen (or sampled from the distribution) as the model's prediction.
+The linear layer transforms the vector into a set of logits, which are raw scores for every word in the model's vocabulary. The `softmax` function then converts these logits into probabilities, where each probability represents the likelihood of that particular word being the _next_ word in the sequence. The word with the highest probability is typically chosen (or sampled from the distribution) as the model's prediction.
 
 ### Training GPT: The Art of Prediction
 

@@ -8,13 +8,13 @@ author: "Adarsh Nair"
 
 As a budding data scientist, I'm often struck by the elegant simplicity underlying some of the most profound concepts in our field. One such concept that captivated me early on, bridging the gap between abstract mathematics and real-world applications, is the **Markov Chain**. It’s a tool so versatile, it powers everything from Google's PageRank algorithm to the predictive text on your phone.
 
-But what exactly *is* a Markov Chain? When I first encountered the term, it sounded intimidating, almost like something out of a dense theoretical physics textbook. Yet, as I dug deeper, I realized its core idea is beautifully intuitive. It's about making predictions based on *just* the current situation, forgetting everything that happened before.
+But what exactly _is_ a Markov Chain? When I first encountered the term, it sounded intimidating, almost like something out of a dense theoretical physics textbook. Yet, as I dug deeper, I realized its core idea is beautifully intuitive. It's about making predictions based on _just_ the current situation, forgetting everything that happened before.
 
 Let's dive in.
 
 ### The Heart of the Matter: Memorylessness
 
-Imagine you're playing a board game. Your next move depends entirely on where your piece is *right now* and the roll of the dice. It doesn't matter if you landed on that square two turns ago, or if your opponent moved five spaces forward in the last round. Your past moves are irrelevant to your *next* move; only your current position matters.
+Imagine you're playing a board game. Your next move depends entirely on where your piece is _right now_ and the roll of the dice. It doesn't matter if you landed on that square two turns ago, or if your opponent moved five spaces forward in the last round. Your past moves are irrelevant to your _next_ move; only your current position matters.
 
 This, in essence, is the **memoryless property**, the defining characteristic of a Markov Chain. Formally, it states that the probability of transitioning to any particular state depends solely on the current state and not on the sequence of events that preceded it.
 
@@ -22,18 +22,18 @@ Let's denote the state of our system at time $n$ as $X_n$. The memoryless proper
 
 $P(X_{n+1} = j | X_n = i, X_{n-1} = i_{n-1}, \dots, X_0 = i_0) = P(X_{n+1} = j | X_n = i)$
 
-This equation simply means: the probability of being in state $j$ at the next time step ($n+1$), given all past states up to the current state ($n$), is the same as the probability of being in state $j$ given *only* the current state ($i$). It's a powerful simplification that makes complex systems tractable.
+This equation simply means: the probability of being in state $j$ at the next time step ($n+1$), given all past states up to the current state ($n$), is the same as the probability of being in state $j$ given _only_ the current state ($i$). It's a powerful simplification that makes complex systems tractable.
 
 ### Building Blocks: States and Transitions
 
 To really grasp Markov Chains, we need two fundamental components:
 
 1.  **States**: These are the possible situations or conditions our system can be in. Think of them as discrete categories.
-    *   **Example**: If we're modeling daily weather, our states might be {Sunny, Cloudy, Rainy}.
-    *   **Example**: For a simple text generator, states could be individual words {the, cat, sat, on, mat}.
+    - **Example**: If we're modeling daily weather, our states might be {Sunny, Cloudy, Rainy}.
+    - **Example**: For a simple text generator, states could be individual words {the, cat, sat, on, mat}.
 
 2.  **Transitions**: These are the movements or changes from one state to another. Crucially, each transition has an associated probability.
-    *   **Example (Weather)**: If it's Sunny today, there's a certain probability it will be Sunny tomorrow, another probability it will be Cloudy, and another it will be Rainy.
+    - **Example (Weather)**: If it's Sunny today, there's a certain probability it will be Sunny tomorrow, another probability it will be Cloudy, and another it will be Rainy.
 
 Let's consider a simple weather example, which is often the first illustration I encountered and found most helpful.
 
@@ -41,20 +41,20 @@ Let's consider a simple weather example, which is often the first illustration I
 Assume we have three states: $S_1$ (Sunny), $S_2$ (Cloudy), $S_3$ (Rainy).
 The probabilities of transitioning from one state to another might look like this:
 
-*   **If today is Sunny:**
-    *   Tomorrow is Sunny: 70% chance
-    *   Tomorrow is Cloudy: 20% chance
-    *   Tomorrow is Rainy: 10% chance
-*   **If today is Cloudy:**
-    *   Tomorrow is Sunny: 30% chance
-    *   Tomorrow is Cloudy: 40% chance
-    *   Tomorrow is Rainy: 30% chance
-*   **If today is Rainy:**
-    *   Tomorrow is Sunny: 10% chance
-    *   Tomorrow is Cloudy: 40% chance
-    *   Tomorrow is Rainy: 50% chance
+- **If today is Sunny:**
+  - Tomorrow is Sunny: 70% chance
+  - Tomorrow is Cloudy: 20% chance
+  - Tomorrow is Rainy: 10% chance
+- **If today is Cloudy:**
+  - Tomorrow is Sunny: 30% chance
+  - Tomorrow is Cloudy: 40% chance
+  - Tomorrow is Rainy: 30% chance
+- **If today is Rainy:**
+  - Tomorrow is Sunny: 10% chance
+  - Tomorrow is Cloudy: 40% chance
+  - Tomorrow is Rainy: 50% chance
 
-Notice an important detail: for each current state, the probabilities of transitioning to *all possible next states* must sum up to 1 (or 100%). You can't just vanish into thin air, you *must* transition to one of the defined states.
+Notice an important detail: for each current state, the probabilities of transitioning to _all possible next states_ must sum up to 1 (or 100%). You can't just vanish into thin air, you _must_ transition to one of the defined states.
 
 ### The Transition Matrix: Our Map of Possibilities
 
@@ -69,29 +69,31 @@ $P = \begin{pmatrix}
 \end{pmatrix}$
 
 Here:
-*   Row 1: Probabilities of transitioning *from* Sunny (to Sunny, Cloudy, Rainy).
-*   Row 2: Probabilities of transitioning *from* Cloudy (to Sunny, Cloudy, Rainy).
-*   Row 3: Probabilities of transitioning *from* Rainy (to Sunny, Cloudy, Rainy).
+
+- Row 1: Probabilities of transitioning _from_ Sunny (to Sunny, Cloudy, Rainy).
+- Row 2: Probabilities of transitioning _from_ Cloudy (to Sunny, Cloudy, Rainy).
+- Row 3: Probabilities of transitioning _from_ Rainy (to Sunny, Cloudy, Rainy).
 
 Each row sums to 1. This matrix is the entire "memory" of our Markov Chain; it's all the information we need to predict the future.
 
 ### Simulating the Future (One Step at a Time)
 
 With our transition matrix, we can simulate the weather day by day. Let's say today is Sunny. We'd pick a random number between 0 and 1.
-*   If the number is between 0 and 0.7, tomorrow is Sunny.
-*   If between 0.7 and 0.9 (0.7+0.2), tomorrow is Cloudy.
-*   If between 0.9 and 1.0 (0.9+0.1), tomorrow is Rainy.
+
+- If the number is between 0 and 0.7, tomorrow is Sunny.
+- If between 0.7 and 0.9 (0.7+0.2), tomorrow is Cloudy.
+- If between 0.9 and 1.0 (0.9+0.1), tomorrow is Rainy.
 
 This process gives us a sequence of states. If we start Sunny, we might get: Sunny -> Sunny -> Cloudy -> Rainy -> Cloudy -> ...
 
-What if we want to know the probability of the weather being Sunny, Cloudy, or Rainy *two* days from now, given it's Sunny today?
+What if we want to know the probability of the weather being Sunny, Cloudy, or Rainy _two_ days from now, given it's Sunny today?
 We can achieve this by multiplying the transition matrix by itself. If $P$ gives us the probabilities for 1 step, $P^2$ gives us the probabilities for 2 steps, $P^3$ for 3 steps, and so on.
 
 Let $p^{(n)}_i$ be the probability of being in state $i$ after $n$ steps. If we start in a specific state, say Sunny (represented as a row vector $[1, 0, 0]$), then the probability distribution after $n$ steps would be:
 
 $p^{(n)} = p^{(0)} P^n$
 
-Where $p^{(0)}$ is our initial state distribution (e.g., $[1, 0, 0]$ if we *know* it's Sunny today).
+Where $p^{(0)}$ is our initial state distribution (e.g., $[1, 0, 0]$ if we _know_ it's Sunny today).
 
 ### The Long Run: Reaching a Steady State
 
@@ -116,8 +118,8 @@ The simplicity and power of Markov Chains make them invaluable in a surprising a
 1.  **Google's PageRank Algorithm**: This is perhaps the most famous application. PageRank models a "random surfer" who clicks on links. Each webpage is a "state," and the probability of transitioning from one page to another is based on the links present. The stationary distribution of this Markov Chain represents the long-term probability of the random surfer being on any given page, effectively determining the page's importance or "rank."
 
 2.  **Natural Language Processing (NLP)**:
-    *   **Text Generation**: Markov Chains can be used to generate text that mimics the style of a given corpus. Each word (or character) is a state, and the transition probabilities are learned from how often one word follows another. This is how early predictive text systems or "Markov text generators" work.
-    *   **Speech Recognition**: More advanced versions, like Hidden Markov Models (HMMs), are fundamental in speech recognition, where the underlying "states" (e.g., phonemes, words) are hidden, and we observe only the output (audio signals).
+    - **Text Generation**: Markov Chains can be used to generate text that mimics the style of a given corpus. Each word (or character) is a state, and the transition probabilities are learned from how often one word follows another. This is how early predictive text systems or "Markov text generators" work.
+    - **Speech Recognition**: More advanced versions, like Hidden Markov Models (HMMs), are fundamental in speech recognition, where the underlying "states" (e.g., phonemes, words) are hidden, and we observe only the output (audio signals).
 
 3.  **Genetics and Biology**: Markov Chains are used to model DNA sequences, protein folding, and population dynamics. For example, modeling mutations or the spread of diseases.
 
@@ -127,13 +129,13 @@ The simplicity and power of Markov Chains make them invaluable in a surprising a
 
 ### Beyond the Basics: Limitations and Extensions
 
-While incredibly powerful, the memoryless property is also the main limitation of a simple Markov Chain. In many real-world scenarios, the past *does* matter beyond just the immediate previous state.
+While incredibly powerful, the memoryless property is also the main limitation of a simple Markov Chain. In many real-world scenarios, the past _does_ matter beyond just the immediate previous state.
 
 This is where more advanced concepts come into play:
 
-*   **Higher-Order Markov Chains**: These models consider more than just the immediate previous state. For example, a second-order Markov Chain would base the next state on the *two* previous states.
-*   **Hidden Markov Models (HMMs)**: As mentioned earlier, HMMs are used when the states themselves are not directly observable, but we can observe emissions or outputs that depend on those states. Think of trying to infer someone's mood (hidden state) based on their tone of voice and facial expressions (observations).
-*   **Markov Decision Processes (MDPs)**: These extend Markov Chains by adding decisions or actions that an agent can take, influencing the transitions and leading to rewards. This forms the foundation of Reinforcement Learning, where an agent learns optimal policies by interacting with an environment.
+- **Higher-Order Markov Chains**: These models consider more than just the immediate previous state. For example, a second-order Markov Chain would base the next state on the _two_ previous states.
+- **Hidden Markov Models (HMMs)**: As mentioned earlier, HMMs are used when the states themselves are not directly observable, but we can observe emissions or outputs that depend on those states. Think of trying to infer someone's mood (hidden state) based on their tone of voice and facial expressions (observations).
+- **Markov Decision Processes (MDPs)**: These extend Markov Chains by adding decisions or actions that an agent can take, influencing the transitions and leading to rewards. This forms the foundation of Reinforcement Learning, where an agent learns optimal policies by interacting with an environment.
 
 ### My Ongoing Journey
 

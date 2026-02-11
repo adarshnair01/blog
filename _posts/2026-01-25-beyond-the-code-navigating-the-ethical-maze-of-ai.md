@@ -14,7 +14,7 @@ This isn't just a philosophical debate for academics; it's a practical, everyday
 
 My first real encounter with AI ethics wasn't through a textbook, but through a thought experiment. Imagine an AI system designed to predict creditworthiness for loan applications. Sounds efficient, right? But what if the historical data it was trained on inherently reflected past societal biases? Perhaps certain demographics were historically denied loans more often, not due to their actual inability to repay, but due to systemic prejudice.
 
-When our AI learns from such data, it doesn't magically "correct" the bias; it *amplifies* it. The model learns to associate certain protected attributes (like race or gender) with lower credit scores, even if those attributes are not causally linked to financial risk. This leads to algorithmic bias.
+When our AI learns from such data, it doesn't magically "correct" the bias; it _amplifies_ it. The model learns to associate certain protected attributes (like race or gender) with lower credit scores, even if those attributes are not causally linked to financial risk. This leads to algorithmic bias.
 
 Let's put a slightly more technical lens on this. Imagine we have a model deciding on loan approvals. Ideally, we want its decision to be fair across different demographic groups. If we denote $Y$ as the event of loan approval and $S_1, S_2$ as two different sensitive groups (e.g., gender, race), then a truly fair system might strive for **demographic parity**, meaning the probability of approval should be roughly equal for both groups:
 
@@ -26,9 +26,9 @@ The challenge is that "fairness" itself is a multi-faceted concept. Demographic 
 
 ### The Black Box Problem: Transparency and Explainability (XAI)
 
-One of the most unsettling aspects of complex AI models, particularly deep neural networks, is their "black box" nature. We can feed them inputs and get outputs, but understanding *why* a specific decision was made can be incredibly difficult. This lack of transparency is a huge ethical concern, especially when AI is used in high-stakes domains like healthcare, criminal justice, or autonomous vehicles.
+One of the most unsettling aspects of complex AI models, particularly deep neural networks, is their "black box" nature. We can feed them inputs and get outputs, but understanding _why_ a specific decision was made can be incredibly difficult. This lack of transparency is a huge ethical concern, especially when AI is used in high-stakes domains like healthcare, criminal justice, or autonomous vehicles.
 
-Imagine an AI system recommending a specific medical treatment. If a doctor can't understand *why* the AI made that recommendation, how can they trust it? How can a patient give informed consent? Or consider an AI used in hiring – if it consistently rejects qualified candidates from certain backgrounds, and we can't explain why, how do we address the underlying bias or even confirm its existence?
+Imagine an AI system recommending a specific medical treatment. If a doctor can't understand _why_ the AI made that recommendation, how can they trust it? How can a patient give informed consent? Or consider an AI used in hiring – if it consistently rejects qualified candidates from certain backgrounds, and we can't explain why, how do we address the underlying bias or even confirm its existence?
 
 This is where the field of **Explainable AI (XAI)** comes into play. Techniques like LIME (Local Interpretable Model-agnostic Explanations) and SHAP (SHapley Additive exPlanations) are designed to shed light on these black boxes. They help us understand which features are most influential in a model's prediction for a specific instance or globally.
 
@@ -60,9 +60,10 @@ My reflection here is that we, as developers, are not just building tools; we ar
 ### The Bigger Picture: Societal Impact
 
 Beyond individual users, AI has the potential to reshape entire societies. We need to consider:
-*   **Job Displacement:** While AI creates new jobs, it will undoubtedly automate many existing ones. How do we ethically manage this transition to prevent widespread unemployment and increased inequality?
-*   **Manipulation and Misinformation:** AI-powered tools can generate highly convincing fake content (deepfakes) or spread propaganda at an unprecedented scale, threatening democratic processes and public trust.
-*   **Concentration of Power:** As AI capabilities become more advanced and expensive to develop, there's a risk that a few powerful corporations or governments could gain undue influence, creating a new form of digital divide.
+
+- **Job Displacement:** While AI creates new jobs, it will undoubtedly automate many existing ones. How do we ethically manage this transition to prevent widespread unemployment and increased inequality?
+- **Manipulation and Misinformation:** AI-powered tools can generate highly convincing fake content (deepfakes) or spread propaganda at an unprecedented scale, threatening democratic processes and public trust.
+- **Concentration of Power:** As AI capabilities become more advanced and expensive to develop, there's a risk that a few powerful corporations or governments could gain undue influence, creating a new form of digital divide.
 
 These aren't abstract future problems; they are challenges we're already grappling with. As builders of these systems, we have a unique responsibility to anticipate these impacts and advocate for the ethical development and deployment of AI.
 

@@ -25,14 +25,14 @@ When I first started visualizing time series data, I noticed recurring patterns.
 1.  **Trend ($T_t$)**: This is the long-term progression of the series. Is it generally increasing, decreasing, or staying flat over time? For example, the global average temperature shows an upward trend over the last century.
 2.  **Seasonality ($S_t$)**: These are predictable, repeating patterns within a fixed period, like daily, weekly, monthly, or yearly cycles. Think of retail sales spiking every December due to holidays, or electricity consumption peaking in the afternoon. This pattern has a fixed and known frequency.
 3.  **Cyclicity**: These are patterns that rise and fall, but they don't have a fixed period like seasonality. Business cycles, for instance, might last anywhere from 2 to 10 years and are less predictable in their exact timing. It's important to distinguish cyclicity from seasonality!
-4.  **Residuals / Noise ($R_t$)**: Also known as the error term, this is what's left over after accounting for trend, seasonality, and cyclicity. It represents random, unpredictable fluctuations in the data. Our goal often is to model everything *but* the noise, leaving the noise as truly random.
+4.  **Residuals / Noise ($R_t$)**: Also known as the error term, this is what's left over after accounting for trend, seasonality, and cyclicity. It represents random, unpredictable fluctuations in the data. Our goal often is to model everything _but_ the noise, leaving the noise as truly random.
 
 We often model these components using either an **additive model** or a **multiplicative model**:
 
-*   **Additive Model**: $Y_t = T_t + S_t + R_t$
-    This assumes the magnitude of the seasonal fluctuations and the error term doesn't change with the level of the time series. Think of it as constant up-and-down movements regardless of whether the trend is high or low.
-*   **Multiplicative Model**: $Y_t = T_t \times S_t \times R_t$
-    Here, the magnitude of the seasonal fluctuations and the error term is proportional to the level of the time series. If the trend is increasing, the seasonal "bumps" also get larger. This is common in economic data, like stock prices, where percentage changes are often more relevant than absolute changes.
+- **Additive Model**: $Y_t = T_t + S_t + R_t$
+  This assumes the magnitude of the seasonal fluctuations and the error term doesn't change with the level of the time series. Think of it as constant up-and-down movements regardless of whether the trend is high or low.
+- **Multiplicative Model**: $Y_t = T_t \times S_t \times R_t$
+  Here, the magnitude of the seasonal fluctuations and the error term is proportional to the level of the time series. If the trend is increasing, the seasonal "bumps" also get larger. This is common in economic data, like stock prices, where percentage changes are often more relevant than absolute changes.
 
 Understanding these components is the first step towards building effective forecasting models.
 
@@ -45,6 +45,7 @@ A time series is considered **stationary** if its statistical properties – its
 Why is stationarity so important? Many traditional time series models, especially those in the ARIMA family, explicitly assume that the underlying process generating the data is stationary. If your data isn't stationary, your model might be based on fluctuating properties, leading to unreliable predictions.
 
 **How do we check for stationarity?**
+
 1.  **Visual Inspection**: Plotting the data often reveals obvious trends or changing variances.
 2.  **ACF/PACF Plots**: These plots (which we'll discuss next) can reveal non-stationarity.
 3.  **Statistical Tests**: The **Augmented Dickey-Fuller (ADF) test** is a popular statistical test that checks for the presence of a unit root, which is a common characteristic of non-stationary series. A low p-value (typically < 0.05) suggests stationarity.
@@ -60,11 +61,11 @@ If the series still isn't stationary, you can apply differencing again ($Z'_t = 
 
 Once we have a stationary series (or at least one we've attempted to make stationary), we need to understand its internal structure. This is where **Autocorrelation Function (ACF)** and **Partial Autocorrelation Function (PACF)** plots become our best friends. They help us identify how past values influence current values.
 
-*   **Autocorrelation Function (ACF)**: This plot shows the correlation between a time series and its lagged versions. A lag of 1 means correlating $Y_t$ with $Y_{t-1}$, a lag of 2 means $Y_t$ with $Y_{t-2}$, and so on.
-    *   *Intuition*: A high ACF at lag $k$ tells you that observations $k$ periods apart have a strong linear relationship. If a stock price yesterday influences today's, you'd see high autocorrelation at lag 1.
+- **Autocorrelation Function (ACF)**: This plot shows the correlation between a time series and its lagged versions. A lag of 1 means correlating $Y_t$ with $Y_{t-1}$, a lag of 2 means $Y_t$ with $Y_{t-2}$, and so on.
+  - _Intuition_: A high ACF at lag $k$ tells you that observations $k$ periods apart have a strong linear relationship. If a stock price yesterday influences today's, you'd see high autocorrelation at lag 1.
 
-*   **Partial Autocorrelation Function (PACF)**: This is a bit trickier. It shows the correlation between a time series and its lagged versions *after accounting for the correlations at intermediate lags*.
-    *   *Intuition*: If $Y_t$ is influenced by $Y_{t-1}$, and $Y_{t-1}$ is influenced by $Y_{t-2}$, then $Y_t$ will appear correlated with $Y_{t-2}$ in the ACF. The PACF "removes" the indirect correlation through $Y_{t-1}$ to show the *direct* influence of $Y_{t-2}$ on $Y_t$. It helps isolate the direct impact.
+- **Partial Autocorrelation Function (PACF)**: This is a bit trickier. It shows the correlation between a time series and its lagged versions _after accounting for the correlations at intermediate lags_.
+  - _Intuition_: If $Y_t$ is influenced by $Y_{t-1}$, and $Y_{t-1}$ is influenced by $Y_{t-2}$, then $Y_t$ will appear correlated with $Y_{t-2}$ in the ACF. The PACF "removes" the indirect correlation through $Y_{t-1}$ to show the _direct_ influence of $Y_{t-2}$ on $Y_t$. It helps isolate the direct impact.
 
 These plots are invaluable for identifying the "order" of many time series models, especially the ARIMA models we'll touch upon next. They tell us how many past observations (or past error terms) we might need to consider for our predictions.
 
@@ -74,25 +75,24 @@ With a grasp of decomposition, stationarity, and autocorrelation, we're ready to
 
 1.  **Naive Forecast**: The simplest method! "Tomorrow will be just like today." $\hat{Y}_{t+1} = Y_t$. Surprisingly effective for some series, especially if there's no clear trend or seasonality.
 2.  **Simple Averaging**: Predict the future as the average of all past observations. $\hat{Y}_{t+1} = \frac{1}{t} \sum_{i=1}^{t} Y_i$. Better than Naive for very stable series, but lags behind changes.
-3.  **Moving Averages (MA)**: This smooths out short-term fluctuations by taking the average of the most recent $k$ observations. $\hat{Y}_{t+1} = \frac{1}{k} \sum_{i=t-k+1}^{t} Y_i$. This is good for smoothing, but it's a *lagging* indicator – it responds to changes with a delay.
+3.  **Moving Averages (MA)**: This smooths out short-term fluctuations by taking the average of the most recent $k$ observations. $\hat{Y}_{t+1} = \frac{1}{k} \sum_{i=t-k+1}^{t} Y_i$. This is good for smoothing, but it's a _lagging_ indicator – it responds to changes with a delay.
 4.  **Exponential Smoothing (ETS)**: Instead of giving equal weight to all recent observations, exponential smoothing methods give exponentially decreasing weights to older observations. This means more recent data points have a greater influence on the forecast. There are various flavors, like Simple Exponential Smoothing (for data without trend or seasonality), Holt's Linear Trend (for data with trend), and Holt-Winters (for data with both trend and seasonality). They are powerful and intuitive.
 
 5.  **ARIMA: The Workhorse of Time Series Forecasting**
     **ARIMA** stands for **AutoRegressive Integrated Moving Average**. It's a powerful and widely used class of models that combines three components, denoted by parameters $(p, d, q)$:
+    - **AR ($p$): AutoRegressive**
+      - This component models the dependency between an observation and a number of lagged observations (i.e., past values). An $AR(p)$ model uses the previous $p$ values to predict the current one.
+      - Equation: $\hat{Y}_t = c + \phi_1 Y_{t-1} + \phi_2 Y_{t-2} + \dots + \phi_p Y_{t-p} + \epsilon_t$
+      - _Intuition_: "What happened in the past $p$ steps directly influences what's happening now." The $p$ parameter is often identified using the PACF plot (where the PACF cuts off).
 
-    *   **AR ($p$): AutoRegressive**
-        *   This component models the dependency between an observation and a number of lagged observations (i.e., past values). An $AR(p)$ model uses the previous $p$ values to predict the current one.
-        *   Equation: $\hat{Y}_t = c + \phi_1 Y_{t-1} + \phi_2 Y_{t-2} + \dots + \phi_p Y_{t-p} + \epsilon_t$
-        *   *Intuition*: "What happened in the past $p$ steps directly influences what's happening now." The $p$ parameter is often identified using the PACF plot (where the PACF cuts off).
+    - **I ($d$): Integrated**
+      - This component handles the differencing required to make the time series stationary. The $d$ parameter represents the number of non-seasonal differences needed. If your data required first-order differencing to become stationary, then $d=1$.
+      - _Intuition_: "If our data isn't stable, let's make it stable by looking at the changes between points, not the points themselves."
 
-    *   **I ($d$): Integrated**
-        *   This component handles the differencing required to make the time series stationary. The $d$ parameter represents the number of non-seasonal differences needed. If your data required first-order differencing to become stationary, then $d=1$.
-        *   *Intuition*: "If our data isn't stable, let's make it stable by looking at the changes between points, not the points themselves."
-
-    *   **MA ($q$): Moving Average**
-        *   This component models the dependency between an observation and a residual error from a moving average model applied to lagged observations. An $MA(q)$ model uses the previous $q$ forecast errors to predict the current observation.
-        *   Equation: $\hat{Y}_t = \mu + \epsilon_t + \theta_1 \epsilon_{t-1} + \theta_2 \epsilon_{t-2} + \dots + \theta_q \epsilon_{t-q}$
-        *   *Intuition*: "If our past predictions were consistently off in a certain way, let's use those past errors to refine our current prediction." The $q$ parameter is often identified using the ACF plot (where the ACF cuts off).
+    - **MA ($q$): Moving Average**
+      - This component models the dependency between an observation and a residual error from a moving average model applied to lagged observations. An $MA(q)$ model uses the previous $q$ forecast errors to predict the current observation.
+      - Equation: $\hat{Y}_t = \mu + \epsilon_t + \theta_1 \epsilon_{t-1} + \theta_2 \epsilon_{t-2} + \dots + \theta_q \epsilon_{t-q}$
+      - _Intuition_: "If our past predictions were consistently off in a certain way, let's use those past errors to refine our current prediction." The $q$ parameter is often identified using the ACF plot (where the ACF cuts off).
 
     Combining these, an $ARIMA(p, d, q)$ model essentially describes a series where the $d$-th difference of the series follows an ARMA (AutoRegressive Moving Average) process of order $(p, q)$.
 
@@ -104,17 +104,17 @@ With a grasp of decomposition, stationarity, and autocorrelation, we're ready to
 
 Once we've built a model, we need to evaluate how well it performs. Here are some common metrics:
 
-*   **Mean Absolute Error (MAE)**:
-    $MAE = \frac{1}{n} \sum_{t=1}^{n} |y_t - \hat{y}_t|$
-    This measures the average magnitude of the errors, without considering their direction. It's easy to interpret as it's in the same units as the data.
+- **Mean Absolute Error (MAE)**:
+  $MAE = \frac{1}{n} \sum_{t=1}^{n} |y_t - \hat{y}_t|$
+  This measures the average magnitude of the errors, without considering their direction. It's easy to interpret as it's in the same units as the data.
 
-*   **Mean Squared Error (MSE)**:
-    $MSE = \frac{1}{n} \sum_{t=1}^{n} (y_t - \hat{y}_t)^2$
-    This penalizes larger errors more heavily than MAE due to the squaring. Useful when large errors are particularly undesirable.
+- **Mean Squared Error (MSE)**:
+  $MSE = \frac{1}{n} \sum_{t=1}^{n} (y_t - \hat{y}_t)^2$
+  This penalizes larger errors more heavily than MAE due to the squaring. Useful when large errors are particularly undesirable.
 
-*   **Root Mean Squared Error (RMSE)**:
-    $RMSE = \sqrt{\frac{1}{n} \sum_{t=1}^{n} (y_t - \hat{y}_t)^2}$
-    RMSE is the square root of MSE, bringing the error back to the original units of the data, making it more interpretable than MSE. It still penalizes large errors effectively.
+- **Root Mean Squared Error (RMSE)**:
+  $RMSE = \sqrt{\frac{1}{n} \sum_{t=1}^{n} (y_t - \hat{y}_t)^2}$
+  RMSE is the square root of MSE, bringing the error back to the original units of the data, making it more interpretable than MSE. It still penalizes large errors effectively.
 
 Choosing the right metric depends on the specific problem and the implications of different error magnitudes.
 

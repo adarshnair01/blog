@@ -8,7 +8,7 @@ author: "Adarsh Nair"
 
 Hello fellow data enthusiasts and future AI builders!
 
-If you're anything like me, when you first heard about neural networks, they sounded almost magical. You feed them data, they learn patterns, and then they make predictions. But there's a huge, fundamental question lurking beneath that simple description: *how* do they learn? How does a network adjust its internal knobs and dials to get better at a task?
+If you're anything like me, when you first heard about neural networks, they sounded almost magical. You feed them data, they learn patterns, and then they make predictions. But there's a huge, fundamental question lurking beneath that simple description: _how_ do they learn? How does a network adjust its internal knobs and dials to get better at a task?
 
 For a long time, this was a massive bottleneck in AI research. Then, in the 1980s, a generalized version of an algorithm called **Backpropagation** (often shortened to "backprop") came to prominence, and it completely revolutionized the field. It's not an exaggeration to say that without backprop, modern deep learning as we know it wouldn't exist.
 
@@ -22,10 +22,10 @@ Imagine a student preparing for a complex exam. This student (our neural network
 
 First, the student takes the exam. This is analogous to the **forward pass** in a neural network.
 
-*   **Inputs:** The exam questions (e.g., an image of a cat).
-*   **Neurons (Processing Units):** The student's brain processes information, combines different facts, and applies different reasoning steps. In a neural network, these are our layers of neurons. Each neuron takes inputs, sums them up after multiplying by internal values called **weights** ($w$), adds a **bias** ($b$), and then passes the result through an **activation function** ($f$).
-    *   Mathematically, for a single neuron, this looks like: $z = (\sum_{i} w_i x_i) + b$, and its output is $a = f(z)$.
-*   **Outputs:** The student's final answer (e.g., "This is a cat").
+- **Inputs:** The exam questions (e.g., an image of a cat).
+- **Neurons (Processing Units):** The student's brain processes information, combines different facts, and applies different reasoning steps. In a neural network, these are our layers of neurons. Each neuron takes inputs, sums them up after multiplying by internal values called **weights** ($w$), adds a **bias** ($b$), and then passes the result through an **activation function** ($f$).
+  - Mathematically, for a single neuron, this looks like: $z = (\sum_{i} w_i x_i) + b$, and its output is $a = f(z)$.
+- **Outputs:** The student's final answer (e.g., "This is a cat").
 
 Let's represent this simple flow. Information flows from the input layer, through one or more hidden layers, to the output layer. At each step, computations are performed.
 
@@ -47,9 +47,9 @@ Here, $y$ is the true value, and $\hat{y}$ is our network's prediction. The goal
 
 ### The Challenge: Who's to Blame? (The Credit Assignment Problem)
 
-Our student got a bad grade. Now what? They need to learn from their mistakes. But it's not always clear *which* specific piece of knowledge or reasoning step led to the wrong answer. Was it a misunderstanding of a basic concept (a weight in an early layer)? Was it a calculation error (a bias in a later layer)? This is known as the **credit assignment problem**.
+Our student got a bad grade. Now what? They need to learn from their mistakes. But it's not always clear _which_ specific piece of knowledge or reasoning step led to the wrong answer. Was it a misunderstanding of a basic concept (a weight in an early layer)? Was it a calculation error (a bias in a later layer)? This is known as the **credit assignment problem**.
 
-A neural network might have millions of weights and biases. How do we know *which* of these many parameters contributed most to the error, and by *how much* should each one be adjusted to reduce that error? Randomly tweaking them would be incredibly inefficient, like blindly changing answers on a test hoping to get it right.
+A neural network might have millions of weights and biases. How do we know _which_ of these many parameters contributed most to the error, and by _how much_ should each one be adjusted to reduce that error? Randomly tweaking them would be incredibly inefficient, like blindly changing answers on a test hoping to get it right.
 
 This is where backpropagation shines.
 
@@ -57,24 +57,24 @@ This is where backpropagation shines.
 
 Backpropagation's magic relies heavily on the fundamental concepts of **calculus**, specifically **derivatives** and the **chain rule**. Don't let those terms scare you – the intuition is quite straightforward.
 
-*   **Derivatives ($\frac{dy}{dx}$):** A derivative tells us "how much does $y$ change if I make a tiny change to $x$?" In our context, it tells us: "How much does the *loss* change if I make a tiny change to a specific *weight* or *bias*?" We want to know the *gradient* (the direction of steepest ascent) of the loss function with respect to each parameter.
-*   **The Chain Rule:** This is the superstar of backprop. If you have a sequence of dependencies, like $C$ depends on $B$, and $B$ depends on $A$, the chain rule says:
-    $$ \frac{dC}{dA} = \frac{dC}{dB} \cdot \frac{dB}{dA} $$
+- **Derivatives ($\frac{dy}{dx}$):** A derivative tells us "how much does $y$ change if I make a tiny change to $x$?" In our context, it tells us: "How much does the _loss_ change if I make a tiny change to a specific _weight_ or _bias_?" We want to know the _gradient_ (the direction of steepest ascent) of the loss function with respect to each parameter.
+- **The Chain Rule:** This is the superstar of backprop. If you have a sequence of dependencies, like $C$ depends on $B$, and $B$ depends on $A$, the chain rule says:
+  $$ \frac{dC}{dA} = \frac{dC}{dB} \cdot \frac{dB}{dA} $$
     Think of it this way: How much does a change in temperature ($A$) affect profits ($C$)? Well, temperature affects ice cream sales ($B$), and ice cream sales affect profits. So, we multiply "how much temperature affects sales" by "how much sales affect profits."
 
-This chain-like dependency is exactly what happens in a neural network! The final loss depends on the output of the last layer, which depends on the weights and biases of that layer, which depend on the output of the *previous* layer, and so on.
+This chain-like dependency is exactly what happens in a neural network! The final loss depends on the output of the last layer, which depends on the weights and biases of that layer, which depend on the output of the _previous_ layer, and so on.
 
 ### The Backward Pass: Learning from Mistakes
 
-Backpropagation is essentially the systematic application of the chain rule, moving *backwards* from the output layer to the input layer.
+Backpropagation is essentially the systematic application of the chain rule, moving _backwards_ from the output layer to the input layer.
 
 Let's walk through it intuitively and then with a bit of math.
 
 **Intuition:**
 
 1.  **Calculate the error at the output:** The teacher knows the student's final incorrect answer. How far off was it? This is our initial "error signal."
-2.  **Assign blame to the last layer:** Based on this output error, the teacher thinks: "Okay, what parts of the student's *final step of reasoning* contributed to this error?" They can calculate how much each weight and bias in the *output layer* needs to change.
-3.  **Propagate the blame backwards:** Now, the teacher needs to figure out how much the *previous* layer's outputs contributed to the error. They ask: "If the output of this second-to-last step was a bit different, how would it have affected the final error?" This calculated "blame" then becomes the *new error signal* for the second-to-last layer.
+2.  **Assign blame to the last layer:** Based on this output error, the teacher thinks: "Okay, what parts of the student's _final step of reasoning_ contributed to this error?" They can calculate how much each weight and bias in the _output layer_ needs to change.
+3.  **Propagate the blame backwards:** Now, the teacher needs to figure out how much the _previous_ layer's outputs contributed to the error. They ask: "If the output of this second-to-last step was a bit different, how would it have affected the final error?" This calculated "blame" then becomes the _new error signal_ for the second-to-last layer.
 4.  **Repeat:** This process continues, layer by layer, backwards through the network, until we reach the input layer. At each layer, we calculate the contribution of its weights and biases to the overall error.
 
 **A Bit More Math (Simplified):**
@@ -90,30 +90,30 @@ Let's consider a simple neural network with L layers. Our goal is to find $\frac
 
 2.  **Calculate Gradients for Output Layer Parameters:**
     Once we have $\delta^{(L)}$, we can easily find the gradients for the weights and biases in the output layer:
-    $$ \frac{\partial L}{\partial w_{jk}^{(L)}} = \delta_j^{(L)} \cdot a_k^{(L-1)} $$
-    (Here, $a_k^{(L-1)}$ is the activation from neuron $k$ in the previous layer, which is the input to weight $w_{jk}^{(L)}$).
+    $$ \frac{\partial L}{\partial w*{jk}^{(L)}} = \delta_j^{(L)} \cdot a_k^{(L-1)} $$
+    (Here, $a_k^{(L-1)}$ is the activation from neuron $k$ in the previous layer, which is the input to weight $w*{jk}^{(L)}$).
     $$ \frac{\partial L}{\partial b_j^{(L)}} = \delta_j^{(L)} $$
 
 3.  **Propagate the Error Backwards to Hidden Layers (e.g., Layer $l$):**
-    This is the core of the "back" in backpropagation. To find the error signal $\delta^{(l)}$ for a hidden layer $l$, we need to consider how the error from the *next* layer ($l+1$) is "sent back" to it.
+    This is the core of the "back" in backpropagation. To find the error signal $\delta^{(l)}$ for a hidden layer $l$, we need to consider how the error from the _next_ layer ($l+1$) is "sent back" to it.
     $$ \delta^{(l)} = \left( (w^{(l+1)})^T \delta^{(l+1)} \right) \odot f'(z^{(l)}) $$
     Let's break this down:
-    *   $(w^{(l+1)})^T \delta^{(l+1)}$: This term sums up the error signals from the next layer ($l+1$), weighted by the *transpose* of the weights connecting layer $l$ to $l+1$. It's essentially asking, "How much did neuron $j$ in layer $l$ contribute to the error signals of all neurons in layer $l+1$?"
-    *   $\odot f'(z^{(l)})$ (Hadamard product): This multiplies the result by the derivative of the activation function for layer $l$. This is crucial because a neuron might have a large input, but if its activation function is "saturated" (e.g., very flat), then small changes to its input won't change its output much, meaning it shouldn't receive a large error signal.
+    - $(w^{(l+1)})^T \delta^{(l+1)}$: This term sums up the error signals from the next layer ($l+1$), weighted by the _transpose_ of the weights connecting layer $l$ to $l+1$. It's essentially asking, "How much did neuron $j$ in layer $l$ contribute to the error signals of all neurons in layer $l+1$?"
+    - $\odot f'(z^{(l)})$ (Hadamard product): This multiplies the result by the derivative of the activation function for layer $l$. This is crucial because a neuron might have a large input, but if its activation function is "saturated" (e.g., very flat), then small changes to its input won't change its output much, meaning it shouldn't receive a large error signal.
 
 4.  **Calculate Gradients for Hidden Layer Parameters:**
     Once we have $\delta^{(l)}$, we can calculate the gradients for the weights and biases of layer $l$, just like we did for the output layer:
-    $$ \frac{\partial L}{\partial w_{jk}^{(l)}} = \delta_j^{(l)} \cdot a_k^{(l-1)} $$
+    $$ \frac{\partial L}{\partial w\_{jk}^{(l)}} = \delta_j^{(l)} \cdot a_k^{(l-1)} $$
     $$ \frac{\partial L}{\partial b_j^{(l)}} = \delta_j^{(l)} $$
 
 This process is repeated for each layer, moving backward through the network until we have the gradients for all weights and biases.
 
 ### The Update Rule: Gradient Descent
 
-Now that we have all these gradients ($\frac{\partial L}{\partial w}$ and $\frac{\partial L}{\partial b}$), which tell us the direction and magnitude of change that would increase the loss, we can use them to update our parameters in the *opposite* direction to *decrease* the loss. This process is called **Gradient Descent**.
+Now that we have all these gradients ($\frac{\partial L}{\partial w}$ and $\frac{\partial L}{\partial b}$), which tell us the direction and magnitude of change that would increase the loss, we can use them to update our parameters in the _opposite_ direction to _decrease_ the loss. This process is called **Gradient Descent**.
 
-$$ w_{new} = w_{old} - \eta \frac{\partial L}{\partial w_{old}} $$
-$$ b_{new} = b_{old} - \eta \frac{\partial L}{\partial b_{old}} $$
+$$ w*{new} = w*{old} - \eta \frac{\partial L}{\partial w*{old}} $$
+$$ b*{new} = b*{old} - \eta \frac{\partial L}{\partial b*{old}} $$
 
 Here, $\eta$ (eta) is the **learning rate**, a small positive number that determines the size of the step we take in the direction opposite to the gradient. A good learning rate is crucial – too large, and we might overshoot the minimum; too small, and learning will be agonizingly slow.
 

@@ -14,7 +14,7 @@ In this post, I want to share my go-to strategies for tackling the common data c
 
 ### The Data Detective's Mindset: Before You Clean, Investigate!
 
-Before you even *think* about cleaning, you need to understand your data. This is where you become a data detective. What does each column represent? What's the expected range of values? Are there relationships between features?
+Before you even _think_ about cleaning, you need to understand your data. This is where you become a data detective. What does each column represent? What's the expected range of values? Are there relationships between features?
 
 Tools like `df.info()`, `df.describe()`, and `df.value_counts()` are your magnifying glass and fingerprint kit. They reveal data types, statistical summaries, and the distribution of values, which are crucial for spotting anomalies. Visualizations like histograms, box plots, and scatter plots are also incredibly powerful for surfacing issues that numbers alone might hide. Embrace this exploratory phase; it will save you hours of pain later.
 
@@ -26,42 +26,43 @@ Missing data is perhaps the most common adversary. It's like having blank spaces
 
 **How to Spot It:**
 Using libraries like Pandas, it's straightforward:
+
 ```python
 import pandas as pd
 # Assuming 'df' is your DataFrame
 print(df.isnull().sum()) # Counts missing values per column
 ```
+
 This will give you a quick overview of how many `NaN` (Not a Number) or `None` values are lurking in each column.
 
 **Understanding Why (And Why It Matters):**
-Missing data isn't always random. Sometimes a value is missing because it truly doesn't apply (e.g., "number of children" for an unmarried person), or because of a data entry error, or even a system failure. The *reason* for missingness often guides your cleaning strategy:
+Missing data isn't always random. Sometimes a value is missing because it truly doesn't apply (e.g., "number of children" for an unmarried person), or because of a data entry error, or even a system failure. The _reason_ for missingness often guides your cleaning strategy:
 
-*   **Missing Completely At Random (MCAR):** The missingness isn't related to any other variable or the variable itself. If a sensor randomly fails, that's MCAR.
-*   **Missing At Random (MAR):** Missingness is related to *other observed variables* but not the variable itself. For example, men might be less likely to fill out a certain survey question than women.
-*   **Missing Not At Random (MNAR):** Missingness is related to the value of the variable itself, even if that value is unobserved. For instance, people with very high incomes might be less likely to report their income.
+- **Missing Completely At Random (MCAR):** The missingness isn't related to any other variable or the variable itself. If a sensor randomly fails, that's MCAR.
+- **Missing At Random (MAR):** Missingness is related to _other observed variables_ but not the variable itself. For example, men might be less likely to fill out a certain survey question than women.
+- **Missing Not At Random (MNAR):** Missingness is related to the value of the variable itself, even if that value is unobserved. For instance, people with very high incomes might be less likely to report their income.
 
 **Tactics for Handling Missing Values:**
 
 1.  **Deletion:**
-    *   **Row-wise deletion (`df.dropna()`):** If a row has *any* missing values, remove the entire row. This is simple but can lead to significant data loss if many rows have even one missing value. Use this if the number of missing rows is small (e.g., <5% of your data) and the rows aren't critical.
-    *   **Column-wise deletion (`df.drop()`):** If a column has too many missing values (e.g., >70-80%), it might be better to drop the entire column. It likely won't provide useful information anyway.
+    - **Row-wise deletion (`df.dropna()`):** If a row has _any_ missing values, remove the entire row. This is simple but can lead to significant data loss if many rows have even one missing value. Use this if the number of missing rows is small (e.g., <5% of your data) and the rows aren't critical.
+    - **Column-wise deletion (`df.drop()`):** If a column has too many missing values (e.g., >70-80%), it might be better to drop the entire column. It likely won't provide useful information anyway.
 
 2.  **Imputation (Filling in the Blanks):** This is often preferred as it preserves more data.
-
-    *   **Mean/Median/Mode Imputation:**
-        *   **Mean:** For numerical features, replace `NaN` with the average value. `$ \bar{x} = \frac{1}{n} \sum_{i=1}^{n} x_i $`. Good for normally distributed data.
-        *   **Median:** For numerical features, replace `NaN` with the middle value. More robust to outliers than the mean.
-        *   **Mode:** For categorical features, replace `NaN` with the most frequent value.
-        ```python
-        df['numerical_column'].fillna(df['numerical_column'].mean(), inplace=True)
-        df['categorical_column'].fillna(df['categorical_column'].mode()[0], inplace=True)
-        ```
-    *   **Forward-Fill/Backward-Fill (`ffill`/`bfill`):** Especially useful for time-series data. `ffill` propagates the last valid observation forward, while `bfill` propagates the next valid observation backward.
-    *   **Interpolation:** More sophisticated. It estimates missing values based on surrounding valid points. Linear interpolation is common.
-        ```python
-        df['numerical_column'].interpolate(method='linear', inplace=True)
-        ```
-    *   **Model-based Imputation (Advanced):** Using a machine learning model (e.g., K-Nearest Neighbors, MICE) to predict missing values based on other features in the dataset. This is powerful but more complex.
+    - **Mean/Median/Mode Imputation:**
+      - **Mean:** For numerical features, replace `NaN` with the average value. `$ \bar{x} = \frac{1}{n} \sum_{i=1}^{n} x_i $`. Good for normally distributed data.
+      - **Median:** For numerical features, replace `NaN` with the middle value. More robust to outliers than the mean.
+      - **Mode:** For categorical features, replace `NaN` with the most frequent value.
+      ```python
+      df['numerical_column'].fillna(df['numerical_column'].mean(), inplace=True)
+      df['categorical_column'].fillna(df['categorical_column'].mode()[0], inplace=True)
+      ```
+    - **Forward-Fill/Backward-Fill (`ffill`/`bfill`):** Especially useful for time-series data. `ffill` propagates the last valid observation forward, while `bfill` propagates the next valid observation backward.
+    - **Interpolation:** More sophisticated. It estimates missing values based on surrounding valid points. Linear interpolation is common.
+      ```python
+      df['numerical_column'].interpolate(method='linear', inplace=True)
+      ```
+    - **Model-based Imputation (Advanced):** Using a machine learning model (e.g., K-Nearest Neighbors, MICE) to predict missing values based on other features in the dataset. This is powerful but more complex.
 
 My advice: Start simple. Visualize your data. If mean/median seems reasonable, go for it. If not, explore more advanced methods.
 
@@ -70,6 +71,7 @@ My advice: Start simple. Visualize your data. If mean/median seems reasonable, g
 Duplicate rows are redundant and can skew your analysis or lead to overfitting in models, making your data appear more robust than it truly is.
 
 **How to Spot It:**
+
 ```python
 print(df.duplicated().sum()) # Counts exact duplicate rows
 ```
@@ -81,18 +83,21 @@ Duplicates often arise from data entry errors, combining datasets from different
 
 1.  **Removing Exact Duplicates:**
     This is the simplest form. Pandas can remove entire rows that are identical across all columns.
+
     ```python
     df.drop_duplicates(inplace=True)
     ```
+
     You can also specify a subset of columns to consider for uniqueness. For example, if you know `customer_id` and `order_id` together should be unique:
+
     ```python
     df.drop_duplicates(subset=['customer_id', 'order_id'], inplace=True)
     ```
 
 2.  **Handling "Fuzzy" Duplicates:**
-    Sometimes records aren't *exactly* the same but refer to the same entity (e.g., "New York" vs. "NY"). This is where string matching algorithms (like Levenshtein distance) come in handy to identify similar-looking strings. This is more of an advanced technique often requiring custom code.
+    Sometimes records aren't _exactly_ the same but refer to the same entity (e.g., "New York" vs. "NY"). This is where string matching algorithms (like Levenshtein distance) come in handy to identify similar-looking strings. This is more of an advanced technique often requiring custom code.
 
-Always remove duplicates *after* handling missing values and inconsistencies, as these can make identical records appear different.
+Always remove duplicates _after_ handling missing values and inconsistencies, as these can make identical records appear different.
 
 ### Strategy 3: Standardizing Inconsistent Data and Correcting Typos
 
@@ -100,9 +105,11 @@ Inconsistent data, especially in categorical features, can create many unique ca
 
 **How to Spot It:**
 The `value_counts()` method is your best friend here.
+
 ```python
 print(df['city'].value_counts())
 ```
+
 You might see entries like "New York", "new york", "NY", "NewYork", which all refer to the same city.
 
 **Understanding Why:**
@@ -140,28 +147,29 @@ Outliers are data points that significantly deviate from other observations. The
 **How to Spot It:**
 
 1.  **Visualizations:**
-    *   **Box Plots:** Clearly show the median, quartiles, and points outside the "whiskers" as potential outliers.
-    *   **Histograms/Distribution Plots:** Can reveal extreme values far from the main bulk of data.
-    *   **Scatter Plots:** For multivariate analysis, outliers can appear as points far from the general cluster of other points.
+    - **Box Plots:** Clearly show the median, quartiles, and points outside the "whiskers" as potential outliers.
+    - **Histograms/Distribution Plots:** Can reveal extreme values far from the main bulk of data.
+    - **Scatter Plots:** For multivariate analysis, outliers can appear as points far from the general cluster of other points.
 
 2.  **Statistical Methods:**
-    *   **IQR (Interquartile Range) Method:** A robust way to define a range for "normal" data.
-        *   Calculate the first quartile ($Q_1$) and third quartile ($Q_3$).
-        *   Compute the IQR: $IQR = Q_3 - Q_1$
-        *   Define bounds:
-            *   Lower Bound = $Q_1 - 1.5 \times IQR$
-            *   Upper Bound = $Q_3 + 1.5 \times IQR$
-        *   Any data point outside these bounds is considered an outlier.
-    *   **Z-score:** Measures how many standard deviations a data point is from the mean.
-        *   $Z = \frac{x - \mu}{\sigma}$
-        *   Where $x$ is the data point, $\mu$ is the mean, and $\sigma$ is the standard deviation.
-        *   A common threshold for outliers is $|Z| > 2$ or $|Z| > 3$. This method assumes your data is normally distributed.
+    - **IQR (Interquartile Range) Method:** A robust way to define a range for "normal" data.
+      - Calculate the first quartile ($Q_1$) and third quartile ($Q_3$).
+      - Compute the IQR: $IQR = Q_3 - Q_1$
+      - Define bounds:
+        - Lower Bound = $Q_1 - 1.5 \times IQR$
+        - Upper Bound = $Q_3 + 1.5 \times IQR$
+      - Any data point outside these bounds is considered an outlier.
+    - **Z-score:** Measures how many standard deviations a data point is from the mean.
+      - $Z = \frac{x - \mu}{\sigma}$
+      - Where $x$ is the data point, $\mu$ is the mean, and $\sigma$ is the standard deviation.
+      - A common threshold for outliers is $|Z| > 2$ or $|Z| > 3$. This method assumes your data is normally distributed.
 
 **Understanding Why:**
 Outliers can be:
-*   **Errors:** Data entry mistakes, measurement errors (e.g., typing "1000" instead of "100").
-*   **Natural Variation:** A truly rare but legitimate observation (e.g., a billionaire in a salary dataset).
-*   **Novelty/Anomaly:** An unusual event or behavior you might be interested in detecting.
+
+- **Errors:** Data entry mistakes, measurement errors (e.g., typing "1000" instead of "100").
+- **Natural Variation:** A truly rare but legitimate observation (e.g., a billionaire in a salary dataset).
+- **Novelty/Anomaly:** An unusual event or behavior you might be interested in detecting.
 
 It's crucial to investigate outliers with domain knowledge. Is it an error, or is it a valid extreme value? This decision impacts your next step.
 
@@ -170,12 +178,13 @@ It's crucial to investigate outliers with domain knowledge. Is it an error, or i
 1.  **Removal:** If an outlier is clearly an error and doesn't represent true data, and there are very few of them, you can safely remove the corresponding rows. Be cautious not to remove too much data.
 
 2.  **Transformation:**
-    *   **Log Transformation:** For right-skewed data, taking the natural logarithm ($ \ln(x) $) or base-10 logarithm ($ \log_{10}(x) $) can compress the range of values, bringing outliers closer to the distribution.
-    *   **Square Root Transformation:** Similar to log transformation but less aggressive.
-    *   These are especially useful if your model assumes normally distributed errors.
+    - **Log Transformation:** For right-skewed data, taking the natural logarithm ($ \ln(x) $) or base-10 logarithm ($ \log\_{10}(x) $) can compress the range of values, bringing outliers closer to the distribution.
+    - **Square Root Transformation:** Similar to log transformation but less aggressive.
+    - These are especially useful if your model assumes normally distributed errors.
 
 3.  **Capping/Winsorization:**
     Instead of removing outliers, you can "cap" them. This involves replacing values beyond a certain percentile (e.g., 95th percentile) with the value at that percentile. Similarly, values below the 5th percentile might be replaced with the 5th percentile value.
+
     ```python
     Q1 = df['column'].quantile(0.25)
     Q3 = df['column'].quantile(0.75)
@@ -193,13 +202,13 @@ It's crucial to investigate outliers with domain knowledge. Is it an error, or i
 
 ### Strategy 5: Feature Scaling (A Quick Mention)
 
-While strictly a preprocessing step often done *after* basic cleaning, feature scaling is vital for many ML algorithms. It standardizes the range of independent variables or features.
+While strictly a preprocessing step often done _after_ basic cleaning, feature scaling is vital for many ML algorithms. It standardizes the range of independent variables or features.
 
-*   **Min-Max Scaling (Normalization):** Scales values to a fixed range, usually 0 to 1.
-    $ X_{scaled} = \frac{X - X_{min}}{X_{max} - X_{min}} $
-*   **Standardization (Z-score Scaling):** Transforms data to have a mean of 0 and a standard deviation of 1.
-    $ X_{scaled} = \frac{X - \mu}{\sigma} $
-    This is critical for algorithms that use distance metrics (like K-NN, SVM) or gradient descent (like Linear Regression, Neural Networks) to prevent features with larger scales from dominating.
+- **Min-Max Scaling (Normalization):** Scales values to a fixed range, usually 0 to 1.
+  $ X*{scaled} = \frac{X - X*{min}}{X*{max} - X*{min}} $
+- **Standardization (Z-score Scaling):** Transforms data to have a mean of 0 and a standard deviation of 1.
+  $ X\_{scaled} = \frac{X - \mu}{\sigma} $
+  This is critical for algorithms that use distance metrics (like K-NN, SVM) or gradient descent (like Linear Regression, Neural Networks) to prevent features with larger scales from dominating.
 
 ### Best Practices and The Iterative Nature of Cleaning
 

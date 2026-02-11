@@ -5,6 +5,7 @@ excerpt: "Ever wondered how AI recognizes faces or translates languages? It all 
 tags: ["Neural Networks", "Deep Learning", "Machine Learning", "AI", "Data Science"]
 author: "Adarsh Nair"
 ---
+
 As a kid, I was always fascinated by how our brains worked. How do we learn to recognize a cat, distinguish a smile from a frown, or understand the nuances of a new language? These complex tasks, seemingly effortless for us, are actually the result of billions of tiny, interconnected cells called neurons firing away.
 
 Fast forward to today, and we're seeing machines accomplish similarly astonishing feats: identifying objects in photos, composing music, driving cars, and even beating human champions at complex games. What's the secret sauce behind this explosion of artificial intelligence? Often, it's something inspired directly by our own biology: the **Neural Network**.
@@ -15,10 +16,10 @@ Today, I want to take you on a journey – a peek inside the 'brain' of AI. We'l
 
 Let's start with a quick look at biological neurons. Imagine them as tiny processors in your brain. Each neuron has:
 
-*   **Dendrites:** Tree-like branches that receive signals from other neurons.
-*   **Soma (Cell Body):** The neuron's "headquarters" that processes these signals.
-*   **Axon:** A long cable that transmits the processed signal to other neurons.
-*   **Synapses:** The tiny gaps where axons connect to dendrites, allowing signals to pass.
+- **Dendrites:** Tree-like branches that receive signals from other neurons.
+- **Soma (Cell Body):** The neuron's "headquarters" that processes these signals.
+- **Axon:** A long cable that transmits the processed signal to other neurons.
+- **Synapses:** The tiny gaps where axons connect to dendrites, allowing signals to pass.
 
 When a neuron receives enough signals (excitatory input) that cross a certain threshold, it "fires," sending its own signal down the axon to connected neurons. It's a binary decision: fire or don't fire. This simple, elegant mechanism is what forms the basis of all our thoughts, memories, and actions.
 
@@ -38,15 +39,15 @@ Each of these factors is an **input** to your decision-making process. But some 
 
 Here's how an artificial neuron works:
 
-*   **Inputs ($x_1, x_2, ..., x_n$):** These are the pieces of information (features) we feed into the neuron. For our picnic example, $x_1$ could be a numerical value for "sunniness," $x_2$ for "temperature," etc.
-*   **Weights ($w_1, w_2, ..., w_n$):** Each input $x_i$ is multiplied by a corresponding weight $w_i$. Weights represent the strength or importance of each input. A large positive weight means that input strongly contributes to the neuron "firing," while a large negative weight inhibits it.
-*   **Bias ($b$):** Think of bias as an extra "knob" or an inherent inclination. It allows the neuron to activate even if all inputs are zero, or to remain inactive even if some inputs are positive. It essentially shifts the activation threshold.
-*   **Summation:** The neuron calculates the *weighted sum* of its inputs and adds the bias.
-    $$z = \sum_{i=1}^{n} x_i w_i + b$$
-    Or, using vector notation, which you'll often see in more advanced contexts:
-    $$z = \mathbf{x} \cdot \mathbf{w} + b$$
-    where $\mathbf{x}$ is the vector of inputs and $\mathbf{w}$ is the vector of weights.
-*   **Activation Function ($f$):** This is the crucial non-linear "decision-maker." After computing the weighted sum $z$, the activation function decides whether the neuron "fires" and what output it produces. It introduces non-linearity, which is vital for neural networks to learn complex patterns.
+- **Inputs ($x_1, x_2, ..., x_n$):** These are the pieces of information (features) we feed into the neuron. For our picnic example, $x_1$ could be a numerical value for "sunniness," $x_2$ for "temperature," etc.
+- **Weights ($w_1, w_2, ..., w_n$):** Each input $x_i$ is multiplied by a corresponding weight $w_i$. Weights represent the strength or importance of each input. A large positive weight means that input strongly contributes to the neuron "firing," while a large negative weight inhibits it.
+- **Bias ($b$):** Think of bias as an extra "knob" or an inherent inclination. It allows the neuron to activate even if all inputs are zero, or to remain inactive even if some inputs are positive. It essentially shifts the activation threshold.
+- **Summation:** The neuron calculates the _weighted sum_ of its inputs and adds the bias.
+  $$z = \sum_{i=1}^{n} x_i w_i + b$$
+  Or, using vector notation, which you'll often see in more advanced contexts:
+  $$z = \mathbf{x} \cdot \mathbf{w} + b$$
+  where $\mathbf{x}$ is the vector of inputs and $\mathbf{w}$ is the vector of weights.
+- **Activation Function ($f$):** This is the crucial non-linear "decision-maker." After computing the weighted sum $z$, the activation function decides whether the neuron "fires" and what output it produces. It introduces non-linearity, which is vital for neural networks to learn complex patterns.
 
 Let's combine it all. The output $y$ of a single artificial neuron is:
 $$y = f(\sum_{i=1}^{n} x_i w_i + b)$$
@@ -92,14 +93,15 @@ In mathematical terms, the "slope" is represented by the **gradient** – the de
 The update rule for a weight $w$ (and similarly for a bias $b$) looks like this:
 $$w_{new} = w_{old} - \alpha \frac{\partial L}{\partial w_{old}}$$
 Here:
-*   $w_{new}$ is the updated weight.
-*   $w_{old}$ is the current weight.
-*   $\frac{\partial L}{\partial w_{old}}$ is the partial derivative of the loss function $L$ with respect to $w_{old}$. This tells us how much the loss changes if we slightly change $w_{old}$.
-*   $\alpha$ (alpha) is the **learning rate**. This is a crucial hyperparameter that controls the size of our "steps" down the hill. A large learning rate might overshoot the minimum, while a small one might take too long to converge.
+
+- $w_{new}$ is the updated weight.
+- $w_{old}$ is the current weight.
+- $\frac{\partial L}{\partial w_{old}}$ is the partial derivative of the loss function $L$ with respect to $w_{old}$. This tells us how much the loss changes if we slightly change $w_{old}$.
+- $\alpha$ (alpha) is the **learning rate**. This is a crucial hyperparameter that controls the size of our "steps" down the hill. A large learning rate might overshoot the minimum, while a small one might take too long to converge.
 
 #### 3. Backpropagation: Distributing the Blame
 
-Now, here's the clever part: how do we calculate these derivatives $\frac{\partial L}{\partial w}$ for *all* the weights and biases in a complex, multi-layered network? This is where **Backpropagation** comes in.
+Now, here's the clever part: how do we calculate these derivatives $\frac{\partial L}{\partial w}$ for _all_ the weights and biases in a complex, multi-layered network? This is where **Backpropagation** comes in.
 
 Backpropagation is an algorithm that efficiently calculates the gradient of the loss function with respect to every weight and bias in the network. It works by:
 
@@ -115,9 +117,9 @@ Once we have these gradients for every weight and bias, we use the gradient desc
 
 What we've covered today is the fundamental structure and learning mechanism of a basic **Feedforward Neural Network**. This is the bedrock upon which much more complex and specialized architectures are built:
 
-*   **Convolutional Neural Networks (CNNs):** Excellent for image recognition tasks, mimicking how our visual cortex processes information.
-*   **Recurrent Neural Networks (RNNs):** Designed for sequential data like text and time series, with memory of past inputs.
-*   **Transformers:** The state-of-the-art for Natural Language Processing (NLP), powering models like GPT-3.
+- **Convolutional Neural Networks (CNNs):** Excellent for image recognition tasks, mimicking how our visual cortex processes information.
+- **Recurrent Neural Networks (RNNs):** Designed for sequential data like text and time series, with memory of past inputs.
+- **Transformers:** The state-of-the-art for Natural Language Processing (NLP), powering models like GPT-3.
 
 These advanced networks leverage the same core principles of neurons, layers, activation functions, and backpropagation, but add specialized structures and techniques to tackle specific types of data and problems with incredible efficiency.
 

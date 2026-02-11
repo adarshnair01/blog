@@ -12,15 +12,16 @@ I remember first encountering them during a course on stochastic processes, and 
 
 ### The Heart of the Matter: States, Transitions, and the "Memoryless" Property
 
-At its core, a Markov Chain is a stochastic model describing a sequence of possible events where the probability of each event depends *only* on the state attained in the previous event. This isn't just a fancy way of saying "what happened before affects what happens now"; it's much more specific.
+At its core, a Markov Chain is a stochastic model describing a sequence of possible events where the probability of each event depends _only_ on the state attained in the previous event. This isn't just a fancy way of saying "what happened before affects what happens now"; it's much more specific.
 
-Imagine a system that can be in one of several *states*. For example:
-*   **Weather:** Sunny, Cloudy, Rainy.
-*   **A Light Switch:** On, Off.
-*   **Your Mood:** Happy, Neutral, Sad.
-*   **A Word in a Sentence:** "The", "cat", "sat", "on", "the", "mat".
+Imagine a system that can be in one of several _states_. For example:
 
-A Markov Chain describes how the system *transitions* from one state to another over time. The crucial part, the "memoryless" property (also known as the **Markov Property**), is what truly defines it:
+- **Weather:** Sunny, Cloudy, Rainy.
+- **A Light Switch:** On, Off.
+- **Your Mood:** Happy, Neutral, Sad.
+- **A Word in a Sentence:** "The", "cat", "sat", "on", "the", "mat".
+
+A Markov Chain describes how the system _transitions_ from one state to another over time. The crucial part, the "memoryless" property (also known as the **Markov Property**), is what truly defines it:
 
 **The probability of transitioning to any particular state depends only on the current state, and not on the sequence of states that preceded it.**
 
@@ -32,22 +33,23 @@ Let's formalize this a bit. If $X_t$ represents the state of our system at time 
 
 $P(X_{t+1} = j | X_t = i, X_{t-1} = k, \dots) = P(X_{t+1} = j | X_t = i)$
 
-This simply means the probability of being in state $j$ at time $t+1$, given the entire history, is the same as the probability of being in state $j$ given *only* that you were in state $i$ at time $t$.
+This simply means the probability of being in state $j$ at time $t+1$, given the entire history, is the same as the probability of being in state $j$ given _only_ that you were in state $i$ at time $t$.
 
-These transition probabilities are often constant over time, meaning the system is *time-homogeneous*. We can organize all these probabilities into a very important structure: the **Transition Matrix (P)**.
+These transition probabilities are often constant over time, meaning the system is _time-homogeneous_. We can organize all these probabilities into a very important structure: the **Transition Matrix (P)**.
 
 Let's use our simple weather example:
 States: $S_1$ = Sunny, $S_2$ = Rainy.
 
 Imagine these probabilities:
-*   If today is Sunny, there's a 90% chance tomorrow is Sunny, and 10% chance it's Rainy.
-*   If today is Rainy, there's a 30% chance tomorrow is Sunny, and 70% chance it's Rainy.
+
+- If today is Sunny, there's a 90% chance tomorrow is Sunny, and 10% chance it's Rainy.
+- If today is Rainy, there's a 30% chance tomorrow is Sunny, and 70% chance it's Rainy.
 
 We can represent this as a matrix:
 
 $P = \begin{pmatrix} P(S_1|S_1) & P(S_2|S_1) \\ P(S_1|S_2) & P(S_2|S_2) \end{pmatrix} = \begin{pmatrix} 0.9 & 0.1 \\ 0.3 & 0.7 \end{pmatrix}$
 
-Each row in the matrix represents the current state, and the elements in that row are the probabilities of transitioning to each possible next state. Notice that the sum of probabilities in each row must equal 1 (since you *must* transition to *some* state).
+Each row in the matrix represents the current state, and the elements in that row are the probabilities of transitioning to each possible next state. Notice that the sum of probabilities in each row must equal 1 (since you _must_ transition to _some_ state).
 
 Now, if we know the probability distribution of being in each state at time $t$, represented by a **state vector** $\pi_t = (\pi_{t,S_1}, \pi_{t,S_2})$, we can predict the distribution at time $t+1$ by simply multiplying:
 
@@ -77,9 +79,10 @@ Let $\pi^* = (s, r)$, where $s$ is the long-term probability of Sunny and $r$ is
 We have:
 $(s, r) = (s, r) \begin{pmatrix} 0.9 & 0.1 \\ 0.3 & 0.7 \end{pmatrix}$
 This gives us two equations:
+
 1.  $s = 0.9s + 0.3r$
 2.  $r = 0.1s + 0.7r$
-And our additional constraint:
+    And our additional constraint:
 3.  $s + r = 1$
 
 From equation 1: $0.1s = 0.3r \Rightarrow s = 3r$.
@@ -97,9 +100,9 @@ The simplicity of Markov Chains belies their incredible utility across various d
 1.  **Google PageRank Algorithm:** This is perhaps the most famous application. Imagine the internet as a massive Markov Chain. Each webpage is a state, and a hyperlink from one page to another is a transition. Google's algorithm essentially calculates the stationary distribution of this web surfer model. Pages with higher steady-state probabilities are considered more important, leading to their higher ranking in search results. It's an elegant way to quantify the "importance" of a node in a massive network.
 
 2.  **Natural Language Processing (NLP):**
-    *   **Text Generation:** Markov Chains are the backbone of simple text generators. Given a word, a unigram (order 0 Markov Chain) might just pick any word from the vocabulary. A bigram (order 1 Markov Chain) predicts the next word based *only* on the current word, just like our weather example. Trigrams (order 2) consider the two previous words. This is how many autocomplete features or simple predictive text models work.
-    *   **Speech Recognition:** Hidden Markov Models (HMMs), an extension of Markov Chains, are widely used in speech recognition. Here, the observed sounds are 'hidden' and the underlying spoken words are the states we infer.
-    *   **Spam Filtering:** Analyzing word sequences can help classify emails.
+    - **Text Generation:** Markov Chains are the backbone of simple text generators. Given a word, a unigram (order 0 Markov Chain) might just pick any word from the vocabulary. A bigram (order 1 Markov Chain) predicts the next word based _only_ on the current word, just like our weather example. Trigrams (order 2) consider the two previous words. This is how many autocomplete features or simple predictive text models work.
+    - **Speech Recognition:** Hidden Markov Models (HMMs), an extension of Markov Chains, are widely used in speech recognition. Here, the observed sounds are 'hidden' and the underlying spoken words are the states we infer.
+    - **Spam Filtering:** Analyzing word sequences can help classify emails.
 
 3.  **Reinforcement Learning (RL):** Many RL problems are framed as Markov Decision Processes (MDPs), which are an extension of Markov Chains where an agent also makes decisions (actions) that influence the transitions between states, often with associated rewards. The memoryless property is crucial here for defining the environment.
 
@@ -115,10 +118,11 @@ I've personally found them incredibly useful when trying to get a baseline under
 
 While powerful, the Markov property—that strict "forgetfulness"—is also the main limitation. Many real-world phenomena do depend on more than just the immediate past. The stock market, for instance, might be influenced by trends over weeks or months, not just yesterday's closing price. Similarly, human conversation often builds on a much richer context than just the last word spoken.
 
-Furthermore, we've discussed *discrete-time* Markov Chains with *discrete* states. There are also:
-*   **Continuous-time Markov Chains:** Where transitions can happen at any point in time.
-*   **Hidden Markov Models (HMMs):** Where the states themselves are not directly observable, but their influence on observable outputs is modeled probabilistically. This is very common in NLP and speech recognition.
-*   **Markov Decision Processes (MDPs):** As mentioned, these add actions and rewards, forming the foundation of much of Reinforcement Learning.
+Furthermore, we've discussed _discrete-time_ Markov Chains with _discrete_ states. There are also:
+
+- **Continuous-time Markov Chains:** Where transitions can happen at any point in time.
+- **Hidden Markov Models (HMMs):** Where the states themselves are not directly observable, but their influence on observable outputs is modeled probabilistically. This is very common in NLP and speech recognition.
+- **Markov Decision Processes (MDPs):** As mentioned, these add actions and rewards, forming the foundation of much of Reinforcement Learning.
 
 ### Conclusion
 

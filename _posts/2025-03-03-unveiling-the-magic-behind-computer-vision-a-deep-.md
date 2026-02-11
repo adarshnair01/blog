@@ -1,7 +1,7 @@
 ---
 title: "Unveiling the Magic Behind Computer Vision: A Deep Dive into Convolutional Neural Networks"
 date: "2025-03-03"
-excerpt: "Ever wondered how computers \"see\" and understand images, identifying faces, objects, or even diseases? Join me on a journey to unravel the ingenious architecture of Convolutional Neural Networks, the bedrock of modern computer vision."
+excerpt: 'Ever wondered how computers "see" and understand images, identifying faces, objects, or even diseases? Join me on a journey to unravel the ingenious architecture of Convolutional Neural Networks, the bedrock of modern computer vision.'
 tags: ["Machine Learning", "Deep Learning", "Computer Vision", "CNNs", "Neural Networks"]
 author: "Adarsh Nair"
 ---
@@ -10,7 +10,7 @@ Hey everyone!
 
 It's amazing, isn't it? Just a few years ago, the idea of a computer accurately identifying a cat in a photo, transcribing handwriting, or even powering a self-driving car seemed like pure science fiction. Yet, today, these are realities we interact with daily. As someone who's always been fascinated by how we can teach machines to perform human-like tasks, diving into the world of Artificial Intelligence felt like unlocking a secret superpower. And among the many tools in the AI arsenal, one particular type of neural network has always struck me as exceptionally elegant and powerful: **Convolutional Neural Networks (CNNs)**.
 
-Think about it: Your brain processes visual information almost instantly and effortlessly. You see a fluffy, four-legged creature and *know* it's a cat, regardless of its angle, lighting, or if it's partially hidden. How can we possibly empower a machine to do the same? This was the grand challenge, and CNNs emerged as a brilliant solution.
+Think about it: Your brain processes visual information almost instantly and effortlessly. You see a fluffy, four-legged creature and _know_ it's a cat, regardless of its angle, lighting, or if it's partially hidden. How can we possibly empower a machine to do the same? This was the grand challenge, and CNNs emerged as a brilliant solution.
 
 ### The Problem with "Regular" Neural Networks for Images
 
@@ -31,14 +31,14 @@ Imagine you're looking for a specific pattern, like an edge, in a large puzzle. 
 
 #### The Kernel (Filter)
 
-At the heart of a convolutional layer is a **kernel**, which is just a small matrix of numbers (e.g., 3x3 or 5x5). This kernel acts as a feature detector. When we train the CNN, these numbers in the kernel *learn* to identify specific visual features like:
+At the heart of a convolutional layer is a **kernel**, which is just a small matrix of numbers (e.g., 3x3 or 5x5). This kernel acts as a feature detector. When we train the CNN, these numbers in the kernel _learn_ to identify specific visual features like:
 
-*   Horizontal edges
-*   Vertical edges
-*   Diagonal lines
-*   Corners
-*   Blobs of color
-*   And eventually, more complex patterns!
+- Horizontal edges
+- Vertical edges
+- Diagonal lines
+- Corners
+- Blobs of color
+- And eventually, more complex patterns!
 
 #### The Convolution Operation
 
@@ -46,7 +46,7 @@ The kernel "convolves" (slides) over the input image. At each position, it perfo
 
 Let's illustrate with a simplified conceptual math. For a given output pixel at position $(i, j)$ in the feature map, the operation would look something like this:
 
-$ (\text{Feature Map})_{ij} = \sum_{m=0}^{K_h-1} \sum_{n=0}^{K_w-1} (\text{Input Image})_{i+m, j+n} \cdot (\text{Kernel})_{m,n} $
+$ (\text{Feature Map})_{ij} = \sum_{m=0}^{K*h-1} \sum*{n=0}^{K*w-1} (\text{Input Image})*{i+m, j+n} \cdot (\text{Kernel})\_{m,n} $
 
 Where $K_h$ and $K_w$ are the height and width of the kernel.
 
@@ -54,15 +54,15 @@ By sliding this kernel across the entire image, we generate a new image (the fea
 
 **Key advantages of convolution:**
 
-*   **Parameter Sharing:** The same kernel (set of weights) is applied across the entire image. This drastically reduces the number of parameters compared to FC networks. Think of it: if you're looking for an edge, that edge can appear anywhere in the image, and you don't need a different detector for each possible location.
-*   **Translation Invariance:** Because the kernel slides across the entire image, if a feature (like a cat's eye) shifts slightly in the input image, the CNN can still detect it. This is a crucial property for robust computer vision.
-*   **Local Receptive Fields:** Each neuron in a convolutional layer is only connected to a small, local region of the input. This reflects how biological vision works, where neurons respond to stimuli in a limited region of the visual field.
+- **Parameter Sharing:** The same kernel (set of weights) is applied across the entire image. This drastically reduces the number of parameters compared to FC networks. Think of it: if you're looking for an edge, that edge can appear anywhere in the image, and you don't need a different detector for each possible location.
+- **Translation Invariance:** Because the kernel slides across the entire image, if a feature (like a cat's eye) shifts slightly in the input image, the CNN can still detect it. This is a crucial property for robust computer vision.
+- **Local Receptive Fields:** Each neuron in a convolutional layer is only connected to a small, local region of the input. This reflects how biological vision works, where neurons respond to stimuli in a limited region of the visual field.
 
 #### Hyperparameters of Convolutional Layers
 
-*   **Stride:** How many pixels the kernel shifts at each step. A stride of 1 means it moves one pixel at a time. A stride of 2 means it skips a pixel, which effectively downsamples the feature map.
-*   **Padding:** When the kernel moves to the edges of an image, it might not perfectly align with the remaining pixels. Padding involves adding extra "dummy" pixels (usually zeros) around the border of the input image to ensure the kernel can cover all parts of the image and maintain the desired output size. Common types are 'valid' (no padding, output shrinks) and 'same' (output size is the same as input).
-*   **Number of Filters:** A convolutional layer typically uses multiple kernels, each learning to detect a different feature. If we use 32 filters, we'll get 32 different feature maps as output.
+- **Stride:** How many pixels the kernel shifts at each step. A stride of 1 means it moves one pixel at a time. A stride of 2 means it skips a pixel, which effectively downsamples the feature map.
+- **Padding:** When the kernel moves to the edges of an image, it might not perfectly align with the remaining pixels. Padding involves adding extra "dummy" pixels (usually zeros) around the border of the input image to ensure the kernel can cover all parts of the image and maintain the desired output size. Common types are 'valid' (no padding, output shrinks) and 'same' (output size is the same as input).
+- **Number of Filters:** A convolutional layer typically uses multiple kernels, each learning to detect a different feature. If we use 32 filters, we'll get 32 different feature maps as output.
 
 ### The Role of Non-linearity: The Activation Layer
 
@@ -85,6 +85,7 @@ The most common type is **Max Pooling**. Imagine a 2x2 window sliding over the f
 For example, if you have a 4x4 feature map and apply a 2x2 max pooling with a stride of 2:
 
 Original 4x4 Feature Map:
+
 ```
 [[1, 1, 2, 4],
  [5, 6, 7, 8],
@@ -93,10 +94,12 @@ Original 4x4 Feature Map:
 ```
 
 After 2x2 Max Pooling with stride 2:
+
 ```
 [[6, 8],
  [3, 4]]
 ```
+
 (because max(1,1,5,6)=6, max(2,4,7,8)=8, etc.)
 
 Other pooling types exist, like Average Pooling, but Max Pooling generally performs better in practice for capturing dominant features.
@@ -116,16 +119,16 @@ A common pattern is:
 
 ### Training a CNN: The Learning Process
 
-Just like other neural networks, CNNs learn through a process called **backpropagation** and **gradient descent**. During training, the network is fed millions of labeled images. It makes predictions, compares them to the actual labels (the "ground truth"), calculates the error (loss), and then adjusts all its internal weights (including those in the kernels!) to minimize that error. This iterative process allows the kernels to *learn* what patterns are important for classification.
+Just like other neural networks, CNNs learn through a process called **backpropagation** and **gradient descent**. During training, the network is fed millions of labeled images. It makes predictions, compares them to the actual labels (the "ground truth"), calculates the error (loss), and then adjusts all its internal weights (including those in the kernels!) to minimize that error. This iterative process allows the kernels to _learn_ what patterns are important for classification.
 
 ### Why CNNs Are So Powerful
 
 To summarize, CNNs excel in computer vision tasks due to several key innovations:
 
-*   **Parameter Sharing:** Drastically reduces the number of trainable parameters, making models lighter and faster.
-*   **Local Receptive Fields:** Focus on local patterns, mimicking biological vision.
-*   **Hierarchical Feature Learning:** Builds complex features from simple ones, allowing the network to understand objects at various levels of abstraction.
-*   **Translation Invariance:** Detects features regardless of their position in the image.
+- **Parameter Sharing:** Drastically reduces the number of trainable parameters, making models lighter and faster.
+- **Local Receptive Fields:** Focus on local patterns, mimicking biological vision.
+- **Hierarchical Feature Learning:** Builds complex features from simple ones, allowing the network to understand objects at various levels of abstraction.
+- **Translation Invariance:** Detects features regardless of their position in the image.
 
 These properties make CNNs incredibly effective for tasks that require understanding visual patterns.
 
@@ -133,12 +136,12 @@ These properties make CNNs incredibly effective for tasks that require understan
 
 CNNs aren't just theoretical concepts; they are the backbone of countless modern applications:
 
-*   **Image Classification:** Identifying objects, animals, or scenes in images (e.g., Google Photos, Instagram filters).
-*   **Object Detection:** Locating and identifying multiple objects within an image (e.g., self-driving cars recognizing pedestrians and other vehicles, security cameras).
-*   **Facial Recognition:** Unlocking your phone, tagging friends on social media.
-*   **Medical Imaging:** Detecting tumors or diseases in X-rays, MRIs, and CT scans.
-*   **Image Generation:** Creating realistic fake images (deepfakes) or transferring artistic styles.
-*   **Image Segmentation:** Identifying which pixels belong to which object in an image.
+- **Image Classification:** Identifying objects, animals, or scenes in images (e.g., Google Photos, Instagram filters).
+- **Object Detection:** Locating and identifying multiple objects within an image (e.g., self-driving cars recognizing pedestrians and other vehicles, security cameras).
+- **Facial Recognition:** Unlocking your phone, tagging friends on social media.
+- **Medical Imaging:** Detecting tumors or diseases in X-rays, MRIs, and CT scans.
+- **Image Generation:** Creating realistic fake images (deepfakes) or transferring artistic styles.
+- **Image Segmentation:** Identifying which pixels belong to which object in an image.
 
 ### Wrapping Up
 

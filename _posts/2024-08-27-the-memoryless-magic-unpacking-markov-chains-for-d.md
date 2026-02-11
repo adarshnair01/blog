@@ -8,7 +8,7 @@ author: "Adarsh Nair"
 
 Hey everyone!
 
-Have you ever found yourself in a situation where you're trying to predict what happens next, but you instinctively realize that only the *current* situation truly matters, not how you got there? Maybe you're playing a board game, and your next move depends solely on where your piece is *right now*, not on all the moves you made previously. Or perhaps you're observing the weather, and you feel that if it's sunny today, the chances of it being sunny tomorrow are just that – dependent on today's sun, not on last week's rain.
+Have you ever found yourself in a situation where you're trying to predict what happens next, but you instinctively realize that only the _current_ situation truly matters, not how you got there? Maybe you're playing a board game, and your next move depends solely on where your piece is _right now_, not on all the moves you made previously. Or perhaps you're observing the weather, and you feel that if it's sunny today, the chances of it being sunny tomorrow are just that – dependent on today's sun, not on last week's rain.
 
 If any of this resonates, then congratulations! You've already got an intuitive grasp of the core idea behind **Markov Chains**.
 
@@ -22,13 +22,13 @@ At the heart of every Markov Chain lies a single, crucial assumption, aptly name
 
 **The future is independent of the past, given the present.**
 
-Let that sink in for a moment. It means that to predict the next state of a system, you only need to know its *current* state. All the history that led to the current state becomes irrelevant. It's like being asked where you want to go on your next vacation – your choice likely depends on where you are *now* (e.g., your budget, your desire for sun vs. snow), not on all the previous vacations you've taken.
+Let that sink in for a moment. It means that to predict the next state of a system, you only need to know its _current_ state. All the history that led to the current state becomes irrelevant. It's like being asked where you want to go on your next vacation – your choice likely depends on where you are _now_ (e.g., your budget, your desire for sun vs. snow), not on all the previous vacations you've taken.
 
 Mathematically, if we denote the state of our system at time $n$ as $X_n$, then the Markov Property is expressed as:
 
 $P(X_{n+1}=j | X_n=i, X_{n-1}=i_{n-1}, ..., X_0=i_0) = P(X_{n+1}=j | X_n=i)$
 
-Here, $P(A|B)$ means "the probability of A happening, given that B has already happened." So, this equation says: "The probability of being in state $j$ at the next step, given *all* previous states, is the same as the probability of being in state $j$ at the next step, given *only* the current state $i$."
+Here, $P(A|B)$ means "the probability of A happening, given that B has already happened." So, this equation says: "The probability of being in state $j$ at the next step, given _all_ previous states, is the same as the probability of being in state $j$ at the next step, given _only_ the current state $i$."
 
 This "memoryless" property is what makes Markov Chains so computationally tractable and powerful. It simplifies complex systems dramatically, allowing us to build predictive models without needing to store or process an entire history of events.
 
@@ -37,10 +37,10 @@ This "memoryless" property is what makes Markov Chains so computationally tracta
 To build our chain, we need two fundamental components:
 
 1.  **States:** These are the possible conditions or situations our system can be in. Think of them as the "rooms" in a house.
-    *   **Examples:** For weather, states could be {Sunny, Cloudy, Rainy}. For a simple game, states might be {Start, Position 1, Position 2, ..., Finish}. For customer behavior, states could be {Browsing, Adding to Cart, Purchasing}.
+    - **Examples:** For weather, states could be {Sunny, Cloudy, Rainy}. For a simple game, states might be {Start, Position 1, Position 2, ..., Finish}. For customer behavior, states could be {Browsing, Adding to Cart, Purchasing}.
 
 2.  **Transitions:** These are the movements or changes from one state to another.
-    *   Crucially, these transitions happen with a certain **probability**. We call these **transition probabilities**.
+    - Crucially, these transitions happen with a certain **probability**. We call these **transition probabilities**.
 
 Let's stick with our weather example. If it's Sunny today, what's the probability it will be Sunny tomorrow? Or Cloudy? Or Rainy? These are our transition probabilities.
 
@@ -51,23 +51,25 @@ Let's say our weather states are $S_1$ (Sunny), $S_2$ (Cloudy), and $S_3$ (Rainy
 $P = \begin{pmatrix} P_{11} & P_{12} & P_{13} \\ P_{21} & P_{22} & P_{23} \\ P_{31} & P_{32} & P_{33} \end{pmatrix}$
 
 Where:
-*   $P_{ij}$ is the probability of moving from state $i$ to state $j$.
-*   Each row must sum to 1 (because if you're in state $i$, you *must* transition to *some* state, even if it's staying in state $i$).
+
+- $P_{ij}$ is the probability of moving from state $i$ to state $j$.
+- Each row must sum to 1 (because if you're in state $i$, you _must_ transition to _some_ state, even if it's staying in state $i$).
 
 For our weather example:
 
 $P = \begin{pmatrix} 0.7 & 0.2 & 0.1 \\ 0.3 & 0.4 & 0.3 \\ 0.2 & 0.3 & 0.5 \end{pmatrix}$
 
 How to read this:
-*   If it's Sunny (Row 1), there's a 70% chance it's Sunny tomorrow, 20% chance it's Cloudy, and 10% chance it's Rainy.
-*   If it's Cloudy (Row 2), there's a 30% chance it's Sunny tomorrow, 40% chance it's Cloudy, and 30% chance it's Rainy.
-*   And so on for Rainy days (Row 3).
+
+- If it's Sunny (Row 1), there's a 70% chance it's Sunny tomorrow, 20% chance it's Cloudy, and 10% chance it's Rainy.
+- If it's Cloudy (Row 2), there's a 30% chance it's Sunny tomorrow, 40% chance it's Cloudy, and 30% chance it's Rainy.
+- And so on for Rainy days (Row 3).
 
 ## Walking Through Time: Predicting the Future
 
 Now we have our states and our probabilities of moving between them. How do we use this to predict what happens after several steps?
 
-Let's say we have an initial probability distribution over our states. If we know it's *definitely* Sunny today, our initial distribution $\pi_0$ would be $[1, 0, 0]$ (100% Sunny, 0% Cloudy, 0% Rainy). If we only have an estimate, say 50% Sunny, 30% Cloudy, 20% Rainy, then $\pi_0 = [0.5, 0.3, 0.2]$.
+Let's say we have an initial probability distribution over our states. If we know it's _definitely_ Sunny today, our initial distribution $\pi_0$ would be $[1, 0, 0]$ (100% Sunny, 0% Cloudy, 0% Rainy). If we only have an estimate, say 50% Sunny, 30% Cloudy, 20% Rainy, then $\pi_0 = [0.5, 0.3, 0.2]$.
 
 To find the probability distribution after one step (i.e., tomorrow), we multiply our initial distribution vector by the transition matrix:
 
@@ -109,31 +111,31 @@ Solving these equations gives us the long-term probabilities of each weather sta
 
 The beauty of Markov Chains isn't just in their mathematical elegance, but in their pervasive utility across countless domains:
 
-*   **Google PageRank (Simplified):** This is perhaps one of the most famous applications. Imagine every web page as a "state." When you click a link, you "transition" to another page. The probability of transitioning from page A to page B is related to the number of outbound links from A. Google's PageRank essentially calculates the stationary distribution of this massive web-graph Markov Chain. Pages with higher stationary probabilities are considered more important or authoritative.
+- **Google PageRank (Simplified):** This is perhaps one of the most famous applications. Imagine every web page as a "state." When you click a link, you "transition" to another page. The probability of transitioning from page A to page B is related to the number of outbound links from A. Google's PageRank essentially calculates the stationary distribution of this massive web-graph Markov Chain. Pages with higher stationary probabilities are considered more important or authoritative.
 
-*   **Natural Language Processing (NLP):**
-    *   **N-gram Models:** Markov Chains are the foundation of simple N-gram language models. To predict the next word, an N-gram model looks at the previous N-1 words. For example, a bigram model (N=2) uses the previous word as the "current state" to predict the next word. This is crucial for autocomplete, spell checkers, and even basic machine translation.
-    *   **Hidden Markov Models (HMMs):** A powerful extension where the states themselves aren't directly observable, but their influence on observable outputs is modeled. HMMs are used in speech recognition, bioinformatics (DNA sequencing), and part-of-speech tagging.
+- **Natural Language Processing (NLP):**
+  - **N-gram Models:** Markov Chains are the foundation of simple N-gram language models. To predict the next word, an N-gram model looks at the previous N-1 words. For example, a bigram model (N=2) uses the previous word as the "current state" to predict the next word. This is crucial for autocomplete, spell checkers, and even basic machine translation.
+  - **Hidden Markov Models (HMMs):** A powerful extension where the states themselves aren't directly observable, but their influence on observable outputs is modeled. HMMs are used in speech recognition, bioinformatics (DNA sequencing), and part-of-speech tagging.
 
-*   **Recommendation Systems:** "Customers who bought X also bought Y." This can be framed as a Markov Chain. If a customer is "in the state" of having bought X, what's the probability they transition to the "state" of buying Y?
+- **Recommendation Systems:** "Customers who bought X also bought Y." This can be framed as a Markov Chain. If a customer is "in the state" of having bought X, what's the probability they transition to the "state" of buying Y?
 
-*   **Weather Forecasting:** Our running example is a direct application. While real-world forecasting uses much more complex models, the fundamental idea of state transitions based on current conditions is there.
+- **Weather Forecasting:** Our running example is a direct application. While real-world forecasting uses much more complex models, the fundamental idea of state transitions based on current conditions is there.
 
-*   **Financial Modeling:** Simplified models of stock prices or market states often employ Markov Chains to model transitions between states like "bull market," "bear market," or "stable market."
+- **Financial Modeling:** Simplified models of stock prices or market states often employ Markov Chains to model transitions between states like "bull market," "bear market," or "stable market."
 
-*   **Genetics and Biology:** Modeling base pair sequences in DNA, or the states of proteins, often utilizes Markov Chains.
+- **Genetics and Biology:** Modeling base pair sequences in DNA, or the states of proteins, often utilizes Markov Chains.
 
-*   **Queueing Theory:** Analyzing waiting lines in call centers, supermarkets, or traffic systems uses Markov Chains to model the number of people in a queue or the state of a server.
+- **Queueing Theory:** Analyzing waiting lines in call centers, supermarkets, or traffic systems uses Markov Chains to model the number of people in a queue or the state of a server.
 
 ## Limitations and Considerations
 
 While incredibly versatile, Markov Chains aren't a silver bullet. It's important to understand their limitations:
 
-*   **The Markov Property is a Strong Assumption:** Real-world systems often *do* have memory. Human behavior, for instance, is rarely truly memoryless. Our choices are often influenced by a long history of experiences. If the system genuinely has long-term dependencies, a Markov Chain might provide a simplified, but inaccurate, model.
+- **The Markov Property is a Strong Assumption:** Real-world systems often _do_ have memory. Human behavior, for instance, is rarely truly memoryless. Our choices are often influenced by a long history of experiences. If the system genuinely has long-term dependencies, a Markov Chain might provide a simplified, but inaccurate, model.
 
-*   **State Space Explosion:** If your system has many variables, and each variable can take many values, the number of possible states can grow exponentially, making the transition matrix enormous and computationally intractable.
+- **State Space Explosion:** If your system has many variables, and each variable can take many values, the number of possible states can grow exponentially, making the transition matrix enormous and computationally intractable.
 
-*   **Parameter Estimation:** How do we get those transition probabilities ($P_{ij}$)? In practice, they are estimated from historical data. If you don't have enough data for certain transitions, your model might be unreliable.
+- **Parameter Estimation:** How do we get those transition probabilities ($P_{ij}$)? In practice, they are estimated from historical data. If you don't have enough data for certain transitions, your model might be unreliable.
 
 ## Conclusion: A Simple Idea, Profound Impact
 

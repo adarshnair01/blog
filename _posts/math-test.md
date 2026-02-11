@@ -4,6 +4,7 @@ date: "2024-02-12"
 excerpt: "Exploring the fundamental equations that power data science."
 author: "Adarsh Nair"
 ---
+
 # Mathematical Foundations
 
 Data science relies heavily on mathematical concepts. Here are a few key examples formatted beautifully in this journal.
@@ -15,6 +16,7 @@ The simple linear regression model is defined as:
 $$ Y = \beta_0 + \beta_1 X + \epsilon $$
 
 Where:
+
 - $Y$ is the dependent variable
 - $X$ is the independent variable
 - $\beta_0$ is the intercept
@@ -37,4 +39,4 @@ $$ \sigma(z) = \frac{1}{1 + e^{-z}} $$
 
 Let $A$ be an $m \times n$ matrix and $B$ be an $n \times p$ matrix:
 
-$$ (AB)_{ij} = \sum_{k=1}^n A_{ik}B_{kj} $$
+$$ (AB)_{ij} = \sum_{k=1}^n A*{ik}B*{kj} $$

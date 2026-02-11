@@ -8,7 +8,7 @@ author: "Adarsh Nair"
 
 My journey into the world of Artificial Intelligence has been a constant series of "aha!" moments, but few have resonated as deeply as understanding the Transformer architecture. Before 2017, when the seminal paper "Attention Is All You Need" dropped, the landscape of Natural Language Processing (NLP) was dominated by recurrent neural networks (RNNs) and their more sophisticated cousins, Long Short-Short Term Memory networks (LSTMs). They were good, don't get me wrong, but they had a bottleneck. Imagine trying to read a very long book, but you can only process one word at a time, sequentially, and by the time you reach the end, you've forgotten the nuances of the beginning. That was the struggle of RNNs with long-range dependencies.
 
-Then came the Transformer, a paradigm shift that didn't just improve things; it *transformed* them. It introduced a new way for AI to "think" about sequences, not one word after another, but by looking at all words simultaneously, deciding which ones were most important for understanding each other. This is the core idea of **attention**.
+Then came the Transformer, a paradigm shift that didn't just improve things; it _transformed_ them. It introduced a new way for AI to "think" about sequences, not one word after another, but by looking at all words simultaneously, deciding which ones were most important for understanding each other. This is the core idea of **attention**.
 
 ### The Problem with the Old Ways: The Sequential Bottleneck
 
@@ -16,11 +16,12 @@ Before we dive into the Transformer's brilliance, let's briefly acknowledge the 
 
 ### Enter Attention: "What's Most Important Right Now?"
 
-The core innovation of the Transformer is the **attention mechanism**. It's surprisingly intuitive. Think about how *you* read a sentence like "The animal didn't cross the street because it was too tired." To understand what "it" refers to, you probably immediately connect it back to "the animal." You don't need to re-read the whole sentence sequentially; your brain *attends* to the relevant parts.
+The core innovation of the Transformer is the **attention mechanism**. It's surprisingly intuitive. Think about how _you_ read a sentence like "The animal didn't cross the street because it was too tired." To understand what "it" refers to, you probably immediately connect it back to "the animal." You don't need to re-read the whole sentence sequentially; your brain _attends_ to the relevant parts.
 
 That's precisely what attention allows a neural network to do. When processing a word, it looks at all other words in the input sequence and calculates an "attention score" for each. This score tells the model how much importance it should place on other words when encoding the current word.
 
 The attention mechanism takes three main inputs:
+
 1.  **Query (Q):** This is like asking a question. For each word we're processing, we have a query vector representing it.
 2.  **Keys (K):** These are like the indices or labels of information we're trying to retrieve. Every other word in the sequence has a key vector.
 3.  **Values (V):** These are the actual pieces of information associated with each key. Every other word also has a value vector.
@@ -33,7 +34,7 @@ Here, $Q$, $K$, $V$ are matrices where rows represent words and columns represen
 
 ### Self-Attention: Understanding Context Within a Single Sentence
 
-The real power within the Transformer comes from **self-attention**. Instead of attending to a separate source (like an encoder output attending to a decoder input), self-attention means the queries, keys, and values all come from the *same* sequence. Each word in the input sequence acts as a query, and it attends to every other word (including itself) in the *same* sequence. This allows the model to build a rich contextual understanding for each word based on its relationship with all other words in the sentence. It's how "bank" can mean a river bank or a financial institution, depending on the surrounding words.
+The real power within the Transformer comes from **self-attention**. Instead of attending to a separate source (like an encoder output attending to a decoder input), self-attention means the queries, keys, and values all come from the _same_ sequence. Each word in the input sequence acts as a query, and it attends to every other word (including itself) in the _same_ sequence. This allows the model to build a rich contextual understanding for each word based on its relationship with all other words in the sentence. It's how "bank" can mean a river bank or a financial institution, depending on the surrounding words.
 
 ### Multi-Head Attention: Multiple Perspectives are Better
 
@@ -46,8 +47,8 @@ Why do this? Each "head" can learn to focus on different types of relationships 
 Transformers inherently process all words in parallel, which means they lose the sequential order information that RNNs naturally preserve. "The dog bit the man" is very different from "The man bit the dog." To inject this crucial positional information, the Transformer adds **positional encodings** to the input embeddings.
 
 These encodings are not learned but are fixed sinusoidal functions of varying frequencies.
-$$ PE_{(pos, 2i)} = \sin(pos / 10000^{2i/d_{model}}) $$
-$$ PE_{(pos, 2i+1)} = \cos(pos / 10000^{2i/d_{model}}) $$
+$$ PE*{(pos, 2i)} = \sin(pos / 10000^{2i/d*{model}}) $$
+$$ PE*{(pos, 2i+1)} = \cos(pos / 10000^{2i/d*{model}}) $$
 Where $pos$ is the position of the word in the sequence, $i$ is the dimension within the embedding vector, and $d_{model}$ is the dimension of the embeddings. This unique combination of sines and cosines provides a way to distinguish positions, and importantly, allows the model to learn relative positions (e.g., words 3 positions apart will always have a consistent relationship in their encodings). These positional encodings are simply added to the word embeddings, giving each word a unique vector that combines its meaning with its location.
 
 ### The Encoder Block: The Master of Understanding
@@ -57,8 +58,8 @@ The Transformer architecture is made up of stacked **Encoder** and **Decoder** b
 1.  **Input Embedding + Positional Encoding:** The raw input words are first converted into dense vectors (embeddings), and then the positional encodings are added.
 2.  **Multi-Head Self-Attention Layer:** This is where the magic of self-attention happens. Each word's embedding attends to all other words' embeddings to create a context-aware representation.
 3.  **Add & Normalize (Residual Connection + Layer Normalization):**
-    *   **Residual Connections:** The output of the multi-head self-attention layer is added back to its input. This "skip connection" helps prevent vanishing gradients and allows deeper networks to train more effectively.
-    *   **Layer Normalization:** After the addition, the result is normalized. Layer Normalization helps stabilize training by normalizing the inputs to each layer.
+    - **Residual Connections:** The output of the multi-head self-attention layer is added back to its input. This "skip connection" helps prevent vanishing gradients and allows deeper networks to train more effectively.
+    - **Layer Normalization:** After the addition, the result is normalized. Layer Normalization helps stabilize training by normalizing the inputs to each layer.
 4.  **Feed-Forward Network:** This is a simple, position-wise, fully connected neural network applied independently to each position. It provides a non-linear transformation that helps the model learn more complex patterns. It typically consists of two linear transformations with a ReLU activation in between.
 5.  **Another Add & Normalize:** Similar to step 3, a residual connection and layer normalization are applied after the feed-forward network.
 
@@ -69,9 +70,9 @@ These encoder blocks are typically stacked several times (e.g., 6 times in the o
 The Decoder block is similar to the Encoder but has a couple of key differences, allowing it to generate output sequences:
 
 1.  **Input Embedding + Positional Encoding (for Target Output):** Similar to the encoder, the target output sequence (e.g., the partially translated sentence so far) is embedded and positionally encoded.
-2.  **Masked Multi-Head Self-Attention Layer:** This is crucial for generation. When the decoder is predicting the next word, it should *only* be able to attend to words it has already generated (or the start-of-sequence token). It cannot "cheat" by looking at future words in the target sequence. A "mask" is applied to the attention scores to block information flow from future positions.
+2.  **Masked Multi-Head Self-Attention Layer:** This is crucial for generation. When the decoder is predicting the next word, it should _only_ be able to attend to words it has already generated (or the start-of-sequence token). It cannot "cheat" by looking at future words in the target sequence. A "mask" is applied to the attention scores to block information flow from future positions.
 3.  **Add & Normalize:** Residual connection and layer normalization.
-4.  **Multi-Head Cross-Attention (Encoder-Decoder Attention):** This is where the decoder "looks" at the encoder's output. The `Query` comes from the masked self-attention output of the decoder, while the `Keys` and `Values` come from the *final output of the encoder stack*. This layer allows the decoder to focus on relevant parts of the *input* sentence to generate the *output* sentence.
+4.  **Multi-Head Cross-Attention (Encoder-Decoder Attention):** This is where the decoder "looks" at the encoder's output. The `Query` comes from the masked self-attention output of the decoder, while the `Keys` and `Values` come from the _final output of the encoder stack_. This layer allows the decoder to focus on relevant parts of the _input_ sentence to generate the _output_ sentence.
 5.  **Add & Normalize:** Residual connection and layer normalization.
 6.  **Feed-Forward Network:** Similar to the encoder's feed-forward network.
 7.  **Another Add & Normalize:** Residual connection and layer normalization.

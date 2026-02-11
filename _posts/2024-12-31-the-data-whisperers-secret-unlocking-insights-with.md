@@ -8,19 +8,19 @@ author: "Adarsh Nair"
 
 Hello fellow data adventurers!
 
-Have you ever looked at a massive spreadsheet with hundreds, maybe thousands, of columns and felt a shiver of dread? Each column, representing a 'feature' or 'dimension' of your data, holds a piece of the puzzle. But sometimes, having too many pieces makes the puzzle *harder*, not easier, to solve.
+Have you ever looked at a massive spreadsheet with hundreds, maybe thousands, of columns and felt a shiver of dread? Each column, representing a 'feature' or 'dimension' of your data, holds a piece of the puzzle. But sometimes, having too many pieces makes the puzzle _harder_, not easier, to solve.
 
-I remember my early days exploring machine learning. I was so excited to build complex models, throwing every piece of information I could find into them. More data, more features, more power, right? Well, not exactly. My models were slow, often inaccurate, and worst of all, I couldn't even begin to *visualize* what was going on. It was like trying to navigate a dense jungle with a map showing every single leaf – overwhelming and ultimately unhelpful.
+I remember my early days exploring machine learning. I was so excited to build complex models, throwing every piece of information I could find into them. More data, more features, more power, right? Well, not exactly. My models were slow, often inaccurate, and worst of all, I couldn't even begin to _visualize_ what was going on. It was like trying to navigate a dense jungle with a map showing every single leaf – overwhelming and ultimately unhelpful.
 
 That's when I stumbled upon a concept that completely changed my approach: **Dimensionality Reduction**. It’s the art and science of simplifying your data without losing its most important essence. Think of it as finding the clearest, most concise story hidden within a sprawling epic.
 
 ### The Elephant in the Room: The "Curse of Dimensionality"
 
-Before we dive into the 'how', let's understand the 'why'. Why would we *want* to reduce dimensions? It all boils down to something ominously called the **"Curse of Dimensionality."**
+Before we dive into the 'how', let's understand the 'why'. Why would we _want_ to reduce dimensions? It all boils down to something ominously called the **"Curse of Dimensionality."**
 
 Imagine you want to place a single point in a 1-dimensional space (a line from 0 to 1). There's plenty of "room." Now, place it in a 2-dimensional space (a square from 0 to 1). Still plenty of room. What about a 3-dimensional space (a cube)? You get the picture.
 
-As you increase the number of dimensions, the volume of that space grows exponentially. This means that data points become incredibly sparse. In a high-dimensional space, almost *all* data points are "far away" from each other. Intuitively, this causes several problems:
+As you increase the number of dimensions, the volume of that space grows exponentially. This means that data points become incredibly sparse. In a high-dimensional space, almost _all_ data points are "far away" from each other. Intuitively, this causes several problems:
 
 1.  **Sparsity:** Your data points are like tiny islands in a vast ocean. Any given observation is likely to be very far from any other, making it hard to find meaningful relationships.
 2.  **Increased Computational Cost:** More features mean more calculations, leading to slower training times for models and requiring more memory.
@@ -34,8 +34,8 @@ Dimensionality Reduction comes to our rescue by combating this curse. It helps u
 
 Broadly, there are two main categories of dimensionality reduction:
 
-1.  **Feature Selection:** This is like picking the most important ingredients for a recipe. You identify and keep a *subset* of your original features, discarding the rest. Methods include filter methods (e.g., correlation, chi-squared), wrapper methods (e.g., recursive feature elimination), and embedded methods (e.g., Lasso regression).
-2.  **Feature Extraction:** This is like creating a *new*, concentrated ingredient by combining and transforming your original ingredients. Instead of just picking existing features, you create entirely new ones (called "components" or "embeddings") that capture the essence of the original set. This is where the magic really happens, and it's what we'll focus on today.
+1.  **Feature Selection:** This is like picking the most important ingredients for a recipe. You identify and keep a _subset_ of your original features, discarding the rest. Methods include filter methods (e.g., correlation, chi-squared), wrapper methods (e.g., recursive feature elimination), and embedded methods (e.g., Lasso regression).
+2.  **Feature Extraction:** This is like creating a _new_, concentrated ingredient by combining and transforming your original ingredients. Instead of just picking existing features, you create entirely new ones (called "components" or "embeddings") that capture the essence of the original set. This is where the magic really happens, and it's what we'll focus on today.
 
 Let's dive into some of the most powerful feature extraction techniques.
 
@@ -52,8 +52,8 @@ PCA essentially rotates your coordinate system to align with the directions of m
 1.  **Standardize the Data:** Ensure all features have similar scales.
 2.  **Compute the Covariance Matrix:** This matrix tells us how much each feature varies with every other feature.
 3.  **Eigenvalue Decomposition:** The magic step! We find the **eigenvectors** and **eigenvalues** of the covariance matrix.
-    *   **Eigenvectors:** These are the principal components themselves – the new directions or axes. They are orthogonal (perpendicular) to each other.
-    *   **Eigenvalues:** Each eigenvalue corresponds to an eigenvector and represents the amount of variance captured along that principal component. A larger eigenvalue means that component captures more information.
+    - **Eigenvectors:** These are the principal components themselves – the new directions or axes. They are orthogonal (perpendicular) to each other.
+    - **Eigenvalues:** Each eigenvalue corresponds to an eigenvector and represents the amount of variance captured along that principal component. A larger eigenvalue means that component captures more information.
 4.  **Select Components:** You choose $k$ eigenvectors corresponding to the largest $k$ eigenvalues. These $k$ eigenvectors form your new $k$-dimensional subspace.
 5.  **Project Data:** Transform your original data onto this new subspace.
 
@@ -62,34 +62,39 @@ Mathematically, if $X$ is your data matrix, you're looking for orthogonal vector
 $$ \Sigma v = \lambda v $$
 
 **When to use PCA:**
-*   When your data has a linear structure.
-*   For noise reduction (lower variance components often correspond to noise).
-*   To speed up machine learning algorithms.
-*   For initial exploration and visualization when data isn't *too* non-linear.
+
+- When your data has a linear structure.
+- For noise reduction (lower variance components often correspond to noise).
+- To speed up machine learning algorithms.
+- For initial exploration and visualization when data isn't _too_ non-linear.
 
 **Limitations:**
-*   **Linearity Assumption:** PCA assumes that the principal components are linear combinations of the original features. If your data has a complex, non-linear structure (e.g., a spiral), PCA might not perform well.
-*   **Interpretability:** The new components are linear combinations of the original features, which can sometimes make them harder to interpret than original features.
+
+- **Linearity Assumption:** PCA assumes that the principal components are linear combinations of the original features. If your data has a complex, non-linear structure (e.g., a spiral), PCA might not perform well.
+- **Interpretability:** The new components are linear combinations of the original features, which can sometimes make them harder to interpret than original features.
 
 ### Venturing into Non-Linearity: t-SNE
 
 While PCA is fantastic for linear transformations, the real world is often messy and non-linear. Enter **t-SNE (t-Distributed Stochastic Neighbor Embedding)**.
 
-**Intuition:** Imagine your data points existing in a high-dimensional space. t-SNE's goal is to create a low-dimensional map (typically 2D or 3D) where points that were close together in the high-dimensional space remain close, and points that were far apart remain far apart. It's particularly good at preserving *local* structures – meaning it focuses on keeping clusters of similar points tightly grouped.
+**Intuition:** Imagine your data points existing in a high-dimensional space. t-SNE's goal is to create a low-dimensional map (typically 2D or 3D) where points that were close together in the high-dimensional space remain close, and points that were far apart remain far apart. It's particularly good at preserving _local_ structures – meaning it focuses on keeping clusters of similar points tightly grouped.
 
 It does this by:
+
 1.  Measuring the similarity between pairs of points in the high-dimensional space (using a Gaussian distribution).
 2.  Measuring the similarity between pairs of points in the low-dimensional space (using a Student's t-distribution, which helps push dissimilar points further apart).
 3.  Minimizing the difference between these two similarity distributions (using **Kullback-Leibler divergence**), effectively trying to make the low-dimensional map a faithful representation of the high-dimensional neighborhood relationships.
 
 **When to use t-SNE:**
-*   **Visualization:** It's a go-to for visualizing high-dimensional data, especially to identify clusters. Think image embeddings, text embeddings, or genomic data.
-*   **Discovering Clusters:** If your data naturally forms groups, t-SNE will often make these clusters visually apparent.
+
+- **Visualization:** It's a go-to for visualizing high-dimensional data, especially to identify clusters. Think image embeddings, text embeddings, or genomic data.
+- **Discovering Clusters:** If your data naturally forms groups, t-SNE will often make these clusters visually apparent.
 
 **Limitations:**
-*   **Computational Cost:** It can be very slow for large datasets ($N > 10,000$ points) and isn't typically used for general dimensionality reduction for model training.
-*   **Hyperparameter Sensitivity:** The `perplexity` parameter, which roughly relates to the number of nearest neighbors it considers, can significantly affect the output map.
-*   **Global Structure:** While excellent at preserving local structure, t-SNE sometimes struggles to accurately represent the global relationships between distant clusters. The size and spacing of clusters might not be meaningful.
+
+- **Computational Cost:** It can be very slow for large datasets ($N > 10,000$ points) and isn't typically used for general dimensionality reduction for model training.
+- **Hyperparameter Sensitivity:** The `perplexity` parameter, which roughly relates to the number of nearest neighbors it considers, can significantly affect the output map.
+- **Global Structure:** While excellent at preserving local structure, t-SNE sometimes struggles to accurately represent the global relationships between distant clusters. The size and spacing of clusters might not be meaningful.
 
 ### The New Kid on the Block: UMAP
 
@@ -98,15 +103,17 @@ If t-SNE is a powerful microscope for local patterns, **UMAP (Uniform Manifold A
 **Intuition:** UMAP is based on **manifold learning**, assuming that your high-dimensional data actually lies on a lower-dimensional "manifold" embedded within that higher space (like a crumpled piece of paper in 3D space, which is intrinsically 2D). It constructs a "fuzzy topological representation" of your data – essentially, a graph where points are connected based on their similarity, and the strength of the connection indicates how close they are. It then tries to find a low-dimensional representation that preserves this graph structure as closely as possible.
 
 **How it's different from t-SNE (and often better):**
-*   **Speed:** UMAP is significantly faster than t-SNE, making it feasible for much larger datasets.
-*   **Global Structure Preservation:** Unlike t-SNE, UMAP is designed to better preserve the global structure of the data, meaning that the relative distances between clusters might be more meaningful.
-*   **Theoretical Foundation:** UMAP has a stronger theoretical foundation rooted in Riemannian geometry and algebraic topology, which contributes to its robustness.
-*   **Memory Efficiency:** It generally requires less memory.
+
+- **Speed:** UMAP is significantly faster than t-SNE, making it feasible for much larger datasets.
+- **Global Structure Preservation:** Unlike t-SNE, UMAP is designed to better preserve the global structure of the data, meaning that the relative distances between clusters might be more meaningful.
+- **Theoretical Foundation:** UMAP has a stronger theoretical foundation rooted in Riemannian geometry and algebraic topology, which contributes to its robustness.
+- **Memory Efficiency:** It generally requires less memory.
 
 **When to use UMAP:**
-*   When you need to visualize large, high-dimensional datasets.
-*   When you need to preserve both local and global data structure.
-*   As a general-purpose non-linear dimensionality reduction technique for exploration and even as a pre-processing step for some models.
+
+- When you need to visualize large, high-dimensional datasets.
+- When you need to preserve both local and global data structure.
+- As a general-purpose non-linear dimensionality reduction technique for exploration and even as a pre-processing step for some models.
 
 ### Why Does It All Matter? The Benefits!
 
@@ -120,9 +127,9 @@ Let's quickly recap why embracing dimensionality reduction is a game-changer:
 
 ### Choosing Your Weapon: When to Use What?
 
-*   **Start with PCA** for a quick and effective way to reduce dimensions, especially if your data is linearly structured, or if you primarily care about variance and speed. It's a great first step.
-*   If you're dealing with complex, non-linear data and your primary goal is **visualization and identifying clusters**, then **UMAP** is often your best bet due to its speed and ability to preserve both local and global structure.
-*   **t-SNE** is still valuable, especially for visually inspecting the fine-grained local relationships, but consider UMAP first for larger datasets.
+- **Start with PCA** for a quick and effective way to reduce dimensions, especially if your data is linearly structured, or if you primarily care about variance and speed. It's a great first step.
+- If you're dealing with complex, non-linear data and your primary goal is **visualization and identifying clusters**, then **UMAP** is often your best bet due to its speed and ability to preserve both local and global structure.
+- **t-SNE** is still valuable, especially for visually inspecting the fine-grained local relationships, but consider UMAP first for larger datasets.
 
 ### My Journey Continues...
 

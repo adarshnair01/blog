@@ -6,7 +6,7 @@ tags: ["Monte Carlo", "Simulations", "Data Science", "Probability", "Python"]
 author: "Adarsh Nair"
 ---
 
-Have you ever found yourself staring down a problem that feels... well, *impossible* to solve directly? Perhaps you need to calculate the area of an irregularly shaped pond, estimate the probability of profit for a new business venture with tons of variables, or even understand the complex behavior of particles in a physical system. Traditional mathematical methods might lead you down a rabbit hole of intractable equations.
+Have you ever found yourself staring down a problem that feels... well, _impossible_ to solve directly? Perhaps you need to calculate the area of an irregularly shaped pond, estimate the probability of profit for a new business venture with tons of variables, or even understand the complex behavior of particles in a physical system. Traditional mathematical methods might lead you down a rabbit hole of intractable equations.
 
 What if I told you there's a powerful, elegant, and surprisingly intuitive technique that can tackle these kinds of challenges by simply embracing randomness? Welcome to the fascinating world of **Monte Carlo simulations**.
 
@@ -45,15 +45,15 @@ The area of the square is $A_{square} = (2r)^2 = 4r^2$, where $r$ is the radius 
 The area of the inscribed circle is $A_{circle} = \pi r^2$.
 
 Therefore, the ratio of the circle's area to the square's area is:
-$$ \frac{A_{circle}}{A_{square}} = \frac{\pi r^2}{4r^2} = \frac{\pi}{4} $$
+$$ \frac{A*{circle}}{A*{square}} = \frac{\pi r^2}{4r^2} = \frac{\pi}{4} $$
 
-If we throw darts randomly, the ratio of darts that land *inside* the circle to the total number of darts thrown *into the square* should approximate this area ratio.
+If we throw darts randomly, the ratio of darts that land _inside_ the circle to the total number of darts thrown _into the square_ should approximate this area ratio.
 
 So, if $N_{circle}$ is the count of darts inside the circle and $N_{total}$ is the total count of darts:
-$$ \frac{N_{circle}}{N_{total}} \approx \frac{\pi}{4} $$
+$$ \frac{N*{circle}}{N*{total}} \approx \frac{\pi}{4} $$
 
 This means we can estimate $\pi$ using:
-$$ \pi \approx 4 \times \frac{N_{circle}}{N_{total}} $$
+$$ \pi \approx 4 \times \frac{N*{circle}}{N*{total}} $$
 
 **How do we simulate this?**
 
@@ -93,14 +93,14 @@ As `num_simulations` increases, our `pi_estimate` will get closer and closer to 
 
 Let's move to a scenario that's perhaps more directly relevant to data science and business analytics: estimating the probability of making a profit on a new venture.
 
-Imagine you're evaluating a small startup. You have an initial investment cost, but the revenue and operational costs are uncertain and can vary significantly. Traditional methods might give you a single "best-case" or "worst-case" scenario, but Monte Carlo can give you a *distribution* of possible outcomes and a more robust probability of profit.
+Imagine you're evaluating a small startup. You have an initial investment cost, but the revenue and operational costs are uncertain and can vary significantly. Traditional methods might give you a single "best-case" or "worst-case" scenario, but Monte Carlo can give you a _distribution_ of possible outcomes and a more robust probability of profit.
 
 Let's define our variables with some assumed distributions:
 
-*   **Initial Investment:** \$50,000 (let's assume this is fixed for simplicity, though it could also be a distribution).
-*   **Monthly Revenue:** We estimate it follows a Normal distribution with a mean of \$30,000 and a standard deviation of \$8,000. It could be higher or lower.
-*   **Monthly Operating Costs:** We estimate this follows a Uniform distribution between \$10,000 and \$25,000. It's less predictable but within a range.
-*   **Project Duration:** 12 months.
+- **Initial Investment:** \$50,000 (let's assume this is fixed for simplicity, though it could also be a distribution).
+- **Monthly Revenue:** We estimate it follows a Normal distribution with a mean of \$30,000 and a standard deviation of \$8,000. It could be higher or lower.
+- **Monthly Operating Costs:** We estimate this follows a Uniform distribution between \$10,000 and \$25,000. It's less predictable but within a range.
+- **Project Duration:** 12 months.
 
 Our goal is to estimate the probability that the total profit over 12 months will be positive.
 
@@ -153,7 +153,7 @@ print(f"Standard deviation of profit: ${std_dev_profit:,.2f}")
 # plt.show()
 ```
 
-With this simulation, we're not just getting a single profit number; we're getting a statistical understanding of the venture's potential. We can see the *likelihood* of various outcomes. This is incredibly valuable for decision-making!
+With this simulation, we're not just getting a single profit number; we're getting a statistical understanding of the venture's potential. We can see the _likelihood_ of various outcomes. This is incredibly valuable for decision-making!
 
 ### Why Monte Carlo is a Data Scientist's Best Friend
 
@@ -169,9 +169,9 @@ Monte Carlo simulations are far more than just estimating $\pi$ or business prof
 
 While powerful, Monte Carlo isn't a silver bullet. It's important to be aware of its limitations:
 
-*   **Computational Cost:** To achieve high accuracy, you often need a very large number of simulations. The convergence rate is typically $O(1/\sqrt{N})$, meaning to halve your error, you need to quadruple the number of samples ($N$). This can be computationally expensive for complex models.
-*   **Quality of Random Numbers:** Monte Carlo relies on "pseudo-random" number generators (PRNGs), which are deterministic algorithms designed to produce sequences that *appear* random. The quality of these generators can significantly impact the accuracy of your simulation. For most data science tasks, built-in library functions (like `numpy.random`) are sufficient.
-*   **"Curse of Dimensionality" (Mitigated but Present):** While Monte Carlo is less affected by high dimensionality than deterministic numerical integration methods, covering a vast high-dimensional space still requires a large number of samples to adequately explore the problem space.
+- **Computational Cost:** To achieve high accuracy, you often need a very large number of simulations. The convergence rate is typically $O(1/\sqrt{N})$, meaning to halve your error, you need to quadruple the number of samples ($N$). This can be computationally expensive for complex models.
+- **Quality of Random Numbers:** Monte Carlo relies on "pseudo-random" number generators (PRNGs), which are deterministic algorithms designed to produce sequences that _appear_ random. The quality of these generators can significantly impact the accuracy of your simulation. For most data science tasks, built-in library functions (like `numpy.random`) are sufficient.
+- **"Curse of Dimensionality" (Mitigated but Present):** While Monte Carlo is less affected by high dimensionality than deterministic numerical integration methods, covering a vast high-dimensional space still requires a large number of samples to adequately explore the problem space.
 
 ### Wrapping Up Our Journey
 

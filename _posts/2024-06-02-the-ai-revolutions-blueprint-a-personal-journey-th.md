@@ -5,6 +5,7 @@ excerpt: "Remember when AI models struggled with understanding context across lo
 tags: ["Machine Learning", "NLP", "Deep Learning", "Transformers", "AI Architecture"]
 author: "Adarsh Nair"
 ---
+
 My journey into the world of artificial intelligence has been a series of "aha!" moments, but few have been as impactful as understanding the Transformer architecture. It felt like discovering the secret blueprint behind the most advanced AI systems we use today. For anyone who's ever marvelled at the fluent conversations with ChatGPT, the creative images from DALL-E, or the nuanced sentiment analysis powering modern applications, the Transformer is the unsung hero.
 
 But what exactly is a Transformer? And why did it cause such a stir in the deep learning community? Let's take a personal dive into its mechanics, breaking down why it works, and how it came to dominate the AI landscape.
@@ -17,7 +18,7 @@ Imagine you're reading a very long novel. RNNs process text word by word, carryi
 
 While revolutionary at the time, RNNs had some pretty significant limitations:
 
-1.  **Slow and Sequential:** Each word had to be processed *after* the previous one. This meant no parallelization – you couldn't speed things up by processing multiple parts of the text at once.
+1.  **Slow and Sequential:** Each word had to be processed _after_ the previous one. This meant no parallelization – you couldn't speed things up by processing multiple parts of the text at once.
 2.  **The Long-Term Memory Problem:** Remembering the crucial context from the beginning of a very long text was incredibly hard. By the time the model got to the end, the initial "memory" often faded or got diluted, leading to what we call "vanishing gradients."
 3.  **Information Bottleneck:** All information had to be squeezed into a fixed-size hidden state, which sometimes just wasn't enough to capture complex relationships across long sentences.
 
@@ -25,9 +26,9 @@ I remember grappling with these issues in my own projects. Trying to build a mod
 
 ### The Big Idea: Attention is All You Need
 
-The title of that seminal paper said it all. Forget recurrence; what if an AI model could simply *look* at all parts of an input sequence at once and decide which parts were most important for understanding any given part? This is the core idea behind **Attention**.
+The title of that seminal paper said it all. Forget recurrence; what if an AI model could simply _look_ at all parts of an input sequence at once and decide which parts were most important for understanding any given part? This is the core idea behind **Attention**.
 
-Think of it like studying for a big exam. You don't just read the textbook linearly, trying to summarize each page sequentially. Instead, when you're trying to understand a specific concept, you might skim the entire chapter, highlighting key terms, looking at diagrams, and jumping back to previous sections that seem relevant. You *attend* to the most important parts.
+Think of it like studying for a big exam. You don't just read the textbook linearly, trying to summarize each page sequentially. Instead, when you're trying to understand a specific concept, you might skim the entire chapter, highlighting key terms, looking at diagrams, and jumping back to previous sections that seem relevant. You _attend_ to the most important parts.
 
 The Transformer model took this concept and made it the cornerstone of its architecture. It completely abandoned recurrence, relying solely on attention mechanisms to draw global dependencies between input and output.
 
@@ -35,14 +36,14 @@ The Transformer model took this concept and made it the cornerstone of its archi
 
 Let's demystify the attention mechanism itself. It's often explained using an analogy from information retrieval, like searching a database:
 
-*   **Query (Q):** What information are you looking for? (e.g., "Show me sci-fi movies.")
-*   **Keys (K):** Labels or descriptions of available information. (e.g., Each movie has a "genre" key.)
-*   **Values (V):** The actual information you get back. (e.g., The movie title, director, year, etc.)
+- **Query (Q):** What information are you looking for? (e.g., "Show me sci-fi movies.")
+- **Keys (K):** Labels or descriptions of available information. (e.g., Each movie has a "genre" key.)
+- **Values (V):** The actual information you get back. (e.g., The movie title, director, year, etc.)
 
 In the context of a Transformer, for each word in a sentence (let's say we're trying to understand the word "bank" in "river bank"):
 
 1.  We have a **Query** vector for the word "bank."
-2.  We compare this Query vector to **Key** vectors for *every other word* in the sentence (and "bank" itself).
+2.  We compare this Query vector to **Key** vectors for _every other word_ in the sentence (and "bank" itself).
 3.  The comparison (usually a dot product) gives us a **score** indicating how relevant each other word is to "bank."
 4.  These scores are then passed through a **softmax** function to turn them into probabilities (weights), ensuring they sum up to 1. Words highly relevant to "bank" get higher weights.
 5.  Finally, these weights are used to create a weighted sum of the **Value** vectors of all words. This weighted sum is the "attended" representation of "bank," now enriched with context from the most relevant words.
@@ -55,7 +56,7 @@ Here, $Q$, $K$, and $V$ are matrices where each row represents the Query, Key, o
 
 ### Self-Attention: Looking Inward
 
-The attention mechanism described above is specifically **Self-Attention** because the Queries, Keys, and Values all come from the *same* input sequence. Each word attends to *itself* and *all other words* in the sentence to build a richer representation of itself. This is what allows the model to understand the role of "bank" in "river bank" versus "money bank."
+The attention mechanism described above is specifically **Self-Attention** because the Queries, Keys, and Values all come from the _same_ input sequence. Each word attends to _itself_ and _all other words_ in the sentence to build a richer representation of itself. This is what allows the model to understand the role of "bank" in "river bank" versus "money bank."
 
 ### Multi-Head Attention: Diverse Perspectives
 
@@ -70,6 +71,7 @@ The outputs from these parallel attention heads are then concatenated and linear
 The full Transformer architecture is built upon these attention mechanisms, typically in an **encoder-decoder** structure.
 
 #### The Encoder
+
 The encoder's job is to process the input sequence and produce a rich, contextual representation. It's comprised of multiple identical layers stacked on top of each other. Each layer has two main sub-layers:
 
 1.  **Multi-Head Self-Attention:** As discussed, this allows each word to attend to all other words in the input.
@@ -78,10 +80,11 @@ The encoder's job is to process the input sequence and produce a rich, contextua
 Crucially, each sub-layer is followed by a **residual connection** (meaning we add the input of the sub-layer to its output) and **layer normalization**. Residual connections help with training very deep networks by allowing gradients to flow more easily, preventing them from vanishing. Layer Normalization stabilizes training.
 
 #### The Decoder
+
 The decoder's role is to generate the output sequence, word by word, based on the encoder's output and the words it has already generated. It also has multiple identical layers, but each has three sub-layers:
 
-1.  **Masked Multi-Head Self-Attention:** This is similar to the encoder's self-attention, but with a crucial difference: it's "masked." When generating a word, the decoder can only attend to words *it has already generated* (and the current word itself). This prevents it from "cheating" by looking at future words in the target sequence.
-2.  **Multi-Head Attention (Encoder-Decoder Attention):** This sub-layer queries the output of the *encoder*. Here, the Queries come from the decoder's previous layer, and the Keys and Values come from the *encoder's output*. This is where the decoder "looks back" at the original input sentence to gather relevant information for generating the next word.
+1.  **Masked Multi-Head Self-Attention:** This is similar to the encoder's self-attention, but with a crucial difference: it's "masked." When generating a word, the decoder can only attend to words _it has already generated_ (and the current word itself). This prevents it from "cheating" by looking at future words in the target sequence.
+2.  **Multi-Head Attention (Encoder-Decoder Attention):** This sub-layer queries the output of the _encoder_. Here, the Queries come from the decoder's previous layer, and the Keys and Values come from the _encoder's output_. This is where the decoder "looks back" at the original input sentence to gather relevant information for generating the next word.
 3.  **Position-wise Feed-Forward Network:** Same as in the encoder.
 
 Again, each sub-layer is followed by a residual connection and layer normalization.

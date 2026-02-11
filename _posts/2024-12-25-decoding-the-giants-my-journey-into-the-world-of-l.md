@@ -20,7 +20,7 @@ This isn't just a number game. This immense scale, coupled with training on trul
 
 ### At its Core: The Language Model's Simple Goal
 
-Strip away the hype, the billions of parameters, and the emergent superpowers, and at its heart, a language model has one surprisingly simple, yet incredibly powerful, job: **predicting the next word (or more accurately, the next *token*) in a sequence.**
+Strip away the hype, the billions of parameters, and the emergent superpowers, and at its heart, a language model has one surprisingly simple, yet incredibly powerful, job: **predicting the next word (or more accurately, the next _token_) in a sequence.**
 
 Think about it this way: if I start a sentence, "The cat sat on the...", what's the most probable next word? "Mat," "couch," or "roof" probably come to mind. It's highly unlikely to be "bicycle" or "quantum physics." A language model does this millions of times over, learning these probabilities from the vast amount of text it reads.
 
@@ -28,7 +28,7 @@ Mathematically, a language model tries to estimate the probability of a word giv
 
 $P(w_t | w_1, w_2, ..., w_{t-1})$
 
-This equation essentially asks: "What is the probability of the *t*-th word, given all the words that came before it?" By repeatedly predicting the next token and appending it to the sequence, these models can generate coherent, contextually relevant, and even creative text, one token at a time. This is the foundation of almost everything LLMs do, from writing essays to answering complex questions.
+This equation essentially asks: "What is the probability of the _t_-th word, given all the words that came before it?" By repeatedly predicting the next token and appending it to the sequence, these models can generate coherent, contextually relevant, and even creative text, one token at a time. This is the foundation of almost everything LLMs do, from writing essays to answering complex questions.
 
 ### The Brain Behind the Magic: The Transformer Architecture
 
@@ -39,7 +39,8 @@ The Transformer's core innovation is **self-attention**. Instead of processing w
 Imagine you're reading the sentence: "The animal didn't cross the street because it was too tired." When trying to understand what "it" refers to, your brain immediately connects "it" to "the animal." Self-attention mimics this. For each word in the sentence, it calculates an "attention score" with every other word. These scores determine how much focus (or "attention") the model should pay to each word when encoding a particular word.
 
 Here's a simplified way to think about it:
-1.  **Query, Key, Value:** For each word, the model generates three vectors: a *Query* (what am I looking for?), a *Key* (what information do I have?), and a *Value* (what information should I provide?).
+
+1.  **Query, Key, Value:** For each word, the model generates three vectors: a _Query_ (what am I looking for?), a _Key_ (what information do I have?), and a _Value_ (what information should I provide?).
 2.  **Scoring:** For each word, its Query vector is compared against all other words' Key vectors. This comparison results in an "attention score" – a number indicating how relevant another word is to the current word.
 3.  **Weighting:** These scores are then normalized (e.g., using a softmax function) to get weights. Words with higher scores get higher weights.
 4.  **Combining:** Finally, the Value vectors of all words are multiplied by their respective attention weights and summed up. This weighted sum becomes the new representation of the current word, enriched by the relevant information from the entire sequence.
@@ -52,30 +53,32 @@ If a language model simply predicts the next word, how does it become so good at
 
 1.  **Pre-training:** This is the initial, massive unsupervised learning phase. The model is fed trillions of words from the internet (books, articles, websites, code, etc.) and simply tasked with predicting the next word. Through this vast exposure, it learns grammar, facts about the world, common sense, different writing styles, and even basic reasoning patterns. It's like giving a child every book in the world and asking them to guess the next word in every sentence – they'll eventually learn a lot about how language and the world work.
 
-2.  **Instruction Tuning (Supervised Fine-tuning - SFT):** After pre-training, the model is intelligent but doesn't necessarily know how to *follow instructions*. It might just continue a story instead of answering a question directly. To fix this, it's fine-tuned on a smaller, high-quality dataset of human-written "instructions" and "responses." For example, an instruction might be "Summarize this article:" followed by an article, and the response would be a human-written summary. This teaches the model to understand and respond to user prompts in a helpful way.
+2.  **Instruction Tuning (Supervised Fine-tuning - SFT):** After pre-training, the model is intelligent but doesn't necessarily know how to _follow instructions_. It might just continue a story instead of answering a question directly. To fix this, it's fine-tuned on a smaller, high-quality dataset of human-written "instructions" and "responses." For example, an instruction might be "Summarize this article:" followed by an article, and the response would be a human-written summary. This teaches the model to understand and respond to user prompts in a helpful way.
 
 3.  **Reinforcement Learning from Human Feedback (RLHF):** This is the secret sauce that makes models like ChatGPT feel so incredibly aligned with human intent. RLHF takes the instruction-tuned model a step further:
-    *   **Human Preference Data:** Humans are shown several responses generated by the model for a given prompt and asked to rank them from best to worst.
-    *   **Reward Model Training:** This human preference data is used to train a separate "reward model" that learns to predict which response a human would prefer.
-    *   **Reinforcement Learning:** Finally, the language model is fine-tuned again, but this time using reinforcement learning. The reward model acts as a "critic," guiding the LLM to generate responses that maximize the predicted human preference score. This iterative process is crucial for aligning the model's outputs with human values, safety guidelines, and helpfulness.
+    - **Human Preference Data:** Humans are shown several responses generated by the model for a given prompt and asked to rank them from best to worst.
+    - **Reward Model Training:** This human preference data is used to train a separate "reward model" that learns to predict which response a human would prefer.
+    - **Reinforcement Learning:** Finally, the language model is fine-tuned again, but this time using reinforcement learning. The reward model acts as a "critic," guiding the LLM to generate responses that maximize the predicted human preference score. This iterative process is crucial for aligning the model's outputs with human values, safety guidelines, and helpfulness.
 
 This multi-stage process transforms a powerful next-word predictor into an intelligent, responsive assistant.
 
 ### The Power and the Pitfalls
 
 The capabilities unlocked by LLMs are genuinely astonishing:
-*   **Creative Content Generation:** Writing poems, stories, marketing copy.
-*   **Information Retrieval and Summarization:** Quickly extracting key information from long texts.
-*   **Code Generation and Debugging:** Writing code snippets, explaining errors, translating between languages.
-*   **Language Translation:** More nuanced and context-aware than ever before.
-*   **Interactive Assistants:** Revolutionizing customer service, education, and personal productivity.
+
+- **Creative Content Generation:** Writing poems, stories, marketing copy.
+- **Information Retrieval and Summarization:** Quickly extracting key information from long texts.
+- **Code Generation and Debugging:** Writing code snippets, explaining errors, translating between languages.
+- **Language Translation:** More nuanced and context-aware than ever before.
+- **Interactive Assistants:** Revolutionizing customer service, education, and personal productivity.
 
 However, it's crucial to understand their limitations:
-*   **Hallucinations:** LLMs can confidently generate factually incorrect information. They are pattern matchers, not truth-seekers.
-*   **Bias:** Trained on human data, they can inherit and amplify societal biases present in that data.
-*   **Lack of True Understanding/Common Sense:** While they can mimic understanding, they don't possess consciousness or genuine common sense in the human sense. They operate on statistical relationships.
-*   **Computational Cost:** Training and running these models requires immense computational resources.
-*   **Ethical Concerns:** Misinformation, job displacement, and potential misuse are significant societal challenges.
+
+- **Hallucinations:** LLMs can confidently generate factually incorrect information. They are pattern matchers, not truth-seekers.
+- **Bias:** Trained on human data, they can inherit and amplify societal biases present in that data.
+- **Lack of True Understanding/Common Sense:** While they can mimic understanding, they don't possess consciousness or genuine common sense in the human sense. They operate on statistical relationships.
+- **Computational Cost:** Training and running these models requires immense computational resources.
+- **Ethical Concerns:** Misinformation, job displacement, and potential misuse are significant societal challenges.
 
 ### My Personal Takeaway
 

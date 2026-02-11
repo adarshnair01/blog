@@ -47,8 +47,8 @@ Here's how it works:
     $a = f(z)$
 
     Common activation functions include:
-    *   **Sigmoid**: Squashes values between 0 and 1, useful for probabilities.
-    *   **ReLU (Rectified Linear Unit)**: Outputs $z$ if $z > 0$, and 0 otherwise. This is incredibly popular in deep learning because it helps networks learn faster.
+    - **Sigmoid**: Squashes values between 0 and 1, useful for probabilities.
+    - **ReLU (Rectified Linear Unit)**: Outputs $z$ if $z > 0$, and 0 otherwise. This is incredibly popular in deep learning because it helps networks learn faster.
 
 So, in essence, a single artificial neuron takes a bunch of inputs, weighs their importance, adds a little offset, sums them up, and then makes a 'decision' based on that sum via its activation function. Pretty neat for such a simple unit, right?
 
@@ -58,9 +58,9 @@ A single neuron can make basic decisions, but real intelligence comes from conne
 
 An Artificial Neural Network (ANN) is structured into layers:
 
-*   **Input Layer:** This layer simply receives the initial data (our $x_1, x_2, \ldots, x_n$). It doesn't perform any computation, just passes the information along.
-*   **Hidden Layers:** These are the magic layers! Each neuron in a hidden layer receives inputs from the previous layer, performs its weighted sum and activation, and then passes its output to the next layer. Networks can have one, two, or even hundreds of hidden layers. The more hidden layers, the "deeper" the network, giving rise to the term **Deep Learning**. These layers are where the network learns to extract increasingly complex features from the raw input data.
-*   **Output Layer:** The final layer of neurons produces the network's prediction or decision. For example, if we're classifying images as "cat" or "dog," the output layer might have two neurons, one for each class, indicating the probability that the image belongs to that class.
+- **Input Layer:** This layer simply receives the initial data (our $x_1, x_2, \ldots, x_n$). It doesn't perform any computation, just passes the information along.
+- **Hidden Layers:** These are the magic layers! Each neuron in a hidden layer receives inputs from the previous layer, performs its weighted sum and activation, and then passes its output to the next layer. Networks can have one, two, or even hundreds of hidden layers. The more hidden layers, the "deeper" the network, giving rise to the term **Deep Learning**. These layers are where the network learns to extract increasingly complex features from the raw input data.
+- **Output Layer:** The final layer of neurons produces the network's prediction or decision. For example, if we're classifying images as "cat" or "dog," the output layer might have two neurons, one for each class, indicating the probability that the image belongs to that class.
 
 Imagine a network of streets. The input layer is where all cars enter the city. The hidden layers are the complex web of roads and intersections where cars navigate, making turns and decisions based on traffic signals (weights and biases). The output layer is where cars finally arrive at their destination.
 
@@ -86,11 +86,11 @@ Here, $m$ is the number of training examples, $y^{(i)}$ is the actual value for 
 
 #### 3. Backpropagation: Learning from Mistakes
 
-This is the true secret sauce! Once we know how wrong the network's prediction was, we need to figure out *which* weights and biases contributed to that error and how to adjust them to make a better prediction next time. This process is called **backpropagation**.
+This is the true secret sauce! Once we know how wrong the network's prediction was, we need to figure out _which_ weights and biases contributed to that error and how to adjust them to make a better prediction next time. This process is called **backpropagation**.
 
 Think of it like this: The error signal from the loss function is "propagated backwards" through the network. It's as if each neuron in the network gets a memo saying, "Hey, you contributed this much to the overall error. Here's how you should adjust your weights and bias to reduce that error."
 
-Mathematically, backpropagation uses calculus (specifically, the chain rule) to calculate the **gradient** of the loss function with respect to each weight and bias. The gradient tells us the direction of the steepest increase in the loss. Since we want to *minimize* the loss, we move in the opposite direction of the gradient. This optimization algorithm is called **Gradient Descent**.
+Mathematically, backpropagation uses calculus (specifically, the chain rule) to calculate the **gradient** of the loss function with respect to each weight and bias. The gradient tells us the direction of the steepest increase in the loss. Since we want to _minimize_ the loss, we move in the opposite direction of the gradient. This optimization algorithm is called **Gradient Descent**.
 
 Each weight ($w$) and bias ($b$) is updated using a simple rule:
 
@@ -105,9 +105,9 @@ This cycle of forward propagation, calculating loss, and backpropagation (adjust
 
 While the basic feedforward network (where information flows in one direction) we've discussed is fundamental, the field has evolved to include specialized architectures for different tasks:
 
-*   **Convolutional Neural Networks (CNNs):** These are superstars for image and video processing. They use "convolutional" layers that act like specialized feature detectors, looking for patterns like edges, textures, and shapes in an image. Think of them as tiny, focused filters scanning an image for specific visual cues.
-*   **Recurrent Neural Networks (RNNs):** Designed for sequential data like text, audio, and time series. RNNs have "memory" because their output depends not only on the current input but also on previous computations. This makes them ideal for tasks where context matters, like language translation or predicting the next word in a sentence.
-*   **Transformers:** A more recent and incredibly powerful architecture, especially for Natural Language Processing, that allows the network to weigh the importance of different parts of the input sequence (attention mechanism). These are behind the magic of models like GPT-3 and ChatGPT.
+- **Convolutional Neural Networks (CNNs):** These are superstars for image and video processing. They use "convolutional" layers that act like specialized feature detectors, looking for patterns like edges, textures, and shapes in an image. Think of them as tiny, focused filters scanning an image for specific visual cues.
+- **Recurrent Neural Networks (RNNs):** Designed for sequential data like text, audio, and time series. RNNs have "memory" because their output depends not only on the current input but also on previous computations. This makes them ideal for tasks where context matters, like language translation or predicting the next word in a sentence.
+- **Transformers:** A more recent and incredibly powerful architecture, especially for Natural Language Processing, that allows the network to weigh the importance of different parts of the input sequence (attention mechanism). These are behind the magic of models like GPT-3 and ChatGPT.
 
 ### Why Now? The Resurgence of Deep Learning
 

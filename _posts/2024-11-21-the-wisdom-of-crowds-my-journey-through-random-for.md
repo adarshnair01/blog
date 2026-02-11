@@ -42,15 +42,15 @@ where $p_k$ is the proportion of data points belonging to class $k$ at that node
 
 ## Chapter 2: Building the Forest - The "Random" Part
 
-This is where the magic of "Random Forests" truly begins. Instead of relying on one brittle expert, we build a *forest* of many decision trees. But critically, these trees aren't identical copies. They are deliberately made to be diverse and somewhat "random." This diversity is key to their collective strength.
+This is where the magic of "Random Forests" truly begins. Instead of relying on one brittle expert, we build a _forest_ of many decision trees. But critically, these trees aren't identical copies. They are deliberately made to be diverse and somewhat "random." This diversity is key to their collective strength.
 
 Two primary mechanisms introduce this crucial randomness:
 
 ### Randomness 1: Bootstrap Aggregating (Bagging)
 
-Imagine you have your original dataset of, say, 1000 data points. Instead of training all our trees on this exact same dataset, we create multiple *new* datasets for each tree. How? Through a technique called **bootstrapping**.
+Imagine you have your original dataset of, say, 1000 data points. Instead of training all our trees on this exact same dataset, we create multiple _new_ datasets for each tree. How? Through a technique called **bootstrapping**.
 
-Bootstrapping involves sampling your original dataset *with replacement*. This means we pick a data point, add it to our new "bootstrap sample," and then put it back into the original pool so it can be picked again. We repeat this process until our bootstrap sample has the same number of data points as the original dataset.
+Bootstrapping involves sampling your original dataset _with replacement_. This means we pick a data point, add it to our new "bootstrap sample," and then put it back into the original pool so it can be picked again. We repeat this process until our bootstrap sample has the same number of data points as the original dataset.
 
 So, if we want 100 trees in our forest, we create 100 different bootstrap samples. Each tree in the forest is then trained on a different one of these bootstrap samples.
 
@@ -58,13 +58,13 @@ So, if we want 100 trees in our forest, we create 100 different bootstrap sample
 
 ### Randomness 2: Feature Subsampling at Each Split
 
-Here's the second, equally crucial layer of randomness. When a decision tree is being built, at each node where it considers splitting, it doesn't look at *all* the available features to find the best split. Instead, it randomly selects only a *subset* of the features to consider.
+Here's the second, equally crucial layer of randomness. When a decision tree is being built, at each node where it considers splitting, it doesn't look at _all_ the available features to find the best split. Instead, it randomly selects only a _subset_ of the features to consider.
 
 For example, if you have 100 features, a typical Random Forest might only consider $\sqrt{100} = 10$ random features at each split point (or $\log_2(100) \approx 7$ features, depending on configuration).
 
 **Why this is crucial:** Imagine you have one overwhelmingly strong feature in your dataset. If each tree were allowed to consider all features at every split, then every single tree in your forest would likely choose to split on that same strong feature near the top. This would make all your trees very similar and highly correlated. If that one strong feature happens to be noisy or misleading in some cases, all your trees would make the same mistake.
 
-By forcing each tree to consider only a random subset of features at each split, we ensure that the trees are *decorrelated*. Even if a powerful feature exists, not all trees will get to "see" it at every potential split point. This encourages them to explore other features and develop more diverse decision boundaries. It's like forcing different students to present their findings by focusing on different aspects of a problem, even if a dominant theme exists – you get a richer, more varied set of perspectives.
+By forcing each tree to consider only a random subset of features at each split, we ensure that the trees are _decorrelated_. Even if a powerful feature exists, not all trees will get to "see" it at every potential split point. This encourages them to explore other features and develop more diverse decision boundaries. It's like forcing different students to present their findings by focusing on different aspects of a problem, even if a dominant theme exists – you get a richer, more varied set of perspectives.
 
 ---
 
@@ -72,9 +72,9 @@ By forcing each tree to consider only a random subset of features at each split,
 
 Now we have a forest full of diverse, independently trained decision trees. Each tree, having learned from its own bootstrap sample and its own random subset of features, is ready to make a prediction. The final step is to combine their individual "votes" to arrive at the forest's ultimate decision.
 
-*   **For Classification Tasks:** If you're trying to predict a category (e.g., "spam" or "not spam," "disease" or "no disease"), the Random Forest uses a **majority vote**. Each tree makes its prediction, and the class that receives the most votes from the individual trees is declared the forest's prediction.
+- **For Classification Tasks:** If you're trying to predict a category (e.g., "spam" or "not spam," "disease" or "no disease"), the Random Forest uses a **majority vote**. Each tree makes its prediction, and the class that receives the most votes from the individual trees is declared the forest's prediction.
 
-*   **For Regression Tasks:** If you're predicting a numerical value (e.g., house price, temperature), the Random Forest simply **averages** the predictions from all the individual trees.
+- **For Regression Tasks:** If you're predicting a numerical value (e.g., house price, temperature), the Random Forest simply **averages** the predictions from all the individual trees.
 
 This aggregation step is where the "wisdom of crowds" truly shines. Individual trees might be prone to errors or biases, but by averaging or majority voting their predictions, these individual errors tend to cancel each other out. The collective decision becomes far more stable, accurate, and robust than any single tree's prediction.
 
@@ -102,13 +102,13 @@ The combination of bagging and feature subsampling gives Random Forests some tru
 
 While Random Forests are powerful, a few knobs and dials (hyperparameters) can be tuned to optimize their performance:
 
-*   **`n_estimators`**: This is simply the number of trees in your forest. More trees generally lead to more stable and accurate predictions, but at the cost of increased computational time. There's usually a point of diminishing returns.
+- **`n_estimators`**: This is simply the number of trees in your forest. More trees generally lead to more stable and accurate predictions, but at the cost of increased computational time. There's usually a point of diminishing returns.
 
-*   **`max_features`**: This controls the number of random features considered at each split. Common choices are 'sqrt' (square root of total features) or 'log2' (log base 2 of total features) for classification, and 'n_features' (all features, essentially bagging without feature subsampling) for regression, though 'sqrt' is often a good default for both.
+- **`max_features`**: This controls the number of random features considered at each split. Common choices are 'sqrt' (square root of total features) or 'log2' (log base 2 of total features) for classification, and 'n_features' (all features, essentially bagging without feature subsampling) for regression, though 'sqrt' is often a good default for both.
 
-*   **`max_depth`**: The maximum depth of each individual tree. While often left `None` (allowing trees to grow fully) in Random Forests, as bagging and feature subsampling primarily handle overfitting, limiting depth can sometimes offer further regularization and speed up training.
+- **`max_depth`**: The maximum depth of each individual tree. While often left `None` (allowing trees to grow fully) in Random Forests, as bagging and feature subsampling primarily handle overfitting, limiting depth can sometimes offer further regularization and speed up training.
 
-*   **`min_samples_leaf` / `min_samples_split`**: These control the minimum number of samples required at a leaf node or to make a split, respectively. They prevent individual trees from growing too complex and are tools for fine-tuning.
+- **`min_samples_leaf` / `min_samples_split`**: These control the minimum number of samples required at a leaf node or to make a split, respectively. They prevent individual trees from growing too complex and are tools for fine-tuning.
 
 **A Word of Caution:** While powerful, Random Forests aren't without their considerations. They can be computationally intensive and memory-hungry, especially with a very large number of trees or very high-dimensional data. Also, while more interpretable than, say, a deep neural network, they are still often considered a "black box" compared to a single, shallow decision tree because it's hard to trace a single prediction through hundreds of trees.
 

@@ -12,7 +12,7 @@ Today, I want to share that journey with you, breaking down Decision Trees in a 
 
 ### The Everyday Art of Decision Making
 
-Before we dive into the code and math, let's think about how *we* make decisions. Imagine you're trying to decide if you should go out for a picnic this weekend. You might ask:
+Before we dive into the code and math, let's think about how _we_ make decisions. Imagine you're trying to decide if you should go out for a picnic this weekend. You might ask:
 
 1.  **Is it sunny?** If no, then definitely no picnic.
 2.  **If yes, what's the temperature like?** If it's too hot (say, over 30°C), maybe not a good idea.
@@ -21,7 +21,7 @@ Before we dive into the code and math, let's think about how *we* make decisions
 You've just built a mental **Decision Tree**! Each question is a "node," each answer is a "branch," and the final outcome (picnic or no picnic) is a "leaf."
 
 ![Decision Tree Analogy Diagram - a simple flow chart for picnic decision]
-*(Self-drawn illustration in my mind: A simple flowchart. Root: "Sunny?". Left branch "No" -> "No Picnic". Right branch "Yes" -> "Temp > 30C?". Left branch "No" -> "Windy?". Left "No" -> "Picnic!". Right "Yes" -> "No Picnic". Right branch "Yes" -> "No Picnic")*
+_(Self-drawn illustration in my mind: A simple flowchart. Root: "Sunny?". Left branch "No" -> "No Picnic". Right branch "Yes" -> "Temp > 30C?". Left branch "No" -> "Windy?". Left "No" -> "Picnic!". Right "Yes" -> "No Picnic". Right branch "Yes" -> "No Picnic")_
 
 This exactly mirrors how a machine learning Decision Tree works. It's a flowchart-like structure where each internal node represents a "test" on an attribute, each branch represents the outcome of the test, and each leaf node represents a class label (in classification) or a numerical value (in regression).
 
@@ -29,10 +29,10 @@ This exactly mirrors how a machine learning Decision Tree works. It's a flowchar
 
 Let's formalize our mental picnic tree:
 
-*   **Root Node:** The very first decision point (e.g., "Is it sunny?").
-*   **Internal Nodes:** All other decision points (e.g., "Temperature > 30°C?").
-*   **Branches:** The paths connecting nodes, representing the outcomes of a decision (e.g., "Yes" or "No").
-*   **Leaf Nodes:** The final outcomes or predictions, where no further decisions are made (e.g., "Picnic!" or "No Picnic").
+- **Root Node:** The very first decision point (e.g., "Is it sunny?").
+- **Internal Nodes:** All other decision points (e.g., "Temperature > 30°C?").
+- **Branches:** The paths connecting nodes, representing the outcomes of a decision (e.g., "Yes" or "No").
+- **Leaf Nodes:** The final outcomes or predictions, where no further decisions are made (e.g., "Picnic!" or "No Picnic").
 
 The goal of a Decision Tree algorithm is to construct this tree from your data, making the "best" decisions at each step to arrive at the most accurate predictions.
 
@@ -54,8 +54,8 @@ Two common metrics are used to quantify impurity:
     The formula for Gini Impurity is:
     $G = 1 - \sum_{i=1}^C p_i^2$
     Where:
-    *   $C$ is the number of classes.
-    *   $p_i$ is the proportion of observations belonging to class $i$ in the node.
+    - $C$ is the number of classes.
+    - $p_i$ is the proportion of observations belonging to class $i$ in the node.
 
     Let's say a node has 10 data points: 8 apples and 2 oranges.
     $p_{\text{apple}} = 8/10 = 0.8$
@@ -92,11 +92,12 @@ Let $S$ be a collection of examples, and $A$ be an attribute. We split $S$ into 
 $IG(S, A) = H(S) - \sum_{v \in Values(A)} \frac{|S_v|}{|S|} H(S_v)$
 
 Where:
-*   $H(S)$ is the entropy of the parent node (before splitting).
-*   $Values(A)$ are the possible values for attribute $A$.
-*   $|S_v|$ is the number of examples in subset $S_v$.
-*   $|S|$ is the total number of examples in the parent node.
-*   $H(S_v)$ is the entropy of subset $S_v$.
+
+- $H(S)$ is the entropy of the parent node (before splitting).
+- $Values(A)$ are the possible values for attribute $A$.
+- $|S_v|$ is the number of examples in subset $S_v$.
+- $|S|$ is the total number of examples in the parent node.
+- $H(S_v)$ is the entropy of subset $S_v$.
 
 The algorithm calculates the information gain for every possible feature and every possible split point (for numerical features) and selects the one that yields the highest gain. This process is then repeated recursively for each new node until a stopping condition is met.
 
@@ -104,38 +105,38 @@ The algorithm calculates the information gain for every possible feature and eve
 
 Let's imagine we want to predict if someone will buy a specific product based on their age, income, and whether they're a student.
 
-| ID | Age      | Income  | Student | Buys Product |
-|----|----------|---------|---------|--------------|
-| 1  | <=30     | High    | No      | No           |
-| 2  | <=30     | High    | Yes     | Yes          |
-| 3  | 31-40    | High    | No      | Yes          |
-| 4  | >40      | Medium  | No      | Yes          |
-| 5  | >40      | Low     | Yes     | No           |
-| 6  | >40      | Low     | No      | No           |
-| 7  | 31-40    | Low     | Yes     | Yes          |
-| 8  | <=30     | Medium  | No      | No           |
-| 9  | <=30     | Low     | Yes     | Yes          |
-| 10 | >40      | Medium  | Yes     | Yes          |
+| ID  | Age   | Income | Student | Buys Product |
+| --- | ----- | ------ | ------- | ------------ |
+| 1   | <=30  | High   | No      | No           |
+| 2   | <=30  | High   | Yes     | Yes          |
+| 3   | 31-40 | High   | No      | Yes          |
+| 4   | >40   | Medium | No      | Yes          |
+| 5   | >40   | Low    | Yes     | No           |
+| 6   | >40   | Low    | No      | No           |
+| 7   | 31-40 | Low    | Yes     | Yes          |
+| 8   | <=30  | Medium | No      | No           |
+| 9   | <=30  | Low    | Yes     | Yes          |
+| 10  | >40   | Medium | Yes     | Yes          |
 
 Initially, our root node has 10 samples: 6 "Yes" (Buys Product) and 4 "No". We'd calculate its entropy (or Gini).
 Then, for each attribute (Age, Income, Student), we'd calculate the information gain if we split by it.
 
-*   **Split by 'Student' (Yes/No):**
-    *   `Student = Yes`: (4 Yes, 1 No) -> Very pure!
-    *   `Student = No`: (2 Yes, 3 No) -> Less pure.
-    *   Calculate $IG(\text{Root, Student})$
+- **Split by 'Student' (Yes/No):**
+  - `Student = Yes`: (4 Yes, 1 No) -> Very pure!
+  - `Student = No`: (2 Yes, 3 No) -> Less pure.
+  - Calculate $IG(\text{Root, Student})$
 
-*   **Split by 'Age' (<=30, 31-40, >40):**
-    *   `Age <=30`: (2 Yes, 3 No)
-    *   `Age 31-40`: (2 Yes, 0 No) -> Pure!
-    *   `Age >40`: (2 Yes, 2 No)
-    *   Calculate $IG(\text{Root, Age})$
+- **Split by 'Age' (<=30, 31-40, >40):**
+  - `Age <=30`: (2 Yes, 3 No)
+  - `Age 31-40`: (2 Yes, 0 No) -> Pure!
+  - `Age >40`: (2 Yes, 2 No)
+  - Calculate $IG(\text{Root, Age})$
 
-*   **Split by 'Income' (High, Medium, Low):**
-    *   `Income High`: (2 Yes, 2 No)
-    *   `Income Medium`: (2 Yes, 1 No)
-    *   `Income Low`: (2 Yes, 1 No)
-    *   Calculate $IG(\text{Root, Income})$
+- **Split by 'Income' (High, Medium, Low):**
+  - `Income High`: (2 Yes, 2 No)
+  - `Income Medium`: (2 Yes, 1 No)
+  - `Income Low`: (2 Yes, 1 No)
+  - Calculate $IG(\text{Root, Income})$
 
 The algorithm will pick the split (e.g., 'Student') that yields the highest information gain. It then recursively applies the same logic to the resulting sub-nodes until a stopping condition is met. This greedy approach ensures the best local split at each step.
 
@@ -145,10 +146,10 @@ A tree can keep growing until every leaf node is perfectly pure, meaning it cont
 
 To prevent overfitting, we introduce stopping conditions:
 
-*   **Maximum Depth:** Limit the maximum number of levels in the tree.
-*   **Minimum Samples per Leaf:** Don't split if a node has too few samples to create meaningful child nodes.
-*   **Minimum Impurity Decrease:** Only split if the impurity reduction is above a certain threshold.
-*   **Cost-Complexity Pruning (CCP):** A more advanced technique that builds a full tree and then prunes back branches based on a complexity parameter.
+- **Maximum Depth:** Limit the maximum number of levels in the tree.
+- **Minimum Samples per Leaf:** Don't split if a node has too few samples to create meaningful child nodes.
+- **Minimum Impurity Decrease:** Only split if the impurity reduction is above a certain threshold.
+- **Cost-Complexity Pruning (CCP):** A more advanced technique that builds a full tree and then prunes back branches based on a complexity parameter.
 
 ### Decision Trees for Regression
 
@@ -156,8 +157,8 @@ While we've mostly discussed classification (predicting categories), Decision Tr
 
 Common metrics for regression trees include:
 
-*   **Mean Squared Error (MSE):** $MSE = \frac{1}{N} \sum_{i=1}^N (y_i - \hat{y})^2$
-*   **Mean Absolute Error (MAE):** $MAE = \frac{1}{N} \sum_{i=1}^N |y_i - \hat{y}|$
+- **Mean Squared Error (MSE):** $MSE = \frac{1}{N} \sum_{i=1}^N (y_i - \hat{y})^2$
+- **Mean Absolute Error (MAE):** $MAE = \frac{1}{N} \sum_{i=1}^N |y_i - \hat{y}|$
 
 For a leaf node, the predicted value is typically the average of the target values of all training samples within that node. The splitting criterion aims to minimize the MSE (or MAE) in the resulting child nodes.
 
@@ -165,24 +166,24 @@ For a leaf node, the predicted value is typically the average of the target valu
 
 #### Advantages:
 
-*   **Interpretability:** This is their superstar quality! Decision Trees are "white-box" models. You can literally follow the path from root to leaf and understand *why* a particular decision was made. This is invaluable in fields like medicine or finance where explainability is crucial.
-*   **Minimal Data Preparation:** They don't require feature scaling (like normalization or standardization) because splits are based on individual feature values, not their overall scale. They can also handle both numerical and categorical data naturally.
-*   **Non-linear Relationships:** They can capture complex non-linear relationships in data.
-*   **Visualization:** Trees can be easily visualized, which is great for presentations and understanding your model.
+- **Interpretability:** This is their superstar quality! Decision Trees are "white-box" models. You can literally follow the path from root to leaf and understand _why_ a particular decision was made. This is invaluable in fields like medicine or finance where explainability is crucial.
+- **Minimal Data Preparation:** They don't require feature scaling (like normalization or standardization) because splits are based on individual feature values, not their overall scale. They can also handle both numerical and categorical data naturally.
+- **Non-linear Relationships:** They can capture complex non-linear relationships in data.
+- **Visualization:** Trees can be easily visualized, which is great for presentations and understanding your model.
 
 #### Disadvantages:
 
-*   **Overfitting:** As mentioned, single Decision Trees are highly prone to overfitting, especially when allowed to grow deep. They can capture noise in the data rather than the underlying patterns.
-*   **Instability:** Small changes in the training data can lead to a completely different tree structure.
-*   **Bias towards Dominant Classes:** If some classes heavily outnumber others, the tree might become biased towards the majority class.
-*   **Local Optima:** The greedy approach of optimizing splits locally doesn't guarantee a globally optimal tree.
+- **Overfitting:** As mentioned, single Decision Trees are highly prone to overfitting, especially when allowed to grow deep. They can capture noise in the data rather than the underlying patterns.
+- **Instability:** Small changes in the training data can lead to a completely different tree structure.
+- **Bias towards Dominant Classes:** If some classes heavily outnumber others, the tree might become biased towards the majority class.
+- **Local Optima:** The greedy approach of optimizing splits locally doesn't guarantee a globally optimal tree.
 
 ### Beyond Single Trees: Entering the Ensemble Forest
 
 The limitations of single Decision Trees, particularly their tendency to overfit and instability, paved the way for more powerful techniques: **Ensemble Methods**. These methods combine multiple Decision Trees to create a more robust and accurate model.
 
-*   **Random Forests:** Imagine training hundreds or thousands of Decision Trees, each on a slightly different subset of your data and a random subset of features. Then, for a prediction, they all "vote," and the majority wins (for classification) or their predictions are averaged (for regression). This "wisdom of the crowd" significantly reduces overfitting and improves stability.
-*   **Gradient Boosting Machines (like XGBoost, LightGBM, CatBoost):** These algorithms build trees sequentially. Each new tree tries to correct the errors made by the previous ones, iteratively improving the model's performance. They are often state-of-the-art performers in tabular data tasks.
+- **Random Forests:** Imagine training hundreds or thousands of Decision Trees, each on a slightly different subset of your data and a random subset of features. Then, for a prediction, they all "vote," and the majority wins (for classification) or their predictions are averaged (for regression). This "wisdom of the crowd" significantly reduces overfitting and improves stability.
+- **Gradient Boosting Machines (like XGBoost, LightGBM, CatBoost):** These algorithms build trees sequentially. Each new tree tries to correct the errors made by the previous ones, iteratively improving the model's performance. They are often state-of-the-art performers in tabular data tasks.
 
 These ensemble methods leverage the strengths of Decision Trees while mitigating their weaknesses, making them cornerstone algorithms in almost every data scientist's toolkit.
 

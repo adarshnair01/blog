@@ -1,7 +1,7 @@
 ---
 title: "Unveiling the Magic Behind Computer Vision: My Journey with Convolutional Neural Networks"
 date: "2025-09-01"
-excerpt: "Ever wondered how computers \"see\" and understand images? Join me as we demystify Convolutional Neural Networks, the groundbreaking deep learning architecture that taught machines to perceive the world visually."
+excerpt: 'Ever wondered how computers "see" and understand images? Join me as we demystify Convolutional Neural Networks, the groundbreaking deep learning architecture that taught machines to perceive the world visually.'
 tags: ["Machine Learning", "Deep Learning", "Computer Vision", "CNNs", "Neural Networks"]
 author: "Adarsh Nair"
 ---
@@ -14,7 +14,7 @@ This quest for understanding led me down a rabbit hole, eventually landing on a 
 
 Before CNNs came along, we had traditional Artificial Neural Networks (ANNs), often called "fully connected" networks. Imagine trying to feed an image into one of these. Let's say you have a small image, just 100x100 pixels. That's 10,000 pixels. If it's a color image, it has three color channels (Red, Green, Blue), so that's 30,000 numbers! Each of these 30,000 numbers would be an input to the first layer of a traditional neural network.
 
-Now, imagine the first hidden layer has, say, 1,000 neurons. Each of these 1,000 neurons would need a *weight* connection to every single one of those 30,000 input pixels. That's $30,000 \times 1,000 = 30,000,000$ weights just for the first layer! And that's for a tiny image. Modern images are often 1000x1000 pixels or more. The number of parameters explodes, making the network incredibly slow to train, prone to overfitting, and demanding immense amounts of data.
+Now, imagine the first hidden layer has, say, 1,000 neurons. Each of these 1,000 neurons would need a _weight_ connection to every single one of those 30,000 input pixels. That's $30,000 \times 1,000 = 30,000,000$ weights just for the first layer! And that's for a tiny image. Modern images are often 1000x1000 pixels or more. The number of parameters explodes, making the network incredibly slow to train, prone to overfitting, and demanding immense amounts of data.
 
 Moreover, traditional ANNs treat each pixel as an independent feature. They completely ignore the spatial relationship between pixels. The fact that a pixel's neighbors often contain crucial context (like being part of an edge or a texture) is lost. This is like trying to understand a sentence by just looking at individual words randomly, without considering their order or proximity. Clearly, we needed a better way.
 
@@ -29,8 +29,9 @@ Let's say our 3x3 filter is designed to detect vertical edges. As it slides over
 **How does this "sweeping" work?** It's a mathematical operation called **convolution**. For each position the filter lands on, it performs an element-wise multiplication with the underlying pixels and sums up the results. This single sum becomes one pixel in a new, smaller image called a "feature map" or "activation map."
 
 The formula for a 2D convolution operation can be written as:
-$$ (I * K)(i, j) = \sum_m \sum_n I(i-m, j-n) K(m, n) $$
+$$ (I \* K)(i, j) = \sum_m \sum_n I(i-m, j-n) K(m, n) $$
 Where:
+
 - $I$ is the input image.
 - $K$ is the filter (kernel).
 - $(i, j)$ are the coordinates of the output pixel in the feature map.
@@ -42,7 +43,7 @@ Don't let the math scare you! What this basically means is: take the image ($I$)
 This process gives CNNs three crucial properties that address the weaknesses of traditional ANNs for images:
 
 1.  **Local Receptive Fields:** Each neuron in a convolutional layer only "sees" a small, localized region of the input image, just like neurons in our visual cortex. This drastically reduces the number of parameters.
-2.  **Shared Weights:** The *same* filter (set of weights) is applied across the entire image. If a vertical edge detector is useful in one part of the image, it's probably useful in another. This massively reduces parameters and makes the network learn more generalizable features.
+2.  **Shared Weights:** The _same_ filter (set of weights) is applied across the entire image. If a vertical edge detector is useful in one part of the image, it's probably useful in another. This massively reduces parameters and makes the network learn more generalizable features.
 3.  **Translational Invariance:** Because the filter sweeps across the entire image, if a feature (like an edge) appears in a different location, the same filter will still detect it. This is incredibly important for robust image recognition.
 
 ### The Building Blocks of a CNN: A Deep Dive
@@ -52,8 +53,9 @@ A typical CNN architecture is a stack of several different types of layers, each
 #### 1. The Convolutional Layer (Conv Layer)
 
 This is the heart of a CNN. As we discussed, it applies a set of learnable filters to the input image.
+
 - **Filter Size:** Common sizes are 3x3, 5x5, or 7x7 pixels. Smaller filters often capture finer details.
-- **Number of Filters:** A convolutional layer typically uses *many* filters (e.g., 32, 64, 128). Each filter learns to detect a different feature – one might detect vertical edges, another horizontal edges, another corners, another specific textures. The output of applying all these filters is a stack of feature maps.
+- **Number of Filters:** A convolutional layer typically uses _many_ filters (e.g., 32, 64, 128). Each filter learns to detect a different feature – one might detect vertical edges, another horizontal edges, another corners, another specific textures. The output of applying all these filters is a stack of feature maps.
 - **Stride:** This determines how many pixels the filter shifts at each step. A stride of 1 means it moves one pixel at a time. A stride of 2 means it skips a pixel, effectively reducing the spatial dimensions of the output feature map.
 - **Padding:** Sometimes, to ensure the output feature map has the same spatial dimensions as the input, we add "padding" – typically rows and columns of zeros – around the border of the input image before convolution. This is called "same padding." If no padding is used, it's "valid padding," and the output size will be smaller.
 
@@ -64,9 +66,10 @@ After the convolution operation, a non-linear **activation function** is applied
 Pooling layers are inserted periodically between convolutional layers. Their main purpose is to reduce the spatial dimensions (width and height) of the feature maps, thus reducing the number of parameters and computation in the network. This also helps in making the features detected by the network more robust to slight variations or shifts in the input image (translational invariance at a higher level).
 
 The most popular type of pooling is **Max Pooling**. Here's how it works:
+
 - You define a small spatial window (e.g., 2x2) and a stride (e.g., 2).
 - The window slides over the feature map.
-- For each position, it takes the *maximum* value within that window and outputs it.
+- For each position, it takes the _maximum_ value within that window and outputs it.
 - This effectively summarizes the features within that region, retaining the most prominent activation.
 
 Think of it like this: if a filter detected an edge somewhere in a 2x2 region, max-pooling would simply say, "Yes, there was an edge detected in this general area," without caring about its exact pixel location within that 2x2 window. This makes the network more tolerant to minor shifts or distortions.
@@ -89,11 +92,12 @@ A typical CNN architecture might look something like this:
 `Input Image -> [Conv Layer + ReLU] -> [Pooling Layer] -> [Conv Layer + ReLU] -> [Pooling Layer] -> Flatten Layer -> [Fully Connected Layer + ReLU] -> [Output Layer + Softmax]`
 
 As you go deeper into the network (more layers):
+
 - **Early layers** tend to learn very basic, low-level features like edges, lines, and color blobs.
 - **Mid-level layers** combine these basic features to detect more complex patterns, like corners, circles, or parts of objects (e.g., an eye, a wheel spoke).
 - **Deep layers** can then identify even more abstract and complex features, such as entire objects (faces, cars, animals) or specific textures.
 
-This hierarchical feature extraction is incredibly powerful because the network *learns* the features directly from the data, rather than requiring humans to manually design feature detectors.
+This hierarchical feature extraction is incredibly powerful because the network _learns_ the features directly from the data, rather than requiring humans to manually design feature detectors.
 
 ### Why CNNs are So Powerful
 
@@ -105,6 +109,6 @@ This hierarchical feature extraction is incredibly powerful because the network 
 
 ### The Road Ahead
 
-While CNNs are incredibly powerful, they aren't without their challenges. They typically require vast amounts of labeled data for training, and training them can be computationally expensive. Furthermore, understanding *why* a CNN makes a particular prediction can sometimes feel like peering into a black box, though the field of explainable AI (XAI) is actively working on solutions.
+While CNNs are incredibly powerful, they aren't without their challenges. They typically require vast amounts of labeled data for training, and training them can be computationally expensive. Furthermore, understanding _why_ a CNN makes a particular prediction can sometimes feel like peering into a black box, though the field of explainable AI (XAI) is actively working on solutions.
 
 My journey with CNNs continues, and every time I delve deeper, I'm struck by the elegance and ingenuity of these networks. They’ve transformed those grids of numbers into meaningful insights, literally teaching machines to "see." The next time you unlock your phone with your face, scroll through personalized image feeds, or witness a self-driving car navigate traffic, remember the quiet revolution brought about by these incredible Convolutional Neural Networks. They're not magic, but they certainly feel close.

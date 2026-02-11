@@ -51,14 +51,16 @@ df_perf['C_vectorized'] = df_perf['A'] * 2 + df_perf['B'] / 3
 end_time = time.time()
 print(f"Vectorized operation took: {end_time - start_time:.4f} seconds")
 ```
-*(When I run the commented-out `apply` methods for 1,000,000 rows, `apply(axis=1)` takes ~20 seconds, `apply(lambda x)` takes ~0.2 seconds, and the vectorized operation takes ~0.02 seconds!)*
 
-**Explanation:** Pandas and NumPy operations are often implemented in highly optimized C code under the hood. When you use `df['A'] * 2`, Pandas processes the *entire column* at once using these optimized routines, which is incredibly fast. When you use `apply()`, especially with `axis=1` (row-wise), you're essentially telling Pandas to iterate over your DataFrame in a Python loop, which is much slower because Python loops are not pre-compiled like NumPy/Pandas functions.
+_(When I run the commented-out `apply` methods for 1,000,000 rows, `apply(axis=1)` takes ~20 seconds, `apply(lambda x)` takes ~0.2 seconds, and the vectorized operation takes ~0.02 seconds!)_
+
+**Explanation:** Pandas and NumPy operations are often implemented in highly optimized C code under the hood. When you use `df['A'] * 2`, Pandas processes the _entire column_ at once using these optimized routines, which is incredibly fast. When you use `apply()`, especially with `axis=1` (row-wise), you're essentially telling Pandas to iterate over your DataFrame in a Python loop, which is much slower because Python loops are not pre-compiled like NumPy/Pandas functions.
 
 **When to use `apply()`:** Don't get me wrong, `apply()` isn't evil! It's indispensable when your operation is genuinely complex and cannot be expressed using vectorized functions. This includes:
-*   Calling a function that operates on an entire row or groups of rows, involving conditional logic across multiple columns.
-*   Applying a custom function from a third-party library that doesn't have a vectorized equivalent.
-*   Operations that involve complex string manipulation or regex patterns on each element.
+
+- Calling a function that operates on an entire row or groups of rows, involving conditional logic across multiple columns.
+- Applying a custom function from a third-party library that doesn't have a vectorized equivalent.
+- Operations that involve complex string manipulation or regex patterns on each element.
 
 **Key takeaway:** Always try to find a vectorized solution first. If you can't, then `apply()` is your go-to.
 
@@ -99,7 +101,7 @@ print("Original DataFrame:\n", df_data)
 print("\nProcessed DataFrame with pipe():\n", final_df_clean)
 ```
 
-**Explanation:** The `pipe()` method passes the DataFrame itself as the *first argument* to the function you provide. This allows you to chain custom functions in a very readable, sequential manner, similar to how you chain built-in Pandas methods like `.groupby().agg().reset_index()`. It makes your data transformation steps explicit and easy to follow, almost like reading a recipe.
+**Explanation:** The `pipe()` method passes the DataFrame itself as the _first argument_ to the function you provide. This allows you to chain custom functions in a very readable, sequential manner, similar to how you chain built-in Pandas methods like `.groupby().agg().reset_index()`. It makes your data transformation steps explicit and easy to follow, almost like reading a recipe.
 
 **Pro Tip:** Your custom functions used with `pipe()` should always return a DataFrame!
 
@@ -126,9 +128,10 @@ print("\nExploded DataFrame:\n", df_exploded)
 ```
 
 **Explanation:** `explode()` transforms each element of a list-like entry into a separate row, effectively "unstacking" the data. The index and all other column values are duplicated for each new row. This is incredibly useful for:
-*   Analyzing individual tags or categories when a single entry can have multiple.
-*   Preparing data for text analysis where each word/phrase needs to be on its own row.
-*   Working with datasets where one-to-many relationships are stored within a single cell.
+
+- Analyzing individual tags or categories when a single entry can have multiple.
+- Preparing data for text analysis where each word/phrase needs to be on its own row.
+- Working with datasets where one-to-many relationships are stored within a single cell.
 
 **Note:** `explode()` was introduced in Pandas 0.25.0, so make sure your Pandas version is up to date!
 
@@ -163,9 +166,10 @@ df_large.info(memory_usage='deep')
 For example, if you have 1 million rows and only 5 unique countries, Pandas only needs to store the 5 country names once, plus 1 million small integers (e.g., `0, 1, 2, 3, 4`). This is much more memory-efficient than storing 1 million potentially long string objects.
 
 **Benefits:**
-*   **Memory Savings:** Significant, especially for columns with low cardinality (few unique values).
-*   **Faster Operations:** Many Pandas string operations become faster because they operate on integers internally. Group-by operations, sorting, and selections can also see speedups.
-*   **Integration with ML:** Many machine learning libraries (like scikit-learn) work directly with categorical data or have efficient encoders for it.
+
+- **Memory Savings:** Significant, especially for columns with low cardinality (few unique values).
+- **Faster Operations:** Many Pandas string operations become faster because they operate on integers internally. Group-by operations, sorting, and selections can also see speedups.
+- **Integration with ML:** Many machine learning libraries (like scikit-learn) work directly with categorical data or have efficient encoders for it.
 
 **When to use `factorize()`:** If you only need the underlying integer codes for a column (e.g., for certain ML algorithms) and don't need the full `category` dtype benefits, `pd.factorize()` is a quick way to get them:
 `codes, uniques = pd.factorize(df['country'])`
@@ -198,9 +202,10 @@ print("\nScores with Quantile Bins (qcut):\n", df_scores[['Score', 'Score_Quarti
 ```
 
 **Explanation:**
-*   **`pd.cut(data, bins, labels=None, right=True)`:** This function is for when you want to define your bin edges explicitly. For instance, creating age groups like "0-18", "19-35", "36-60", "60+". You provide a list of numbers that define the boundaries. `right=True` means the bin includes the rightmost edge (e.g., `(10, 20]` means `>10` and `<=20`).
 
-*   **`pd.qcut(data, q, labels=None, duplicates='raise')`:** This function is for when you want each bin to have approximately the same number of observations (equal frequency). You specify the number of quantiles `q` (e.g., `q=4` for quartiles, `q=10` for deciles). `qcut` dynamically determines the bin edges to achieve equal frequency. This is useful for percentile-based ranking or creating balanced groups.
+- **`pd.cut(data, bins, labels=None, right=True)`:** This function is for when you want to define your bin edges explicitly. For instance, creating age groups like "0-18", "19-35", "36-60", "60+". You provide a list of numbers that define the boundaries. `right=True` means the bin includes the rightmost edge (e.g., `(10, 20]` means `>10` and `<=20`).
+
+- **`pd.qcut(data, q, labels=None, duplicates='raise')`:** This function is for when you want each bin to have approximately the same number of observations (equal frequency). You specify the number of quantiles `q` (e.g., `q=4` for quartiles, `q=10` for deciles). `qcut` dynamically determines the bin edges to achieve equal frequency. This is useful for percentile-based ranking or creating balanced groups.
 
 **Mathematical Note:**
 For `pd.cut`, if you have bins $B = [b_0, b_1, \ldots, b_n]$, then a value $x$ falls into the bin $(b_i, b_{i+1}]$ (if `right=True`) or $[b_i, b_{i+1})$ (if `right=False`).
@@ -236,6 +241,7 @@ df_long = df_wide.melt(
 )
 print("\nLong Format (Melted):\n", df_long)
 ```
+
 **Explanation:** `melt()` "unpivots" your data. It takes specified identifier columns (`id_vars`) and converts all other columns (the "value columns") into rows. The original column names become values in a new `var_name` column, and their corresponding data become values in a new `value_name` column.
 
 #### `pivot_table()`: From Long to Wide
@@ -261,11 +267,13 @@ df_pivot = df_long_pivot.pivot_table(
 )
 print("\nWide Format (Pivoted):\n", df_pivot)
 ```
+
 **Explanation:** `pivot_table()` "pivots" your data. You define:
-*   `index`: The column(s) that will become the new DataFrame index (rows).
-*   `columns`: The column(s) whose unique values will become new column headers.
-*   `values`: The column(s) whose values will populate the new DataFrame cells.
-*   `aggfunc`: How to aggregate the `values` if there are multiple entries for a given `index`-`columns` combination (e.g., sum them, average them, count them).
+
+- `index`: The column(s) that will become the new DataFrame index (rows).
+- `columns`: The column(s) whose unique values will become new column headers.
+- `values`: The column(s) whose values will populate the new DataFrame cells.
+- `aggfunc`: How to aggregate the `values` if there are multiple entries for a given `index`-`columns` combination (e.g., sum them, average them, count them).
 
 These two functions are incredibly powerful for feature engineering and preparing data for different types of analysis or visualization.
 
@@ -297,14 +305,16 @@ df_heavy.info(memory_usage='deep')
 ```
 
 **Explanation:**
-*   `int8`: Stores integers from -128 to 127. (1 byte per value)
-*   `int16`: Stores integers from -32,768 to 32,767. (2 bytes per value)
-*   `int32`: Stores integers from -2,147,483,648 to 2,147,483,647. (4 bytes per value)
-*   `int64`: Default, stores very large integers. (8 bytes per value)
+
+- `int8`: Stores integers from -128 to 127. (1 byte per value)
+- `int16`: Stores integers from -32,768 to 32,767. (2 bytes per value)
+- `int32`: Stores integers from -2,147,483,648 to 2,147,483,647. (4 bytes per value)
+- `int64`: Default, stores very large integers. (8 bytes per value)
 
 Similarly for floats:
-*   `float32`: Single-precision float. (4 bytes per value)
-*   `float64`: Default, double-precision float. (8 bytes per value)
+
+- `float32`: Single-precision float. (4 bytes per value)
+- `float64`: Default, double-precision float. (8 bytes per value)
 
 By selecting the smallest possible dtype that can still accurately represent your data, you can significantly reduce memory footprint. This is crucial for working with datasets that barely fit into memory, and it can also speed up operations because less data needs to be moved around.
 

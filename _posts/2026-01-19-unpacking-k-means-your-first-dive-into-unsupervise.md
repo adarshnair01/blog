@@ -8,7 +8,7 @@ author: "Adarsh Nair"
 
 Hey everyone!
 
-Welcome back to the lab. Today, we're going to pull back the curtain on one of the most foundational and widely-used algorithms in the machine learning universe: **K-Means Clustering**. If you've ever looked at a messy dataset and thought, "There *must* be some patterns here," then you're about to meet your new best friend.
+Welcome back to the lab. Today, we're going to pull back the curtain on one of the most foundational and widely-used algorithms in the machine learning universe: **K-Means Clustering**. If you've ever looked at a messy dataset and thought, "There _must_ be some patterns here," then you're about to meet your new best friend.
 
 When I first started diving into data science, the idea of "unsupervised learning" felt a bit like magic. How could a computer learn anything without being given examples of the "right answer"? K-Means was one of the algorithms that truly demystified this for me, showing how elegant mathematical principles can lead to profound insights.
 
@@ -16,21 +16,22 @@ So, grab a coffee (or your favorite beverage), because we're about to embark on 
 
 ### What's All This Talk About "Clustering"?
 
-Imagine you have a massive pile of LEGO bricks, all mixed up. You want to sort them, but nobody told you *how*. You instinctively start putting all the red ones together, all the blue ones together, and all the square ones with other square ones. You're grouping them based on their inherent similarities.
+Imagine you have a massive pile of LEGO bricks, all mixed up. You want to sort them, but nobody told you _how_. You instinctively start putting all the red ones together, all the blue ones together, and all the square ones with other square ones. You're grouping them based on their inherent similarities.
 
-That, my friends, is essentially what **clustering** is in the world of data. It's an unsupervised learning task where we aim to divide a set of data points into a number of groups (called clusters) such that data points within the same group are more similar to each other than to those in other groups. The "unsupervised" part means we don't have predefined labels or categories telling us what each data point *should* be. We let the algorithm discover these natural groupings itself.
+That, my friends, is essentially what **clustering** is in the world of data. It's an unsupervised learning task where we aim to divide a set of data points into a number of groups (called clusters) such that data points within the same group are more similar to each other than to those in other groups. The "unsupervised" part means we don't have predefined labels or categories telling us what each data point _should_ be. We let the algorithm discover these natural groupings itself.
 
 Why is this useful? Think about:
-*   **Customer Segmentation:** Grouping customers with similar purchasing behaviors for targeted marketing.
-*   **Document Analysis:** Categorizing news articles or research papers by topic without needing human tagging.
-*   **Image Compression:** Reducing the number of distinct colors in an image while maintaining visual quality.
-*   **Anomaly Detection:** Identifying data points that don't fit into any group, potentially signaling fraud or defects.
+
+- **Customer Segmentation:** Grouping customers with similar purchasing behaviors for targeted marketing.
+- **Document Analysis:** Categorizing news articles or research papers by topic without needing human tagging.
+- **Image Compression:** Reducing the number of distinct colors in an image while maintaining visual quality.
+- **Anomaly Detection:** Identifying data points that don't fit into any group, potentially signaling fraud or defects.
 
 K-Means is a particularly popular choice for its simplicity and efficiency.
 
 ### The Intuition: Finding the "Centers" of Your Data
 
-At its heart, K-Means is wonderfully intuitive. Think of it like a game of musical chairs, but for data points. You start with a certain number of "chairs" (which we call **centroids**), scattered randomly. Each data point rushes to sit in the closest chair. Once everyone's seated, the chairs move to the *center* of their new groups. The game repeats until no one needs to move chairs anymore.
+At its heart, K-Means is wonderfully intuitive. Think of it like a game of musical chairs, but for data points. You start with a certain number of "chairs" (which we call **centroids**), scattered randomly. Each data point rushes to sit in the closest chair. Once everyone's seated, the chairs move to the _center_ of their new groups. The game repeats until no one needs to move chairs anymore.
 
 Let's formalize this "game" into the actual K-Means algorithm.
 
@@ -44,17 +45,17 @@ The "K" in K-Means stands for the number of clusters you want to find. This is a
 
 You begin by placing $K$ **centroids** (these are just imaginary points that represent the center of a cluster) randomly within your data's space. These initial positions are often random, though more sophisticated methods exist (like K-Means++).
 
-*   **Example:** If $K=3$, you'd randomly pick 3 data points from your dataset and declare them as your initial centroids, or simply randomly place 3 points within the range of your data.
+- **Example:** If $K=3$, you'd randomly pick 3 data points from your dataset and declare them as your initial centroids, or simply randomly place 3 points within the range of your data.
 
 #### Step 2: Assignment Step (The "E" in EM) – Every Point Finds Its Home
 
-Now that you have your centroids, every single data point in your dataset needs to decide which cluster it belongs to. It does this by calculating its distance to *every* centroid. The data point then **assigns itself to the cluster whose centroid is closest.**
+Now that you have your centroids, every single data point in your dataset needs to decide which cluster it belongs to. It does this by calculating its distance to _every_ centroid. The data point then **assigns itself to the cluster whose centroid is closest.**
 
 How do we measure "closest"? Most commonly, we use **Euclidean distance**, which you might remember from geometry class as the straight-line distance between two points. For two points $\mathbf{x} = (x_1, x_2, \dots, x_n)$ and $\mathbf{y} = (y_1, y_2, \dots, y_n)$ in $n$-dimensional space, the Euclidean distance is:
 
 $d(\mathbf{x}, \mathbf{y}) = \sqrt{\sum_{i=1}^n (x_i - y_i)^2}$
 
-*   **Analogy:** Each person (data point) looks around for the closest musical chair (centroid) and runs to it.
+- **Analogy:** Each person (data point) looks around for the closest musical chair (centroid) and runs to it.
 
 #### Step 3: Update Step (The "M" in EM) – Centroids Move!
 
@@ -64,11 +65,11 @@ If $C_j$ is the set of data points assigned to cluster $j$, and $|C_j|$ is the n
 
 $\mu_j = \frac{1}{|C_j|} \sum_{\mathbf{x} \in C_j} \mathbf{x}$
 
-*   **Analogy:** After everyone sits down, the musical chairs magically move to the exact center of where their group of people are sitting.
+- **Analogy:** After everyone sits down, the musical chairs magically move to the exact center of where their group of people are sitting.
 
 #### Step 4: Convergence – The Dance Ends
 
-Steps 2 and 3 are repeated. Data points re-assign themselves to the *newly moved* centroids, and then the centroids re-calculate their positions based on these new assignments. This iterative process continues until one of two conditions is met:
+Steps 2 and 3 are repeated. Data points re-assign themselves to the _newly moved_ centroids, and then the centroids re-calculate their positions based on these new assignments. This iterative process continues until one of two conditions is met:
 
 1.  **The centroids no longer move significantly.** This means the clusters have stabilized, and further iterations wouldn't change the assignments much.
 2.  **A maximum number of iterations is reached.** This prevents the algorithm from running forever in case of very subtle shifts.
@@ -84,11 +85,12 @@ The objective function, $J$, is defined as:
 $J = \sum_{j=1}^{K} \sum_{\mathbf{x} \in C_j} ||\mathbf{x} - \mu_j||^2$
 
 Let's break this down:
-*   $\sum_{j=1}^{K}$: Sum over all $K$ clusters.
-*   $\sum_{\mathbf{x} \in C_j}$: For each cluster, sum over all data points $\mathbf{x}$ belonging to that cluster $C_j$.
-*   $||\mathbf{x} - \mu_j||^2$: This is the squared Euclidean distance between a data point $\mathbf{x}$ and its assigned centroid $\mu_j$. We square it to give larger distances a disproportionately higher penalty and to simplify derivative calculations (though we won't go into calculus here!).
 
-Essentially, K-Means is trying to make the points within each cluster as close as possible to their own cluster's center. It wants to create dense, compact clusters. The algorithm is guaranteed to converge to a *local optimum* for this objective function.
+- $\sum_{j=1}^{K}$: Sum over all $K$ clusters.
+- $\sum_{\mathbf{x} \in C_j}$: For each cluster, sum over all data points $\mathbf{x}$ belonging to that cluster $C_j$.
+- $||\mathbf{x} - \mu_j||^2$: This is the squared Euclidean distance between a data point $\mathbf{x}$ and its assigned centroid $\mu_j$. We square it to give larger distances a disproportionately higher penalty and to simplify derivative calculations (though we won't go into calculus here!).
+
+Essentially, K-Means is trying to make the points within each cluster as close as possible to their own cluster's center. It wants to create dense, compact clusters. The algorithm is guaranteed to converge to a _local optimum_ for this objective function.
 
 ### Choosing the Right K: The Elbow Method
 
@@ -99,7 +101,7 @@ One of the biggest questions with K-Means is, "How do I choose the 'K' (number o
 3.  **Plot Inertia vs. K:** You'll typically see that as you increase K, the inertia decreases (because points are getting closer to their centroids).
 4.  **Look for the "Elbow":** The point on the graph where the rate of decrease in inertia sharply changes and starts to slow down significantly resembles an arm's elbow. This "elbow" is often considered a good candidate for K, as adding more clusters beyond this point provides diminishing returns in terms of reducing the WCSS.
 
-*   **Intuition:** Imagine trying to fit a certain number of boxes into a larger box. The first few boxes (small K) reduce the wasted space (inertia) a lot. But after a certain point, adding more tiny boxes (larger K) only slightly reduces the remaining empty space, and it makes your organization more complex. You want a good balance.
+- **Intuition:** Imagine trying to fit a certain number of boxes into a larger box. The first few boxes (small K) reduce the wasted space (inertia) a lot. But after a certain point, adding more tiny boxes (larger K) only slightly reduces the remaining empty space, and it makes your organization more complex. You want a good balance.
 
 While the Elbow Method is a great starting point, it's not always clear-cut. Sometimes the "elbow" is ambiguous, and domain knowledge or other metrics (like Silhouette Score) might be needed.
 
@@ -108,16 +110,18 @@ While the Elbow Method is a great starting point, it's not always clear-cut. Som
 Every tool has its pros and cons. K-Means is no exception:
 
 #### Strengths:
-*   **Simplicity and Speed:** It's easy to understand, implement, and computationally very efficient, especially for large datasets. Its time complexity is roughly linear with the number of data points.
-*   **Scalability:** Can handle large datasets effectively.
-*   **Interpretability:** The concept of centroids as cluster representatives is easy to grasp.
+
+- **Simplicity and Speed:** It's easy to understand, implement, and computationally very efficient, especially for large datasets. Its time complexity is roughly linear with the number of data points.
+- **Scalability:** Can handle large datasets effectively.
+- **Interpretability:** The concept of centroids as cluster representatives is easy to grasp.
 
 #### Weaknesses:
-*   **Requires Specifying K:** As discussed, choosing K can be tricky.
-*   **Sensitive to Initialization:** Since it finds a *local optimum*, different random initializations of centroids can lead to different final clusterings. This is why it's common to run K-Means multiple times with different initial centroids and pick the best result (often measured by the lowest inertia). K-Means++ is a smarter initialization strategy that helps mitigate this.
-*   **Assumes Spherical, Equal-Sized Clusters:** K-Means works best when clusters are roughly spherical, of similar size, and density. It struggles with irregularly shaped clusters (like crescent moons) or clusters with vastly different densities.
-*   **Sensitive to Outliers:** Outliers can heavily influence centroid positions, potentially distorting cluster shapes.
-*   **Requires Feature Scaling:** Because K-Means uses distance calculations, features with larger ranges can disproportionately influence the distance. It's almost always essential to scale your features (e.g., using StandardScaler) before applying K-Means.
+
+- **Requires Specifying K:** As discussed, choosing K can be tricky.
+- **Sensitive to Initialization:** Since it finds a _local optimum_, different random initializations of centroids can lead to different final clusterings. This is why it's common to run K-Means multiple times with different initial centroids and pick the best result (often measured by the lowest inertia). K-Means++ is a smarter initialization strategy that helps mitigate this.
+- **Assumes Spherical, Equal-Sized Clusters:** K-Means works best when clusters are roughly spherical, of similar size, and density. It struggles with irregularly shaped clusters (like crescent moons) or clusters with vastly different densities.
+- **Sensitive to Outliers:** Outliers can heavily influence centroid positions, potentially distorting cluster shapes.
+- **Requires Feature Scaling:** Because K-Means uses distance calculations, features with larger ranges can disproportionately influence the distance. It's almost always essential to scale your features (e.g., using StandardScaler) before applying K-Means.
 
 ### Practical Considerations & Beyond K-Means
 
@@ -127,9 +131,9 @@ When you're ready to implement K-Means, remember these tips:
 2.  **Run Multiple Initializations:** Most libraries (like scikit-learn's `KMeans`) allow you to specify `n_init` (number of times the algorithm will be run with different centroid seeds). The best result (lowest inertia) will be chosen.
 3.  **Evaluate K:** Use the Elbow Method, and if you can, incorporate domain knowledge.
 4.  **Consider Alternatives:** If K-Means isn't giving you satisfactory results, explore other clustering algorithms like:
-    *   **DBSCAN:** Great for finding density-based clusters of arbitrary shapes and identifying outliers.
-    *   **Hierarchical Clustering:** Creates a hierarchy of clusters, useful for exploring different levels of granularity.
-    *   **Gaussian Mixture Models (GMMs):** A probabilistic approach that can handle clusters with different shapes and sizes.
+    - **DBSCAN:** Great for finding density-based clusters of arbitrary shapes and identifying outliers.
+    - **Hierarchical Clustering:** Creates a hierarchy of clusters, useful for exploring different levels of granularity.
+    - **Gaussian Mixture Models (GMMs):** A probabilistic approach that can handle clusters with different shapes and sizes.
 
 ### Conclusion: Your First Step into Unsupervised Exploration
 

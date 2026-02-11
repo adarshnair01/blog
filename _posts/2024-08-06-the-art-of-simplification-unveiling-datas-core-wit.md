@@ -8,11 +8,12 @@ author: "Adarsh Nair"
 
 ## The Cluttered Room of Data: Why We Need PCA
 
-Picture this: You're trying to understand a person. You could list every single atom in their body, describe every hair follicle, every thought they've ever had. That's an incredible amount of detail, right? So much that it becomes impossible to grasp the *essence* of who they are. Instead, we focus on key traits: their personality, their interests, their core values. We reduce the complexity to understand the most important aspects.
+Picture this: You're trying to understand a person. You could list every single atom in their body, describe every hair follicle, every thought they've ever had. That's an incredible amount of detail, right? So much that it becomes impossible to grasp the _essence_ of who they are. Instead, we focus on key traits: their personality, their interests, their core values. We reduce the complexity to understand the most important aspects.
 
 This isn't just about people; it's about data. In the world of Data Science and Machine Learning, we often encounter datasets with hundreds, sometimes thousands, of features (or "dimensions"). Imagine trying to visualize a dataset with 500 features – it's impossible! This phenomenon is often called the "**Curse of Dimensionality**."
 
 **Why is high dimensionality a "curse"?**
+
 1.  **Computational Cost:** More features mean more calculations, slowing down algorithms and consuming more memory.
 2.  **Visualization Challenges:** We can easily plot 2D or 3D data, but beyond that, it's a mental stretch.
 3.  **Increased Noise:** Not all features are equally important; many might be redundant or just plain noise, confusing our models.
@@ -28,9 +29,9 @@ Imagine you have a scatter plot of data points in two dimensions. If these point
 
 PCA mathematically finds these "main directions." These directions are our **Principal Components**.
 
-*   The **first principal component** is the direction along which the data varies the most. It captures the maximum amount of variance.
-*   The **second principal component** is orthogonal (perpendicular) to the first and captures the next largest amount of variance.
-*   This continues for subsequent components, each orthogonal to the previous ones, capturing less and less variance.
+- The **first principal component** is the direction along which the data varies the most. It captures the maximum amount of variance.
+- The **second principal component** is orthogonal (perpendicular) to the first and captures the next largest amount of variance.
+- This continues for subsequent components, each orthogonal to the previous ones, capturing less and less variance.
 
 By projecting our original high-dimensional data onto these new principal components, especially the ones that capture the most variance, we effectively reduce the number of dimensions while preserving the most significant patterns. We're essentially rotating our coordinate system to align with the directions of maximum information.
 
@@ -47,7 +48,7 @@ Imagine one feature represents "age" (0-100) and another represents "income" ($0
 To prevent features with larger ranges or different units from disproportionately influencing the principal components, we **standardize** the data. This means transforming each feature so it has a mean of 0 and a standard deviation of 1.
 
 For each feature $x$:
-$$ x_{new} = \frac{x - \mu}{\sigma} $$
+$$ x\_{new} = \frac{x - \mu}{\sigma} $$
 
 where $\mu$ is the mean of the feature and $\sigma$ is its standard deviation.
 
@@ -55,19 +56,20 @@ where $\mu$ is the mean of the feature and $\sigma$ is its standard deviation.
 
 Now that our data is standardized, we need to understand how the features relate to each other. This is where the **covariance matrix** comes in.
 
-*   **Variance** measures how a single variable varies from its mean.
-*   **Covariance** measures how two variables vary *together*.
-    *   A positive covariance means they tend to increase or decrease together.
-    *   A negative covariance means one tends to increase as the other decreases.
-    *   A covariance near zero suggests little to no linear relationship.
+- **Variance** measures how a single variable varies from its mean.
+- **Covariance** measures how two variables vary _together_.
+  - A positive covariance means they tend to increase or decrease together.
+  - A negative covariance means one tends to increase as the other decreases.
+  - A covariance near zero suggests little to no linear relationship.
 
 The covariance matrix, often denoted as $\Sigma$, is a square matrix where:
-*   The diagonal elements are the variances of each feature.
-*   The off-diagonal elements are the covariances between pairs of features.
+
+- The diagonal elements are the variances of each feature.
+- The off-diagonal elements are the covariances between pairs of features.
 
 For a dataset with $n$ features, the covariance matrix will be $n \times n$.
 If we have two features, $X$ and $Y$, their covariance is:
-$$ Cov(X, Y) = \frac{1}{m-1} \sum_{i=1}^m (x_i - \bar{x})(y_i - \bar{y}) $$
+$$ Cov(X, Y) = \frac{1}{m-1} \sum\_{i=1}^m (x_i - \bar{x})(y_i - \bar{y}) $$
 where $m$ is the number of observations (data points).
 
 The covariance matrix is crucial because it encapsulates all the relationships within our data – the very patterns we want PCA to uncover.
@@ -76,8 +78,8 @@ The covariance matrix is crucial because it encapsulates all the relationships w
 
 This is the heart of PCA! **Eigenvalues** and **Eigenvectors** are special values and vectors associated with a square matrix (in our case, the covariance matrix).
 
-*   **Eigenvectors** represent the **directions** or axes of maximum variance in our data. These are our Principal Components. Imagine an arrow pointing in the direction of the most spread-out data.
-*   **Eigenvalues** represent the **magnitude** of variance along those eigenvectors. A larger eigenvalue means more variance is captured along its corresponding eigenvector.
+- **Eigenvectors** represent the **directions** or axes of maximum variance in our data. These are our Principal Components. Imagine an arrow pointing in the direction of the most spread-out data.
+- **Eigenvalues** represent the **magnitude** of variance along those eigenvectors. A larger eigenvalue means more variance is captured along its corresponding eigenvector.
 
 Mathematically, for a square matrix $A$ (our covariance matrix), a vector $\vec{v}$ is an eigenvector if applying the transformation $A$ to $\vec{v}$ only scales $\vec{v}$ by a factor $\lambda$ (the eigenvalue), without changing its direction:
 
@@ -97,7 +99,7 @@ To transform our original data into the new, lower-dimensional space, we simply 
 
 Let $X_{std}$ be our standardized data matrix (original features $\times$ number of samples) and $W$ be the projection matrix (selected eigenvectors $\times$ original features). The new, reduced-dimensional data $Y$ is:
 
-$$ Y = X_{std}W $$
+$$ Y = X\_{std}W $$
 
 The resulting matrix $Y$ has $k$ columns, representing our data projected onto the $k$ principal components. Each row in $Y$ is a new data point, but now described by its coordinates along these principal component axes.
 
@@ -114,23 +116,26 @@ How do we decide how many principal components to keep? This is a crucial step!
 ## PCA: The Good, The Bad, and The Practical
 
 ### Pros of PCA:
-*   **Dimensionality Reduction:** Reduces features, making models faster and less memory-intensive.
-*   **Noise Reduction:** By focusing on directions of maximum variance, PCA can effectively filter out noise, which often contributes less to overall variance.
-*   **Visualization:** Allows us to plot high-dimensional data in 2D or 3D, revealing hidden clusters or patterns.
-*   **Multicollinearity Handling:** Addresses issues where features are highly correlated, as PCA combines these correlated features into a single principal component.
+
+- **Dimensionality Reduction:** Reduces features, making models faster and less memory-intensive.
+- **Noise Reduction:** By focusing on directions of maximum variance, PCA can effectively filter out noise, which often contributes less to overall variance.
+- **Visualization:** Allows us to plot high-dimensional data in 2D or 3D, revealing hidden clusters or patterns.
+- **Multicollinearity Handling:** Addresses issues where features are highly correlated, as PCA combines these correlated features into a single principal component.
 
 ### Cons of PCA:
-*   **Loss of Interpretability:** Principal components are linear combinations of the original features. This means PC1 might be `0.3*Age + 0.7*Income - 0.2*Education`. It's hard to intuitively understand what "PC1" truly represents in terms of the original features.
-*   **Assumes Linearity:** PCA works by finding linear relationships. If the underlying data structure is non-linear, PCA might not be the best choice (though there are extensions like Kernel PCA).
-*   **Information Loss:** While we aim to retain *most* variance, some information is inevitably lost when we reduce dimensions.
-*   **Sensitive to Scaling:** As discussed, feature scaling is critical. If not done correctly, features with larger scales will dominate the principal components.
-*   **Unsupervised:** PCA doesn't consider the target variable (if any) when finding components. This means the principal components might not always be optimal for supervised tasks like classification.
+
+- **Loss of Interpretability:** Principal components are linear combinations of the original features. This means PC1 might be `0.3*Age + 0.7*Income - 0.2*Education`. It's hard to intuitively understand what "PC1" truly represents in terms of the original features.
+- **Assumes Linearity:** PCA works by finding linear relationships. If the underlying data structure is non-linear, PCA might not be the best choice (though there are extensions like Kernel PCA).
+- **Information Loss:** While we aim to retain _most_ variance, some information is inevitably lost when we reduce dimensions.
+- **Sensitive to Scaling:** As discussed, feature scaling is critical. If not done correctly, features with larger scales will dominate the principal components.
+- **Unsupervised:** PCA doesn't consider the target variable (if any) when finding components. This means the principal components might not always be optimal for supervised tasks like classification.
 
 ### Real-World Applications:
-*   **Image Compression & Recognition:** Think "Eigenfaces" in facial recognition systems, where PCA compresses images while retaining key features.
-*   **Genomics & Bioinformatics:** Analyzing high-dimensional gene expression data to identify significant biological pathways.
-*   **Finance:** Reducing the number of variables in portfolio optimization or risk management to simplify complex models.
-*   **Feature Engineering:** Creating new, powerful features for machine learning models by combining existing ones.
+
+- **Image Compression & Recognition:** Think "Eigenfaces" in facial recognition systems, where PCA compresses images while retaining key features.
+- **Genomics & Bioinformatics:** Analyzing high-dimensional gene expression data to identify significant biological pathways.
+- **Finance:** Reducing the number of variables in portfolio optimization or risk management to simplify complex models.
+- **Feature Engineering:** Creating new, powerful features for machine learning models by combining existing ones.
 
 ## My Final Thoughts: The Art of Knowing When to Simplify
 

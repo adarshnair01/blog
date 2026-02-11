@@ -31,9 +31,9 @@ Our artificial neuron, often called a **node** or **perceptron**, works similarl
 
 4.  **Activation Function ($f$):** This is the "decision-maker." The sum $z$ is passed through an activation function, which determines the neuron's output. Why do we need this? It introduces non-linearity. Without it, stacking multiple layers of neurons would just be like having one big linear neuron, limiting the network's ability to learn complex patterns.
     Some common activation functions you might encounter are:
-    *   **Sigmoid:** Squashes values between 0 and 1, useful for probabilities.
-    *   **ReLU (Rectified Linear Unit):** Outputs the input if it's positive, otherwise zero. $f(z) = \max(0, z)$. It's simple and very popular!
-    *   **Tanh (Hyperbolic Tangent):** Squashes values between -1 and 1.
+    - **Sigmoid:** Squashes values between 0 and 1, useful for probabilities.
+    - **ReLU (Rectified Linear Unit):** Outputs the input if it's positive, otherwise zero. $f(z) = \max(0, z)$. It's simple and very popular!
+    - **Tanh (Hyperbolic Tangent):** Squashes values between -1 and 1.
 
     So, the final output of our neuron is:
     $$a = f(z)$$
@@ -44,9 +44,9 @@ This tiny little unit, taking inputs, weighing them, summing them up, and making
 
 A single neuron can make simple decisions. But to tackle complex problems like recognizing cats in photos or understanding human speech, we need more. We connect these neurons together in layers, forming a **Neural Network**.
 
-*   **Input Layer:** This is where our raw data enters the network. Each node here represents an input feature (e.g., a pixel value).
-*   **Hidden Layers:** These are the "thinking" layers. The output of one layer becomes the input for the next. As information passes through these layers, the network learns to extract increasingly complex features from the data. The "deep" in **Deep Learning** simply refers to networks with many hidden layers.
-*   **Output Layer:** This layer produces the final result. For classifying images into "cat" or "dog," it might have two output nodes. For predicting a house price, it might have one output node.
+- **Input Layer:** This is where our raw data enters the network. Each node here represents an input feature (e.g., a pixel value).
+- **Hidden Layers:** These are the "thinking" layers. The output of one layer becomes the input for the next. As information passes through these layers, the network learns to extract increasingly complex features from the data. The "deep" in **Deep Learning** simply refers to networks with many hidden layers.
+- **Output Layer:** This layer produces the final result. For classifying images into "cat" or "dog," it might have two output nodes. For predicting a house price, it might have one output node.
 
 Information flows from the input layer, through the hidden layers, to the output layer. This process is called **forward propagation**. Each connection between neurons has its own weight, and each neuron has its own bias. The sheer number of these weights and biases in a large network can be astounding – millions, even billions!
 
@@ -62,11 +62,11 @@ The goal is to adjust these weights and biases so that the network makes accurat
     $$L = \frac{1}{2m} \sum_{j=1}^{m} (y^{(j)} - \hat{y}^{(j)})^2$$
     Where $m$ is the number of examples, $y^{(j)}$ is the true value, and $\hat{y}^{(j)}$ is the predicted value for the $j$-th example. Our goal is to minimize this loss.
 3.  **Adjusting the Weights (Gradient Descent & Backpropagation):** This is the core of learning. We want to know how much each weight and bias contributed to the error and in what direction we should change it to reduce the error.
-    *   **Gradient Descent:** Imagine you're blindfolded on a hilly terrain, trying to find the lowest point (the minimum loss). You'd feel the slope around you and take a small step downhill. This is what gradient descent does. It calculates the "slope" (gradient) of the loss function with respect to each weight and bias.
-    *   **Updating Rule:** We update each weight $w$ using the following rule:
-        $$w_{new} = w_{old} - \alpha \frac{\partial L}{\partial w}$$
-        Here, $\frac{\partial L}{\partial w}$ is the gradient (how much the loss changes with a tiny change in $w$), and $\alpha$ is the **learning rate**. The learning rate determines how big of a "step" we take downhill. Too big, and we might overshoot the minimum; too small, and learning will be very slow.
-    *   **Backpropagation:** Calculating these gradients for every single weight in a large network efficiently is computationally intensive. Backpropagation is a clever algorithm that does exactly this, working backward from the output layer to the input layer, distributing the blame for the error across all the weights. It's an application of the chain rule from calculus, but its intuition is simpler: if the output was wrong, which connections were most responsible, and how should they be tweaked?
+    - **Gradient Descent:** Imagine you're blindfolded on a hilly terrain, trying to find the lowest point (the minimum loss). You'd feel the slope around you and take a small step downhill. This is what gradient descent does. It calculates the "slope" (gradient) of the loss function with respect to each weight and bias.
+    - **Updating Rule:** We update each weight $w$ using the following rule:
+      $$w_{new} = w_{old} - \alpha \frac{\partial L}{\partial w}$$
+      Here, $\frac{\partial L}{\partial w}$ is the gradient (how much the loss changes with a tiny change in $w$), and $\alpha$ is the **learning rate**. The learning rate determines how big of a "step" we take downhill. Too big, and we might overshoot the minimum; too small, and learning will be very slow.
+    - **Backpropagation:** Calculating these gradients for every single weight in a large network efficiently is computationally intensive. Backpropagation is a clever algorithm that does exactly this, working backward from the output layer to the input layer, distributing the blame for the error across all the weights. It's an application of the chain rule from calculus, but its intuition is simpler: if the output was wrong, which connections were most responsible, and how should they be tweaked?
 
 This entire process – forward propagation, calculating loss, and then backpropagation to update weights – is repeated thousands, millions, even billions of times over many iterations (called **epochs**) using vast amounts of data. Slowly but surely, the network's weights and biases converge to values that allow it to make incredibly accurate predictions.
 
@@ -82,11 +82,11 @@ What makes these seemingly simple interconnected nodes capable of such complex f
 
 It's not an exaggeration to say that neural networks are powering much of the AI we interact with daily:
 
-*   **Image Recognition:** Your phone's face unlock, tagging friends in photos, self-driving cars recognizing pedestrians and traffic signs.
-*   **Natural Language Processing (NLP):** Google Translate, autocorrect, chatbots like ChatGPT, spam detection.
-*   **Speech Recognition:** Siri, Alexa, Google Assistant.
-*   **Recommendation Systems:** What movies Netflix suggests, what products Amazon shows you.
-*   **Medical Diagnosis:** Analyzing medical images (X-rays, MRIs) for early detection of diseases.
+- **Image Recognition:** Your phone's face unlock, tagging friends in photos, self-driving cars recognizing pedestrians and traffic signs.
+- **Natural Language Processing (NLP):** Google Translate, autocorrect, chatbots like ChatGPT, spam detection.
+- **Speech Recognition:** Siri, Alexa, Google Assistant.
+- **Recommendation Systems:** What movies Netflix suggests, what products Amazon shows you.
+- **Medical Diagnosis:** Analyzing medical images (X-rays, MRIs) for early detection of diseases.
 
 They are silently, yet profoundly, changing our world.
 
@@ -94,10 +94,10 @@ They are silently, yet profoundly, changing our world.
 
 While powerful, neural networks aren't without their complexities:
 
-*   **Data Hunger:** They often require vast amounts of labeled data to train effectively.
-*   **Computational Cost:** Training large models can require significant computing power and time.
-*   **Interpretability (The Black Box Problem):** Sometimes, it's hard to understand *why* a neural network made a particular decision, especially in deep networks. This "black box" nature can be a concern in critical applications like healthcare or autonomous driving.
-*   **Adversarial Attacks:** Small, imperceptible changes to input data can sometimes trick a network into making drastically wrong predictions.
+- **Data Hunger:** They often require vast amounts of labeled data to train effectively.
+- **Computational Cost:** Training large models can require significant computing power and time.
+- **Interpretability (The Black Box Problem):** Sometimes, it's hard to understand _why_ a neural network made a particular decision, especially in deep networks. This "black box" nature can be a concern in critical applications like healthcare or autonomous driving.
+- **Adversarial Attacks:** Small, imperceptible changes to input data can sometimes trick a network into making drastically wrong predictions.
 
 Researchers are actively working on these challenges, exploring areas like explainable AI (XAI), more efficient architectures, and methods to train models with less data. The field is constantly evolving, and that's what makes it so exciting!
 

@@ -24,13 +24,13 @@ This is where **dimensionality reduction** comes in. The goal is to project this
 
 You might have heard of **Principal Component Analysis (PCA)**, another popular dimensionality reduction technique. PCA is fantastic! It finds directions (principal components) that capture the most variance in your data, effectively creating new axes that summarize the data's global structure.
 
-However, PCA is primarily a linear technique. It's great at preserving *global* relationships – if two clusters are very far apart in high dimensions, they'll likely remain far apart after PCA. But what if the interesting structure is *local*? What if points are very similar to their immediate neighbors, forming complex, non-linear clusters that are entangled in high dimensions? PCA might struggle to untangle these delicate, local relationships, instead squashing them together in its effort to preserve the overall spread.
+However, PCA is primarily a linear technique. It's great at preserving _global_ relationships – if two clusters are very far apart in high dimensions, they'll likely remain far apart after PCA. But what if the interesting structure is _local_? What if points are very similar to their immediate neighbors, forming complex, non-linear clusters that are entangled in high dimensions? PCA might struggle to untangle these delicate, local relationships, instead squashing them together in its effort to preserve the overall spread.
 
 Think of it like this: PCA is great for drawing an outline of a city. t-SNE, on the other hand, tries to draw a map that accurately reflects the proximity of neighborhoods and individual houses within those neighborhoods, even if the city itself has a really weird, winding layout.
 
 ### t-SNE's Big Idea: Focusing on Neighbors
 
-t-SNE's core philosophy is simple yet profound: **it cares deeply about who your neighbors are.** If two data points are close to each other in the high-dimensional space, t-SNE tries to keep them close in the low-dimensional map. If they're far apart, it tries to keep them far apart. It prioritizes *local similarities* above all else.
+t-SNE's core philosophy is simple yet profound: **it cares deeply about who your neighbors are.** If two data points are close to each other in the high-dimensional space, t-SNE tries to keep them close in the low-dimensional map. If they're far apart, it tries to keep them far apart. It prioritizes _local similarities_ above all else.
 
 Let's break down how it does this, step-by-step:
 
@@ -43,10 +43,11 @@ The conditional probability $P_{j|i}$ that point $x_j$ is a neighbor of $x_i$ is
 $P_{j|i} = \frac{\exp(-\|x_i - x_j\|^2 / (2\sigma_i^2))}{\sum_{k \neq i} \exp(-\|x_i - x_k\|^2 / (2\sigma_i^2))}$
 
 Let's unpack this:
-*   $\|x_i - x_j\|^2$: This is the squared Euclidean distance between $x_i$ and $x_j$. The closer they are, the smaller this value.
-*   $\exp(-\text{distance}^2 / (2\sigma_i^2))$: This is a Gaussian kernel. It converts distances into similarities. Small distances yield high similarities.
-*   $\sigma_i$: This is the bandwidth of the Gaussian kernel, which is adjusted for each point $x_i$. This is *crucial* and related to a hyperparameter called **perplexity**. It essentially controls how much t-SNE focuses on local vs. slightly broader neighborhoods for each point. A smaller $\sigma_i$ means $x_i$ considers only its very closest neighbors.
-*   The denominator normalizes these similarities so they sum to 1, making them proper probabilities.
+
+- $\|x_i - x_j\|^2$: This is the squared Euclidean distance between $x_i$ and $x_j$. The closer they are, the smaller this value.
+- $\exp(-\text{distance}^2 / (2\sigma_i^2))$: This is a Gaussian kernel. It converts distances into similarities. Small distances yield high similarities.
+- $\sigma_i$: This is the bandwidth of the Gaussian kernel, which is adjusted for each point $x_i$. This is _crucial_ and related to a hyperparameter called **perplexity**. It essentially controls how much t-SNE focuses on local vs. slightly broader neighborhoods for each point. A smaller $\sigma_i$ means $x_i$ considers only its very closest neighbors.
+- The denominator normalizes these similarities so they sum to 1, making them proper probabilities.
 
 To make the process symmetric (so that the probability of $x_j$ being a neighbor of $x_i$ is the same as $x_i$ being a neighbor of $x_j$), t-SNE often uses a joint probability:
 
@@ -60,7 +61,7 @@ Here's a key difference: Instead of a Gaussian distribution, t-SNE uses a **Stud
 
 $Q_{ij} = \frac{(1 + \|y_i - y_j\|^2)^{-1}}{\sum_{k \neq l} (1 + \|y_k - y_l\|^2)^{-1}}$
 
-Why a Student's t-distribution? Because it has **"heavy tails."** This means that points that are moderately far apart in the low-dimensional space ($y$) are still assigned a non-negligible similarity, allowing them to be "pushed" further apart during optimization. This helps to alleviate the "crowding problem" – a common issue in dimensionality reduction where distant points in high dimensions tend to get mapped to crowded regions in low dimensions. The heavy tails allow dissimilar points to be modeled *further apart* in the low-dimensional map.
+Why a Student's t-distribution? Because it has **"heavy tails."** This means that points that are moderately far apart in the low-dimensional space ($y$) are still assigned a non-negligible similarity, allowing them to be "pushed" further apart during optimization. This helps to alleviate the "crowding problem" – a common issue in dimensionality reduction where distant points in high dimensions tend to get mapped to crowded regions in low dimensions. The heavy tails allow dissimilar points to be modeled _further apart_ in the low-dimensional map.
 
 #### 3. Making the Maps Match: The Cost Function
 
@@ -70,7 +71,7 @@ $C = KL(P || Q) = \sum_i \sum_j P_{ij} \log \frac{P_{ij}}{Q_{ij}}$
 
 What does KL Divergence do? It measures how one probability distribution ($Q$) differs from a reference distribution ($P$). The goal is to make $KL(P || Q)$ as small as possible.
 
-Crucially, the KL divergence is **asymmetric**. It heavily penalizes putting high $P_{ij}$ (points that *are* neighbors in high dimensions) where $Q_{ij}$ is low (making them *not* neighbors in low dimensions). In other words, t-SNE really, *really* tries to avoid pushing truly similar points apart. It's less concerned if points that were far apart in high dimensions end up slightly closer in low dimensions (though the heavy tails of the t-distribution still help mitigate this).
+Crucially, the KL divergence is **asymmetric**. It heavily penalizes putting high $P_{ij}$ (points that _are_ neighbors in high dimensions) where $Q_{ij}$ is low (making them _not_ neighbors in low dimensions). In other words, t-SNE really, _really_ tries to avoid pushing truly similar points apart. It's less concerned if points that were far apart in high dimensions end up slightly closer in low dimensions (though the heavy tails of the t-distribution still help mitigate this).
 
 #### 4. The Optimization Dance: Gradient Descent
 
@@ -80,18 +81,19 @@ The gradient for point $y_i$ is:
 $\frac{\delta C}{\delta y_i} = 4 \sum_j (P_{ij} - Q_{ij}) (y_i - y_j) (1 + \|y_i - y_j\|^2)^{-1}$
 
 This formula tells us how to move each $y_i$:
-*   If $P_{ij} > Q_{ij}$ (points are closer in high-dim than low-dim), they are "attracted" to each other.
-*   If $P_{ij} < Q_{ij}$ (points are farther in high-dim than low-dim), they are "repelled" from each other.
-This process continues for many iterations until the cost function converges or a maximum number of iterations is reached.
+
+- If $P_{ij} > Q_{ij}$ (points are closer in high-dim than low-dim), they are "attracted" to each other.
+- If $P_{ij} < Q_{ij}$ (points are farther in high-dim than low-dim), they are "repelled" from each other.
+  This process continues for many iterations until the cost function converges or a maximum number of iterations is reached.
 
 ### The Secret Sauce: Hyperparameters and "Magic"
 
 Two critical hyperparameters influence t-SNE's output:
 
 1.  **Perplexity:** This is arguably the most important parameter. It can be thought of as a "guess" at the number of close neighbors each point has. It influences the $\sigma_i$ (bandwidth) for the Gaussian kernels.
-    *   **Low perplexity** (e.g., 2-5) focuses very locally, leading to potentially many small, fragmented clusters, and can make noise appear as distinct groups.
-    *   **High perplexity** (e.g., 50-100+) forces t-SNE to consider more global relationships, potentially merging true local clusters.
-    *   A typical range for perplexity is **5 to 50**. You often need to experiment.
+    - **Low perplexity** (e.g., 2-5) focuses very locally, leading to potentially many small, fragmented clusters, and can make noise appear as distinct groups.
+    - **High perplexity** (e.g., 50-100+) forces t-SNE to consider more global relationships, potentially merging true local clusters.
+    - A typical range for perplexity is **5 to 50**. You often need to experiment.
 
 2.  **Learning Rate (or 'epsilon'):** Controls the step size during gradient descent. Too low, and convergence is slow; too high, and the optimization might overshoot the minimum.
 
@@ -101,25 +103,27 @@ Beyond these, there's another "trick" called **"Early Exaggeration."** During th
 
 Once you have your beautiful 2D plot, what can you infer?
 
-*   **Clusters mean similarity:** If points are clustered together, they are very similar in the high-dimensional space. t-SNE is excellent at revealing these inherent groupings.
-*   **Distance between clusters:** Generally, clusters that are far apart on the t-SNE map are indeed quite different in the high-dimensional space.
-*   **Don't over-interpret absolute distances or sizes:**
-    *   The *absolute distance* between two points on the t-SNE plot doesn't directly correspond to their absolute distance in high dimensions. It's about *relative* similarity.
-    *   The *size or density* of a cluster on the map doesn't necessarily mean it was denser or sparser in high dimensions.
-    *   **The shape of a cluster can be misleading.** A perfectly circular cluster on the map doesn't mean it's a perfect sphere in high dimensions; it could be a stretched-out ellipsoid that was just folded nicely.
+- **Clusters mean similarity:** If points are clustered together, they are very similar in the high-dimensional space. t-SNE is excellent at revealing these inherent groupings.
+- **Distance between clusters:** Generally, clusters that are far apart on the t-SNE map are indeed quite different in the high-dimensional space.
+- **Don't over-interpret absolute distances or sizes:**
+  - The _absolute distance_ between two points on the t-SNE plot doesn't directly correspond to their absolute distance in high dimensions. It's about _relative_ similarity.
+  - The _size or density_ of a cluster on the map doesn't necessarily mean it was denser or sparser in high dimensions.
+  - **The shape of a cluster can be misleading.** A perfectly circular cluster on the map doesn't mean it's a perfect sphere in high dimensions; it could be a stretched-out ellipsoid that was just folded nicely.
 
 ### When to Use t-SNE (and When Not To)
 
 **Use t-SNE for:**
-*   **Visualization:** It excels at revealing intricate, non-linear structures and clusters in high-dimensional data.
-*   **Exploration:** Great for initial data exploration, identifying anomalies, or understanding how different classes (if labeled) separate.
-*   **Feature Engineering:** Sometimes, the clusters found by t-SNE can inspire new features for a machine learning model.
+
+- **Visualization:** It excels at revealing intricate, non-linear structures and clusters in high-dimensional data.
+- **Exploration:** Great for initial data exploration, identifying anomalies, or understanding how different classes (if labeled) separate.
+- **Feature Engineering:** Sometimes, the clusters found by t-SNE can inspire new features for a machine learning model.
 
 **Avoid t-SNE for:**
-*   **Inferring global structure:** t-SNE prioritizes local structure. The global arrangement of clusters on the map might not reflect their true global distances in high dimensions.
-*   **Quantitative comparisons:** You can't compare two different t-SNE plots (e.g., generated with different random seeds or perplexity values) quantitatively. Each run is stochastic, and results are only locally meaningful within that run.
-*   **Extrapolation:** You can't train a t-SNE model and then apply it to new, unseen data directly. It's primarily a visualization tool for existing datasets.
-*   **Very large datasets:** Its computational complexity ($O(N^2)$ for naive implementation, though faster variants exist) can make it slow for datasets with millions of points. For very large datasets, consider alternatives like **UMAP** or **LargeVis**, which are often faster and better at preserving global structure.
+
+- **Inferring global structure:** t-SNE prioritizes local structure. The global arrangement of clusters on the map might not reflect their true global distances in high dimensions.
+- **Quantitative comparisons:** You can't compare two different t-SNE plots (e.g., generated with different random seeds or perplexity values) quantitatively. Each run is stochastic, and results are only locally meaningful within that run.
+- **Extrapolation:** You can't train a t-SNE model and then apply it to new, unseen data directly. It's primarily a visualization tool for existing datasets.
+- **Very large datasets:** Its computational complexity ($O(N^2)$ for naive implementation, though faster variants exist) can make it slow for datasets with millions of points. For very large datasets, consider alternatives like **UMAP** or **LargeVis**, which are often faster and better at preserving global structure.
 
 ### Practical Tips for Using t-SNE
 

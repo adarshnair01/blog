@@ -5,21 +5,22 @@ excerpt: "Ever wondered how we can predict the future, even with imperfect infor
 tags: ["Markov Chains", "Probability", "Data Science", "Machine Learning", "Stochastic Processes"]
 author: "Adarsh Nair"
 ---
+
 As a data scientist, one of the most thrilling aspects of the job is the ability to peek into the future, to model uncertainty, and to make educated guesses about what might happen next. It's like having a limited, but surprisingly effective, crystal ball. And for me, one of the first and most elegant "crystal ball" tools I encountered was the **Markov Chain**.
 
-I remember feeling a mix of intimidation and excitement when I first heard the term. It sounded complex, deeply mathematical, and a bit esoteric. But as I delved deeper, I realized its core idea is surprisingly simple, yet profoundly powerful. It's about predicting the next step based *only* on the current step, forgetting everything that came before. Let's unwrap this seemingly magical concept together.
+I remember feeling a mix of intimidation and excitement when I first heard the term. It sounded complex, deeply mathematical, and a bit esoteric. But as I delved deeper, I realized its core idea is surprisingly simple, yet profoundly powerful. It's about predicting the next step based _only_ on the current step, forgetting everything that came before. Let's unwrap this seemingly magical concept together.
 
 ## The Dance of States: What is a Markov Chain?
 
-Imagine you're playing a simple board game. Your current position on the board is what matters. Your next move (e.g., how many spaces you advance) depends on a dice roll *from your current position*, not on where you started the game, or how you got to your current spot. That, in essence, is the **Markov Property**.
+Imagine you're playing a simple board game. Your current position on the board is what matters. Your next move (e.g., how many spaces you advance) depends on a dice roll _from your current position_, not on where you started the game, or how you got to your current spot. That, in essence, is the **Markov Property**.
 
-Formally, a **Markov Chain** is a sequence of random variables where the probability of moving to the next state depends *only* on the current state and not on the sequence of events that preceded it. This "memoryless" property is its defining characteristic.
+Formally, a **Markov Chain** is a sequence of random variables where the probability of moving to the next state depends _only_ on the current state and not on the sequence of events that preceded it. This "memoryless" property is its defining characteristic.
 
 Let's break down the mathematical essence of this idea. If $X_0, X_1, X_2, \dots$ represent the sequence of states of our system over time, the Markov Property states:
 
 $P(X_{n+1}=j | X_n=i, X_{n-1}=i_{n-1}, \dots, X_0=i_0) = P(X_{n+1}=j | X_n=i)$
 
-In plain English: the probability of being in state $j$ at the next step, given *all* past states, is the same as the probability of being in state $j$ given *only* the current state $i$.
+In plain English: the probability of being in state $j$ at the next step, given _all_ past states, is the same as the probability of being in state $j$ given _only_ the current state $i$.
 
 ### A Familiar Example: The Weather Forecast
 
@@ -54,9 +55,10 @@ $P = \begin{pmatrix}
 \end{pmatrix}$
 
 Where:
-*   $p_{SS}$ = Probability of Sunny tomorrow given Sunny today.
-*   $p_{SC}$ = Probability of Cloudy tomorrow given Sunny today.
-*   And so on...
+
+- $p_{SS}$ = Probability of Sunny tomorrow given Sunny today.
+- $p_{SC}$ = Probability of Cloudy tomorrow given Sunny today.
+- And so on...
 
 Let's plug in some hypothetical numbers (these are just examples, you'd calculate them from historical data):
 
@@ -67,8 +69,9 @@ $P = \begin{pmatrix}
 \end{pmatrix}$
 
 **Important properties of a transition matrix:**
-*   Each entry $p_{ij}$ must be between 0 and 1 (as it's a probability).
-*   The sum of probabilities in each row must equal 1. This makes sense: if you're in a certain state, you *must* transition to *some* state (including staying the same) with 100% certainty.
+
+- Each entry $p_{ij}$ must be between 0 and 1 (as it's a probability).
+- The sum of probabilities in each row must equal 1. This makes sense: if you're in a certain state, you _must_ transition to _some_ state (including staying the same) with 100% certainty.
 
 ## Forecasting the Future: Powering the Matrix
 
@@ -102,7 +105,7 @@ Calculating $P^n$ involves matrix multiplication, which can be done efficiently 
 
 One of the most fascinating properties of many Markov Chains is their tendency to settle into a **stationary distribution** (also called a steady state) over the long run.
 
-Imagine you let our weather model run for hundreds, thousands of days. Eventually, the probability of it being Sunny, Cloudy, or Rainy on any given day will converge to a fixed set of probabilities, *regardless of what the weather was like on day zero*. The initial state's influence fades away.
+Imagine you let our weather model run for hundreds, thousands of days. Eventually, the probability of it being Sunny, Cloudy, or Rainy on any given day will converge to a fixed set of probabilities, _regardless of what the weather was like on day zero_. The initial state's influence fades away.
 
 This stationary distribution, often denoted by $\pi$, is a probability vector where $\pi = \begin{pmatrix} \pi_S & \pi_C & \pi_R \end{pmatrix}$. It has two key properties:
 
@@ -118,14 +121,14 @@ For our weather example, solving for $\pi$ would tell us, in the very long run, 
 The beauty of Markov Chains lies in their versatility. They might seem abstract, but they underpin many real-world systems:
 
 1.  **Natural Language Processing (NLP):**
-    *   **Text Generation:** Imagine predicting the next word in a sentence. "The quick brown __" (fox, cat, dog). A Markov chain can be trained on a corpus of text to predict the most likely next word given the current word (or few words, an N-gram model is a more sophisticated form). This is fundamental to autocomplete, spell checkers, and even basic chatbots.
-    *   **Speech Recognition:** Modeling sequences of phonemes.
+    - **Text Generation:** Imagine predicting the next word in a sentence. "The quick brown \_\_" (fox, cat, dog). A Markov chain can be trained on a corpus of text to predict the most likely next word given the current word (or few words, an N-gram model is a more sophisticated form). This is fundamental to autocomplete, spell checkers, and even basic chatbots.
+    - **Speech Recognition:** Modeling sequences of phonemes.
 
 2.  **Google's PageRank Algorithm:** This is perhaps one of the most famous applications. Google modeled the entire World Wide Web as a giant Markov Chain. Each webpage is a state, and clicking a link is a transition. The probability of navigating from one page to another is determined by the links. The stationary distribution of this massive chain gives each page a "PageRank" – essentially, the long-term probability that a random surfer will be on that page, indicating its importance.
 
 3.  **Bioinformatics:** Analyzing DNA sequences, modeling protein folding, and understanding gene regulation can involve Markov models. Hidden Markov Models (HMMs) are an extension that's particularly useful here.
 
-4.  **Financial Modeling:** While stock prices aren't perfectly Markovian (past history often *does* influence future prices), simplified models sometimes use Markov Chains to model discrete price movements (up, down, same).
+4.  **Financial Modeling:** While stock prices aren't perfectly Markovian (past history often _does_ influence future prices), simplified models sometimes use Markov Chains to model discrete price movements (up, down, same).
 
 5.  **Reinforcement Learning (RL):** At the heart of many RL algorithms are **Markov Decision Processes (MDPs)**. These are Markov Chains with the added elements of actions and rewards. An agent learns to make decisions in a sequential environment, where the next state depends only on the current state and the chosen action. This makes Markov Chains a foundational concept for anyone diving into AI and learning agents.
 
@@ -134,8 +137,9 @@ The beauty of Markov Chains lies in their versatility. They might seem abstract,
 While incredibly powerful, Markov Chains aren't a silver bullet. Their core limitation is the **memoryless property**. Many real-world phenomena exhibit long-term dependencies. For example, predicting a stock price often requires looking at trends over weeks or months, not just yesterday's price.
 
 When the memoryless assumption is too restrictive, more complex models come into play:
-*   **Hidden Markov Models (HMMs):** When the underlying states aren't directly observable, but rather inferred from observable outputs (e.g., inferring a disease state from symptoms).
-*   **Recurrent Neural Networks (RNNs) and Transformers:** These deep learning architectures are specifically designed to handle long-term dependencies in sequential data, overcoming the Markovian limitation in many complex scenarios like advanced NLP.
+
+- **Hidden Markov Models (HMMs):** When the underlying states aren't directly observable, but rather inferred from observable outputs (e.g., inferring a disease state from symptoms).
+- **Recurrent Neural Networks (RNNs) and Transformers:** These deep learning architectures are specifically designed to handle long-term dependencies in sequential data, overcoming the Markovian limitation in many complex scenarios like advanced NLP.
 
 ## Wrapping Up: A Powerful First Step
 
