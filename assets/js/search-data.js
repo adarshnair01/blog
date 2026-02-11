@@ -9,19 +9,19 @@ ninja.data = [{
     handler: () => {
       window.location.href = "/blog/";
     },
-  },{id: "nav-cv",
+  },{id: "nav-blog",
+          title: "blog",
+          description: "",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/blog/index.html";
+          },
+        },{id: "nav-cv",
           title: "CV",
           description: "Download my resume by clicking the PDF icon.",
           section: "Navigation",
           handler: () => {
             window.location.href = "/blog/cv/";
-          },
-        },{id: "nav-blog",
-          title: "blog",
-          description: "",
-          section: "Navigation",
-          handler: () => {
-            window.location.href = "/blog/blog/";
           },
         },{id: "nav-projects",
           title: "projects",
