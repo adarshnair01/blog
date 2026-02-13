@@ -37,6 +37,13 @@ ninja.data = [{
           handler: () => {
             window.location.href = "/blog/repositories/";
           },
+        },{id: "nav-books",
+          title: "books",
+          description: "",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/blog/books/";
+          },
         },{id: "post-cracking-the-ai-black-box-why-explainable-ai-xai-is-our-superpower",
         
           title: "Cracking the AI Black Box: Why Explainable AI (XAI) is Our Superpower",
