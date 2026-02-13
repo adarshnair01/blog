@@ -1,8 +1,10 @@
 ---
 layout: book-shelf
-title: bookshelf
+title: books
 permalink: /books/
-nav: false
+redirect: https://adarshnair.online/books/
+nav: true
+nav_order: 5
 collection: books
 ---
 
