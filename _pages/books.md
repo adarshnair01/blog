@@ -4,7 +4,7 @@ title: books
 permalink: /books/
 redirect: https://adarshnair.online/books/
 nav: true
-nav_order: 5
+nav_order: 7
 collection: books
 ---
 
