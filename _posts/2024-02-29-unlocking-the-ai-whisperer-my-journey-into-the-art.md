@@ -97,7 +97,8 @@ LLMs can generate free-form text, but often in data science, we need structured 
 **Prompt:**
 "Extract the following information about the customer and format it as a JSON object with keys `name`, `email`, and `order_number`.
 
-Customer email: 'janesmith@example.com', Name: Jane Smith, Order: #12345"
+`Customer email: 'janesmith@example.com', Name: Jane Smith, Order: #12345`
+"
 
 **LLM Response (Example):**
 
