@@ -58,7 +58,29 @@ ninja.data = [{
           handler: () => {
             window.location.href = "/blog/books/";
           },
-        },{id: "post-cracking-the-ai-black-box-why-explainable-ai-xai-is-our-superpower",
+        },{id: "post-stop-copy-pasting-unlock-your-data-superpowers-with-these-7-interactive-pandas-challenges",
+        
+          title: "STOP Copy-Pasting: Unlock Your Data Superpowers with These 7 *Interactive* Pandas Challenges!",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/blog/2026/stop-copy-pasting-unlock-your-data-superpowers-with-these-7-interactive-pandas-challenges/";
+          
+        },
+      },{id: "post-beyond-the-demo-evaluating-llm-agents-for-production-readiness",
+        
+          title: "Beyond the Demo: Evaluating LLM Agents for Production Readiness",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/blog/2026/beyond-the-demo-evaluating-llm-agents-for-production-readiness/";
+          
+        },
+      },{id: "post-cracking-the-ai-black-box-why-explainable-ai-xai-is-our-superpower",
         
           title: "Cracking the AI Black Box: Why Explainable AI (XAI) is Our Superpower",
         
