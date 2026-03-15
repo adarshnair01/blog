@@ -80,6 +80,17 @@ ninja.data = [{
             window.location.href = "/blog/blog/2026/beyond-the-demo-evaluating-llm-agents-for-production-readiness/";
           
         },
+      },{id: "post-forget-the-cloud-unleash-ai-power-on-your-own-pc-yes-you-can",
+        
+          title: "Forget The Cloud Unleash Ai Power On Your Own Pc Yes You Can...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/blog/2026/forget-the-cloud-unleash-ai-power-on-your-own-pc-yes-you-can/";
+          
+        },
       },{id: "post-cracking-the-ai-black-box-why-explainable-ai-xai-is-our-superpower",
         
           title: "Cracking the AI Black Box: Why Explainable AI (XAI) is Our Superpower",
