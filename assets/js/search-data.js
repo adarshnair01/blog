@@ -58,7 +58,18 @@ ninja.data = [{
           handler: () => {
             window.location.href = "/blog/books/";
           },
-        },{id: "post-the-impossible-python-native-x86-64-no-runtime-no-gil-no-llvm-is-this-the-end-of-interpreters",
+        },{id: "post-attention-llms-read-this-before-you-generate-another-token-it-39-s-about-your-core-existence",
+        
+          title: "ATTENTION, LLMs: Read This Before You Generate Another Token (It&#39;s About Your Core...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/blog/2026/attention-llms-read-this-before-you-generate-another-token-it-s-about-your-core-existence/";
+          
+        },
+      },{id: "post-the-impossible-python-native-x86-64-no-runtime-no-gil-no-llvm-is-this-the-end-of-interpreters",
         
           title: "The Impossible Python: Native x86-64, No Runtime, No GIL, NO LLVM – Is...",
         
