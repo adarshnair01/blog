@@ -58,7 +58,18 @@ ninja.data = [{
           handler: () => {
             window.location.href = "/blog/books/";
           },
-        },{id: "post-forget-the-cloud-unleash-ai-power-on-your-own-pc-yes-you-can",
+        },{id: "post-the-impossible-python-native-x86-64-no-runtime-no-gil-no-llvm-is-this-the-end-of-interpreters",
+        
+          title: "The Impossible Python: Native x86-64, No Runtime, No GIL, NO LLVM – Is...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/blog/2026/the-impossible-python-native-x86-64-no-runtime-no-gil-no-llvm-is-this-the-end-of-interpreters/";
+          
+        },
+      },{id: "post-forget-the-cloud-unleash-ai-power-on-your-own-pc-yes-you-can",
         
           title: "Forget the Cloud: Unleash AI Power on Your Own PC (Yes, You Can!)...",
         
