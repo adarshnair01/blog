@@ -69,6 +69,17 @@ ninja.data = [{
             window.location.href = "/blog/blog/2026/forget-the-cloud-unleash-ai-power-on-your-own-pc-yes-you-can/";
           
         },
+      },{id: "post-beyond-the-hype-the-silent-killers-of-production-ai-you-must-understand-data-science-weekly-642-deep-dive",
+        
+          title: "Beyond the Hype: The Silent Killers of Production AI You Must Understand (Data...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/blog/2026/beyond-the-hype-the-silent-killers-of-production-ai-you-must-understand-data-science-weekly-642-deep-dive/";
+          
+        },
       },{id: "post-stop-copy-pasting-unlock-your-data-superpowers-with-these-7-interactive-pandas-challenges",
         
           title: "STOP Copy-Pasting: Unlock Your Data Superpowers with These 7 *Interactive* Pandas Challenges!",
