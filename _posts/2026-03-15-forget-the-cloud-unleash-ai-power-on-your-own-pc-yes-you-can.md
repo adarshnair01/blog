@@ -1,4 +1,3 @@
----BLOG_POST_START---
 ---
 layout: post
 title: "Forget the Cloud: Unleash AI Power on Your Own PC (Yes, You Can!)"
