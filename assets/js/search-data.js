@@ -58,7 +58,18 @@ ninja.data = [{
           handler: () => {
             window.location.href = "/blog/books/";
           },
-        },{id: "post-stop-copy-pasting-unlock-your-data-superpowers-with-these-7-interactive-pandas-challenges",
+        },{id: "post-forget-the-cloud-unleash-ai-power-on-your-own-pc-yes-you-can",
+        
+          title: "Forget the Cloud: Unleash AI Power on Your Own PC (Yes, You Can!)...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/blog/2026/forget-the-cloud-unleash-ai-power-on-your-own-pc-yes-you-can/";
+          
+        },
+      },{id: "post-stop-copy-pasting-unlock-your-data-superpowers-with-these-7-interactive-pandas-challenges",
         
           title: "STOP Copy-Pasting: Unlock Your Data Superpowers with These 7 *Interactive* Pandas Challenges!",
         
@@ -78,17 +89,6 @@ ninja.data = [{
         handler: () => {
           
             window.location.href = "/blog/blog/2026/beyond-the-demo-evaluating-llm-agents-for-production-readiness/";
-          
-        },
-      },{id: "post-forget-the-cloud-unleash-ai-power-on-your-own-pc-yes-you-can",
-        
-          title: "Forget The Cloud Unleash Ai Power On Your Own Pc Yes You Can...",
-        
-        description: "",
-        section: "Posts",
-        handler: () => {
-          
-            window.location.href = "/blog/blog/2026/forget-the-cloud-unleash-ai-power-on-your-own-pc-yes-you-can/";
           
         },
       },{id: "post-cracking-the-ai-black-box-why-explainable-ai-xai-is-our-superpower",
