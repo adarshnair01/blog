@@ -69,6 +69,17 @@ ninja.data = [{
             window.location.href = "/blog/blog/2026/the-matrix-is-real-how-deep-learning-libraries-are-rewiring-our-understanding-of-intelligence-and-building-the-future/";
           
         },
+      },{id: "post-stop-the-bleeding-how-39-claudetop-39-is-exposing-hidden-ai-costs-amp-saving-developers-millions-in-real-time",
+        
+          title: "STOP THE BLEEDING! How &#39;Claudetop&#39; Is Exposing Hidden AI Costs &amp; Saving Developers...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/blog/2026/stop-the-bleeding-how-claudetop-is-exposing-hidden-ai-costs-saving-developers-millions-in-real-time/";
+          
+        },
       },{id: "post-chatgpt-helped-build-a-cancer-vaccine-the-mind-bending-story-of-one-data-scientist-39-s-race-against-time-for-his-dying-dog",
         
           title: "ChatGPT Helped Build a Cancer Vaccine? The Mind-Bending Story of One Data Scientist&#39;s...",
