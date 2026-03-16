@@ -69,6 +69,17 @@ ninja.data = [{
             window.location.href = "/blog/blog/2026/the-silent-awakening-why-machine-cognition-is-not-sci-fi-anymore/";
           
         },
+      },{id: "post-the-silent-killer-of-your-ai-projects-why-your-ml-benchmarks-are-lying-to-you-and-how-to-fix-it",
+        
+          title: "The Silent Killer of Your AI Projects: Why Your ML Benchmarks Are LYING...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/blog/2026/the-silent-killer-of-your-ai-projects-why-your-ml-benchmarks-are-lying-to-you-and-how-to-fix-it/";
+          
+        },
       },{id: "post-attention-llms-read-this-before-you-generate-another-token-it-39-s-about-your-core-existence",
         
           title: "ATTENTION, LLMs: Read This Before You Generate Another Token (It&#39;s About Your Core...",
