@@ -58,7 +58,18 @@ ninja.data = [{
           handler: () => {
             window.location.href = "/blog/books/";
           },
-        },{id: "post-attention-llms-read-this-before-you-generate-another-token-it-39-s-about-your-core-existence",
+        },{id: "post-the-silent-awakening-why-39-machine-cognition-39-is-not-sci-fi-anymore",
+        
+          title: "The Silent Awakening: Why &#39;Machine Cognition&#39; Is NOT Sci-Fi Anymore",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/blog/2026/the-silent-awakening-why-machine-cognition-is-not-sci-fi-anymore/";
+          
+        },
+      },{id: "post-attention-llms-read-this-before-you-generate-another-token-it-39-s-about-your-core-existence",
         
           title: "ATTENTION, LLMs: Read This Before You Generate Another Token (It&#39;s About Your Core...",
         
