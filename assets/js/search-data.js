@@ -58,7 +58,18 @@ ninja.data = [{
           handler: () => {
             window.location.href = "/blog/books/";
           },
-        },{id: "post-the-matrix-is-real-how-deep-learning-libraries-are-rewiring-our-understanding-of-intelligence-and-building-the-future",
+        },{id: "post-your-ai-observability-bill-is-about-to-explode-the-hidden-costs-of-llms-investigating-production-alerts-and-how-to-fix-it",
+        
+          title: "Your AI Observability Bill Is About To EXPLODE: The Hidden Costs of LLMs...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/blog/2026/your-ai-observability-bill-is-about-to-explode-the-hidden-costs-of-llms-investigating-production-alerts-and-how-to-fix-it/";
+          
+        },
+      },{id: "post-the-matrix-is-real-how-deep-learning-libraries-are-rewiring-our-understanding-of-intelligence-and-building-the-future",
         
           title: "THE MATRIX IS REAL: How Deep Learning Libraries Are Rewiring Our Understanding of...",
         
