@@ -58,7 +58,18 @@ ninja.data = [{
           handler: () => {
             window.location.href = "/blog/books/";
           },
-        },{id: "post-chatgpt-helped-build-a-cancer-vaccine-the-mind-bending-story-of-one-data-scientist-39-s-race-against-time-for-his-dying-dog",
+        },{id: "post-the-matrix-is-real-how-deep-learning-libraries-are-rewiring-our-understanding-of-intelligence-and-building-the-future",
+        
+          title: "THE MATRIX IS REAL: How Deep Learning Libraries Are Rewiring Our Understanding of...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/blog/2026/the-matrix-is-real-how-deep-learning-libraries-are-rewiring-our-understanding-of-intelligence-and-building-the-future/";
+          
+        },
+      },{id: "post-chatgpt-helped-build-a-cancer-vaccine-the-mind-bending-story-of-one-data-scientist-39-s-race-against-time-for-his-dying-dog",
         
           title: "ChatGPT Helped Build a Cancer Vaccine? The Mind-Bending Story of One Data Scientist&#39;s...",
         
