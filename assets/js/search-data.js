@@ -80,6 +80,17 @@ ninja.data = [{
             window.location.href = "/blog/blog/2026/chatgpt-helped-build-a-cancer-vaccine-the-mind-bending-story-of-one-data-scientist-s-race-against-time-for-his-dying-dog/";
           
         },
+      },{id: "post-the-ai-hive-mind-is-here-spine-swarm-unleashes-autonomous-collaboration-on-a-visual-canvas-and-it-39-s-scary-good",
+        
+          title: "The AI Hive Mind Is Here: Spine Swarm Unleashes Autonomous Collaboration on a...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/blog/2026/the-ai-hive-mind-is-here-spine-swarm-unleashes-autonomous-collaboration-on-a-visual-canvas-and-it-s-scary-good/";
+          
+        },
       },{id: "post-the-silent-awakening-why-39-machine-cognition-39-is-not-sci-fi-anymore",
         
           title: "The Silent Awakening: Why &#39;Machine Cognition&#39; Is NOT Sci-Fi Anymore",
