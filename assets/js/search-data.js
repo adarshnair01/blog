@@ -58,7 +58,18 @@ ninja.data = [{
           handler: () => {
             window.location.href = "/blog/books/";
           },
-        },{id: "post-the-silent-awakening-why-39-machine-cognition-39-is-not-sci-fi-anymore",
+        },{id: "post-chatgpt-helped-build-a-cancer-vaccine-the-mind-bending-story-of-one-data-scientist-39-s-race-against-time-for-his-dying-dog",
+        
+          title: "ChatGPT Helped Build a Cancer Vaccine? The Mind-Bending Story of One Data Scientist&#39;s...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/blog/2026/chatgpt-helped-build-a-cancer-vaccine-the-mind-bending-story-of-one-data-scientist-s-race-against-time-for-his-dying-dog/";
+          
+        },
+      },{id: "post-the-silent-awakening-why-39-machine-cognition-39-is-not-sci-fi-anymore",
         
           title: "The Silent Awakening: Why &#39;Machine Cognition&#39; Is NOT Sci-Fi Anymore",
         
