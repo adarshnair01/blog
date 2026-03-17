@@ -69,6 +69,17 @@ ninja.data = [{
             window.location.href = "/blog/blog/2026/stop-using-sqlite3-how-this-async-python-sqlite-wrapper-will-make-your-code-fly-and-why-it-s-in-colour/";
           
         },
+      },{id: "post-unmasking-the-architects-of-ai-39-s-brain-how-deep-learning-libraries-really-enable-machines-to-learn-and-why-it-39-s-changing-everything",
+        
+          title: "Unmasking the Architects of AI&#39;s Brain: How Deep Learning Libraries *Really* Enable Machines...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/blog/2026/unmasking-the-architects-of-ai-s-brain-how-deep-learning-libraries-really-enable-machines-to-learn-and-why-it-s-changing-everything/";
+          
+        },
       },{id: "post-the-ai-brain-drain-why-we-39-re-losing-our-minds-over-cs-fundamentals-and-how-to-reclaim-your-tech-soul",
         
           title: "The AI Brain Drain: Why We&#39;re Losing Our Minds Over CS Fundamentals (And...",
