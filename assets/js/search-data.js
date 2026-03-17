@@ -69,6 +69,17 @@ ninja.data = [{
             window.location.href = "/blog/blog/2026/stop-using-sqlite3-how-this-async-python-sqlite-wrapper-will-make-your-code-fly-and-why-it-s-in-colour/";
           
         },
+      },{id: "post-the-silent-takeover-why-your-next-research-assistant-might-be-code-not-a-cap-amp-gown",
+        
+          title: "THE SILENT TAKEOVER: Why Your Next Research Assistant Might Be Code, Not a...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/blog/2026/the-silent-takeover-why-your-next-research-assistant-might-be-code-not-a-cap-gown/";
+          
+        },
       },{id: "post-the-uncomfortable-truth-your-python-type-checker-is-a-liar-and-here-39-s-why",
         
           title: "The Uncomfortable Truth: Your Python Type Checker Is A Liar (And Here&#39;s Why)...",
