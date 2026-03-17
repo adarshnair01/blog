@@ -58,7 +58,18 @@ ninja.data = [{
           handler: () => {
             window.location.href = "/blog/books/";
           },
-        },{id: "post-your-ai-observability-bill-is-about-to-explode-the-hidden-costs-of-llms-investigating-production-alerts-and-how-to-fix-it",
+        },{id: "post-the-ai-brain-drain-why-we-39-re-losing-our-minds-over-cs-fundamentals-and-how-to-reclaim-your-tech-soul",
+        
+          title: "The AI Brain Drain: Why We&#39;re Losing Our Minds Over CS Fundamentals (And...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/blog/2026/the-ai-brain-drain-why-we-re-losing-our-minds-over-cs-fundamentals-and-how-to-reclaim-your-tech-soul/";
+          
+        },
+      },{id: "post-your-ai-observability-bill-is-about-to-explode-the-hidden-costs-of-llms-investigating-production-alerts-and-how-to-fix-it",
         
           title: "Your AI Observability Bill Is About To EXPLODE: The Hidden Costs of LLMs...",
         
