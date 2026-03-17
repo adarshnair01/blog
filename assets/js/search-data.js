@@ -69,6 +69,17 @@ ninja.data = [{
             window.location.href = "/blog/blog/2026/stop-using-sqlite3-how-this-async-python-sqlite-wrapper-will-make-your-code-fly-and-why-it-s-in-colour/";
           
         },
+      },{id: "post-the-uncomfortable-truth-your-python-type-checker-is-a-liar-and-here-39-s-why",
+        
+          title: "The Uncomfortable Truth: Your Python Type Checker Is A Liar (And Here&#39;s Why)...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/blog/2026/the-uncomfortable-truth-your-python-type-checker-is-a-liar-and-here-s-why/";
+          
+        },
       },{id: "post-unmasking-the-architects-of-ai-39-s-brain-how-deep-learning-libraries-really-enable-machines-to-learn-and-why-it-39-s-changing-everything",
         
           title: "Unmasking the Architects of AI&#39;s Brain: How Deep Learning Libraries *Really* Enable Machines...",
