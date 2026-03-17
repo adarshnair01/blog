@@ -212,6 +212,17 @@ ninja.data = [{
             window.location.href = "/blog/blog/2026/attention-llms-read-this-before-you-generate-another-token-it-s-about-your-core-existence/";
           
         },
+      },{id: "post-ai-39-s-secret-mind-why-we-need-to-look-inside-before-it-39-s-too-late-and-how-we-39-re-doing-it",
+        
+          title: "AI&#39;s Secret Mind: Why We NEED To Look Inside Before It&#39;s Too Late...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/blog/2026/ai-s-secret-mind-why-we-need-to-look-inside-before-it-s-too-late-and-how-we-re-doing-it/";
+          
+        },
       },{id: "post-the-impossible-python-native-x86-64-no-runtime-no-gil-no-llvm-is-this-the-end-of-interpreters",
         
           title: "The Impossible Python: Native x86-64, No Runtime, No GIL, NO LLVM – Is...",
