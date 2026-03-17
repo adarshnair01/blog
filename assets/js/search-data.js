@@ -212,6 +212,17 @@ ninja.data = [{
             window.location.href = "/blog/blog/2026/the-impossible-python-native-x86-64-no-runtime-no-gil-no-llvm-is-this-the-end-of-interpreters/";
           
         },
+      },{id: "post-forget-everything-you-knew-data-science-weekly-642-reveals-graph-neural-networks-are-predicting-the-impossible",
+        
+          title: "Forget Everything You Knew: Data Science Weekly #642 Reveals Graph Neural Networks Are...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/blog/2026/forget-everything-you-knew-data-science-weekly-642-reveals-graph-neural-networks-are-predicting-the-impossible/";
+          
+        },
       },{id: "post-forget-the-cloud-unleash-ai-power-on-your-own-pc-yes-you-can",
         
           title: "Forget the Cloud: Unleash AI Power on Your Own PC (Yes, You Can!)...",
