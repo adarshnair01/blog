@@ -58,7 +58,18 @@ ninja.data = [{
           handler: () => {
             window.location.href = "/blog/books/";
           },
-        },{id: "post-the-ai-brain-drain-why-we-39-re-losing-our-minds-over-cs-fundamentals-and-how-to-reclaim-your-tech-soul",
+        },{id: "post-stop-using-sqlite3-how-this-async-python-sqlite-wrapper-will-make-your-code-fly-and-why-it-39-s-in-39-colour-39",
+        
+          title: "STOP Using `sqlite3`! How This Async Python SQLite Wrapper Will Make Your Code...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/blog/2026/stop-using-sqlite3-how-this-async-python-sqlite-wrapper-will-make-your-code-fly-and-why-it-s-in-colour/";
+          
+        },
+      },{id: "post-the-ai-brain-drain-why-we-39-re-losing-our-minds-over-cs-fundamentals-and-how-to-reclaim-your-tech-soul",
         
           title: "The AI Brain Drain: Why We&#39;re Losing Our Minds Over CS Fundamentals (And...",
         
