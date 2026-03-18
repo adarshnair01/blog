@@ -58,7 +58,18 @@ ninja.data = [{
           handler: () => {
             window.location.href = "/blog/books/";
           },
-        },{id: "post-stop-using-sqlite3-how-this-async-python-sqlite-wrapper-will-make-your-code-fly-and-why-it-39-s-in-39-colour-39",
+        },{id: "post-ai-ate-my-homework-and-my-brain-why-losing-interest-in-cs-fundamentals-is-a-recipe-for-disaster-or-superpower",
+        
+          title: "AI Ate My Homework (And My Brain): Why Losing Interest in CS Fundamentals...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/blog/2026/ai-ate-my-homework-and-my-brain-why-losing-interest-in-cs-fundamentals-is-a-recipe-for-disaster-or-superpower/";
+          
+        },
+      },{id: "post-stop-using-sqlite3-how-this-async-python-sqlite-wrapper-will-make-your-code-fly-and-why-it-39-s-in-39-colour-39",
         
           title: "STOP Using `sqlite3`! How This Async Python SQLite Wrapper Will Make Your Code...",
         
