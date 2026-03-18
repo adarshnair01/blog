@@ -80,6 +80,17 @@ ninja.data = [{
             window.location.href = "/blog/blog/2026/the-silent-takeover-why-your-next-research-assistant-might-be-code-not-a-cap-gown/";
           
         },
+      },{id: "post-the-great-abstraction-are-ai-tools-making-us-forget-cs-fundamentals-and-why-that-39-s-dangerous",
+        
+          title: "THE GREAT ABSTRACTION: Are AI Tools Making Us FORGET CS Fundamentals? (And Why...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/blog/2026/the-great-abstraction-are-ai-tools-making-us-forget-cs-fundamentals-and-why-that-s-dangerous/";
+          
+        },
       },{id: "post-the-uncomfortable-truth-your-python-type-checker-is-a-liar-and-here-39-s-why",
         
           title: "The Uncomfortable Truth: Your Python Type Checker Is A Liar (And Here&#39;s Why)...",
