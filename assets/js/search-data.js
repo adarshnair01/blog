@@ -102,6 +102,17 @@ ninja.data = [{
             window.location.href = "/blog/blog/2026/the-uncomfortable-truth-your-python-type-checker-is-a-liar-and-here-s-why/";
           
         },
+      },{id: "post-copyright-war-for-ai-39-s-soul-fsf-vs-anthropic-amp-the-fight-to-free-your-llm",
+        
+          title: "Copyright War for AI&#39;s Soul: FSF vs. Anthropic &amp; The Fight to Free...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/blog/2026/copyright-war-for-ai-s-soul-fsf-vs-anthropic-the-fight-to-free-your-llm/";
+          
+        },
       },{id: "post-unmasking-the-architects-of-ai-39-s-brain-how-deep-learning-libraries-really-enable-machines-to-learn-and-why-it-39-s-changing-everything",
         
           title: "Unmasking the Architects of AI&#39;s Brain: How Deep Learning Libraries *Really* Enable Machines...",
