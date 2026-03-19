@@ -58,7 +58,18 @@ ninja.data = [{
           handler: () => {
             window.location.href = "/blog/books/";
           },
-        },{id: "post-ai-ate-my-homework-and-my-brain-why-losing-interest-in-cs-fundamentals-is-a-recipe-for-disaster-or-superpower",
+        },{id: "post-the-end-of-human-researchers-karpathy-39-s-autoresearch-just-blew-up-everything-we-thought-we-knew-about-ai",
+        
+          title: "THE END OF HUMAN RESEARCHERS? Karpathy&#39;s AutoResearch Just Blew Up Everything We Thought...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/blog/2026/the-end-of-human-researchers-karpathy-s-autoresearch-just-blew-up-everything-we-thought-we-knew-about-ai/";
+          
+        },
+      },{id: "post-ai-ate-my-homework-and-my-brain-why-losing-interest-in-cs-fundamentals-is-a-recipe-for-disaster-or-superpower",
         
           title: "AI Ate My Homework (And My Brain): Why Losing Interest in CS Fundamentals...",
         
