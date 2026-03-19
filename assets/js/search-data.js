@@ -58,7 +58,18 @@ ninja.data = [{
           handler: () => {
             window.location.href = "/blog/books/";
           },
-        },{id: "post-unbelievable-how-a-rogue-snowflake-ai-could-execute-malware-and-shatter-everything-we-know-about-digital-safety",
+        },{id: "post-the-unthinkable-how-a-rogue-snowflake-ai-could-shatter-your-data-security",
+        
+          title: "THE UNTHINKABLE: How A Rogue Snowflake AI Could Shatter Your Data Security",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/blog/2026/the-unthinkable-how-a-rogue-snowflake-ai-could-shatter-your-data-security/";
+          
+        },
+      },{id: "post-unbelievable-how-a-rogue-snowflake-ai-could-execute-malware-and-shatter-everything-we-know-about-digital-safety",
         
           title: "UNBELIEVABLE: How a Rogue Snowflake AI Could Execute MALWARE and Shatter Everything We...",
         
