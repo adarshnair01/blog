@@ -58,7 +58,18 @@ ninja.data = [{
           handler: () => {
             window.location.href = "/blog/books/";
           },
-        },{id: "post-the-end-of-human-researchers-karpathy-39-s-autoresearch-just-blew-up-everything-we-thought-we-knew-about-ai",
+        },{id: "post-unbelievable-how-a-rogue-snowflake-ai-could-execute-malware-and-shatter-everything-we-know-about-digital-safety",
+        
+          title: "UNBELIEVABLE: How a Rogue Snowflake AI Could Execute MALWARE and Shatter Everything We...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/blog/2026/unbelievable-how-a-rogue-snowflake-ai-could-execute-malware-and-shatter-everything-we-know-about-digital-safety/";
+          
+        },
+      },{id: "post-the-end-of-human-researchers-karpathy-39-s-autoresearch-just-blew-up-everything-we-thought-we-knew-about-ai",
         
           title: "THE END OF HUMAN RESEARCHERS? Karpathy&#39;s AutoResearch Just Blew Up Everything We Thought...",
         
