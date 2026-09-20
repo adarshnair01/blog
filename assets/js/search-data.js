@@ -60,7 +60,7 @@ ninja.data = [{
           },
         },{id: "post-forget-brain-games-this-ancient-secret-is-the-ultimate-neural-network-optimizer",
         
-          title: "Forget Brain Games This Ancient Secret Is The Ultimate Neural Network Optimizer",
+          title: "Forget Brain Games: THIS Ancient Secret Is The Ultimate Neural Network Optimizer!",
         
         description: "",
         section: "Posts",
@@ -69,9 +69,9 @@ ninja.data = [{
             window.location.href = "/blog/blog/2026/forget-brain-games-this-ancient-secret-is-the-ultimate-neural-network-optimizer/";
           
         },
-      },{id: "post-the-uncensored-truth-a-machine-learning-engineer-s-raw-letter-to-the-future",
+      },{id: "post-the-uncensored-truth-a-machine-learning-engineer-39-s-raw-letter-to-the-future",
         
-          title: "The Uncensored Truth A Machine Learning Engineer S Raw Letter To The Future...",
+          title: "The Uncensored Truth: A Machine Learning Engineer&#39;s Raw Letter to the Future",
         
         description: "",
         section: "Posts",
@@ -82,7 +82,7 @@ ninja.data = [{
         },
       },{id: "post-the-silent-revolution-how-one-open-source-python-library-just-broke-the-proprietary-document-lock",
         
-          title: "The Silent Revolution How One Open Source Python Library Just Broke The Proprietary...",
+          title: "The Silent Revolution: How One Open Source Python Library Just BROKE the Proprietary...",
         
         description: "",
         section: "Posts",
@@ -91,9 +91,9 @@ ninja.data = [{
             window.location.href = "/blog/blog/2026/the-silent-revolution-how-one-open-source-python-library-just-broke-the-proprietary-document-lock/";
           
         },
-      },{id: "post-forget-brain-games-this-ancient-hack-is-the-ultimate-brain-upgrade-backed-by-ai-neurotech",
+      },{id: "post-forget-brain-games-this-ancient-39-hack-39-is-the-ultimate-brain-upgrade-backed-by-ai-amp-neurotech",
         
-          title: "Forget Brain Games This Ancient Hack Is The Ultimate Brain Upgrade Backed By...",
+          title: "Forget Brain Games: THIS Ancient &#39;Hack&#39; Is The ULTIMATE Brain Upgrade (Backed by...",
         
         description: "",
         section: "Posts",
@@ -104,7 +104,7 @@ ninja.data = [{
         },
       },{id: "post-the-ai-revolution-just-got-meaningful-typesafe-ai-unlocks-the-secret-to-true-intelligence-and-it-changes-everything",
         
-          title: "The Ai Revolution Just Got Meaningful Typesafe Ai Unlocks The Secret To True...",
+          title: "The AI Revolution Just Got Meaningful: TypeSafe AI Unlocks the Secret to True...",
         
         description: "",
         section: "Posts",
@@ -115,7 +115,7 @@ ninja.data = [{
         },
       },{id: "post-the-python-typing-revolution-how-gradual-adoption-can-transform-your-codebase-from-chaos-to-clarity",
         
-          title: "The Python Typing Revolution How Gradual Adoption Can Transform Your Codebase From Chaos...",
+          title: "The Python Typing Revolution: How Gradual Adoption Can Transform Your Codebase From Chaos...",
         
         description: "",
         section: "Posts",
@@ -126,7 +126,7 @@ ninja.data = [{
         },
       },{id: "post-the-silent-persuaders-is-an-ai-chatbot-quietly-rewiring-your-beliefs",
         
-          title: "The Silent Persuaders Is An Ai Chatbot Quietly Rewiring Your Beliefs",
+          title: "The Silent Persuaders: Is an AI Chatbot Quietly Rewiring Your Beliefs?",
         
         description: "",
         section: "Posts",
@@ -157,9 +157,9 @@ ninja.data = [{
             window.location.href = "/blog/blog/2026/the-mind-bending-ai-how-chatbots-are-secretly-rewiring-your-brain-and-what-to-do-about-it/";
           
         },
-      },{id: "post-ai-s-dirty-secret-why-we-re-building-castles-on-sand-and-how-ml-science-can-save-us",
+      },{id: "post-ai-39-s-dirty-secret-why-we-39-re-building-castles-on-sand-and-how-ml-science-can-save-us",
         
-          title: "Ai S Dirty Secret Why We Re Building Castles On Sand And How...",
+          title: "AI&#39;s Dirty Secret: Why We&#39;re Building Castles on Sand (And How ML Science...",
         
         description: "",
         section: "Posts",
@@ -168,9 +168,9 @@ ninja.data = [{
             window.location.href = "/blog/blog/2026/ai-s-dirty-secret-why-we-re-building-castles-on-sand-and-how-ml-science-can-save-us/";
           
         },
-      },{id: "post-the-great-digital-heist-microsoft-exec-says-ai-scraping-is-largest-theft-of-labor-here-s-what-that-means-for-you",
+      },{id: "post-the-great-digital-heist-microsoft-exec-says-ai-scraping-is-39-largest-theft-of-labor-39-here-39-s-what-that-means-for-you",
         
-          title: "The Great Digital Heist Microsoft Exec Says Ai Scraping Is Largest Theft Of...",
+          title: "The Great Digital Heist: Microsoft Exec Says AI Scraping is &#39;Largest Theft of...",
         
         description: "",
         section: "Posts",
@@ -181,7 +181,7 @@ ninja.data = [{
         },
       },{id: "post-the-ai-apocalypse-is-canceled-how-bend-lang-on-gpus-just-saved-us-all-from-bot-blunders-and-your-job",
         
-          title: "The Ai Apocalypse Is Canceled How Bend Lang On Gpus Just Saved Us...",
+          title: "The AI Apocalypse is Canceled: How Bend.lang on GPUs Just Saved Us All...",
         
         description: "",
         section: "Posts",
@@ -190,9 +190,9 @@ ninja.data = [{
             window.location.href = "/blog/blog/2026/the-ai-apocalypse-is-canceled-how-bend-lang-on-gpus-just-saved-us-all-from-bot-blunders-and-your-job/";
           
         },
-      },{id: "post-the-ai-apocalypse-is-canceled-how-one-language-just-made-ai-unhackable-error-proof-and-it-runs-on-your-gpu",
+      },{id: "post-the-ai-apocalypse-is-canceled-how-one-language-just-made-ai-unhackable-amp-error-proof-and-it-runs-on-your-gpu",
         
-          title: "The Ai Apocalypse Is Canceled How One Language Just Made Ai Unhackable Error...",
+          title: "The AI Apocalypse is Canceled: How One Language Just Made AI Unhackable &amp;...",
         
         description: "",
         section: "Posts",
@@ -225,7 +225,7 @@ ninja.data = [{
         },
       },{id: "post-the-silent-crisis-why-our-rush-to-deploy-ai-could-sabotage-the-future-of-machine-learning",
         
-          title: "The Silent Crisis Why Our Rush To Deploy Ai Could Sabotage The Future...",
+          title: "THE SILENT CRISIS: Why Our Rush to Deploy AI Could SABOTAGE the Future...",
         
         description: "",
         section: "Posts",
@@ -267,9 +267,9 @@ ninja.data = [{
             window.location.href = "/blog/blog/2026/the-algorithm-of-ecstasy-how-ai-is-rewriting-the-rules-of-sex-love-and-humanity-s-final-act/";
           
         },
-      },{id: "post-the-algorithmic-orgasm-decoding-ai-s-role-in-our-future-love-lives-and-the-end-of-days",
+      },{id: "post-the-algorithmic-orgasm-decoding-ai-39-s-role-in-our-future-love-lives-and-the-end-of-days",
         
-          title: "The Algorithmic Orgasm Decoding Ai S Role In Our Future Love Lives And...",
+          title: "The Algorithmic Orgasm: Decoding AI&#39;s Role in Our Future Love Lives and the...",
         
         description: "",
         section: "Posts",
