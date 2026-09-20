@@ -58,7 +58,227 @@ ninja.data = [{
           handler: () => {
             window.location.href = "/blog/books/";
           },
-        },{id: "post-the-unthinkable-how-a-rogue-snowflake-ai-could-shatter-your-data-security",
+        },{id: "post-forget-brain-games-this-ancient-secret-is-the-ultimate-neural-network-optimizer",
+        
+          title: "Forget Brain Games This Ancient Secret Is The Ultimate Neural Network Optimizer",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/blog/2026/forget-brain-games-this-ancient-secret-is-the-ultimate-neural-network-optimizer/";
+          
+        },
+      },{id: "post-the-uncensored-truth-a-machine-learning-engineer-s-raw-letter-to-the-future",
+        
+          title: "The Uncensored Truth A Machine Learning Engineer S Raw Letter To The Future...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/blog/2026/the-uncensored-truth-a-machine-learning-engineer-s-raw-letter-to-the-future/";
+          
+        },
+      },{id: "post-the-silent-revolution-how-one-open-source-python-library-just-broke-the-proprietary-document-lock",
+        
+          title: "The Silent Revolution How One Open Source Python Library Just Broke The Proprietary...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/blog/2026/the-silent-revolution-how-one-open-source-python-library-just-broke-the-proprietary-document-lock/";
+          
+        },
+      },{id: "post-forget-brain-games-this-ancient-hack-is-the-ultimate-brain-upgrade-backed-by-ai-neurotech",
+        
+          title: "Forget Brain Games This Ancient Hack Is The Ultimate Brain Upgrade Backed By...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/blog/2026/forget-brain-games-this-ancient-hack-is-the-ultimate-brain-upgrade-backed-by-ai-neurotech/";
+          
+        },
+      },{id: "post-the-ai-revolution-just-got-meaningful-typesafe-ai-unlocks-the-secret-to-true-intelligence-and-it-changes-everything",
+        
+          title: "The Ai Revolution Just Got Meaningful Typesafe Ai Unlocks The Secret To True...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/blog/2026/the-ai-revolution-just-got-meaningful-typesafe-ai-unlocks-the-secret-to-true-intelligence-and-it-changes-everything/";
+          
+        },
+      },{id: "post-the-python-typing-revolution-how-gradual-adoption-can-transform-your-codebase-from-chaos-to-clarity",
+        
+          title: "The Python Typing Revolution How Gradual Adoption Can Transform Your Codebase From Chaos...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/blog/2026/the-python-typing-revolution-how-gradual-adoption-can-transform-your-codebase-from-chaos-to-clarity/";
+          
+        },
+      },{id: "post-the-silent-persuaders-is-an-ai-chatbot-quietly-rewiring-your-beliefs",
+        
+          title: "The Silent Persuaders Is An Ai Chatbot Quietly Rewiring Your Beliefs",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/blog/2026/the-silent-persuaders-is-an-ai-chatbot-quietly-rewiring-your-beliefs/";
+          
+        },
+      },{id: "post-forget-brain-games-this-ancient-practice-is-the-ultimate-cognitive-upgrade-backed-by-neuro-ai",
+        
+          title: "Forget Brain Games: THIS Ancient Practice Is The Ultimate Cognitive Upgrade (Backed By...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/blog/2026/forget-brain-games-this-ancient-practice-is-the-ultimate-cognitive-upgrade-backed-by-neuro-ai/";
+          
+        },
+      },{id: "post-the-mind-bending-ai-how-chatbots-are-secretly-rewiring-your-brain-and-what-to-do-about-it",
+        
+          title: "THE MIND-BENDING AI: How Chatbots Are Secretly Rewiring Your Brain (And What To...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/blog/2026/the-mind-bending-ai-how-chatbots-are-secretly-rewiring-your-brain-and-what-to-do-about-it/";
+          
+        },
+      },{id: "post-ai-s-dirty-secret-why-we-re-building-castles-on-sand-and-how-ml-science-can-save-us",
+        
+          title: "Ai S Dirty Secret Why We Re Building Castles On Sand And How...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/blog/2026/ai-s-dirty-secret-why-we-re-building-castles-on-sand-and-how-ml-science-can-save-us/";
+          
+        },
+      },{id: "post-the-great-digital-heist-microsoft-exec-says-ai-scraping-is-largest-theft-of-labor-here-s-what-that-means-for-you",
+        
+          title: "The Great Digital Heist Microsoft Exec Says Ai Scraping Is Largest Theft Of...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/blog/2026/the-great-digital-heist-microsoft-exec-says-ai-scraping-is-largest-theft-of-labor-here-s-what-that-means-for-you/";
+          
+        },
+      },{id: "post-the-ai-apocalypse-is-canceled-how-bend-lang-on-gpus-just-saved-us-all-from-bot-blunders-and-your-job",
+        
+          title: "The Ai Apocalypse Is Canceled How Bend Lang On Gpus Just Saved Us...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/blog/2026/the-ai-apocalypse-is-canceled-how-bend-lang-on-gpus-just-saved-us-all-from-bot-blunders-and-your-job/";
+          
+        },
+      },{id: "post-the-ai-apocalypse-is-canceled-how-one-language-just-made-ai-unhackable-error-proof-and-it-runs-on-your-gpu",
+        
+          title: "The Ai Apocalypse Is Canceled How One Language Just Made Ai Unhackable Error...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/blog/2026/the-ai-apocalypse-is-canceled-how-one-language-just-made-ai-unhackable-error-proof-and-it-runs-on-your-gpu/";
+          
+        },
+      },{id: "post-forget-sudoku-this-ancient-skill-is-your-brain-39-s-ultimate-anti-aging-hack-backed-by-ai-amp-neuroscience",
+        
+          title: "FORGET Sudoku! This ANCIENT Skill Is Your Brain&#39;s ULTIMATE Anti-Aging Hack (Backed by...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/blog/2026/forget-sudoku-this-ancient-skill-is-your-brain-s-ultimate-anti-aging-hack-backed-by-ai-neuroscience/";
+          
+        },
+      },{id: "post-i-39-m-an-ml-engineer-here-39-s-the-unfiltered-truth-about-ai-that-keeps-me-up-at-night",
+        
+          title: "I&#39;m an ML Engineer. Here&#39;s The Unfiltered Truth About AI That Keeps Me...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/blog/2026/i-m-an-ml-engineer-here-s-the-unfiltered-truth-about-ai-that-keeps-me-up-at-night/";
+          
+        },
+      },{id: "post-the-silent-crisis-why-our-rush-to-deploy-ai-could-sabotage-the-future-of-machine-learning",
+        
+          title: "The Silent Crisis Why Our Rush To Deploy Ai Could Sabotage The Future...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/blog/2026/the-silent-crisis-why-our-rush-to-deploy-ai-could-sabotage-the-future-of-machine-learning/";
+          
+        },
+      },{id: "post-alibaba-just-unleashed-a-medical-revolution-this-open-source-ai-can-detect-cancer-amp-150-diseases-and-it-39-s-changing-everything",
+        
+          title: "Alibaba Just Unleashed a Medical Revolution: This Open-Source AI Can Detect Cancer &amp;...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/blog/2026/alibaba-just-unleashed-a-medical-revolution-this-open-source-ai-can-detect-cancer-150-diseases-and-it-s-changing-everything/";
+          
+        },
+      },{id: "post-bombshell-microsoft-director-warns-ai-scraping-is-39-largest-theft-of-labor-ever-39-is-your-work-next",
+        
+          title: "BOMBSHELL: Microsoft Director Warns AI Scraping is &#39;Largest Theft of Labor EVER.&#39; Is...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/blog/2026/bombshell-microsoft-director-warns-ai-scraping-is-largest-theft-of-labor-ever-is-your-work-next/";
+          
+        },
+      },{id: "post-the-algorithm-of-ecstasy-how-ai-is-rewriting-the-rules-of-sex-love-and-humanity-39-s-final-act",
+        
+          title: "The Algorithm of Ecstasy: How AI is Rewriting the Rules of Sex, Love,...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/blog/2026/the-algorithm-of-ecstasy-how-ai-is-rewriting-the-rules-of-sex-love-and-humanity-s-final-act/";
+          
+        },
+      },{id: "post-the-algorithmic-orgasm-decoding-ai-s-role-in-our-future-love-lives-and-the-end-of-days",
+        
+          title: "The Algorithmic Orgasm Decoding Ai S Role In Our Future Love Lives And...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/blog/2026/the-algorithmic-orgasm-decoding-ai-s-role-in-our-future-love-lives-and-the-end-of-days/";
+          
+        },
+      },{id: "post-the-unthinkable-how-a-rogue-snowflake-ai-could-shatter-your-data-security",
         
           title: "THE UNTHINKABLE: How A Rogue Snowflake AI Could Shatter Your Data Security",
         
