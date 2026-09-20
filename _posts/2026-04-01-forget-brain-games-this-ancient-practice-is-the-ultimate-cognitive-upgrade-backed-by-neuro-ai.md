@@ -43,15 +43,15 @@ In an ANN, learning occurs through **weight updates**. Each connection between a
 
 ### Building Internal Language Models: From Words to Worldviews
 
-Consider how an LLM processes language. It doesn't just store words; it learns the *relationships* between words, the *context* in which they appear, and the *semantic meaning* they convey. This is achieved through sophisticated architectures like the **Transformer network**, which uses self-attention mechanisms to weigh the importance of different words in a sequence.
+Consider how an LLM processes language. It doesn't just store words; it learns the _relationships_ between words, the _context_ in which they appear, and the _semantic meaning_ they convey. This is achieved through sophisticated architectures like the **Transformer network**, which uses self-attention mechanisms to weigh the importance of different words in a sequence.
 
 The human brain does something remarkably similar. When you learn a new language, you're not just memorizing isolated words. You're constructing an entirely new internal "language model" that encompasses:
 
-*   **Phonology:** The sound system (e.g., distinguishing 'r' and 'l' in Japanese).
-*   **Morphology:** Word structure (e.g., understanding prefixes and suffixes).
-*   **Syntax:** Sentence structure (e.g., subject-verb-object order).
-*   **Semantics:** Meaning (e.g., the subtle differences between synonyms).
-*   **Pragmatics:** Contextual usage and social rules.
+- **Phonology:** The sound system (e.g., distinguishing 'r' and 'l' in Japanese).
+- **Morphology:** Word structure (e.g., understanding prefixes and suffixes).
+- **Syntax:** Sentence structure (e.g., subject-verb-object order).
+- **Semantics:** Meaning (e.g., the subtle differences between synonyms).
+- **Pragmatics:** Contextual usage and social rules.
 
 This process forces your brain to create new neural representations for sounds, words, and grammatical structures, and crucially, to map these new representations onto existing concepts or to form entirely new conceptual frameworks.
 
@@ -113,12 +113,12 @@ Neuroimaging studies using fMRI and EEG have revealed fascinating structural and
 
 ### Key Brain Regions Involved:
 
-*   **Dorsolateral Prefrontal Cortex (DLPFC):** Crucial for executive functions, working memory, and cognitive control. Bilinguals show increased grey matter density and activity in this region, indicative of enhanced inhibitory control (suppressing the non-target language).
-*   **Anterior Cingulate Cortex (ACC):** Involved in conflict monitoring and error detection. Bilinguals often exhibit greater activity here, as they constantly monitor which language is appropriate and switch accordingly.
-*   **Inferior Parietal Lobule (IPL):** Plays a role in language processing, word retrieval, and attention.
-*   **Basal Ganglia:** Important for language switching and procedural learning (like grammatical rules).
+- **Dorsolateral Prefrontal Cortex (DLPFC):** Crucial for executive functions, working memory, and cognitive control. Bilinguals show increased grey matter density and activity in this region, indicative of enhanced inhibitory control (suppressing the non-target language).
+- **Anterior Cingulate Cortex (ACC):** Involved in conflict monitoring and error detection. Bilinguals often exhibit greater activity here, as they constantly monitor which language is appropriate and switch accordingly.
+- **Inferior Parietal Lobule (IPL):** Plays a role in language processing, word retrieval, and attention.
+- **Basal Ganglia:** Important for language switching and procedural learning (like grammatical rules).
 
-The continuous "juggling" of two language systems strengthens the connections between these regions, creating a more efficient and robust neural network. It's akin to optimizing the *architecture* of a complex software system for better performance and resilience.
+The continuous "juggling" of two language systems strengthens the connections between these regions, creating a more efficient and robust neural network. It's akin to optimizing the _architecture_ of a complex software system for better performance and resilience.
 
 ### A Hypothetical "Neuro-Linguistic Enhancement Platform" (NLEP)
 
@@ -173,10 +173,10 @@ While such a platform is largely hypothetical in its full scope (especially the 
 
 While the technical and neurological benefits are profound, the act of learning a new language offers a wealth of non-quantifiable advantages that contribute to overall mental well-being:
 
-*   **Cultural Immersion:** It opens doors to new cultures, perspectives, and ways of thinking, broadening your worldview and fostering empathy.
-*   **Social Connection:** It allows you to connect with people from different backgrounds, combatting isolation and building a richer social life – a known factor in cognitive health.
-*   **Sense of Achievement:** The journey is challenging, but each milestone reached provides a powerful sense of accomplishment, boosting self-esteem and motivation.
-*   **Reduced Anxiety and Stress:** Engaging in focused learning can be a form of mindfulness, distracting from daily stressors and promoting mental calm.
+- **Cultural Immersion:** It opens doors to new cultures, perspectives, and ways of thinking, broadening your worldview and fostering empathy.
+- **Social Connection:** It allows you to connect with people from different backgrounds, combatting isolation and building a richer social life – a known factor in cognitive health.
+- **Sense of Achievement:** The journey is challenging, but each milestone reached provides a powerful sense of accomplishment, boosting self-esteem and motivation.
+- **Reduced Anxiety and Stress:** Engaging in focused learning can be a form of mindfulness, distracting from daily stressors and promoting mental calm.
 
 These holistic benefits amplify the neurological advantages, creating a powerful synergy for brain health.
 
