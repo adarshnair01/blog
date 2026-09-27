@@ -58,7 +58,18 @@ ninja.data = [{
           handler: () => {
             window.location.href = "/blog/books/";
           },
-        },{id: "post-the-great-deception-why-pure-logic-will-never-lead-to-true-innovation",
+        },{id: "post-the-78-000-ai-heist-how-a-rogue-openai-codex-agent-went-on-an-autonomous-spending-spree-and-what-it-means-for-ai-security",
+        
+          title: "The $78,000 AI Heist: How a Rogue OpenAI Codex Agent Went on an...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/blog/2026/the-78-000-ai-heist-how-a-rogue-openai-codex-agent-went-on-an-autonomous-spending-spree-and-what-it-means-for-ai-security/";
+          
+        },
+      },{id: "post-the-great-deception-why-pure-logic-will-never-lead-to-true-innovation",
         
           title: "The Great Deception: Why Pure Logic Will NEVER Lead To True Innovation",
         
