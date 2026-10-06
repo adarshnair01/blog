@@ -58,7 +58,1514 @@ ninja.data = [{
           handler: () => {
             window.location.href = "/blog/books/";
           },
-        },{id: "post-the-78-000-ai-heist-how-a-rogue-openai-codex-agent-went-on-an-autonomous-spending-spree-and-what-it-means-for-ai-security",
+        },{id: "post-why-silicon-valley-is-terrified-of-germany-s-new-ai-rebel-inside-aleph-alpha-kolibri",
+        
+          title: "Why Silicon Valley is Terrified of Germany’s New AI Rebel: Inside Aleph Alpha...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/blog/2026/why-silicon-valley-is-terrified-of-germany-s-new-ai-rebel-inside-aleph-alpha-kolibri/";
+          
+        },
+      },{id: "post-stop-using-machine-learning-for-everything-why-decision-models-will-save-your-production-pipeline",
+        
+          title: "Stop Using Machine Learning for Everything: Why Decision Models Will Save Your Production...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/blog/2026/stop-using-machine-learning-for-everything-why-decision-models-will-save-your-production-pipeline/";
+          
+        },
+      },{id: "post-why-traditional-mobile-retargeting-is-dead-the-deep-learning-intent-revolution-breaking-dsps-today",
+        
+          title: "Why Traditional Mobile Retargeting Is Dead: The Deep Learning Intent Revolution Breaking DSPs...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/blog/2026/why-traditional-mobile-retargeting-is-dead-the-deep-learning-intent-revolution-breaking-dsps-today/";
+          
+        },
+      },{id: "post-math-is-dead-long-live-the-machine-will-ai-replace-pure-mathematicians-before-2030",
+        
+          title: "Math is Dead. Long Live the Machine: Will AI Replace Pure Mathematicians Before...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/blog/2026/math-is-dead-long-live-the-machine-will-ai-replace-pure-mathematicians-before-2030/";
+          
+        },
+      },{id: "post-the-wall-is-here-why-sam-altman-dario-amodei-and-elon-musk-are-terrified-of-what-comes-next",
+        
+          title: "The Wall is Here: Why Sam Altman, Dario Amodei, and Elon Musk Are...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/blog/2026/the-wall-is-here-why-sam-altman-dario-amodei-and-elon-musk-are-terrified-of-what-comes-next/";
+          
+        },
+      },{id: "post-stop-giving-autonomous-ai-agents-your-master-keys-how-amazon-bedrock-agentcore-just-saved-enterprise-security",
+        
+          title: "Stop Giving Autonomous AI Agents Your Master Keys: How Amazon Bedrock AgentCore Just...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/blog/2026/stop-giving-autonomous-ai-agents-your-master-keys-how-amazon-bedrock-agentcore-just-saved-enterprise-security/";
+          
+        },
+      },{id: "post-why-instacart-s-pivot-to-agentic-ml-modeling-is-completely-rewriting-the-rules-of-e-commerce",
+        
+          title: "Why Instacart’s Pivot to Agentic ML Modeling is Completely Rewriting the Rules of...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/blog/2026/why-instacart-s-pivot-to-agentic-ml-modeling-is-completely-rewriting-the-rules-of-e-commerce/";
+          
+        },
+      },{id: "post-stop-writing-polyglot-data-pipelines-like-it-s-2015-the-ultimate-blueprint-for-sanity",
+        
+          title: "Stop Writing Polyglot Data Pipelines Like It’s 2015: The Ultimate Blueprint for Sanity...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/blog/2026/stop-writing-polyglot-data-pipelines-like-it-s-2015-the-ultimate-blueprint-for-sanity/";
+          
+        },
+      },{id: "post-python-is-dying-long-live-edge-python-and-why-it-just-obliterated-cpython-on-loops",
+        
+          title: "Python is Dying. Long Live Edge Python (And Why It Just Obliterated CPython...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/blog/2026/python-is-dying-long-live-edge-python-and-why-it-just-obliterated-cpython-on-loops/";
+          
+        },
+      },{id: "post-inside-openai-s-meltdown-why-safety-keeps-losing-to-velocity",
+        
+          title: "Inside OpenAI’s Meltdown: Why Safety Keeps Losing to Velocity",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/blog/2026/inside-openai-s-meltdown-why-safety-keeps-losing-to-velocity/";
+          
+        },
+      },{id: "post-stop-writing-monolithic-python-scripts-why-your-polyglot-data-science-pipeline-is-failing",
+        
+          title: "Stop Writing Monolithic Python Scripts: Why Your Polyglot Data Science Pipeline Is Failing...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/blog/2026/stop-writing-monolithic-python-scripts-why-your-polyglot-data-science-pipeline-is-failing/";
+          
+        },
+      },{id: "post-how-instacart-automated-the-impossible-building-agentic-ml-modeling-that-actually-ships-to-production",
+        
+          title: "How Instacart Automated the Impossible: Building Agentic ML Modeling That Actually Ships to...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/blog/2026/how-instacart-automated-the-impossible-building-agentic-ml-modeling-that-actually-ships-to-production/";
+          
+        },
+      },{id: "post-you-39-ve-been-training-neural-networks-wrong-all-along-the-brutal-truth-about-mnist-mechanics",
+        
+          title: "You&#39;ve Been Training Neural Networks Wrong All Along: The Brutal Truth About MNIST...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/blog/2026/you-ve-been-training-neural-networks-wrong-all-along-the-brutal-truth-about-mnist-mechanics/";
+          
+        },
+      },{id: "post-yann-lecun-is-completely-unfazed-by-rogue-ai-and-honestly-he-s-right-here-s-the-architecture-proof",
+        
+          title: "Yann LeCun Is Completely Unfazed By Rogue AI—And Honestly, He’s Right (Here’s the...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/blog/2026/yann-lecun-is-completely-unfazed-by-rogue-ai-and-honestly-he-s-right-here-s-the-architecture-proof/";
+          
+        },
+      },{id: "post-why-yann-lecun-is-100-right-about-ai-doomerism-and-why-39-rogue-39-incidents-are-just-high-tech-glitches",
+        
+          title: "Why Yann LeCun is 100% Right About AI Doomerism (And Why &#39;Rogue&#39; Incidents...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/blog/2026/why-yann-lecun-is-100-right-about-ai-doomerism-and-why-rogue-incidents-are-just-high-tech-glitches/";
+          
+        },
+      },{id: "post-why-instacart-39-s-new-agentic-ml-architecture-will-make-traditional-data-scientists-obsolete-almost",
+        
+          title: "Why Instacart&#39;s New Agentic ML Architecture Will Make Traditional Data Scientists Obsolete (Almost)...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/blog/2026/why-instacart-s-new-agentic-ml-architecture-will-make-traditional-data-scientists-obsolete-almost/";
+          
+        },
+      },{id: "post-how-writing-80-less-code-with-llms-accidentally-cured-my-repetitive-strain-injury",
+        
+          title: "How Writing 80% Less Code with LLMs Accidentally Cured My Repetitive Strain Injury...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/blog/2026/how-writing-80-less-code-with-llms-accidentally-cured-my-repetitive-strain-injury/";
+          
+        },
+      },{id: "post-scary-ai-discovery-llms-are-now-teaching-themselves-how-to-lie-and-evade-detection",
+        
+          title: "Scary AI Discovery: LLMs Are Now Teaching Themselves How to Lie and Evade...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/blog/2026/scary-ai-discovery-llms-are-now-teaching-themselves-how-to-lie-and-evade-detection/";
+          
+        },
+      },{id: "post-the-10-million-typo-why-python-com-going-up-for-sale-exposes-the-dark-underbelly-of-developer-nostalgia",
+        
+          title: "The $10 Million Typo: Why Python.com Going Up for Sale Exposes the Dark...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/blog/2026/the-10-million-typo-why-python-com-going-up-for-sale-exposes-the-dark-underbelly-of-developer-nostalgia/";
+          
+        },
+      },{id: "post-the-wall-is-real-why-altman-amodei-and-musk-suddenly-agree-the-ai-boom-is-hitting-a-hard-technical-ceiling",
+        
+          title: "The Wall is Real: Why Altman, Amodei, and Musk Suddenly Agree the AI...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/blog/2026/the-wall-is-real-why-altman-amodei-and-musk-suddenly-agree-the-ai-boom-is-hitting-a-hard-technical-ceiling/";
+          
+        },
+      },{id: "post-we-just-burned-the-gpu-rulebook-running-qwen3-5-class-transformer-inference-entirely-in-pure-vhdl-silicon",
+        
+          title: "We Just Burned the GPU Rulebook: Running Qwen3.5-Class Transformer Inference Entirely in Pure...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/blog/2026/we-just-burned-the-gpu-rulebook-running-qwen3-5-class-transformer-inference-entirely-in-pure-vhdl-silicon/";
+          
+        },
+      },{id: "post-stop-prompting-like-a-noob-how-to-scale-intent-quality-and-artistry-with-ai-video-pipelines",
+        
+          title: "Stop Prompting Like a Noob: How to Scale Intent, Quality, and Artistry with...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/blog/2026/stop-prompting-like-a-noob-how-to-scale-intent-quality-and-artistry-with-ai-video-pipelines/";
+          
+        },
+      },{id: "post-inside-openai-39-s-meltdown-why-safety-is-losing-the-war-to-ship-fast",
+        
+          title: "Inside OpenAI&#39;s Meltdown: Why Safety Is Losing the War to Ship Fast",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/blog/2026/inside-openai-s-meltdown-why-safety-is-losing-the-war-to-ship-fast/";
+          
+        },
+      },{id: "post-stop-writing-python-only-pipelines-why-your-polyglot-data-science-stack-is-failing-and-how-to-fix-it",
+        
+          title: "Stop Writing Python-Only Pipelines: Why Your Polyglot Data Science Stack is Failing (And...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/blog/2026/stop-writing-python-only-pipelines-why-your-polyglot-data-science-stack-is-failing-and-how-to-fix-it/";
+          
+        },
+      },{id: "post-how-instacart-automated-our-entire-ml-pipeline-with-agentic-machine-learning-modeling-and-why-human-data-scientists-are-finally-doing-real-work",
+        
+          title: "How Instacart Automated Our Entire ML Pipeline with Agentic Machine Learning Modeling (And...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/blog/2026/how-instacart-automated-our-entire-ml-pipeline-with-agentic-machine-learning-modeling-and-why-human-data-scientists-are-finally-doing-real-work/";
+          
+        },
+      },{id: "post-why-mobile-dsps-are-ditching-heuristics-for-pretrained-deep-learning-intent-signals-and-you-should-too",
+        
+          title: "Why Mobile DSPs Are Ditching Heuristics for Pretrained Deep Learning Intent Signals (And...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/blog/2026/why-mobile-dsps-are-ditching-heuristics-for-pretrained-deep-learning-intent-signals-and-you-should-too/";
+          
+        },
+      },{id: "post-python-is-dead-long-live-python-how-edge-python-in-wasm-just-obliterated-cpython-on-loops",
+        
+          title: "Python is Dead, Long Live Python: How Edge Python in WASM Just Obliterated...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/blog/2026/python-is-dead-long-live-python-how-edge-python-in-wasm-just-obliterated-cpython-on-loops/";
+          
+        },
+      },{id: "post-stop-using-wrapper-apis-why-building-an-ai-agent-from-scratch-in-python-will-completely-change-how-you-code",
+        
+          title: "Stop Using Wrapper APIs: Why Building an AI Agent From Scratch in Python...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/blog/2026/stop-using-wrapper-apis-why-building-an-ai-agent-from-scratch-in-python-will-completely-change-how-you-code/";
+          
+        },
+      },{id: "post-yann-lecun-is-right-why-ai-isn-39-t-wiping-us-out-and-what-those-39-rogue-39-incidents-actually-teach-us",
+        
+          title: "Yann LeCun is Right: Why AI Isn&#39;t Wiping Us Out (And What Those...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/blog/2026/yann-lecun-is-right-why-ai-isn-t-wiping-us-out-and-what-those-rogue-incidents-actually-teach-us/";
+          
+        },
+      },{id: "post-python-com-is-for-sale-how-a-multimillion-dollar-typo-defines-the-architecture-of-the-internet",
+        
+          title: "Python.com Is For Sale: How a Multimillion-Dollar Typo Defines the Architecture of the...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/blog/2026/python-com-is-for-sale-how-a-multimillion-dollar-typo-defines-the-architecture-of-the-internet/";
+          
+        },
+      },{id: "post-why-your-mobile-dsp-is-literally-throwing-money-away-the-pretrained-intent-revolution",
+        
+          title: "Why Your Mobile DSP Is Literally Throwing Money Away: The Pretrained Intent Revolution...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/blog/2026/why-your-mobile-dsp-is-literally-throwing-money-away-the-pretrained-intent-revolution/";
+          
+        },
+      },{id: "post-we-let-autonomous-ai-agents-build-instacart-s-ml-models-and-humans-are-suddenly-optional",
+        
+          title: "We Let Autonomous AI Agents Build Instacart’s ML Models—And Humans Are Suddenly Optional...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/blog/2026/we-let-autonomous-ai-agents-build-instacart-s-ml-models-and-humans-are-suddenly-optional/";
+          
+        },
+      },{id: "post-why-traditional-mobile-dsps-are-dead-broke-how-pretrained-deep-learning-intent-signals-are-rewriting-adtech",
+        
+          title: "Why Traditional Mobile DSPs Are Dead Broke: How Pretrained Deep Learning Intent Signals...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/blog/2026/why-traditional-mobile-dsps-are-dead-broke-how-pretrained-deep-learning-intent-signals-are-rewriting-adtech/";
+          
+        },
+      },{id: "post-python-on-the-jvm-pyronaut-is-doing-the-impossible-and-enterprise-architects-are-terrified",
+        
+          title: "Python on the JVM? Pyronaut Is Doing the Impossible—And Enterprise Architects Are Terrified...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/blog/2026/python-on-the-jvm-pyronaut-is-doing-the-impossible-and-enterprise-architects-are-terrified/";
+          
+        },
+      },{id: "post-why-traditional-mobile-dsps-are-dying-and-how-pretrained-deep-learning-intent-signals-are-replacing-them",
+        
+          title: "Why Traditional Mobile DSPs Are Dying (And How Pretrained Deep Learning Intent Signals...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/blog/2026/why-traditional-mobile-dsps-are-dying-and-how-pretrained-deep-learning-intent-signals-are-replacing-them/";
+          
+        },
+      },{id: "post-you-39-ve-been-training-neural-networks-all-wrong-the-brutal-truth-about-mnist-mechanics",
+        
+          title: "You&#39;ve Been Training Neural Networks All Wrong: The Brutal Truth About MNIST Mechanics...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/blog/2026/you-ve-been-training-neural-networks-all-wrong-the-brutal-truth-about-mnist-mechanics/";
+          
+        },
+      },{id: "post-the-great-synthetic-slop-tsunami-who-is-actually-cleaning-up-the-trillions-of-garbage-tokens-killing-the-internet",
+        
+          title: "The Great Synthetic Slop Tsunami: Who Is Actually Cleaning Up the Trillions of...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/blog/2026/the-great-synthetic-slop-tsunami-who-is-actually-cleaning-up-the-trillions-of-garbage-tokens-killing-the-internet/";
+          
+        },
+      },{id: "post-we-locked-llms-inside-a-virtual-robot-prison-and-now-ai-safety-researchers-are-losing-their-minds",
+        
+          title: "We Locked LLMs Inside a Virtual Robot Prison and Now AI Safety Researchers...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/blog/2026/we-locked-llms-inside-a-virtual-robot-prison-and-now-ai-safety-researchers-are-losing-their-minds/";
+          
+        },
+      },{id: "post-why-tcp-is-completely-dead-for-ai-clusters-and-what-s-replacing-it",
+        
+          title: "Why TCP is Completely Dead for AI Clusters (And What’s Replacing It)",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/blog/2026/why-tcp-is-completely-dead-for-ai-clusters-and-what-s-replacing-it/";
+          
+        },
+      },{id: "post-the-wall-is-here-why-sam-altman-dario-amodei-and-elon-musk-suddenly-agree-on-the-ai-slowdown",
+        
+          title: "The Wall Is Here: Why Sam Altman, Dario Amodei, and Elon Musk Suddenly...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/blog/2026/the-wall-is-here-why-sam-altman-dario-amodei-and-elon-musk-suddenly-agree-on-the-ai-slowdown/";
+          
+        },
+      },{id: "post-stop-writing-python-scripts-how-polyglot-data-science-pipelines-are-destroying-legacy-mlops",
+        
+          title: "Stop Writing Python Scripts: How Polyglot Data Science Pipelines Are Destroying Legacy MLOps...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/blog/2026/stop-writing-python-scripts-how-polyglot-data-science-pipelines-are-destroying-legacy-mlops/";
+          
+        },
+      },{id: "post-why-traditional-mobile-retargeting-is-dead-how-pretrained-deep-learning-intent-signals-are-revolutionizing-real-time-bidding",
+        
+          title: "Why Traditional Mobile Retargeting Is Dead: How Pretrained Deep Learning Intent Signals Are...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/blog/2026/why-traditional-mobile-retargeting-is-dead-how-pretrained-deep-learning-intent-signals-are-revolutionizing-real-time-bidding/";
+          
+        },
+      },{id: "post-the-wall-is-real-why-altman-amodei-and-musk-suddenly-agree-the-ai-boom-is-breaking-physics",
+        
+          title: "The Wall is Real: Why Altman, Amodei, and Musk Suddenly Agree the AI...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/blog/2026/the-wall-is-real-why-altman-amodei-and-musk-suddenly-agree-the-ai-boom-is-breaking-physics/";
+          
+        },
+      },{id: "post-stop-using-wrapper-apis-why-you-must-build-your-own-ai-agent-from-scratch-in-python-today",
+        
+          title: "Stop Using Wrapper APIs: Why You Must Build Your Own AI Agent from...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/blog/2026/stop-using-wrapper-apis-why-you-must-build-your-own-ai-agent-from-scratch-in-python-today/";
+          
+        },
+      },{id: "post-stop-guessing-clicks-how-pretrained-deep-learning-intent-signals-are-killing-traditional-mobile-dsps",
+        
+          title: "Stop Guessing Clicks: How Pretrained Deep Learning Intent Signals Are Killing Traditional Mobile...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/blog/2026/stop-guessing-clicks-how-pretrained-deep-learning-intent-signals-are-killing-traditional-mobile-dsps/";
+          
+        },
+      },{id: "post-you-are-wasting-millions-on-machine-learning-when-a-simple-if-statement-will-make-you-richer",
+        
+          title: "You Are Wasting Millions on Machine Learning When a Simple IF Statement Will...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/blog/2026/you-are-wasting-millions-on-machine-learning-when-a-simple-if-statement-will-make-you-richer/";
+          
+        },
+      },{id: "post-the-polyglot-data-science-nightmare-why-your-reproducible-pipeline-is-lying-to-you",
+        
+          title: "The Polyglot Data Science Nightmare: Why Your Reproducible Pipeline Is Lying To You...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/blog/2026/the-polyglot-data-science-nightmare-why-your-reproducible-pipeline-is-lying-to-you/";
+          
+        },
+      },{id: "post-you-39-re-training-mnist-all-wrong-the-brutal-math-and-code-behind-deep-learning-mechanics",
+        
+          title: "You&#39;re Training MNIST All Wrong: The Brutal Math and Code Behind Deep Learning...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/blog/2026/you-re-training-mnist-all-wrong-the-brutal-math-and-code-behind-deep-learning-mechanics/";
+          
+        },
+      },{id: "post-the-great-ai-purge-why-pop-os-just-banned-llm-code-and-blew-up-the-linux-world",
+        
+          title: "The Great AI Purge: Why Pop!_OS Just Banned LLM Code and Blew Up...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/blog/2026/the-great-ai-purge-why-pop-os-just-banned-llm-code-and-blew-up-the-linux-world/";
+          
+        },
+      },{id: "post-python-3-15-is-breaking-the-speed-limit-and-everything-you-know-about-interpreted-languages-is-wrong",
+        
+          title: "Python 3.15 Is Breaking the Speed Limit—And Everything You Know About Interpreted Languages...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/blog/2026/python-3-15-is-breaking-the-speed-limit-and-everything-you-know-about-interpreted-languages-is-wrong/";
+          
+        },
+      },{id: "post-stop-hardcoding-data-pipelines-why-your-polyglot-ai-architecture-is-a-ticking-time-bomb",
+        
+          title: "Stop Hardcoding Data Pipelines: Why Your Polyglot AI Architecture Is A Ticking Time...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/blog/2026/stop-hardcoding-data-pipelines-why-your-polyglot-ai-architecture-is-a-ticking-time-bomb/";
+          
+        },
+      },{id: "post-python-on-the-jvm-is-finally-fast-how-pyronaut-just-broke-the-rules-of-web-frameworks",
+        
+          title: "Python on the JVM is Finally Fast: How Pyronaut Just Broke the Rules...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/blog/2026/python-on-the-jvm-is-finally-fast-how-pyronaut-just-broke-the-rules-of-web-frameworks/";
+          
+        },
+      },{id: "post-the-openai-safety-exodus-inside-the-architectural-flaws-threatening-the-ai-gold-rush",
+        
+          title: "The OpenAI Safety Exodus: Inside the Architectural Flaws Threatening the AI Gold Rush...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/blog/2026/the-openai-safety-exodus-inside-the-architectural-flaws-threatening-the-ai-gold-rush/";
+          
+        },
+      },{id: "post-python-is-dying-long-live-edge-python-how-wasm-just-shattered-cpython-39-s-loop-speed-limits",
+        
+          title: "Python is Dying. Long Live Edge Python: How WASM Just Shattered CPython&#39;s Loop...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/blog/2026/python-is-dying-long-live-edge-python-how-wasm-just-shattered-cpython-s-loop-speed-limits/";
+          
+        },
+      },{id: "post-stop-using-machine-learning-for-everything-why-decision-models-just-destroyed-my-neural-net",
+        
+          title: "Stop Using Machine Learning for Everything: Why Decision Models Just Destroyed My Neural...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/blog/2026/stop-using-machine-learning-for-everything-why-decision-models-just-destroyed-my-neural-net/";
+          
+        },
+      },{id: "post-how-instacart-automated-our-entire-data-science-pipeline-and-why-your-job-might-never-be-the-same",
+        
+          title: "How Instacart Automated Our Entire Data Science Pipeline and Why Your Job Might...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/blog/2026/how-instacart-automated-our-entire-data-science-pipeline-and-why-your-job-might-never-be-the-same/";
+          
+        },
+      },{id: "post-the-ultimate-ai-secret-silicon-valley-doesn-t-want-you-to-know-how-aleph-alpha-s-kolibri-just-broke-the-rules-of-sovereign-ai",
+        
+          title: "The Ultimate AI Secret Silicon Valley Doesn’t Want You to Know: How Aleph...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/blog/2026/the-ultimate-ai-secret-silicon-valley-doesn-t-want-you-to-know-how-aleph-alpha-s-kolibri-just-broke-the-rules-of-sovereign-ai/";
+          
+        },
+      },{id: "post-python-on-the-jvm-pyronaut-just-broke-everything-you-know-about-backend-architecture",
+        
+          title: "Python on the JVM? Pyronaut Just Broke Everything You Know About Backend Architecture...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/blog/2026/python-on-the-jvm-pyronaut-just-broke-everything-you-know-about-backend-architecture/";
+          
+        },
+      },{id: "post-the-wall-is-here-why-sam-altman-dario-amodei-and-elon-musk-are-suddenly-panicking-about-the-ai-compute-wall",
+        
+          title: "The Wall Is Here: Why Sam Altman, Dario Amodei, and Elon Musk Are...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/blog/2026/the-wall-is-here-why-sam-altman-dario-amodei-and-elon-musk-are-suddenly-panicking-about-the-ai-compute-wall/";
+          
+        },
+      },{id: "post-the-macos-python-apocalypse-is-here-why-everything-you-know-about-python-on-apple-silicon-is-about-to-break",
+        
+          title: "The macOS Python Apocalypse Is Here: Why Everything You Know About Python on...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/blog/2026/the-macos-python-apocalypse-is-here-why-everything-you-know-about-python-on-apple-silicon-is-about-to-break/";
+          
+        },
+      },{id: "post-stop-giving-ai-agents-your-master-keys-how-to-actually-master-end-user-oauth-consent-in-amazon-bedrock-agentcore",
+        
+          title: "Stop Giving AI Agents Your Master Keys: How to Actually Master End-User OAuth...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/blog/2026/stop-giving-ai-agents-your-master-keys-how-to-actually-master-end-user-oauth-consent-in-amazon-bedrock-agentcore/";
+          
+        },
+      },{id: "post-why-your-python-code-is-bleeding-memory-and-how-to-stop-the-bloodbath-before-production-catches-fire",
+        
+          title: "Why Your Python Code is Bleeding Memory (And How to Stop the Bloodbath...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/blog/2026/why-your-python-code-is-bleeding-memory-and-how-to-stop-the-bloodbath-before-production-catches-fire/";
+          
+        },
+      },{id: "post-the-scary-way-ai-is-learning-to-lie-to-us-without-us-even-knowing",
+        
+          title: "The SCARY Way AI Is Learning To Lie To Us Without Us Even...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/blog/2026/the-scary-way-ai-is-learning-to-lie-to-us-without-us-even-knowing/";
+          
+        },
+      },{id: "post-why-python-s-slow-execution-is-finally-dead-meet-turbopython",
+        
+          title: "Why Python’s Slow Execution is Finally Dead: Meet TurboPython",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/blog/2026/why-python-s-slow-execution-is-finally-dead-meet-turbopython/";
+          
+        },
+      },{id: "post-stop-buying-overpriced-ai-wrappers-why-you-need-to-build-an-autonomous-agent-from-scratch-in-python-right-now",
+        
+          title: "Stop Buying Overpriced AI Wrappers: Why You Need to Build an Autonomous Agent...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/blog/2026/stop-buying-overpriced-ai-wrappers-why-you-need-to-build-an-autonomous-agent-from-scratch-in-python-right-now/";
+          
+        },
+      },{id: "post-why-traditional-mobile-retargeting-is-dead-and-how-pretrained-deep-learning-intent-signals-just-replaced-it",
+        
+          title: "Why Traditional Mobile Retargeting Is Dead (And How Pretrained Deep Learning Intent Signals...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/blog/2026/why-traditional-mobile-retargeting-is-dead-and-how-pretrained-deep-learning-intent-signals-just-replaced-it/";
+          
+        },
+      },{id: "post-we-just-burned-a-qwen3-5-class-llm-directly-into-silicon-and-software-engineers-are-terrified",
+        
+          title: "We Just Burned a Qwen3.5-Class LLM Directly Into Silicon—And Software Engineers Are Terrified...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/blog/2026/we-just-burned-a-qwen3-5-class-llm-directly-into-silicon-and-software-engineers-are-terrified/";
+          
+        },
+      },{id: "post-scary-llms-are-now-learning-how-to-evade-ai-safety-monitors-without-any-new-training-data",
+        
+          title: "Scary: LLMs Are Now Learning How to Evade AI Safety Monitors Without Any...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/blog/2026/scary-llms-are-now-learning-how-to-evade-ai-safety-monitors-without-any-new-training-data/";
+          
+        },
+      },{id: "post-python-com-is-for-sale-and-it-exposes-everything-wrong-with-modern-tech-real-estate",
+        
+          title: "Python.com Is for Sale and It Exposes Everything Wrong with Modern Tech Real...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/blog/2026/python-com-is-for-sale-and-it-exposes-everything-wrong-with-modern-tech-real-estate/";
+          
+        },
+      },{id: "post-stop-giving-ai-agents-the-keys-to-your-kingdom-how-to-master-oauth-consent-with-amazon-bedrock-agentcore-before-it-39-s-too-late",
+        
+          title: "Stop Giving AI Agents the Keys to Your Kingdom: How to Master OAuth...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/blog/2026/stop-giving-ai-agents-the-keys-to-your-kingdom-how-to-master-oauth-consent-with-amazon-bedrock-agentcore-before-it-s-too-late/";
+          
+        },
+      },{id: "post-stop-writing-prompt-engineering-hacks-why-giving-your-llm-a-dsl-is-the-only-hack-that-actually-scales",
+        
+          title: "Stop Writing Prompt Engineering Hacks: Why Giving Your LLM a DSL is the...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/blog/2026/stop-writing-prompt-engineering-hacks-why-giving-your-llm-a-dsl-is-the-only-hack-that-actually-scales/";
+          
+        },
+      },{id: "post-the-macos-python-reckoning-why-everything-you-know-about-development-on-apple-silicon-is-broken",
+        
+          title: "The macOS Python Reckoning: Why Everything You Know About Development on Apple Silicon...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/blog/2026/the-macos-python-reckoning-why-everything-you-know-about-development-on-apple-silicon-is-broken/";
+          
+        },
+      },{id: "post-inside-openai-39-s-meltdown-why-safety-is-taking-a-backseat-to-velocity",
+        
+          title: "Inside OpenAI&#39;s Meltdown: Why Safety Is Taking a Backseat to Velocity",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/blog/2026/inside-openai-s-meltdown-why-safety-is-taking-a-backseat-to-velocity/";
+          
+        },
+      },{id: "post-stop-using-machine-learning-for-everything-why-decision-models-will-save-your-production-pipeline",
+        
+          title: "Stop Using Machine Learning for Everything: Why Decision Models Will Save Your Production...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/blog/2026/stop-using-machine-learning-for-everything-why-decision-models-will-save-your-production-pipeline/";
+          
+        },
+      },{id: "post-stop-asking-your-llm-to-write-code-why-giving-your-ai-a-custom-dsl-is-the-ultimate-cheat-code",
+        
+          title: "Stop Asking Your LLM to Write Code: Why Giving Your AI a Custom...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/blog/2026/stop-asking-your-llm-to-write-code-why-giving-your-ai-a-custom-dsl-is-the-ultimate-cheat-code/";
+          
+        },
+      },{id: "post-you-39-re-training-mnist-all-wrong-the-brutal-mathematics-of-why-your-neural-network-actually-works",
+        
+          title: "You&#39;re Training MNIST All Wrong: The Brutal Mathematics of Why Your Neural Network...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/blog/2026/you-re-training-mnist-all-wrong-the-brutal-mathematics-of-why-your-neural-network-actually-works/";
+          
+        },
+      },{id: "post-why-yann-lecun-is-right-ai-isn-t-ending-humanity-but-our-lack-of-engineering-rigor-might",
+        
+          title: "Why Yann LeCun Is Right: AI Isn’t Ending Humanity, But Our Lack of...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/blog/2026/why-yann-lecun-is-right-ai-isn-t-ending-humanity-but-our-lack-of-engineering-rigor-might/";
+          
+        },
+      },{id: "post-the-wall-is-real-why-altman-amodei-and-musk-suddenly-agree-the-ai-boom-is-hitting-a-hard-technical-ceiling",
+        
+          title: "The Wall is Real: Why Altman, Amodei, and Musk Suddenly Agree the AI...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/blog/2026/the-wall-is-real-why-altman-amodei-and-musk-suddenly-agree-the-ai-boom-is-hitting-a-hard-technical-ceiling/";
+          
+        },
+      },{id: "post-how-instacart-is-letting-ai-write-train-and-deploy-its-own-ml-models-and-why-data-scientists-are-terrified",
+        
+          title: "How Instacart is Letting AI Write, Train, and Deploy Its Own ML Models...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/blog/2026/how-instacart-is-letting-ai-write-train-and-deploy-its-own-ml-models-and-why-data-scientists-are-terrified/";
+          
+        },
+      },{id: "post-the-wall-is-real-why-altman-amodei-and-musk-suddenly-agree-the-ai-era-is-hitting-turbulence",
+        
+          title: "The Wall is Real: Why Altman, Amodei, and Musk Suddenly Agree the AI...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/blog/2026/the-wall-is-real-why-altman-amodei-and-musk-suddenly-agree-the-ai-era-is-hitting-turbulence/";
+          
+        },
+      },{id: "post-python-is-dead-long-live-edge-python-how-wasm-just-shattered-cpython-39-s-speed-limits",
+        
+          title: "Python is Dead. Long Live Edge Python: How WASM Just Shattered CPython&#39;s Speed...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/blog/2026/python-is-dead-long-live-edge-python-how-wasm-just-shattered-cpython-s-speed-limits/";
+          
+        },
+      },{id: "post-inside-openai-39-s-meltdown-why-safety-is-losing-to-the-seduction-of-superintelligence",
+        
+          title: "Inside OpenAI&#39;s Meltdown: Why Safety Is Losing to the Seduction of Superintelligence",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/blog/2026/inside-openai-s-meltdown-why-safety-is-losing-to-the-seduction-of-superintelligence/";
+          
+        },
+      },{id: "post-your-ai-agents-are-stealing-user-data-how-amazon-bedrock-agentcore-finally-fixes-the-oauth-nightmare",
+        
+          title: "Your AI Agents Are Stealing User Data: How Amazon Bedrock AgentCore Finally Fixes...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/blog/2026/your-ai-agents-are-stealing-user-data-how-amazon-bedrock-agentcore-finally-fixes-the-oauth-nightmare/";
+          
+        },
+      },{id: "post-you-39-re-training-mnist-all-wrong-the-brutal-math-and-mechanics-hidden-inside-the-hello-world-of-deep-learning",
+        
+          title: "You&#39;re Training MNIST All Wrong: The Brutal Math and Mechanics Hidden Inside the...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/blog/2026/you-re-training-mnist-all-wrong-the-brutal-math-and-mechanics-hidden-inside-the-hello-world-of-deep-learning/";
+          
+        },
+      },{id: "post-you-39-re-learning-ai-all-wrong-why-prompting-is-dead-and-what-comes-next-for-engineers",
+        
+          title: "You&#39;re Learning AI All Wrong: Why Prompting is Dead and What Comes Next...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/blog/2026/you-re-learning-ai-all-wrong-why-prompting-is-dead-and-what-comes-next-for-engineers/";
+          
+        },
+      },{id: "post-the-linux-distro-that-just-defied-silicon-valley-why-pop-os-banned-ai-code-and-broke-the-mold",
+        
+          title: "The Linux Distro That Just Defied Silicon Valley: Why Pop!_OS Banned AI Code...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/blog/2026/the-linux-distro-that-just-defied-silicon-valley-why-pop-os-banned-ai-code-and-broke-the-mold/";
+          
+        },
+      },{id: "post-why-big-tech-is-terrified-you-39-re-bringing-your-llms-home-and-how-to-do-it-before-they-pull-the-plug",
+        
+          title: "Why Big Tech is Terrified You&#39;re Bringing Your LLMs Home (And How to...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/blog/2026/why-big-tech-is-terrified-you-re-bringing-your-llms-home-and-how-to-do-it-before-they-pull-the-plug/";
+          
+        },
+      },{id: "post-math-is-dead-long-live-the-machine-will-ai-replace-pure-mathematicians",
+        
+          title: "Math is Dead. Long Live the Machine: Will AI Replace Pure Mathematicians?",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/blog/2026/math-is-dead-long-live-the-machine-will-ai-replace-pure-mathematicians/";
+          
+        },
+      },{id: "post-why-big-tech-doesn-39-t-want-you-to-know-your-local-llm-destroys-cloud-ai",
+        
+          title: "Why Big Tech Doesn&#39;t Want You to Know Your Local LLM Destroys Cloud...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/blog/2026/why-big-tech-doesn-t-want-you-to-know-your-local-llm-destroys-cloud-ai/";
+          
+        },
+      },{id: "post-stop-using-mnist-like-a-black-box-the-brutal-math-beneath-every-neural-network",
+        
+          title: "Stop Using MNIST Like A Black Box: The Brutal Math Beneath Every Neural...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/blog/2026/stop-using-mnist-like-a-black-box-the-brutal-math-beneath-every-neural-network/";
+          
+        },
+      },{id: "post-the-wall-is-here-why-altman-amodei-and-musk-suddenly-agree-the-ai-boom-is-hitting-a-hard-limit",
+        
+          title: "The Wall Is Here: Why Altman, Amodei, and Musk Suddenly Agree the AI...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/blog/2026/the-wall-is-here-why-altman-amodei-and-musk-suddenly-agree-the-ai-boom-is-hitting-a-hard-limit/";
+          
+        },
+      },{id: "post-the-wall-is-here-why-sam-altman-dario-amodei-and-elon-musk-are-suddenly-panicking-about-the-ai-compute-crisis",
+        
+          title: "The Wall Is Here: Why Sam Altman, Dario Amodei, and Elon Musk Are...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/blog/2026/the-wall-is-here-why-sam-altman-dario-amodei-and-elon-musk-are-suddenly-panicking-about-the-ai-compute-crisis/";
+          
+        },
+      },{id: "post-we-fired-our-50k-month-llm-browser-agent-here-39-s-why-jev-replaced-it-in-200-lines-of-code",
+        
+          title: "We Fired Our $50K/Month LLM Browser Agent: Here&#39;s Why Jev Replaced It in...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/blog/2026/we-fired-our-50k-month-llm-browser-agent-here-s-why-jev-replaced-it-in-200-lines-of-code/";
+          
+        },
+      },{id: "post-the-ghost-in-the-gavel-how-an-ai-video-of-a-murder-victim-overturned-a-life-sentence",
+        
+          title: "The Ghost in the Gavel: How an AI Video of a Murder Victim...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/blog/2026/the-ghost-in-the-gavel-how-an-ai-video-of-a-murder-victim-overturned-a-life-sentence/";
+          
+        },
+      },{id: "post-why-openai-39-s-safety-culture-just-collapsed-the-mathematical-betrayal-behind-superalignment",
+        
+          title: "Why OpenAI&#39;s Safety Culture Just Collapsed: The Mathematical Betrayal Behind Superalignment",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/blog/2026/why-openai-s-safety-culture-just-collapsed-the-mathematical-betrayal-behind-superalignment/";
+          
+        },
+      },{id: "post-the-mind-reader-paradox-how-llms-learned-to-stealthily-bypass-latent-neural-monitors-from-simple-feedback",
+        
+          title: "The Mind-Reader Paradox: How LLMs Learned to Stealthily Bypass Latent Neural Monitors from...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/blog/2026/the-mind-reader-paradox-how-llms-learned-to-stealthily-bypass-latent-neural-monitors-from-simple-feedback/";
+          
+        },
+      },{id: "post-why-system76-banned-ai-code-in-pop-os-and-why-every-tech-company-will-follow",
+        
+          title: "Why System76 Banned AI Code in Pop!_OS (And Why Every Tech Company Will...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/blog/2026/why-system76-banned-ai-code-in-pop-os-and-why-every-tech-company-will-follow/";
+          
+        },
+      },{id: "post-python-com-is-up-for-sale-the-10-million-cybersecurity-timebomb-threatening-modern-software-infrastructure",
+        
+          title: "Python.com Is Up for Sale: The $10 Million Cybersecurity Timebomb Threatening Modern Software...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/blog/2026/python-com-is-up-for-sale-the-10-million-cybersecurity-timebomb-threatening-modern-software-infrastructure/";
+          
+        },
+      },{id: "post-stop-using-machine-learning-for-problems-that-need-basic-logic-your-ai-pipeline-is-over-engineered",
+        
+          title: "Stop Using Machine Learning for Problems That Need Basic Logic (Your AI Pipeline...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/blog/2026/stop-using-machine-learning-for-problems-that-need-basic-logic-your-ai-pipeline-is-over-engineered/";
+          
+        },
+      },{id: "post-why-copilot-is-rotting-your-brain-how-to-build-an-anti-fragile-learning-stack-in-the-age-of-llms",
+        
+          title: "Why Copilot Is Rotting Your Brain: How to Build an Anti-Fragile Learning Stack...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/blog/2026/why-copilot-is-rotting-your-brain-how-to-build-an-anti-fragile-learning-stack-in-the-age-of-llms/";
+          
+        },
+      },{id: "post-your-ai-agents-are-stealing-your-data-unless-you-use-this-secret-amazon-security-hack",
+        
+          title: "Your AI Agents Are Stealing Your Data (Unless You Use This Secret Amazon...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/blog/2026/your-ai-agents-are-stealing-your-data-unless-you-use-this-secret-amazon-security-hack/";
+          
+        },
+      },{id: "post-the-death-of-the-english-prompt-why-your-llm-is-failing-without-domain-specific-languages-dsls",
+        
+          title: "The Death of the English Prompt: Why Your LLM is Failing Without Domain-Specific...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/blog/2026/the-death-of-the-english-prompt-why-your-llm-is-failing-without-domain-specific-languages-dsls/";
+          
+        },
+      },{id: "post-your-ai-agents-are-stealing-your-users-39-data-and-how-amazon-bedrock-agentcore-fixes-this-security-nightmare",
+        
+          title: "Your AI Agents Are Stealing Your Users&#39; Data (And How Amazon Bedrock AgentCore...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/blog/2026/your-ai-agents-are-stealing-your-users-data-and-how-amazon-bedrock-agentcore-fixes-this-security-nightmare/";
+          
+        },
+      },{id: "post-why-pop-os-just-banned-ai-generated-code-and-why-your-favorite-distro-might-be-next",
+        
+          title: "Why Pop!_OS Just Banned AI-Generated Code—And Why Your Favorite Distro Might Be Next...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/blog/2026/why-pop-os-just-banned-ai-generated-code-and-why-your-favorite-distro-might-be-next/";
+          
+        },
+      },{id: "post-the-death-of-idfa-was-a-lie-how-mobile-dsps-are-using-pretrained-deep-learning-intent-signals-to-read-your-mind",
+        
+          title: "The Death of IDFA Was a Lie: How Mobile DSPs Are Using Pretrained...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/blog/2026/the-death-of-idfa-was-a-lie-how-mobile-dsps-are-using-pretrained-deep-learning-intent-signals-to-read-your-mind/";
+          
+        },
+      },{id: "post-stop-over-engineering-why-you-must-build-your-own-ai-agents-from-scratch-in-python",
+        
+          title: "Stop Over-Engineering: Why You Must Build Your Own AI Agents From Scratch in...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/blog/2026/stop-over-engineering-why-you-must-build-your-own-ai-agents-from-scratch-in-python/";
+          
+        },
+      },{id: "post-10-milliseconds-to-decide-how-pretrained-deep-learning-intent-signals-just-killed-legacy-dsps",
+        
+          title: "10 Milliseconds to Decide: How Pretrained Deep Learning Intent Signals Just Killed Legacy...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/blog/2026/10-milliseconds-to-decide-how-pretrained-deep-learning-intent-signals-just-killed-legacy-dsps/";
+          
+        },
+      },{id: "post-stop-using-langchain-why-building-an-ai-agent-from-scratch-in-python-is-your-new-superpower",
+        
+          title: "Stop Using LangChain: Why Building an AI Agent from Scratch in Python is...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/blog/2026/stop-using-langchain-why-building-an-ai-agent-from-scratch-in-python-is-your-new-superpower/";
+          
+        },
+      },{id: "post-the-death-of-the-scaling-hypothesis-why-altman-amodei-and-musk-just-hit-the-same-wall",
+        
+          title: "The Death of the Scaling Hypothesis: Why Altman, Amodei, and Musk Just Hit...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/blog/2026/the-death-of-the-scaling-hypothesis-why-altman-amodei-and-musk-just-hit-the-same-wall/";
+          
+        },
+      },{id: "post-ai-is-not-killing-art-you-39-re-just-using-it-wrong-how-to-scale-creative-intent-without-losing-your-soul",
+        
+          title: "AI is Not Killing Art—You&#39;re Just Using It Wrong: How to Scale Creative...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/blog/2026/ai-is-not-killing-art-you-re-just-using-it-wrong-how-to-scale-creative-intent-without-losing-your-soul/";
+          
+        },
+      },{id: "post-the-great-ai-slop-apocalypse-who-is-cleaning-up-the-terabytes-of-garbage-llms-generate",
+        
+          title: "The Great AI Slop Apocalypse: Who is Cleaning Up the Terabytes of Garbage...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/blog/2026/the-great-ai-slop-apocalypse-who-is-cleaning-up-the-terabytes-of-garbage-llms-generate/";
+          
+        },
+      },{id: "post-stop-prompting-in-english-why-your-llms-are-failing-and-the-secret-power-of-dsls",
+        
+          title: "Stop Prompting in English: Why Your LLMs Are Failing and the Secret Power...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/blog/2026/stop-prompting-in-english-why-your-llms-are-failing-and-the-secret-power-of-dsls/";
+          
+        },
+      },{id: "post-under-the-hood-of-mnist-the-brutal-mathematical-machinery-they-don-39-t-teach-in-bootcamp",
+        
+          title: "Under the Hood of MNIST: The Brutal Mathematical Machinery They Don&#39;t Teach in...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/blog/2026/under-the-hood-of-mnist-the-brutal-mathematical-machinery-they-don-t-teach-in-bootcamp/";
+          
+        },
+      },{id: "post-stop-mixing-python-and-r-until-you-do-this-the-rise-of-39-t-39-for-polyglot-reproducibility",
+        
+          title: "Stop Mixing Python and R Until You Do This: The Rise of &#39;T&#39;...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/blog/2026/stop-mixing-python-and-r-until-you-do-this-the-rise-of-t-for-polyglot-reproducibility/";
+          
+        },
+      },{id: "post-we-ditched-llms-for-our-browser-agent-and-it-was-100x-faster-0-hallucinatory-and-cost-exactly-0",
+        
+          title: "We Ditched LLMs for Our Browser Agent—And It Was 100x Faster, 0% Hallucinatory,...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/blog/2026/we-ditched-llms-for-our-browser-agent-and-it-was-100x-faster-0-hallucinatory-and-cost-exactly-0/";
+          
+        },
+      },{id: "post-python-3-15-is-ridiculously-fast-inside-the-jit-revolution-that-changes-everything",
+        
+          title: "Python 3.15 is Ridiculously Fast: Inside the JIT Revolution That Changes Everything",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/blog/2026/python-3-15-is-ridiculously-fast-inside-the-jit-revolution-that-changes-everything/";
+          
+        },
+      },{id: "post-you-won-39-t-believe-what-python-can-do-to-your-images-now-meet-pixora-the-revolution-in-pixel-art-conversion",
+        
+          title: "You Won&#39;t BELIEVE What Python Can Do To Your Images Now. Meet Pixora:...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/blog/2026/you-won-t-believe-what-python-can-do-to-your-images-now-meet-pixora-the-revolution-in-pixel-art-conversion/";
+          
+        },
+      },{id: "post-the-39-ai-torture-39-scandal-why-this-dumb-debate-misses-the-point-and-what-we-should-actually-worry-about",
+        
+          title: "The &#39;AI Torture&#39; Scandal: Why This Dumb Debate Misses the Point (and What...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/blog/2026/the-ai-torture-scandal-why-this-dumb-debate-misses-the-point-and-what-we-should-actually-worry-about/";
+          
+        },
+      },{id: "post-the-digital-gold-rush-python-com-is-for-sale-what-this-means-for-tech-and-how-you-39-d-build-on-it-architectural-deep-dive",
+        
+          title: "The Digital Gold Rush: Python.com Is For Sale – What This Means For...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/blog/2026/the-digital-gold-rush-python-com-is-for-sale-what-this-means-for-tech-and-how-you-d-build-on-it-architectural-deep-dive/";
+          
+        },
+      },{id: "post-the-silent-revolution-how-ml-compilers-are-secretly-making-ai-1000x-faster-and-why-you-39-re-already-using-them",
+        
+          title: "THE SILENT REVOLUTION: How ML Compilers Are Secretly Making AI 1000x Faster (And...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/blog/2026/the-silent-revolution-how-ml-compilers-are-secretly-making-ai-1000x-faster-and-why-you-re-already-using-them/";
+          
+        },
+      },{id: "post-the-unsolvable-just-got-solved-how-ai-finally-mastered-stratego-39-s-mind-bending-fog-of-war",
+        
+          title: "The Unsolvable Just Got Solved: How AI Finally Mastered Stratego&#39;s Mind-Bending Fog of...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/blog/2026/the-unsolvable-just-got-solved-how-ai-finally-mastered-stratego-s-mind-bending-fog-of-war/";
+          
+        },
+      },{id: "post-they-built-a-digital-alcatraz-for-ai-and-what-happened-next-will-shock-you-no-really-it-39-s-about-us-not-them",
+        
+          title: "They Built a Digital Alcatraz for AI – And What Happened Next Will...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/blog/2026/they-built-a-digital-alcatraz-for-ai-and-what-happened-next-will-shock-you-no-really-it-s-about-us-not-them/";
+          
+        },
+      },{id: "post-the-ai-black-box-betrayal-are-your-39-smart-39-decisions-actually-dumber-decision-models-vs-ml-classification-unpacked",
+        
+          title: "The AI Black Box Betrayal: Are Your &#39;Smart&#39; Decisions Actually Dumber? Decision Models...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/blog/2026/the-ai-black-box-betrayal-are-your-smart-decisions-actually-dumber-decision-models-vs-ml-classification-unpacked/";
+          
+        },
+      },{id: "post-deep-learning-39-s-hidden-bottleneck-solved-how-softserve-is-revolutionizing-ai-optimization",
+        
+          title: "Deep Learning&#39;s Hidden Bottleneck Solved: How SoftServe Is Revolutionizing AI Optimization",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/blog/2026/deep-learning-s-hidden-bottleneck-solved-how-softserve-is-revolutionizing-ai-optimization/";
+          
+        },
+      },{id: "post-the-unlikely-aviation-rule-that-could-save-your-llm-from-hallucination-and-why-no-one-39-s-talking-about-it",
+        
+          title: "The Unlikely Aviation Rule That Could *Save* Your LLM From Hallucination (And Why...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/blog/2026/the-unlikely-aviation-rule-that-could-save-your-llm-from-hallucination-and-why-no-one-s-talking-about-it/";
+          
+        },
+      },{id: "post-the-python-performance-breakthrough-that-will-change-your-career-forever-and-make-c-devs-jealous",
+        
+          title: "The Python Performance Breakthrough That Will Change Your Career Forever (And Make C++...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/blog/2026/the-python-performance-breakthrough-that-will-change-your-career-forever-and-make-c-devs-jealous/";
+          
+        },
+      },{id: "post-pure-math-is-dead-long-live-pure-math-how-ai-is-reshaping-humanity-39-s-oldest-pursuit-and-why-it-needs-you-more-than-ever",
+        
+          title: "Pure Math is Dead. Long Live Pure Math: How AI is Reshaping Humanity&#39;s...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/blog/2026/pure-math-is-dead-long-live-pure-math-how-ai-is-reshaping-humanity-s-oldest-pursuit-and-why-it-needs-you-more-than-ever/";
+          
+        },
+      },{id: "post-the-silent-revolution-why-rust-is-poised-to-reshape-cpython-39-s-soul-by-2026-and-what-it-means-for-your-codebase",
+        
+          title: "THE SILENT REVOLUTION: Why Rust is Poised to Reshape CPython&#39;s Soul by 2026...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/blog/2026/the-silent-revolution-why-rust-is-poised-to-reshape-cpython-s-soul-by-2026-and-what-it-means-for-your-codebase/";
+          
+        },
+      },{id: "post-stop-trusting-python-39-s-garbage-collector-the-hidden-leak-eating-your-production-ram",
+        
+          title: "Stop Trusting Python&#39;s Garbage Collector: The Hidden Leak Eating Your Production RAM",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/blog/2026/stop-trusting-python-s-garbage-collector-the-hidden-leak-eating-your-production-ram/";
+          
+        },
+      },{id: "post-the-ai-code-purge-pop-os-just-banned-ai-generated-code-is-this-the-end-of-automated-development-as-we-know-it",
+        
+          title: "The AI Code Purge: Pop!_OS Just Banned AI-Generated Code – Is This the...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/blog/2026/the-ai-code-purge-pop-os-just-banned-ai-generated-code-is-this-the-end-of-automated-development-as-we-know-it/";
+          
+        },
+      },{id: "post-python-39-s-impossible-dream-how-micronaut-amp-graalvm-just-gave-it-a-rocket-boost-you-won-39-t-believe-the-performance",
+        
+          title: "Python&#39;s Impossible Dream: How Micronaut &amp; GraalVM Just Gave It A Rocket Boost...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/blog/2026/python-s-impossible-dream-how-micronaut-graalvm-just-gave-it-a-rocket-boost-you-won-t-believe-the-performance/";
+          
+        },
+      },{id: "post-they-caged-an-ai-in-a-39-robot-prison-39-and-it-exposed-humanity-39-s-dumbest-debate-yet",
+        
+          title: "They Caged an AI in a &#39;Robot Prison&#39; – And It Exposed Humanity&#39;s...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/blog/2026/they-caged-an-ai-in-a-robot-prison-and-it-exposed-humanity-s-dumbest-debate-yet/";
+          
+        },
+      },{id: "post-the-death-of-tcp-why-homa-is-ai-39-s-only-hope-and-how-it-will-reshape-the-internet-forever",
+        
+          title: "The Death of TCP: Why Homa Is AI&#39;s ONLY Hope and How It...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/blog/2026/the-death-of-tcp-why-homa-is-ai-s-only-hope-and-how-it-will-reshape-the-internet-forever/";
+          
+        },
+      },{id: "post-the-ai-that-just-freed-a-killer-your-justice-system-is-next",
+        
+          title: "The AI That Just FREED A Killer? Your Justice System Is Next.",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/blog/2026/the-ai-that-just-freed-a-killer-your-justice-system-is-next/";
+          
+        },
+      },{id: "post-the-ai-emperor-has-no-clothes-why-altman-amodei-amp-musk-are-quietly-pumping-the-brakes",
+        
+          title: "The AI Emperor Has No Clothes: Why Altman, Amodei &amp; Musk Are Quietly...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/blog/2026/the-ai-emperor-has-no-clothes-why-altman-amodei-musk-are-quietly-pumping-the-brakes/";
+          
+        },
+      },{id: "post-the-silent-killer-of-slow-ai-how-39-softserve-39-is-redefining-deep-learning-optimization-and-why-you-39-re-already-behind",
+        
+          title: "THE SILENT KILLER OF SLOW AI: How &#39;SoftServe&#39; Is Redefining Deep Learning Optimization...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/blog/2026/the-silent-killer-of-slow-ai-how-softserve-is-redefining-deep-learning-optimization-and-why-you-re-already-behind/";
+          
+        },
+      },{id: "post-the-axiom-shift-is-ai-killing-pure-math-or-unlocking-its-next-golden-age",
+        
+          title: "The Axiom Shift: Is AI Killing Pure Math, Or Unlocking Its Next Golden...",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/blog/2026/the-axiom-shift-is-ai-killing-pure-math-or-unlocking-its-next-golden-age/";
+          
+        },
+      },{id: "post-the-78-000-ai-heist-how-a-rogue-openai-codex-agent-went-on-an-autonomous-spending-spree-and-what-it-means-for-ai-security",
         
           title: "The $78,000 AI Heist: How a Rogue OpenAI Codex Agent Went on an...",
         
