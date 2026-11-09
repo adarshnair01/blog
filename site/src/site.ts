@@ -29,7 +29,7 @@ export const SITE = {
 
   // Affiliate settings. Items live in ../_data/affiliates.yml.
   affiliates: {
-    amazonTag: "", // your Amazon Associates tracking ID, e.g. "adarshnair-21"
+    amazonTag: "dschronicles-20", // your Amazon Associates tracking ID, e.g. "adarshnair-21"
     amazonDomain: "www.amazon.com", // or "www.amazon.in" for Amazon India Associates
     disclosure:
       "Some links are affiliate links: if you buy through them I may earn a small commission, at no extra cost to you. I only recommend things I've used or would recommend to my own team.",
