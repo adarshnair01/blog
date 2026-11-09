@@ -16,7 +16,7 @@
 
 ## 🚀 About This Repo
 
-This repository contains my personal portfolio and blog, built using the [al-folio](https://github.com/alshedivat/al-folio) Jekyll theme. It showcases my professional experience, data science projects, and technical writings.
+This repository contains my personal portfolio and blog, built with [Astro](https://astro.build). It showcases my professional experience, data science projects, and technical writings.
 
 ### Key Sections:
 
@@ -41,44 +41,30 @@ This repository contains my personal portfolio and blog, built using the [al-fol
 
 ## 🚀 Deployment & Development
 
-This site is deployed to **GitHub Pages** using **GitHub Actions**.
+The site lives in [`site/`](site/) and reads content from the repo root:
 
-### Local Development
+| What | Where |
+| --- | --- |
+| Blog posts | `_posts/YYYY-MM-DD-slug.md` (front matter: `title`, `date`, `excerpt`, `tags`) |
+| Projects | `_projects/*.md` |
+| CV and publications | `_data/cv.yml` |
+| Affiliate recommendations | `_data/affiliates.yml` |
+| Site settings (nav, analytics, AdSense, affiliates) | `site/src/site.ts` |
 
-To run the site locally, you need Ruby and Bundler installed:
+### Local development
+
+Requires Node.js 22.23+ (24 recommended).
 
 ```bash
-# Install dependencies
-bundle install
-
-# Run the local development server
-bundle exec jekyll serve
+cd site
+npm install
+npm run dev        # http://localhost:4321/blog/ (search works only after a build)
+npm run build      # static site + search index in site/dist/
+npm run preview    # serve the build, including search
 ```
 
-The site will be available at `http://localhost:4000/blog/`.
+### Deployment
 
-### Deployment to GitHub Pages
+Every push to `master` that touches content or `site/` runs [`deploy.yml`](.github/workflows/deploy.yml), which builds the site and publishes `site/dist/` to the `gh-pages` branch. It also rebuilds daily, so posts dated in the future go live on their date.
 
-Deployment is automated via GitHub Actions on every push to the `master` branch.
-
-1.  **Push Changes**:
-    ```bash
-    git add .
-    git commit -m "Your update message"
-    git push origin master
-    ```
-2.  **Workflow**: The `deploy.yml` action will:
-    - Build the Jekyll site (including PDF CV generation).
-    - Optimize assets.
-    - Push the generated static files to the `gh-pages` branch.
-3.  **URL**: The site is live at [https://adarshnair.online/blog/](https://adarshnair.online/blog/).
-
----
-
-## 🎨 Acknowledgments
-
-This site is based on the excellent [al-folio](https://github.com/alshedivat/al-folio) theme.
-
-## ⚖️ License
-
-All content is © 2026 Adarsh Nair. The code is available under the MIT License.
+Live at [https://adarshnair.online/blog/](https://adarshnair.online/blog/). More detail in [`site/README.md`](site/README.md).

@@ -16,6 +16,8 @@ on:
       - "_projects/**"
       - "_data/cv.yml"
       - "site/**"
+  schedule:
+    - cron: "15 0 * * *" # daily rebuild so future-dated posts publish on their date
   workflow_dispatch:
 
 permissions:

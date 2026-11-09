@@ -1,25 +1,21 @@
-_site
-.bundle
-.DS_store
-.idea
-.jekyll-cache
-.jekyll-metadata
-.ruby-version
-.sass-cache
-.tweet-cache
-.venv
-assets/libs/
-assets/rendercv/rendercv_output/*.typ
-Gemfile.lock
+# Dependencies and builds
 node_modules/
-vendor
+site/dist/
+site/.astro/
+
+# Old Jekyll output (local only)
+_site/
+.jekyll-cache/
+
+# Editors / OS
+.DS_Store
+.idea
+*.swp
+*.log
+.venv
 .gemini/
+
+# Personal local files
 resume_text.txt
 build_log.txt
 generate_project_images.py
-.DS_Store
-*.swp
-*.log
-# Astro site
-site/dist/
-site/.astro/

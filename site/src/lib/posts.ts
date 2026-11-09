@@ -64,7 +64,10 @@ let cache: Post[] | undefined;
 /** All published posts, newest first, with stable Jekyll-compatible URLs. */
 export async function getPosts(): Promise<Post[]> {
   if (cache) return cache;
-  const entries = await getCollection("posts", ({ data }) => !data.draft);
+  // Like Jekyll (future: false): posts dated in the future stay hidden until a build on/after that date.
+  // deploy.yml also rebuilds daily so scheduled posts appear on time.
+  const now = Date.now();
+  const entries = await getCollection("posts", ({ data }) => !data.draft && data.date.valueOf() <= now);
 
   const posts: Post[] = entries.map((entry) => {
     const body = entry.body ?? "";
