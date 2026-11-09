@@ -1,0 +1,68 @@
+---
+import Base from "../layouts/Base.astro";
+import AffiliateCard from "../components/AffiliateCard.astro";
+import { getAffiliates, categoryLabel, categoryIcon } from "../lib/affiliates";
+import { SITE, url, absUrl } from "../site";
+
+const items = getAffiliates();
+const cats = [...new Set(items.map((i) => i.category))];
+const jsonLd = [
+  {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    name: "Data science & ML toolkit",
+    url: absUrl("/toolkit/"),
+    itemListElement: items.map((it, i) => ({ "@type": "ListItem", position: i + 1, name: it.name, url: it.href })),
+  },
+];
+---
+
+<Base
+  title="My data science & ML toolkit"
+  description="The books, courses and tools I recommend for learning machine learning, deep learning, statistics and MLOps — picked by a data science lead with 10 years in industry."
+  path="/toolkit/"
+  jsonLd={jsonLd}
+>
+  <div class="wrap">
+    <header class="page-head toolkit-hero">
+      <p class="eyebrow">Toolkit</p>
+      <h1>The resources I actually recommend</h1>
+      <p>
+        After 10 years of building ML in production and mentoring data scientists, these are the books, courses and
+        tools I point people to. Short list, no fluff.
+      </p>
+    </header>
+
+    <div class="chips toolkit-filter" role="group" aria-label="Filter by category">
+      <button class="chip" type="button" data-cat="all" aria-pressed="true">All <span class="count">{items.length}</span></button>
+      {
+        cats.map((c) => (
+          <button class="chip" type="button" data-cat={c} aria-pressed="false">
+            {categoryIcon[c] ?? "⭐"} {categoryLabel[c] ?? c} <span class="count">{items.filter((i) => i.category === c).length}</span>
+          </button>
+        ))
+      }
+    </div>
+
+    <div class="aff-grid toolkit-grid">
+      {items.map((item) => <AffiliateCard item={item} placement="toolkit" />)}
+    </div>
+
+    <p class="aff-disclosure" style="margin-top:28px">
+      {SITE.affiliates.disclosure} <a href={url("/disclosure/")}>Full disclosure</a>
+    </p>
+  </div>
+
+  <script>
+    const chips = [...document.querySelectorAll<HTMLButtonElement>("[data-cat]")];
+    const cards = [...document.querySelectorAll<HTMLElement>(".toolkit-grid .aff-card")];
+    const apply = (cat: string) => {
+      chips.forEach((c) => c.setAttribute("aria-pressed", String(c.dataset.cat === cat)));
+      cards.forEach((card) => (card.hidden = cat !== "all" && card.dataset.category !== cat));
+      history.replaceState(null, "", cat === "all" ? location.pathname : `#${cat}`);
+    };
+    chips.forEach((c) => c.addEventListener("click", () => apply(c.dataset.cat!)));
+    const initial = location.hash.slice(1);
+    if (chips.some((c) => c.dataset.cat === initial)) apply(initial);
+  </script>
+</Base>

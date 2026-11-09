@@ -1,0 +1,44 @@
+---
+import Base from "../../../layouts/Base.astro";
+import PostCard from "../../../components/PostCard.astro";
+import { getPosts, type Post } from "../../../lib/posts";
+import { url } from "../../../site";
+
+export async function getStaticPaths() {
+  const posts = await getPosts();
+  const years = [...new Set(posts.map((p) => p.year))];
+  return years.map((year) => ({ params: { year }, props: { year, posts: posts.filter((p) => p.year === year), years } }));
+}
+interface Props {
+  year: string;
+  posts: Post[];
+  years: string[];
+}
+const { year, posts, years } = Astro.props;
+const byMonth = new Map<string, Post[]>();
+for (const p of posts) {
+  const m = p.date.toLocaleDateString("en-US", { month: "long", timeZone: "UTC" });
+  byMonth.set(m, [...(byMonth.get(m) ?? []), p]);
+}
+---
+
+<Base title={`${year} articles`} description={`All ${posts.length} articles published in ${year} on machine learning, AI and data science.`} path={`/blog/${year}/`}>
+  <div class="wrap">
+    <header class="page-head">
+      <p class="eyebrow">Archive</p>
+      <h1>{year}</h1>
+      <p>{posts.length} articles · <a href={url(`/explore/`)}>Explore all</a></p>
+    </header>
+    <nav class="topic-strip" aria-label="Years">
+      {years.map((y) => <a class="tag" href={url(`/blog/${y}/`)} aria-current={y === year ? "page" : undefined}>{y}</a>)}
+    </nav>
+    {
+      [...byMonth].map(([month, list]) => (
+        <section>
+          <div class="section-title"><h2>{month}</h2><span class="muted">{list.length}</span></div>
+          <div class="post-grid" style="margin-bottom:32px">{list.map((p) => <PostCard post={p} heading="h3" />)}</div>
+        </section>
+      ))
+    }
+  </div>
+</Base>

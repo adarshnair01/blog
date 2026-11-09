@@ -1,0 +1,36 @@
+---
+import BlogIndex from "../../components/BlogIndex.astro";
+import { getPosts } from "../../lib/posts";
+import { SITE, url } from "../../site";
+
+// The Jekyll site paginated 5 posts per page (~191 pages). Pages past the new total
+// become lightweight redirects to the archive so old links don't 404.
+export async function getStaticPaths() {
+  const LEGACY_MAX_PAGES = 200;
+  const total = Math.ceil((await getPosts()).length / SITE.postsPerPage);
+  const last = Math.max(total, LEGACY_MAX_PAGES);
+  return Array.from({ length: last - 1 }, (_, i) => ({ params: { n: String(i + 2) }, props: { total } }));
+}
+const page = Number(Astro.params.n);
+const { total } = Astro.props;
+const target = url(`/page/${total}/`);
+---
+
+{
+  page <= total ? (
+    <BlogIndex page={page} />
+  ) : (
+    <html lang="en">
+      <head>
+        <meta charset="utf-8" />
+        <title>Redirecting…</title>
+        <meta name="robots" content="noindex" />
+        <link rel="canonical" href={new URL(target, SITE.origin).href} />
+        <meta http-equiv="refresh" content={`0; url=${target}`} />
+      </head>
+      <body>
+        <a href={target}>Continue to the archive</a>
+      </body>
+    </html>
+  )
+}

@@ -1,0 +1,30 @@
+---
+import { getCollection } from "astro:content";
+import Base from "../../layouts/Base.astro";
+import { url } from "../../site";
+
+const projects = (await getCollection("projects")).sort((a, b) => a.data.importance - b.data.importance);
+---
+
+<Base title="Projects" description="Selected industry data science projects: LLM fine-tuning, recommender systems, segmentation, forecasting, marketing mix modelling and more." path="/projects/">
+  <div class="wrap">
+    <header class="page-head">
+      <p class="eyebrow">Projects</p>
+      <h1>Selected work</h1>
+      <p>Production ML systems I've led or built — from LLM intent models to marketing mix models.</p>
+    </header>
+    <div class="project-grid">
+      {
+        projects.map((p) => (
+          <article class="card project-card">
+            {p.data.img && <img src={url(`/${p.data.img}`)} alt="" loading="lazy" width="400" height="225" />}
+            <div class="card-body">
+              <h2 style="font-size:1.15rem"><a href={url(`/projects/${p.id}/`)}>{p.data.title}</a></h2>
+              <p>{p.data.description}</p>
+            </div>
+          </article>
+        ))
+      }
+    </div>
+  </div>
+</Base>

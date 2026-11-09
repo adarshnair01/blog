@@ -1,0 +1,19 @@
+---
+import Base from "../layouts/Base.astro";
+import { url } from "../site";
+---
+
+<Base title="Page not found" path="/404.html" noindex>
+  <div class="wrap">
+    <header class="page-head">
+      <p class="eyebrow">404</p>
+      <h1>That page wandered off</h1>
+      <p>The link may be old or mistyped. Try searching — press <kbd>/</kbd> — or start from one of these:</p>
+    </header>
+    <div class="btn-row">
+      <button class="btn" type="button" data-search-open>Search articles</button>
+      <a class="btn ghost" href={url("/")}>Latest posts</a>
+      <a class="btn ghost" href={url("/explore/")}>Explore</a>
+    </div>
+  </div>
+</Base>

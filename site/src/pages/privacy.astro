@@ -1,0 +1,38 @@
+---
+import Base from "../layouts/Base.astro";
+import { SITE, url } from "../site";
+const updated = "November 9, 2026";
+---
+
+<Base title="Privacy policy" description="What data Data Science Chronicles collects, why, and how to opt out." path="/privacy/">
+  <div class="wrap">
+    <header class="page-head"><p class="eyebrow">Legal</p><h1>Privacy policy</h1><p>Last updated {updated}.</p></header>
+    <div class="prose page-body">
+      <p>This blog ({SITE.origin}{SITE.base}/) is run by {SITE.author}. It has no accounts and doesn't ask you for personal information.</p>
+      <h2>Analytics</h2>
+      <p>
+        I use Google Analytics 4 to understand which articles are read and how people find them. It uses cookies and
+        collects things like pages viewed, approximate location, device and browser, and clicks on outbound and affiliate
+        links. You can opt out with the <a href="https://tools.google.com/dlpage/gaoptout" rel="noopener">Google Analytics opt-out add-on</a>.
+      </p>
+      <h2>Advertising</h2>
+      <p>
+        This site may use Google AdSense. Google and its partners use cookies to serve ads based on your visits to this and
+        other websites. You can turn off personalised ads in <a href="https://adssettings.google.com" rel="noopener">Google Ads Settings</a>
+        or opt out of third-party vendors at <a href="https://www.aboutads.info/choices" rel="noopener">aboutads.info</a>. See
+        <a href="https://policies.google.com/technologies/partner-sites" rel="noopener">how Google uses information from sites that use its services</a>.
+      </p>
+      <h2>Affiliate links</h2>
+      <p>
+        Some links go to partners such as Amazon or course providers. When you click them, those sites may set cookies to
+        attribute a purchase. See the <a href={url("/disclosure/")}>affiliate disclosure</a>.
+      </p>
+      <h2>Comments</h2>
+      <p>Comments use Giscus (GitHub Discussions) and load only when you scroll to them. Posting requires a GitHub account and is covered by GitHub's privacy statement.</p>
+      <h2>Your preferences</h2>
+      <p>The light/dark theme choice is stored in your browser's local storage and never sent anywhere.</p>
+      <h2>Contact</h2>
+      <p>Email <a href={`mailto:${SITE.socials.email}`}>{SITE.socials.email}</a> with any privacy request.</p>
+    </div>
+  </div>
+</Base>

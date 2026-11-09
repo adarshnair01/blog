@@ -1,0 +1,69 @@
+---
+import Base from "../layouts/Base.astro";
+import { getPosts, collectTerms, formatDate } from "../lib/posts";
+import { url } from "../site";
+
+const posts = await getPosts();
+const topics = collectTerms(posts, "tags").slice(0, 40);
+const initial = posts.slice(0, 30);
+---
+
+<Base
+  title="Explore all articles"
+  description={`Filter ${posts.length} articles on machine learning, AI and data science by topic, year and keyword.`}
+  path="/explore/"
+>
+  <div class="wrap">
+    <header class="page-head">
+      <p class="eyebrow">Explore</p>
+      <h1>Find something to read</h1>
+      <p>Filter every article by keyword, topic and month. Filters are saved in the URL, so you can share a view.</p>
+    </header>
+
+    <div class="explore-controls" data-explore data-src={url("/posts.json")}>
+      <div class="explore-row">
+        <label class="visually-hidden" for="q">Filter articles</label>
+        <input id="q" class="input" type="search" placeholder="Filter by title, summary or tag…" autocomplete="off" />
+        <label class="visually-hidden" for="sort">Sort</label>
+        <select id="sort" class="select">
+          <option value="new">Newest first</option>
+          <option value="old">Oldest first</option>
+          <option value="long">Longest read</option>
+          <option value="short">Quick reads</option>
+        </select>
+      </div>
+      <div class="chips" role="group" aria-label="Topics">
+        {topics.map((t) => <button class="chip" type="button" data-tag={t.slug} aria-pressed="false">{t.name}</button>)}
+      </div>
+      <div>
+        <div class="timeline" aria-label="Articles per month — click to filter"></div>
+        <div class="explore-row" style="justify-content:space-between;font-size:13px">
+          <span class="muted" data-count>{posts.length} articles</span>
+          <button class="chip" type="button" data-reset hidden>Clear filters ✕</button>
+        </div>
+      </div>
+    </div>
+
+    <ol class="result-list" data-results>
+      {
+        initial.map((p) => (
+          <li>
+            <a href={url(p.path)}>{p.title}</a>
+            <p>{p.description}</p>
+            <div class="meta">
+              <time datetime={p.date.toISOString()}>{formatDate(p.date)}</time>
+              <span>{p.readingMinutes} min read</span>
+            </div>
+          </li>
+        ))
+      }
+    </ol>
+    <div class="pager"><button class="btn ghost" type="button" data-more hidden>Show more</button></div>
+    <noscript><p><a href={url("/page/2/")}>Browse the paginated archive →</a></p></noscript>
+  </div>
+
+  <script>
+    import { initExplore } from "../lib/explore-client";
+    initExplore();
+  </script>
+</Base>

@@ -1,0 +1,161 @@
+# Affiliate recommendations shown on the blog (Toolkit page, end of posts, sidebar, home page).
+#
+# HOW TO EARN FROM THESE
+#  - Amazon items: set your Associates tag once in site/src/site.ts (affiliates.amazonTag).
+#    It is appended to every `amazon:` link automatically.
+#  - Everything else: replace `url` with your personal affiliate/referral link from that
+#    program (Coursera, DataCamp, etc.). Until you do, the link still works, it just earns nothing.
+#
+# FIELDS
+#  id        unique, used in analytics events (affiliate_click → item_id)
+#  name      product name
+#  category  books | courses | tools  (add more freely; they become filter chips)
+#  blurb     one line: what it is
+#  why       one line: why YOU recommend it (this is what converts — make it personal)
+#  amazon    search text or ASIN → builds an Amazon link with your tag   (use this OR url)
+#  url       direct (affiliate) link
+#  cta       button text (default "Check it out")
+#  badge     optional ribbon, e.g. "My #1 pick"
+#  topics    post tags this is relevant to (matched case-insensitively against post tags)
+#  featured  true → shown on the home page and as fallback when no topic matches
+#  affiliate false → a plain recommendation that earns nothing: the link is not marked
+#            "sponsored" and the card shows a "Not sponsored" label. Default: true.
+
+- id: hands-on-ml
+  name: Hands-On Machine Learning with Scikit-Learn, Keras & TensorFlow
+  category: books
+  blurb: Aurélien Géron's practical tour from linear models to deep learning.
+  why: The book I recommend most to people starting out — every chapter ends in runnable code.
+  amazon: Hands-On Machine Learning with Scikit-Learn Keras TensorFlow Geron
+  cta: View on Amazon
+  badge: My #1 pick
+  featured: true
+  topics: [machine learning, scikit-learn, deep learning, neural networks, python, data science, supervised learning, regression, classification]
+
+- id: designing-ml-systems
+  name: Designing Machine Learning Systems
+  category: books
+  blurb: Chip Huyen on taking models from notebook to production.
+  why: The best single read on MLOps, data drift and monitoring that I know of.
+  amazon: Designing Machine Learning Systems Chip Huyen
+  cta: View on Amazon
+  featured: true
+  topics: [mlops, production, deployment, machine learning engineering, model monitoring, data engineering, system design]
+
+- id: ai-engineering
+  name: AI Engineering
+  category: books
+  blurb: Chip Huyen on building applications with foundation models.
+  why: Covers RAG, evaluation and fine-tuning trade-offs without the hype.
+  amazon: AI Engineering Chip Huyen
+  cta: View on Amazon
+  topics: [llm, llms, large language models, generative ai, genai, rag, prompt engineering, fine-tuning, ai agents, agents, transformers]
+
+- id: deep-learning-python
+  name: Deep Learning with Python
+  category: books
+  blurb: François Chollet (creator of Keras) explains deep learning from first principles.
+  why: Builds real intuition for why neural networks work, not just how to call them.
+  amazon: Deep Learning with Python Chollet
+  cta: View on Amazon
+  topics: [deep learning, neural networks, keras, tensorflow, cnn, convolutional neural networks, computer vision, rnn]
+
+- id: practical-statistics
+  name: Practical Statistics for Data Scientists
+  category: books
+  blurb: The 50+ statistical concepts data scientists actually use.
+  why: Perfect desk reference for hypothesis tests, A/B testing and resampling.
+  amazon: Practical Statistics for Data Scientists Bruce Gedeck
+  cta: View on Amazon
+  topics: [statistics, probability, hypothesis testing, a/b testing, bayesian statistics, statistical inference, regression]
+
+- id: ml-specialization
+  name: Machine Learning Specialization (Andrew Ng)
+  category: courses
+  blurb: Stanford × DeepLearning.AI's beginner-friendly ML course on Coursera.
+  why: Still the gentlest, clearest on-ramp into ML I've seen.
+  url: https://www.coursera.org/specializations/machine-learning-introduction
+  cta: Start learning
+  badge: Beginner friendly
+  featured: true
+  topics: [machine learning, supervised learning, regression, logistic regression, gradient descent, classification, data science]
+
+- id: deep-learning-specialization
+  name: Deep Learning Specialization
+  category: courses
+  blurb: Five courses on neural networks, CNNs, sequence models and transformers.
+  why: Great follow-up once you know the basics and want the math behind deep learning.
+  url: https://www.coursera.org/specializations/deep-learning
+  cta: Start learning
+  topics: [deep learning, neural networks, backpropagation, cnn, rnn, transformers, computer vision, nlp]
+
+- id: datacamp
+  name: DataCamp
+  category: courses
+  blurb: Interactive, in-browser courses for Python, SQL and data science.
+  why: Best for learning by typing code daily in short sessions.
+  url: https://www.datacamp.com/
+  cta: Try DataCamp
+  topics: [python, sql, pandas, data cleaning, data visualization, data analysis, data science, feature engineering]
+
+- id: wandb
+  name: Weights & Biases
+  category: tools
+  blurb: Experiment tracking, model registry and LLM evaluation.
+  why: What I use to stop losing track of which run produced which model.
+  url: https://wandb.ai/site
+  cta: Try it free
+  topics: [mlops, hyperparameter tuning, deep learning, experiment tracking, model evaluation, llm]
+
+- id: colab-pro
+  name: Google Colab Pro
+  category: tools
+  blurb: Hosted Jupyter notebooks with faster GPUs.
+  why: The cheapest way to get a GPU for training experiments without any setup.
+  url: https://colab.research.google.com/signup
+  cta: See plans
+  topics: [deep learning, python, pytorch, tensorflow, gpu, computer vision, fine-tuning]
+
+# ---- AI assistants -------------------------------------------------------------
+# None of these has a public affiliate program (checked Nov 2026), so they are plain,
+# non-sponsored recommendations. To earn from Gemini, join the Google Workspace referral
+# program and uncomment the google-workspace item below with your referral link.
+
+- id: chatgpt
+  name: ChatGPT
+  category: ai
+  affiliate: false
+  blurb: OpenAI's assistant for writing, coding, analysis and brainstorming.
+  why: My go-to for quick drafts and talking through a modelling idea out loud.
+  url: https://chatgpt.com/
+  cta: Try ChatGPT
+  topics: [llm, llms, large language models, generative ai, genai, chatgpt, openai, gpt, prompt engineering, ai agents, agents, ai, nlp]
+
+- id: claude
+  name: Claude
+  category: ai
+  affiliate: false
+  blurb: Anthropic's assistant, strong at long documents, careful reasoning and code.
+  why: What I reach for when I need to read a long paper or refactor a messy notebook.
+  url: https://claude.ai/
+  cta: Try Claude
+  topics: [llm, llms, large language models, generative ai, genai, claude, anthropic, prompt engineering, ai agents, agents, ai safety, ai ethics, ai, nlp]
+
+- id: gemini
+  name: Google Gemini
+  category: ai
+  affiliate: false
+  blurb: Google's assistant, built into Search, Gmail, Docs and Android.
+  why: Handy when the work already lives in Google Docs, Sheets or Drive.
+  url: https://gemini.google.com/
+  cta: Try Gemini
+  topics: [llm, llms, large language models, generative ai, genai, gemini, google, multimodal, prompt engineering, ai, nlp]
+
+# - id: google-workspace
+#   name: Google Workspace (with Gemini)
+#   category: ai
+#   blurb: Gmail, Docs, Sheets and Meet for teams, with Gemini built in.
+#   why: The easiest way to bring Gemini into a team's everyday documents.
+#   url: https://YOUR-WORKSPACE-REFERRAL-LINK
+#   cta: Try Workspace free
+#   topics: [gemini, google, productivity, generative ai]

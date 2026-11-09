@@ -1,0 +1,35 @@
+---
+import AffiliateCard from "./AffiliateCard.astro";
+import type { Affiliate } from "../lib/affiliates";
+import { SITE, url } from "../site";
+
+interface Props {
+  items: Affiliate[];
+  placement: string;
+  title?: string;
+  subtitle?: string;
+}
+const { items, placement, title = "Level up on this topic", subtitle = "Hand-picked resources I'd point a colleague to." } = Astro.props;
+---
+
+{
+  items.length > 0 && (
+    <section class="aff-block" aria-label="Recommended resources" data-pagefind-ignore>
+      <header class="aff-block-head">
+        <div>
+          <p class="eyebrow">Recommended</p>
+          <h2>{title}</h2>
+          <p class="muted">{subtitle}</p>
+        </div>
+        <a class="aff-all" href={url("/toolkit/")}>See my full toolkit →</a>
+      </header>
+      <div class="aff-grid">
+        {items.map((item) => <AffiliateCard item={item} placement={placement} />)}
+      </div>
+      <p class="aff-disclosure">
+        <svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"></circle><path d="M12 11v6M12 7.5v.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path></svg>
+        {SITE.affiliates.disclosure} <a href={url("/disclosure/")}>Details</a>
+      </p>
+    </section>
+  )
+}

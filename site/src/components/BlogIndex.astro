@@ -1,0 +1,106 @@
+---
+import Base from "../layouts/Base.astro";
+import PostCard from "./PostCard.astro";
+import Pagination from "./Pagination.astro";
+import AffiliateBlock from "./AffiliateBlock.astro";
+import { getAffiliates } from "../lib/affiliates";
+import { getPosts, collectTerms, formatDate, slugify } from "../lib/posts";
+import { SITE, url, absUrl } from "../site";
+
+interface Props {
+  page: number;
+}
+const { page } = Astro.props;
+const all = await getPosts();
+const per = SITE.postsPerPage;
+const total = Math.ceil(all.length / per);
+const pathFor = (n: number) => (n === 1 ? "/" : `/page/${n}/`);
+
+const isFirst = page === 1;
+const featured = isFirst ? all[0] : undefined;
+const list = isFirst ? all.slice(1, per) : all.slice((page - 1) * per, page * per);
+const topics = collectTerms(all, "tags").slice(0, 18);
+const picks = isFirst ? getAffiliates().filter((a) => a.featured).slice(0, 3) : [];
+
+const jsonLd = [
+  {
+    "@context": "https://schema.org",
+    "@type": "Blog",
+    name: SITE.blogName,
+    url: absUrl("/"),
+    description: SITE.description,
+    author: { "@type": "Person", name: SITE.author },
+    blogPost: [featured, ...list].filter(Boolean).map((p) => ({
+      "@type": "BlogPosting",
+      headline: p!.title,
+      url: absUrl(p!.path),
+      datePublished: p!.date.toISOString(),
+    })),
+  },
+];
+---
+
+<Base
+  title={isFirst ? undefined : `Page ${page}`}
+  description={isFirst ? SITE.description : `${SITE.blogName} — articles page ${page} of ${total}.`}
+  path={pathFor(page)}
+  jsonLd={jsonLd}
+  prev={page > 1 ? pathFor(page - 1) : undefined}
+  next={page < total ? pathFor(page + 1) : undefined}
+>
+  <div class="wrap">
+    <header class="page-head">
+      <p class="eyebrow">{SITE.blogName}</p>
+      <h1>{isFirst ? "Notes on machine learning, AI and data science" : `Archive — page ${page}`}</h1>
+      <p>
+        {all.length.toLocaleString("en-US")} articles on models, math and shipping ML to production. Press
+        <kbd>/</kbd> to search, or <a href={url("/explore/")}>explore by topic and year</a>.
+      </p>
+    </header>
+
+    {
+      isFirst && (
+        <nav class="topic-strip" aria-label="Popular topics">
+          {topics.map((t) => (
+            <a class="tag" href={url(`/blog/tag/${t.slug}/`)}>
+              {t.name} <span class="count">{t.count}</span>
+            </a>
+          ))}
+          <a class="tag" href={url("/blog/tag/")}>All topics →</a>
+        </nav>
+      )
+    }
+
+    {
+      featured && (
+        <article class="featured">
+          <div class="meta">
+            <span>Latest</span>
+            <time datetime={featured.date.toISOString()}>{formatDate(featured.date)}</time>
+            <span>{featured.readingMinutes} min read</span>
+          </div>
+          <h2>
+            <a href={url(featured.path)}>{featured.title}</a>
+          </h2>
+          <p>{featured.description}</p>
+          <div class="tags">
+            {featured.tags.slice(0, 5).map((t) => (
+              <a class="tag" href={url(`/blog/tag/${slugify(t)}/`)}>{t}</a>
+            ))}
+          </div>
+        </article>
+      )
+    }
+
+    <div class="section-title">
+      <h2>{isFirst ? "Recent articles" : `Articles ${(page - 1) * per + 1}–${Math.min(page * per, all.length)}`}</h2>
+    </div>
+    <div class="post-grid">
+      {list.map((post) => <PostCard post={post} />)}
+    </div>
+
+    <Pagination current={page} total={total} pathFor={pathFor} />
+
+    {isFirst && <AffiliateBlock items={picks} placement="home" title="Start here: my top picks" subtitle="The three resources I recommend most to anyone getting into data science." />}
+  </div>
+</Base>

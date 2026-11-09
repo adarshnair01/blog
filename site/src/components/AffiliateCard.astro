@@ -1,0 +1,37 @@
+---
+import type { Affiliate } from "../lib/affiliates";
+import { categoryIcon, categoryLabel } from "../lib/affiliates";
+
+interface Props {
+  item: Affiliate;
+  placement: string; // for analytics: toolkit | post_end | sidebar | home
+  compact?: boolean;
+}
+const { item, placement, compact = false } = Astro.props;
+const linkAttrs = {
+  href: item.href,
+  target: "_blank",
+  rel: item.paid ? "sponsored noopener" : "noopener",
+  "data-aff": item.id,
+  "data-aff-placement": placement,
+  "data-aff-paid": String(item.paid),
+};
+---
+
+<article class:list={["aff-card", { compact }]} data-category={item.category}>
+  {item.badge && <span class="aff-badge">{item.badge}</span>}
+  <div class="aff-top">
+    <span class="aff-icon" aria-hidden="true">{categoryIcon[item.category] ?? "⭐"}</span>
+    <div>
+      <span class="aff-cat">{categoryLabel[item.category] ?? item.category}</span>
+      <h3 class="aff-name"><a {...linkAttrs}>{item.name}</a></h3>
+    </div>
+  </div>
+  {!compact && <p class="aff-blurb">{item.blurb}</p>}
+  {item.why && !compact && <p class="aff-why"><span>Why I recommend it</span>{item.why}</p>}
+  <a class="aff-cta" {...linkAttrs} aria-label={`${item.cta}: ${item.name} (opens ${item.host})`}>
+    <span>{item.cta}</span>
+    <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+  </a>
+  {!compact && <span class="aff-host">on {item.host}{!item.paid && <span class="aff-free"> · Not sponsored</span>}</span>}
+</article>

@@ -1,0 +1,30 @@
+---
+import Base from "../layouts/Base.astro";
+import { SITE, url } from "../site";
+---
+
+<Base title="Affiliate disclosure" description="How affiliate links and advertising work on Data Science Chronicles." path="/disclosure/">
+  <div class="wrap">
+    <header class="page-head"><p class="eyebrow">Transparency</p><h1>Affiliate disclosure</h1></header>
+    <div class="prose page-body">
+      <p>{SITE.affiliates.disclosure}</p>
+      <p>
+        Links to books, courses and tools on this site — including those on the <a href={url("/toolkit/")}>Toolkit</a> page and
+        in the “Recommended” boxes on articles — may be affiliate links. When you click one and make a purchase, the
+        retailer may pay me a commission. The price you pay is the same.
+      </p>
+      <p>As an Amazon Associate I earn from qualifying purchases.</p>
+      <p>
+        Recommendations are my own and are chosen because I think they are useful; no company pays to be listed or
+        reviews what I write. Articles themselves are never written to promote a product.
+      </p>
+      <h2>Advertising</h2>
+      <p>
+        This site may show ads served by Google AdSense. Ads are clearly labelled “Advertisement”. I don't choose the
+        individual ads shown and don't endorse the advertisers. See the <a href={url("/privacy/")}>privacy policy</a> for how
+        ad cookies work and how to opt out.
+      </p>
+      <p>Questions? Email <a href={`mailto:${SITE.socials.email}`}>{SITE.socials.email}</a>.</p>
+    </div>
+  </div>
+</Base>

@@ -1,0 +1,240 @@
+---
+import { render } from "astro:content";
+import "katex/dist/katex.min.css";
+import Base from "../../../layouts/Base.astro";
+import PostCard from "../../../components/PostCard.astro";
+import AffiliateBlock from "../../../components/AffiliateBlock.astro";
+import AffiliateCard from "../../../components/AffiliateCard.astro";
+import AdSlot from "../../../components/AdSlot.astro";
+import { affiliatesFor } from "../../../lib/affiliates";
+import { getPosts, relatedPosts, formatDate, slugify, type Post } from "../../../lib/posts";
+import { SITE, url, absUrl } from "../../../site";
+
+export async function getStaticPaths() {
+  const posts = await getPosts();
+  return posts.map((post, i) => ({
+    params: { year: post.year, slug: post.slug },
+    props: { post, newer: posts[i - 1], older: posts[i + 1] },
+  }));
+}
+
+interface Props {
+  post: Post;
+  newer?: Post;
+  older?: Post;
+}
+const { post, newer, older } = Astro.props;
+const { Content, headings } = await render(post.entry);
+const toc = headings.filter((h) => h.depth === 2 || h.depth === 3);
+const related = relatedPosts(post, await getPosts(), 4);
+const primaryTag = post.tags[0];
+const recs = affiliatesFor(post.tags, 3);
+const inline = recs[0];
+const pageUrl = absUrl(post.path);
+
+const jsonLd = [
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    headline: post.title,
+    description: post.description,
+    datePublished: post.date.toISOString(),
+    dateModified: post.date.toISOString(),
+    mainEntityOfPage: { "@type": "WebPage", "@id": pageUrl },
+    url: pageUrl,
+    image: absUrl(SITE.ogImage),
+    wordCount: post.wordCount,
+    timeRequired: `PT${post.readingMinutes}M`,
+    keywords: post.tags.join(", "),
+    inLanguage: SITE.lang,
+    author: { "@type": "Person", name: post.entry.data.author, url: absUrl("/about/"), sameAs: [SITE.socials.linkedin, SITE.socials.github] },
+    publisher: { "@type": "Person", name: SITE.author, url: SITE.socials.website },
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Blog", item: absUrl("/") },
+      ...(primaryTag
+        ? [{ "@type": "ListItem", position: 2, name: primaryTag, item: absUrl(`/blog/tag/${slugify(primaryTag)}/`) }]
+        : []),
+      { "@type": "ListItem", position: primaryTag ? 3 : 2, name: post.title, item: pageUrl },
+    ],
+  },
+];
+---
+
+<Base
+  title={post.title}
+  description={post.description}
+  path={post.path}
+  type="article"
+  jsonLd={jsonLd}
+  published={post.date}
+  tags={post.tags}
+  katex={post.hasMath}
+>
+  <div class="progress" aria-hidden="true"></div>
+  <div class="wrap article-layout">
+    <article data-pagefind-body>
+      <header class="article-head">
+        <nav class="breadcrumbs" aria-label="Breadcrumb">
+          <ol>
+            <li><a href={url("/")}>Blog</a></li>
+            {primaryTag && <li><a href={url(`/blog/tag/${slugify(primaryTag)}/`)}>{primaryTag}</a></li>}
+            <li aria-current="page" class="visually-hidden">{post.title}</li>
+          </ol>
+        </nav>
+        <h1 data-pagefind-meta="title">{post.title}</h1>
+        {post.entry.data.excerpt && <p class="lede">{post.entry.data.excerpt}</p>}
+        <div class="byline" data-pagefind-ignore>
+          <img src={url("/assets/img/prof_pic_color.png")} alt="" width="40" height="40" loading="lazy" />
+          <div>
+            <div class="who">{post.entry.data.author}</div>
+            <div class="meta">
+              <time datetime={post.date.toISOString()} data-pagefind-meta="date">{formatDate(post.date)}</time>
+              <span>{post.readingMinutes} min read</span>
+            </div>
+          </div>
+          <div class="share">
+            <button class="icon-btn" type="button" data-share aria-label="Share this article">
+              <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M4 12v7a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-7M16 6l-4-4-4 4M12 2v13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+              <span>Share</span>
+            </button>
+            <a class="icon-btn" href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(pageUrl)}`} target="_blank" rel="noopener" aria-label="Share on LinkedIn">in</a>
+            <a class="icon-btn" href={`https://x.com/intent/post?url=${encodeURIComponent(pageUrl)}&text=${encodeURIComponent(post.title)}`} target="_blank" rel="noopener" aria-label="Share on X">𝕏</a>
+          </div>
+        </div>
+      </header>
+
+      {
+        toc.length > 2 && (
+          <details class="toc-mobile" data-pagefind-ignore>
+            <summary>On this page</summary>
+            <ol>
+              {toc.map((h) => (
+                <li><a href={`#${h.slug}`}>{h.text.replace(/#$/, "")}</a></li>
+              ))}
+            </ol>
+          </details>
+        )
+      }
+
+      <div class="prose">
+        <Content />
+      </div>
+
+      <!-- Moved into the article body by post-client.ts (kept out of the flow until then to avoid layout shift) -->
+      <div hidden data-insert-at="0.25" data-pagefind-ignore><AdSlot slot="inArticle" format="fluid" layout="in-article" /></div>
+      {
+        inline && (
+          <div hidden data-insert-at="0.6" data-pagefind-ignore>
+            <aside class="aff-inline" aria-label="Recommended resource">
+              <span class="aff-inline-kicker">Want to go deeper?</span>
+              <AffiliateCard item={inline} placement="post_inline" compact />
+            </aside>
+          </div>
+        )
+      }
+
+      <AffiliateBlock items={recs} placement="post_end" />
+      <AdSlot slot="endOfPost" />
+
+      <footer class="post-foot" data-pagefind-ignore>
+        {
+          post.tags.length > 0 && (
+            <div class="post-tags">
+              {post.tags.map((t) => (
+                <a class="tag" href={url(`/blog/tag/${slugify(t)}/`)}>#{t}</a>
+              ))}
+            </div>
+          )
+        }
+
+        <aside class="author-box">
+          <img src={url("/assets/img/prof_pic_color.png")} alt={SITE.author} width="64" height="64" loading="lazy" />
+          <div>
+            <strong>{SITE.author}</strong>
+            <p>
+              {SITE.jobTitle}. 10 years building recommender systems, forecasting and NLP in production.
+              <a href={url("/about/")}>More about me</a> · <a href={SITE.socials.linkedin} rel="me noopener">LinkedIn</a>
+            </p>
+          </div>
+        </aside>
+
+        <nav class="post-nav" aria-label="More articles">
+          {older && (
+            <a href={url(older.path)} rel="prev">
+              <small>← Previous</small>
+              {older.title}
+            </a>
+          )}
+          {newer && (
+            <a class="next" href={url(newer.path)} rel="next">
+              <small>Next →</small>
+              {newer.title}
+            </a>
+          )}
+        </nav>
+
+        {
+          related.length > 0 && (
+            <section>
+              <div class="section-title">
+                <h2>Related reading</h2>
+              </div>
+              <div class="post-grid">
+                {related.map((p) => <PostCard post={p} heading="h3" />)}
+              </div>
+            </section>
+          )
+        }
+
+        <section class="comments" id="comments">
+          <div class="giscus-host"></div>
+          <button class="comments-btn" type="button" data-load-comments>💬 Load comments (GitHub Discussions)</button>
+        </section>
+      </footer>
+    </article>
+
+    <aside class="toc" aria-label="Table of contents and recommendations" data-pagefind-ignore>
+      {
+        toc.length > 2 && (
+          <>
+            <h2>On this page</h2>
+            <ol>
+              {toc.map((h) => (
+                <li class={`d${h.depth}`}>
+                  <a href={`#${h.slug}`}>{h.text.replace(/#$/, "")}</a>
+                </li>
+              ))}
+            </ol>
+          </>
+        )
+      }
+      {
+        recs[1] && (
+          <div class="side-rec">
+            <h2>Recommended</h2>
+            <AffiliateCard item={recs[1]} placement="sidebar" compact />
+          </div>
+        )
+      }
+      <AdSlot slot="sidebar" format="rectangle" />
+    </aside>
+  </div>
+
+  <button class="icon-btn to-top" type="button" aria-label="Back to top" data-to-top>↑</button>
+  <div class="toast" role="status" aria-live="polite"></div>
+
+  <script
+    is:inline
+    type="application/json"
+    id="post-config"
+    set:html={JSON.stringify({ giscus: SITE.giscus, mermaid: post.hasMermaid, title: post.title, url: pageUrl })}
+  />
+  <script>
+    import { initPost } from "../../../lib/post-client";
+    initPost();
+  </script>
+</Base>

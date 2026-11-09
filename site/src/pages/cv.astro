@@ -1,0 +1,95 @@
+---
+import Base from "../layouts/Base.astro";
+import { loadCv, fmtYm } from "../lib/cv";
+import { url } from "../site";
+
+const cv = loadCv();
+const s = cv.sections;
+---
+
+<Base title="CV" description={cv.summary} path="/cv/">
+  <div class="wrap">
+    <header class="page-head">
+      <p class="eyebrow">Curriculum vitae</p>
+      <h1>{cv.name}</h1>
+      <p>{cv.label} · {cv.location}</p>
+    </header>
+    <div class="btn-row">
+      <a class="btn" href={url("/assets/pdf/adarsh_nair_resume.pdf")}>Download PDF</a>
+      <a class="btn ghost" href={`mailto:${cv.email}`}>{cv.email}</a>
+    </div>
+    <p class="page-body">{cv.summary}</p>
+
+    <section class="cv-section">
+      <h2>Experience</h2>
+      {
+        s.Experience.map((e: any) => (
+          <div class="cv-item">
+            <div class="when">{fmtYm(e.start_date)} – {e.end_date === "Present" ? "Present" : fmtYm(e.end_date)}</div>
+            <div>
+              <h3>{e.position} · {e.company}</h3>
+              <div class="muted" style="font-size:14px">{e.location}</div>
+              {e.summary && <p style="margin:6px 0 0">{e.summary}</p>}
+              <details>
+                <summary class="muted" style="font-size:14px;cursor:pointer;margin-top:6px">{e.highlights?.length ?? 0} highlights</summary>
+                <ul>{e.highlights?.map((h: string) => <li>{h}</li>)}</ul>
+              </details>
+            </div>
+          </div>
+        ))
+      }
+    </section>
+
+    <section class="cv-section">
+      <h2>Education</h2>
+      {
+        s.Education.map((e: any) => (
+          <div class="cv-item">
+            <div class="when">{fmtYm(e.start_date)} – {fmtYm(e.end_date)}</div>
+            <div>
+              <h3>{e.studyType}, {e.area}</h3>
+              <div class="muted">{e.institution}, {e.location}</div>
+            </div>
+          </div>
+        ))
+      }
+    </section>
+
+    <section class="cv-section">
+      <h2>Skills</h2>
+      {
+        s.Skills.map((g: any) => (
+          <div class="cv-item">
+            <div class="when">{g.name}</div>
+            <div class="tags">{g.keywords.map((k: string) => <span class="tag">{k}</span>)}</div>
+          </div>
+        ))
+      }
+    </section>
+
+    <section class="cv-section">
+      <h2>Awards & certificates</h2>
+      {
+        s.Awards.map((a: any) => (
+          <div class="cv-item">
+            <div class="when">{a.date}</div>
+            <div><h3>{a.title}</h3><div class="muted">{a.awarder} — {a.summary}</div></div>
+          </div>
+        ))
+      }
+      {
+        s.Certificates?.map((c: any) => (
+          <div class="cv-item">
+            <div class="when">{fmtYm(c.date)}</div>
+            <div><h3>{c.name}</h3><div class="muted">{c.issuer}</div></div>
+          </div>
+        ))
+      }
+    </section>
+
+    <section class="cv-section">
+      <h2>Languages</h2>
+      <div class="tags">{s.Languages.map((l: any) => <span class="tag">{l.name} · {l.summary}</span>)}</div>
+    </section>
+  </div>
+</Base>

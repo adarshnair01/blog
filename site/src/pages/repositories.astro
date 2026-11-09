@@ -1,0 +1,49 @@
+---
+import Base from "../layouts/Base.astro";
+import { SITE } from "../site";
+
+const repos = [
+  "adarshnair01/Recommendation-Engine",
+  "adarshnair01/AssetOpsBench",
+  "adarshnair01/Voronoi-Path-Planning",
+  "adarshnair01/live-score-feed",
+  "adarshnair01/Wikifeedia",
+  "adarshnair01/latexcv",
+  "adarshnair01/blog",
+];
+---
+
+<Base title="Repositories" description="Open-source repositories by Adarsh Nair on GitHub." path="/repositories/">
+  <div class="wrap">
+    <header class="page-head">
+      <p class="eyebrow">Open source</p>
+      <h1>Repositories</h1>
+      <p>Code on <a href={SITE.socials.github} rel="me noopener">GitHub</a>. Stars and descriptions load live.</p>
+    </header>
+    <div class="project-grid" data-repos>
+      {
+        repos.map((r) => (
+          <article class="card" data-repo={r}>
+            <h2 style="font-size:1.1rem;font-family:var(--mono)"><a href={`https://github.com/${r}`} rel="noopener">{r.split("/")[1]}</a></h2>
+            <p class="desc muted">github.com/{r}</p>
+            <div class="meta stats"></div>
+          </article>
+        ))
+      }
+    </div>
+  </div>
+  <script>
+    document.querySelectorAll<HTMLElement>("[data-repo]").forEach(async (card) => {
+      try {
+        const r = await fetch(`https://api.github.com/repos/${card.dataset.repo}`);
+        if (!r.ok) return;
+        const d = await r.json();
+        if (d.description) card.querySelector(".desc")!.textContent = d.description;
+        card.querySelector(".stats")!.innerHTML = [d.language, `★ ${d.stargazers_count}`, `⑂ ${d.forks_count}`]
+          .filter(Boolean)
+          .map((x) => `<span>${String(x).replace(/</g, "&lt;")}</span>`)
+          .join("");
+      } catch {}
+    });
+  </script>
+</Base>

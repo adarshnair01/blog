@@ -1,0 +1,39 @@
+---
+import Base from "../layouts/Base.astro";
+import { loadCv, fmtYm } from "../lib/cv";
+import { SITE } from "../site";
+
+const pubs = loadCv().sections.Publications as { title: string; authors: string[]; publisher: string; releaseDate: string; url?: string; summary?: string }[];
+// DOI from _bibliography/papers.bib for the TENCON paper.
+const doi: Record<string, string> = { "Preserving Cluster Identity": "10.1109/TENCON66050.2025.11375049" };
+const doiFor = (t: string) => Object.entries(doi).find(([k]) => t.startsWith(k))?.[1];
+---
+
+<Base title="Publications" description="Peer-reviewed research by Adarsh Nair on incremental clustering and motion planning." path="/publications/">
+  <div class="wrap">
+    <header class="page-head">
+      <p class="eyebrow">Publications</p>
+      <h1>Research</h1>
+      <p>Also on <a href={SITE.socials.scholar} rel="noopener">Google Scholar</a>.</p>
+    </header>
+    <div class="page-body">
+      {
+        pubs.map((p) => (
+          <article class="cv-item" style="grid-template-columns:1fr">
+            <h2 style="font-size:1.2rem;margin:0">{p.title}</h2>
+            <div class="meta">
+              <span>{p.authors.join(", ")}</span>
+              <span>{p.publisher}</span>
+              <span>{fmtYm(p.releaseDate)}</span>
+            </div>
+            {p.summary && <p style="margin:6px 0">{p.summary}</p>}
+            <div class="tags">
+              {doiFor(p.title) && <a class="tag" href={`https://doi.org/${doiFor(p.title)}`} rel="noopener">DOI</a>}
+              {p.url && <a class="tag" href={p.url} rel="noopener">Conference</a>}
+            </div>
+          </article>
+        ))
+      }
+    </div>
+  </div>
+</Base>

@@ -1,0 +1,32 @@
+---
+import type { Post } from "../lib/posts";
+import { formatDate, slugify } from "../lib/posts";
+import { url } from "../site";
+
+interface Props {
+  post: Post;
+  heading?: "h2" | "h3";
+}
+const { post, heading = "h2" } = Astro.props;
+const H = heading;
+---
+
+<article class="card">
+  <div class="meta">
+    <time datetime={post.date.toISOString()}>{formatDate(post.date)}</time>
+    <span>{post.readingMinutes} min read</span>
+  </div>
+  <H><a href={url(post.path)}>{post.title}</a></H>
+  <p>{post.description}</p>
+  {
+    post.tags.length > 0 && (
+      <div class="tags">
+        {post.tags.slice(0, 3).map((t) => (
+          <a class="tag" href={url(`/blog/tag/${slugify(t)}/`)}>
+            {t}
+          </a>
+        ))}
+      </div>
+    )
+  }
+</article>

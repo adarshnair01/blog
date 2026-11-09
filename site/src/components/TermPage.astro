@@ -1,0 +1,45 @@
+---
+import Base from "../layouts/Base.astro";
+import PostCard from "./PostCard.astro";
+import type { Post, Term } from "../lib/posts";
+import { SITE, url, absUrl } from "../site";
+
+interface Props {
+  term: Term;
+  kind: "tag" | "category";
+  posts: Post[];
+}
+const { term, kind, posts } = Astro.props;
+const path = `/blog/${kind}/${term.slug}/`;
+const title = kind === "tag" ? `${term.name} articles` : `${term.name} — category`;
+const description = `${posts.length} article${posts.length === 1 ? "" : "s"} on ${term.name} by ${SITE.author}: ${posts
+  .slice(0, 3)
+  .map((p) => p.title)
+  .join("; ")}.`.slice(0, 300);
+
+const jsonLd = [
+  {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    name: title,
+    url: absUrl(path),
+    mainEntity: {
+      "@type": "ItemList",
+      itemListElement: posts.slice(0, 50).map((p, i) => ({ "@type": "ListItem", position: i + 1, url: absUrl(p.path) })),
+    },
+  },
+];
+---
+
+<Base title={title} description={description} path={path} jsonLd={jsonLd} noindex={posts.length < 2}>
+  <div class="wrap">
+    <header class="page-head">
+      <p class="eyebrow"><a href={url("/blog/tag/")}>Topics</a></p>
+      <h1>{term.name}</h1>
+      <p>{posts.length} article{posts.length === 1 ? "" : "s"} · <a href={url(`/explore/?tag=${term.slug}`)}>filter further in Explore</a></p>
+    </header>
+    <div class="post-grid">
+      {posts.map((p) => <PostCard post={p} />)}
+    </div>
+  </div>
+</Base>

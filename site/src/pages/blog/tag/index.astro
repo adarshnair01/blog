@@ -1,0 +1,41 @@
+---
+import Base from "../../../layouts/Base.astro";
+import { getPosts, collectTerms } from "../../../lib/posts";
+import { url } from "../../../site";
+
+const terms = collectTerms(await getPosts(), "tags");
+const max = terms[0]?.count ?? 1;
+const popular = terms.filter((t) => t.count >= 2);
+const rest = terms.filter((t) => t.count < 2);
+---
+
+<Base title="All topics" description={`Browse ${terms.length} topics across machine learning, AI, statistics and data science.`} path="/blog/tag/">
+  <div class="wrap">
+    <header class="page-head">
+      <p class="eyebrow">Topics</p>
+      <h1>Browse by topic</h1>
+      <p>{terms.length} topics. Bigger means more articles.</p>
+    </header>
+    <div class="tag-cloud">
+      {
+        popular.map((t) => (
+          <a class="tag" href={url(`/blog/tag/${t.slug}/`)} style={`font-size:${(12.5 + 9 * Math.sqrt(t.count / max)).toFixed(1)}px`}>
+            {t.name} <span class="count">{t.count}</span>
+          </a>
+        ))
+      }
+    </div>
+    {
+      rest.length > 0 && (
+        <details style="margin-top:28px">
+          <summary class="muted">{rest.length} more topics with a single article</summary>
+          <div class="tag-cloud" style="margin-top:14px">
+            {rest.map((t) => (
+              <a class="tag" href={url(`/blog/tag/${t.slug}/`)}>{t.name}</a>
+            ))}
+          </div>
+        </details>
+      )
+    }
+  </div>
+</Base>
